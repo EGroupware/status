@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="status.index" template="" lang="" group="0" version="19.1" >
+		<vbox parent_node="egw_fw_sidebar_r">
+			<grid id="list">
+				<columns>
+					<column/>
+				</columns>
+				<rows>
+					<row class="th">
+						
+					</row>
+					<row>
+						<hbox>
+							<avatar id="${row}[id]"/>
+							<image id = "${row}[stat1]"/>
+							<image id = "${row}[stat2]"/>
+							<image id = "${row}[stat3]"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</template>
+</overlay>
