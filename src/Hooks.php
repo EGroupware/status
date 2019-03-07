@@ -20,13 +20,32 @@ class Hooks {
 	 */
 	const APPNAME = 'status';
 
-	/**
-	 * Runs after navbar and loads status app into framework
-	 *
-	 */
-	public static function after_navbar ()
-	{
-		
-	}
 
+	public static function get_rows ()
+	{
+		$accesslog = new \admin_accesslog();
+		$contact_obj = new Api\Contacts();
+		$rows = $result = $onlineusers = $readonlys = $users = array ();
+
+		\admin_ui::get_users(array(), $users);
+		$total = $accesslog->get_rows(array('session_list' => true), $rows, $readonlys);
+		if ($total > 0)
+		{
+			unset($rows['no_lo'], $rows['no_total']);
+			foreach ($rows as $row)
+			{
+				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
+				$onlineusers [] = $row['account_id'];
+			}
+		}
+		foreach ($users as $user)
+		{
+			$contact = $contact_obj->read('account:'.$user['account_id'], true);
+			$result [] = array (
+				'id' => $contact['id'],
+				'stat1' => in_array($user['account_id'], $onlineusers)
+			);
+		}
+		return $result;
+	}
 }

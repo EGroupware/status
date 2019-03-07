@@ -13,7 +13,7 @@
 $setup_info['status']['name']    = 'status';
 $setup_info['status']['title']   = 'Status';
 $setup_info['status']['version'] = '19.1';
-$setup_info['status']['enable']  = 2;
+$setup_info['status']['enable']  = 1;
 $setup_info['status']['autoinstall'] = true;	// install automatically on update
 $setup_info['status']['author'] = 'Hadi Nategh';
 $setup_info['status']['index'] = array('menuaction' => 'status.EGroupware\\Status\\Ui.index&ajax=true');
@@ -25,8 +25,8 @@ $setup_info['status']['license']  = 'GPL';
 $setup_info['status']['description'] = '';
 
 /* The hooks this app includes, needed for hooks registration */
-$setup_info['status']['hooks']['after_navbar'] = 'EGroupware\Status\Hooks::after_navbar';
-
+$setup_info['status']['hooks']['framework_header'] = 'EGroupware\Status\Hooks::framework_header';
+$setup_info['status']['hooks']['status-get_rows'] = 'EGroupware\Status\Hooks::get_rows';
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(
 	'appname' => 'api',

@@ -34,34 +34,54 @@ class Ui {
 	function index($content=null)
 	{
 		$tpl = new Api\Etemplate('status.index');
-		
-		$tpl->exec('status.EGroupware\\Status\\Ui.index', array(),array());
+		$content = array('list' => self::get_rows());
+
+		// first row of grid is dedicated to its header
+		array_unshift($content['list'], [''=>'']);
+
+		if (is_array($actions = self::get_actions()) && !empty($actions))
+		{
+			// Add actions
+			$tpl->setElementAttribute('list', 'actions', $actions);
+		}
+
+		$tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array());
 	}
 
+	public static function ajax_sorting ()
+	{
+
+	}
 
 	/**
-	 * Get current online users
+	 * Get actions / context menu for index
 	 *
-	 * @return array return an array of users info
+	 * @return {array} returns defined actions as an array
 	 */
-	static function getOnlineUsers ()
+	private static function get_actions()
 	{
-		$accesslog = new \admin_accesslog();
-		$rows = $readonlys = $users = array ();
-		$total = $accesslog->get_rows(array('session_list' => true), $rows, $readonlys);
-		if ($total > 0)
+		$actions = [];
+		$hooks = Api\Hooks::implemented('status-get_actions');
+		foreach ($hooks as $app)
 		{
-			unset($rows['no_lo'], $rows['no_total']);
-			foreach ($rows as $row)
-			{
-				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
-				$users [] = array(
-					'account_id' => $row['account_id'],
-					'username' => Api\Accounts::username($row['account_id']),
-					'email' => Api\Accounts::id2name($row['account_id'], 'account_email'),
-				);
-			}
+			$actions += Api\Hooks::process('status-get_actions', $app, true);
 		}
-		return $users;
+		return $actions;
+	}
+
+	/**
+	 * Get rows
+	 * @return array
+	 */
+	static function get_rows ()
+	{
+		$rows = [];
+		$hooks = Api\Hooks::implemented('status-get_rows');
+		foreach($hooks as $app)
+		{
+			$r = Api\Hooks::process('status-get_rows', $app, true);
+			$rows += $r[$app];
+		}
+		return $rows;
 	}
 }
