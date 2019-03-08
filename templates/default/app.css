@@ -7,6 +7,7 @@ div#egw_fw_sidebar_r {
     top: 43px;
     border-left: 1px solid #b4b4b4;
 	border-top: 1px solid #b4b4b4;
+	overflow-y: auto;
 }
 
 #egw_fw_main {
@@ -35,4 +36,7 @@ tr.egw_online_true {
 
 #status-index_status-index-rows tr.row div.et2_hbox {
 	padding:5px;
+}
+#egw_fw_sidebar_r::-webkit-scrollbar {
+    width: 1px;
 }
