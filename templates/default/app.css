@@ -12,3 +12,27 @@ div#egw_fw_sidebar_r {
 #egw_fw_main {
 	margin-right: 53px;
 }
+
+tr.egw_online_true span.stat1 {
+	width: 15px;
+    height: 15px;
+    background-image: url(../../../api/templates/default/images/logo64x64.png);
+    position: absolute;
+    left: 0px;
+    border-radius: 50%;
+    z-index: 100000;
+    background-size: 15px;
+    background-repeat: no-repeat;
+}
+
+tr.egw_online_false {
+	opacity: 0.5;
+}
+
+tr.egw_online_true {
+	opacity: 1;
+}
+
+#status-index_status-index-rows tr.row div.et2_hbox {
+	padding:5px;
+}

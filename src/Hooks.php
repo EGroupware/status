@@ -48,4 +48,15 @@ class Hooks {
 		}
 		return $result;
 	}
+
+	public static function get_actions ()
+	{
+		return [
+			'fav' => [
+				'caption' => 'Favorite',
+				'allowOnMultiple' => false,
+				'onExecute' => 'javaScript:app.status.handle_actions'
+			]
+		];
+	}
 }

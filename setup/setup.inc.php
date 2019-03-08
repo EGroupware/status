@@ -27,6 +27,7 @@ $setup_info['status']['description'] = '';
 /* The hooks this app includes, needed for hooks registration */
 $setup_info['status']['hooks']['framework_header'] = 'EGroupware\Status\Hooks::framework_header';
 $setup_info['status']['hooks']['status-get_rows'] = 'EGroupware\Status\Hooks::get_rows';
+$setup_info['status']['hooks']['status-get_actions'] = 'EGroupware\Status\Hooks::get_actions';
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(
 	'appname' => 'api',

@@ -48,9 +48,25 @@ class Ui {
 		$tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array());
 	}
 
-	public static function ajax_sorting ()
+	/**
+	 * handle drag and drop sorting
+	 *
+	 * @param array $orders newly ordered list
+	 */
+	public static function ajax_sorting ($orders)
 	{
 
+		foreach ($orders as $keys => $val)
+		{
+			$orders[$keys] = $val -1;
+		}
+
+		//TODO: set newly sorted list into preferences
+
+
+		//Calling to referesh after sort happens
+		$response = Api\Json\Response::get();
+		$response->call('app.status.refresh');
 	}
 
 	/**
@@ -64,7 +80,8 @@ class Ui {
 		$hooks = Api\Hooks::implemented('status-get_actions');
 		foreach ($hooks as $app)
 		{
-			$actions += Api\Hooks::process('status-get_actions', $app, true);
+			$a =  Api\Hooks::process('status-get_actions', $app, true);
+			$actions += $a[$app];
 		}
 		return $actions;
 	}
