@@ -13,7 +13,7 @@
 $setup_info['status']['name']    = 'status';
 $setup_info['status']['title']   = 'Status';
 $setup_info['status']['version'] = '19.1';
-$setup_info['status']['enable']  = 1;
+$setup_info['status']['enable']  = 5; // status 5 means load application in background, tab and sidebox will not be shown but index page will be loaded
 $setup_info['status']['autoinstall'] = true;	// install automatically on update
 $setup_info['status']['author'] = 'Hadi Nategh';
 $setup_info['status']['index'] = array('menuaction' => 'status.EGroupware\\Status\\Ui.index&ajax=true');
