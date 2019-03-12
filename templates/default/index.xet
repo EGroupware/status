@@ -3,7 +3,7 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="status.index.rows" template="" lang="" group="0" version="19.1" >
-		<grid id="list" width="100%" height="100%" class="egwGridView_grid" sortable="EGroupware\\Status\\Ui::ajax_sorting" resize_ratio="0">
+		<grid id="list" width="100%" height="100%" class="egwGridView_grid" sortable="EGroupware\Status\Ui::ajax_sorting" resize_ratio="0">
 			<columns>
 				<column/>
 			</columns>
@@ -15,6 +15,7 @@
 						<description id="${row}[stat1]" class="stat1"/>
 						<description id="${row}[stat2]" class="stat2"/>
 						<description id="${row}[stat3]" class="stat3"/>
+						<description id="${row}[stat4]" class="stat4"/>
 					</hbox>
 				</row>
 			</rows>
