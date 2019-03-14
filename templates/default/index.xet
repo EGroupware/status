@@ -9,9 +9,11 @@
 			</columns>
 			<rows>
 				<row class="th"></row>
-				<row class="row $row_cont[class] egw_online_$row_cont[stat1]">
+				<row class="row $row_cont[class] egw_online_$row_cont[stat1]" id="$row_cont[id]">
 					<hbox>
-						<avatar contact_id="$row_cont[id]" height="100%" width="100%"/>
+						<hbox class="avatar" statustext="$row_cont[hint]">
+							<image src="$row_cont[icon]" class="iphoto" />
+						</hbox>
 						<description id="${row}[stat1]" class="stat1"/>
 						<description id="${row}[stat2]" class="stat2"/>
 						<description id="${row}[stat3]" class="stat3"/>

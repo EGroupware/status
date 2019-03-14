@@ -35,8 +35,18 @@ tr.egw_online_true {
 }
 
 #status-index_status-index-rows tr.row div.et2_hbox {
-	padding:5px;
+	display: inline-block;
 }
+
+#status-index_status-index-rows tr.row .avatar  {
+	width: 40px;
+	height: 40px;
+}
+#status-index_status-index-rows tr.row .avatar img {
+	height: auto;
+	width: 40px;
+}
+
 #egw_fw_sidebar_r::-webkit-scrollbar {
     width: 1px;
 }

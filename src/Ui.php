@@ -34,7 +34,7 @@ class Ui {
 	function index($content=null)
 	{
 		$tpl = new Api\Etemplate('status.index');
-		$content = array('list' => self::get_rows());
+		$content = array('list' => Hooks::statusItems());
 
 		// first row of grid is dedicated to its header
 		array_unshift($content['list'], [''=>'']);
@@ -52,14 +52,11 @@ class Ui {
 	 * handle drag and drop sorting
 	 *
 	 * @param array $orders newly ordered list
+	 *
+	 * @todo arrange sorting and refresh client
 	 */
 	public static function ajax_sorting ($orders)
 	{
-
-		foreach ($orders as $keys => $val)
-		{
-			$orders[$keys] = $val -1;
-		}
 
 		//TODO: set newly sorted list into preferences
 
@@ -84,21 +81,5 @@ class Ui {
 			$actions += $a[$app];
 		}
 		return $actions;
-	}
-
-	/**
-	 * Get rows
-	 * @return array
-	 */
-	static function get_rows ()
-	{
-		$rows = [];
-		$hooks = Api\Hooks::implemented('status-get_rows');
-		foreach($hooks as $app)
-		{
-			$r = Api\Hooks::process('status-get_rows', $app, true);
-			$rows += $r[$app];
-		}
-		return $rows;
 	}
 }
