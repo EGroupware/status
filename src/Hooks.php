@@ -62,7 +62,7 @@ class Hooks {
 	 *					'notifications' => An integer number representing number of notifications,
 	 *										this is an aggregation value which might gets added up
 	 *										with other stat id related to the item.
-	 *					'active' => boolean value to show item activeness
+	 *					'active' => int value to show item activeness
 	 *				]
 	 *			]
 	 *		]
@@ -80,7 +80,7 @@ class Hooks {
 	 *			'stat' => [
 	 *				'egw' => [
 	 *					'notifications' => 5,
-	 *					'active' => true
+	 *					'active' => 1
 	 *				]
 	 *			]
 	 *		]

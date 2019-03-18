@@ -34,7 +34,10 @@ class Ui {
 	function index($content=null)
 	{
 		$tpl = new Api\Etemplate('status.index');
-		$content = array('list' => Hooks::statusItems());
+		$content = array(
+			'list' => Hooks::statusItems(),
+			'fav' => [['' => ''], ['id' => 'placeholder', 'disable_row' => true]]
+		);
 
 		// first row of grid is dedicated to its header
 		array_unshift($content['list'], [''=>'']);

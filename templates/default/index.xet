@@ -2,14 +2,37 @@
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
 <!-- $Id$ -->
 <overlay>
-	<template id="status.index.rows" template="" lang="" group="0" version="19.1" >
-		<grid id="list" width="100%" height="100%" class="egwGridView_grid" sortable="EGroupware\Status\Ui::ajax_sorting" resize_ratio="0">
+	<template id="status.index.fav" template="" lang="" group="0" version="19.1" >
+		<grid id="fav" width="100%" height="100%" class="egwGridView_grid" sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_sorting" resize_ratio="0">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row class="th" height="40">
+					<image class="iphoto" width="40" height="40"/>
+				</row>
+				<row class="row egw_online_$row_cont[stat1] $row_cont[class]" id="$row_cont[id]" disabled="$row_cont[disable_row]">
+					<hbox>
+						<hbox class="avatar" statustext="$row_cont[hint]">
+							<image src="$row_cont[icon]" class="iphoto" />
+						</hbox>
+						<description id="${row}[stat1]" class="stat1"/>
+						<description id="${row}[stat2]" class="stat2"/>
+						<description id="${row}[stat3]" class="stat3"/>
+						<description id="${row}[stat4]" class="stat4"/>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="status.index.list" template="" lang="" group="0" version="19.1" >
+		<grid id="list" width="100%" height="100%" class="egwGridView_grid" sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_sorting" resize_ratio="0">
 			<columns>
 				<column/>
 			</columns>
 			<rows>
 				<row class="th"></row>
-				<row class="row $row_cont[class] egw_online_$row_cont[stat1]" id="$row_cont[id]">
+				<row class="row egw_online_$row_cont[stat1] $row_cont[class]" id="$row_cont[id]">
 					<hbox>
 						<hbox class="avatar" statustext="$row_cont[hint]">
 							<image src="$row_cont[icon]" class="iphoto" />
@@ -30,7 +53,10 @@
 			</columns>
 			<rows>
 				<row>
-					<template id="status.index.rows"/>
+					<template id="status.index.fav"/>
+				</row>
+				<row>
+					<template id="status.index.list"/>
 				</row>
 			</rows>
 		</grid>
