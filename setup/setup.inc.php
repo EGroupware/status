@@ -28,6 +28,8 @@ $setup_info['status']['description'] = '';
 $setup_info['status']['hooks']['framework_header'] = 'EGroupware\Status\Hooks::framework_header';
 $setup_info['status']['hooks']['status-getStatus'] = 'EGroupware\Status\Hooks::getStatus';
 $setup_info['status']['hooks']['status-get_actions'] = 'EGroupware\Status\Hooks::get_actions';
+$setup_info['status']['hooks']['settings'] = 'EGroupware\Status\Hooks::settings';
+
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(
 	'appname' => 'api',

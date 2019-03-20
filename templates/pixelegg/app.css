@@ -23,12 +23,47 @@ div#egw_fw_sidebar_r {
 #egw_fw_main {
   margin-right: 53px;
 }
-tr.egw_online_true span.stat1 {
+#egw_fw_sidebar_r tr.row td {
+  position: relative;
+}
+tr span.stat0 {
   width: 15px;
   height: 15px;
-  background-image: url(../../../api/templates/default/images/logo64x64.png);
   position: absolute;
   left: 0px;
+  border-radius: 50%;
+  z-index: 100000;
+  background-size: 15px;
+  background-repeat: no-repeat;
+}
+tr span.stat1 {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  border-radius: 50%;
+  z-index: 100000;
+  background-size: 15px;
+  background-repeat: no-repeat;
+}
+tr span.stat2 {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  border-radius: 50%;
+  z-index: 100000;
+  background-size: 15px;
+  background-repeat: no-repeat;
+}
+tr span.stat3 {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
   border-radius: 50%;
   z-index: 100000;
   background-size: 15px;
@@ -60,6 +95,13 @@ tr.egw_online_true {
 }
 #egw_fw_sidebar_r::-webkit-scrollbar {
   width: 1px;
+}
+.fav_placeholder {
+  height: 40px;
+  background: silver;
+}
+#emptyrow {
+  display: none;
 }
 .slideIsUp #egw_fw_sidebar_r {
   top: 89px;

@@ -78,7 +78,7 @@ class Hooks {
 	 * 			]),
 	 *			'hint' => 'Hadi Nategh (hn@egroupware.org)',
 	 *			'stat' => [
-	 *				'egw' => [
+	 *				'status' => [
 	 *					'notifications' => 5,
 	 *					'active' => 1
 	 *				]
@@ -119,8 +119,9 @@ class Hooks {
 					]),
 					'hint' => $contact['n_given']. ' ' . $contact['n_family']. ' ('. $id . ')',
 					'stat' => [
-						'egw' => [
-							'active' => $onlines[$id]
+						'status' => [
+							'active' => $onlines[$id],
+							'bg' => 'api/templates/default/images/logo64x64.png'
 						]
 					]
 				];
@@ -150,5 +151,68 @@ class Hooks {
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			]
 		];
+	}
+
+	/**
+	 * Get all implemented stat keys
+	 * @return type
+	 */
+	public static function getStatKeys ()
+	{
+		return Api\Hooks::implemented('status-getStatus');
+	}
+
+	/**
+	 * populates $settings for the Api\Preferences
+	 *
+	 * @return array
+	 */
+	static function settings() {
+
+		$sel_options = self::getStatKeys();
+		/* Settings array for this app */
+		$settings = array(
+			'status0' => array(
+				'type'   => 'select',
+				'label'  => 'Status indicator no. 1 (top left corner)',
+				'name'   => 'status0',
+				'values' => $sel_options,
+				'help'   => '',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> 'status',
+			),
+			'status1' => array(
+				'type'   => 'select',
+				'label'  => 'Status indicator no. 2 (bottom left corner)',
+				'name'   => 'status1',
+				'values' => $sel_options,
+				'help'   => '',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> '',
+			),
+			'status2' => array(
+				'type'   => 'select',
+				'label'  => 'Status indicator no. 3 (top right corner)',
+				'name'   => 'status2',
+				'values' => $sel_options,
+				'help'   => '',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> '',
+			),
+			'status3' => array(
+				'type'   => 'select',
+				'label'  => 'Status indicator no. 4 (bottom right corner)',
+				'name'   => 'status3',
+				'values' => $sel_options,
+				'help'   => '',
+				'xmlrpc' => True,
+				'admin'  => False,
+				'default'=> '',
+			)
+		);
+		return $settings;
 	}
 }
