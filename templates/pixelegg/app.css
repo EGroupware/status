@@ -103,7 +103,10 @@ tr.egw_online_true {
 #emptyrow {
   display: none;
 }
+#status-index_status-index-fav #status-index_fav td.iphoto img {
+  margin-top: 5px;
+}
 .slideIsUp #egw_fw_sidebar_r {
-  top: 89px;
+  top: 57px;
   height: calc(100% - 110px);
 }

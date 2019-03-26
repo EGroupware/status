@@ -8,8 +8,8 @@
 				<column/>
 			</columns>
 			<rows>
-				<row class="th" height="40">
-					<image class="iphoto" width="40" height="40"/>
+				<row class="th" height="30">
+					<image class="iphoto" width="100%" height="20" src="plus"/>
 				</row>
 				<row class="row $row_cont[class]" id="$row_cont[id]">
 					<hbox>
@@ -26,7 +26,7 @@
 		</grid>
 	</template>
 	<template id="status.index.list" template="" lang="" group="0" version="19.1" >
-		<grid id="list" width="100%" height="100%" class="egwGridView_grid" sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_sorting" resize_ratio="0">
+		<grid id="list" width="100%" height="100%" class="egwGridView_grid" sortable_connectWith=".ui-sortable" sortable_containment="#egw_fw_sidebar_r" sortable="EGroupware\Status\Ui::ajax_sorting" resize_ratio="0">
 			<columns>
 				<column/>
 			</columns>

@@ -99,3 +99,7 @@ tr.egw_online_true {
 }
 
 #emptyrow {display: none;}
+
+#status-index_status-index-fav #status-index_fav td.iphoto img {
+    margin-top: 5px;
+}
