@@ -9,6 +9,11 @@
  * @package status
  * @version $Id$
  */
+@media print {
+  div#egw_fw_sidebar_r {
+    display: none;
+  }
+}
 div#egw_fw_sidebar_r {
   position: fixed;
   background: white;
