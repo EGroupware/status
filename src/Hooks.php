@@ -34,7 +34,7 @@ class Hooks {
 		$hooks = Api\Hooks::implemented('status-getStatus');
 		foreach($hooks as $app)
 		{
-			$s = Api\Hooks::process('status-getStatus', $app, true);
+			$s = Api\Hooks::process(['location'=>'status-getStatus', 'app'=>$app], $app);
 			$status = array_merge_recursive ($status, $s[$app]);
 		}
 
@@ -49,6 +49,9 @@ class Hooks {
 	}
 
 	/**
+	 * Get status
+	 * @param array $data info regarding the running hook
+	 *
 	 * @return array returns an array of users with their status
 	 *
 	 * Status array structure:
@@ -87,8 +90,10 @@ class Hooks {
 	 * ]
 	 *
 	 */
-	public static function getStatus ()
+	public static function getStatus ($data)
 	{
+		if ($data['app'] != self::APPNAME) return [];
+
 		$stat = $rows = $readonlys = $users = $onlines = [];
 		$accesslog = new \admin_accesslog();
 		$contact_obj = new Api\Contacts();
@@ -146,7 +151,7 @@ class Hooks {
 	{
 		return [
 			'fav' => [
-				'caption' => 'Favorite',
+				'caption' => 'Add to favorites',
 				'allowOnMultiple' => false,
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			]
