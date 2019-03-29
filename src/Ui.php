@@ -139,4 +139,15 @@ class Ui {
 		}
 		return $actions;
 	}
+
+	private static function get_favActions()
+	{
+		return [
+			'unfavorite' => [
+				'caption' => 'Remove from favorites',
+				'allowOnMultiple' => false,
+				'onExecute' => 'javaScript:app.status.handle_actions'
+			]
+		];
+	}
 }
