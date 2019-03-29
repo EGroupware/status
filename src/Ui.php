@@ -93,6 +93,9 @@ class Ui {
 		{
 			// Add actions
 			$tpl->setElementAttribute('list', 'actions', $actions);
+			unset($actions['fav']);
+			$actions = array_merge($actions, self::get_favActions());
+			$tpl->setElementAttribute('fav', 'actions', $actions);
 		}
 
 		$tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array());
