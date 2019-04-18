@@ -42,7 +42,7 @@ class Hooks {
 		//TODO: consider favorites and sorting orders
 		foreach ($status as &$s)
 		{
-			if (is_array($s['id'])) $s['id'] = $s[id][0];
+			if (is_array($s['id'])) $s['id'] = $s['id'][0];
 			$result [] = $s;
 		}
 		return $result;
