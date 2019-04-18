@@ -113,7 +113,7 @@ class Hooks {
 		{
 			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
 			$contact = $contact_obj->read('account:'.$user['account_id'], true);
-			$id = strtolower($contact['email']);
+			$id = strtolower($user['account_lid'].'@'.$GLOBALS['egw_info']['user']['domain']);
 			if ($id)
 			{
 				$stat [$id] = [
@@ -122,7 +122,7 @@ class Hooks {
 						'contact_id' => $contact['id'],
 						'etag' => $contact['etag']
 					]),
-					'hint' => $contact['n_given']. ' ' . $contact['n_family']. ' ('. $id . ')',
+					'hint' => $contact['n_given']. ' ' . $contact['n_family'],
 					'stat' => [
 						'status' => [
 							'active' => $onlines[$id],
