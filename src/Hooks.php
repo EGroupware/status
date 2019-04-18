@@ -113,7 +113,7 @@ class Hooks {
 		{
 			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
 			$contact = $contact_obj->read('account:'.$user['account_id'], true);
-			$id = strtolower($user['account_lid'].'@'.$GLOBALS['egw_info']['user']['domain']);
+			$id = self::getUserName($user['account_lid']);
 			if ($id)
 			{
 				$stat [$id] = [
@@ -219,5 +219,17 @@ class Hooks {
 			)
 		);
 		return $settings;
+	}
+
+	/**
+	 * construct username from account_lid and domain
+	 *
+	 * @param type $_user = null if user given then use user as account lid
+	 * @return string return username
+	 */
+	public static function getUserName($_user = null)
+	{
+		$user = $_user ? $_user : $GLOBALS['egw_info']['user']['account_lid'];
+		return strtolower($user.'@'.$GLOBALS['egw_info']['user']['domain']);
 	}
 }
