@@ -58,7 +58,7 @@ class Ui {
 					}
 				}
 			}
-			$isFav = in_array($item['id'], $GLOBALS['egw_info']['user']['preferences']['status']['fav']);
+			$isFav = in_array($item['id'], self::mapFavoritesIds2Names());
 			$content[$isFav ? 'fav' : 'list'][] = array_merge([
 				'id' => $item['id'],
 				'hint' => $item['hint'],
@@ -75,7 +75,7 @@ class Ui {
 		{
 			$temp = [];
 			// Sort fav list base on stored user fav preference
-			foreach ($GLOBALS['egw_info']['user']['preferences']['status']['fav'] as $fav)
+			foreach (self::mapFavoritesIds2Names() as $fav)
 			{
 				foreach ($content['fav'] as $item)
 				{
@@ -121,8 +121,7 @@ class Ui {
 		// the first row belongs to an empty placeholder and it should not participate
 		// in sorting
 		if ($orders[0] && $orders[0]['id'] == 'emptyrow') unset($orders[0]);
-
-		$GLOBALS['egw']->preferences->add('status','fav', array_values($orders));
+		$GLOBALS['egw']->preferences->add('status','fav', array_values(self::mapNames2Ids($orders)));
 		$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 	}
 
@@ -152,5 +151,19 @@ class Ui {
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			]
 		];
+	}
+
+	static function mapFavoritesIds2Names ()
+	{
+		return array_map(function ($_id){
+			return Api\Accounts::id2name($_id);
+		}, $GLOBALS['egw_info']['user']['preferences']['status']['fav']);
+	}
+
+	static function mapNames2Ids ($_names)
+	{
+		return array_map(function ($name) {
+			return Api\Accounts::getInstance()->name2id($name);
+		}, $_names);
 	}
 }

@@ -104,14 +104,18 @@ class Hooks {
 			foreach ($rows as $row)
 			{
 				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
-				$id = Api\Accounts::id2name($row['account_id'], 'account_email');
+				$id = Api\Accounts::id2name($row['account_id'], 'account_lid');
 				$onlines [$id] = (int)(time() - $row['li']);
 			}
 		}
 		\admin_ui::get_users(array(), $users);
 		foreach ($users as $user)
 		{
-			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
+			// own user, expired ones and not active ones should not get into the list
+			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id'] ||
+					!Api\Accounts::is_active($user['account_id']) 	||
+					Api\Accounts::is_expired($user['account_id'])) continue;
+
 			$contact = $contact_obj->read('account:'.$user['account_id'], true);
 			$id = self::getUserName($user['account_lid']);
 			if ($id)
@@ -222,7 +226,7 @@ class Hooks {
 	}
 
 	/**
-	 * construct username from account_lid and domain
+	 * Get username from account_lid
 	 *
 	 * @param type $_user = null if user given then use user as account lid
 	 * @return string return username
@@ -230,6 +234,6 @@ class Hooks {
 	public static function getUserName($_user = null)
 	{
 		$user = $_user ? $_user : $GLOBALS['egw_info']['user']['account_lid'];
-		return strtolower($user.'@'.$GLOBALS['egw_info']['user']['domain']);
+		return strtolower($user);
 	}
 }
