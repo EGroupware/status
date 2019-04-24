@@ -58,9 +58,10 @@ class Ui {
 					}
 				}
 			}
-			$isFav = in_array($item['id'], self::mapFavoritesIds2Names());
+			$isFav = in_array(strtolower($item['id']), self::mapFavoritesIds2Names());
 			$content[$isFav ? 'fav' : 'list'][] = array_merge([
 				'id' => $item['id'],
+				'account_id' => $item['account_id'],
 				'hint' => $item['hint'],
 				'icon' => $item['icon'],
 			], (array)$stat);
@@ -156,7 +157,7 @@ class Ui {
 	static function mapFavoritesIds2Names ()
 	{
 		return array_map(function ($_id){
-			return Api\Accounts::id2name($_id);
+			return strtolower(Api\Accounts::id2name($_id));
 		}, $GLOBALS['egw_info']['user']['preferences']['status']['fav']);
 	}
 

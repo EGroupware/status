@@ -57,7 +57,8 @@ class Hooks {
 	 * Status array structure:
 	 * [
 	 *		[id] => [
-	 *			'id' => id,
+	 *			'id' => account_lid,
+	 *			'account_id' => account_id,
 	 *			'icon' => Icon to show as avatar for the item,
 	 *			'hint' => Text to show as tooltip for the item,
 	 *			'stat' => [
@@ -73,8 +74,9 @@ class Hooks {
 	 *
 	 * An item example:
 	 * [
-	 *		'hn@egroupware.org' => [
-	 *			'id' => 'hn@egroupware.org',
+	 *		'hn' => [
+	 *			'id' => 'hn',
+	 *			'account_id' => 7,
 	 *			'icon' => Api\Egw::link('/api/avatar.php', [
 	 *				'contact_id' => 7,
 	 * 				'etag' => 11
@@ -122,6 +124,7 @@ class Hooks {
 			{
 				$stat [$id] = [
 					'id' => $id,
+					'account_id' => $user['account_id'],
 					'icon' => Api\Egw::link('/api/avatar.php', [
 						'contact_id' => $contact['id'],
 						'etag' => $contact['etag']
