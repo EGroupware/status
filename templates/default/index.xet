@@ -8,8 +8,8 @@
 				<column/>
 			</columns>
 			<rows>
-				<row class="th" height="30">
-					<image class="iphoto" width="100%" height="20" src="plus"/>
+				<row class="th" height="40" width="40">
+					<image class="iphoto" width="100%" height="25" src="favorites"/>
 				</row>
 				<row class="row $row_cont[class]" id="$row_cont[id]">
 					<hbox>
