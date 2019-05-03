@@ -110,7 +110,11 @@ class Hooks {
 				$onlines [$id] = (int)(time() - $row['li']);
 			}
 		}
-		\admin_ui::get_users(array(), $users);
+		\admin_ui::get_users(array('filter' => 'accounts', 'start' => 0), $users);
+		usort($users, function($a, $b){
+			if ($a['account_id'] == $b['account_id']) return 0;
+			return ($a['account_lastlogin'] < $b['account_lastlogin']) ? 1 : -1;
+		});
 		foreach ($users as $user)
 		{
 			// own user, expired ones and not active ones should not get into the list
@@ -139,7 +143,7 @@ class Hooks {
 				];
 			}
 		}
-		uasort ($stat, function ($a ,$b){
+		usort ($stat, function ($a ,$b){
 			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active'])
 			{
 				return 0;
