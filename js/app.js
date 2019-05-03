@@ -78,6 +78,45 @@ app.classes.status = AppJS.extend(
 	},
 
 	/**
+	 * Dialog for selecting users and add them to the favorites
+	 */
+	add_to_fav: function ()
+	{
+		var list = this.et2.getArrayMgr('content').getEntry('list');
+		var self = this;
+		et2_createWidget("dialog",
+		{
+			callback: function(_button_id, _value)
+			{
+				if (_button_id == 'add' && _value)
+				{
+					for (var i in _value.accounts)
+					{
+						for (var j in list)
+						{
+							if (list[j]['account_id'] == _value.accounts[i])
+							{
+								self.handle_actions({id: 'fav'}, [{data: list[j]}]);
+							}
+						}
+					}
+				}
+			},
+			title: egw.lang('Add to favorites'),
+			buttons: [
+				{text: this.egw.lang("Add"), id: "add", class: "ui-priority-primary", default: true},
+				{text: this.egw.lang("Cancel"), id:"cancel"}
+			],
+			value:{
+				content:{
+					value: '',
+			}},
+			template: egw.webserverUrl+'/status/templates/default/search_list.xet',
+			resizable: false
+		}, et2_dialog._create_parent('status'));
+	},
+
+	/**
 	 * Refresh the list
 	 */
 	refresh: function ()

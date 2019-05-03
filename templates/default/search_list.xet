@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="search_list" template="" lang="" group="0" version="19.1" >
+		<grid width="350" height="100%" resize_ratio="0">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<taglist-account id="accounts" />
+				</row>
+			</rows>
+		</grid>
+	</template>
+</overlay>
