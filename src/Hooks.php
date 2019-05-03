@@ -110,17 +110,16 @@ class Hooks {
 				$onlines [$id] = (int)(time() - $row['li']);
 			}
 		}
-		\admin_ui::get_users(array('filter' => 'accounts', 'start' => 0), $users);
-		usort($users, function($a, $b){
-			if ($a['account_id'] == $b['account_id']) return 0;
-			return ($a['account_lastlogin'] < $b['account_lastlogin']) ? 1 : -1;
-		});
+		\admin_ui::get_users([
+			'filter' => 'accounts',
+			'order' => 'account_lastlogin',
+			'sort' => 'DESC',
+			'active' => true
+		], $users);
+
 		foreach ($users as $user)
 		{
-			// own user, expired ones and not active ones should not get into the list
-			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id'] ||
-					!Api\Accounts::is_active($user['account_id']) 	||
-					Api\Accounts::is_expired($user['account_id'])) continue;
+			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
 
 			$contact = $contact_obj->read('account:'.$user['account_id'], true);
 			$id = self::getUserName($user['account_lid']);
