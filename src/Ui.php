@@ -35,8 +35,44 @@ class Ui {
 	{
 		$tpl = new Api\Etemplate('status.index');
 
-		$content = [];
+		if (!is_array($content))
+		{
+			$content = self::getContentStatus();
+		}
+		else
+		{
+			$content = array_merge($content, self::getContentStatus());
+		}
+
+		if (is_array($actions = self::get_actions()) && !empty($actions))
+		{
+			// Add actions
+			$tpl->setElementAttribute('list', 'actions', $actions);
+			$actions['unfavorite']['enabled'] = true;
+			$tpl->setElementAttribute('fav', 'actions', $actions);
+		}
+
+		return $tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array(), array());
+	}
+
+	/**
+	 * Refresh with new content
+	 */
+	public static function ajax_refresh ()
+	{
+		$response = Api\Json\Response::get();
+		$data = self::getContentStatus();
+		$response->data($data);
+	}
+
+	/**
+	 * Get content
+	 * @return array returns an array of content
+	 */
+	public static function getContentStatus ()
+	{
 		$skeys = Hooks::getStatKeys();
+		$content = [];
 		foreach (Hooks::statusItems() as $item)
 		{
 			$stat = [];
@@ -85,31 +121,10 @@ class Ui {
 			}
 			$content['fav'] = $temp;
 		}
-
 		// first row of grid is dedicated to its header
 		array_unshift($content['list'], [''=>'']);
 		array_unshift($content['fav'], [''=>'']);
-
-		if (is_array($actions = self::get_actions()) && !empty($actions))
-		{
-			// Add actions
-			$tpl->setElementAttribute('list', 'actions', $actions);
-			unset($actions['fav']);
-			$actions = array_merge($actions, self::get_favActions());
-			$tpl->setElementAttribute('fav', 'actions', $actions);
-		}
-
-		$tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array());
-	}
-
-	/**
-	 * handle drag and drop sorting
-	 *
-	 * @param array $orders newly ordered list
-	 *
-	 */
-	public static function ajax_sorting ($orders)
-	{
+		return $content;
 	}
 
 	/**
@@ -143,17 +158,10 @@ class Ui {
 		return $actions;
 	}
 
-	private static function get_favActions()
-	{
-		return [
-			'unfavorite' => [
-				'caption' => 'Remove from favorites',
-				'allowOnMultiple' => false,
-				'onExecute' => 'javaScript:app.status.handle_actions'
-			]
-		];
-	}
-
+	/**
+	 * Map favorites preference into names
+	 * @return array
+	 */
 	static function mapFavoritesIds2Names ()
 	{
 		return array_map(function ($_id){
@@ -161,6 +169,11 @@ class Ui {
 		}, $GLOBALS['egw_info']['user']['preferences']['status']['fav']);
 	}
 
+	/**
+	 * Map names into ids
+	 * @param array $_names
+	 * @return array
+	 */
 	static function mapNames2Ids ($_names)
 	{
 		return array_map(function ($name) {

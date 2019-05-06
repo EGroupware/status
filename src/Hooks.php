@@ -142,7 +142,7 @@ class Hooks {
 				];
 			}
 		}
-		usort ($stat, function ($a ,$b){
+		uasort ($stat, function ($a ,$b){
 			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active'])
 			{
 				return 0;
@@ -163,6 +163,12 @@ class Hooks {
 			'fav' => [
 				'caption' => 'Add to favorites',
 				'allowOnMultiple' => false,
+				'onExecute' => 'javaScript:app.status.handle_actions'
+			],
+			'unfavorite' => [
+				'caption' => 'Remove from favorites',
+				'allowOnMultiple' => false,
+				'enabled' => false,
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			]
 		];

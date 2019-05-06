@@ -57,7 +57,6 @@ app.classes.status = AppJS.extend(
 	handle_actions: function (_action, _selected)
 	{
 		var data = _selected[0]['data'];
-		var id = _selected[0]['id'];
 		var favorites = Object.values(egw.preference('fav', 'status'));
 		switch (_action.id)
 		{
@@ -74,7 +73,7 @@ app.classes.status = AppJS.extend(
 				break;
 
 		}
-
+		this.refresh();
 	},
 
 	/**
@@ -121,6 +120,25 @@ app.classes.status = AppJS.extend(
 	 */
 	refresh: function ()
 	{
-		// TODO
+		var self = this;
+		// give it a delay to make sure the preferences data is updated before refreshing
+		window.setTimeout(function(){
+			egw.json('EGroupware\\Status\\Ui::ajax_refresh', [], function(_data){
+				self.updateContent(_data.fav, _data.list);
+			}).sendRequest();
+		}, 200);
+	},
+
+	/**
+	 * Update content of fav and list girds
+	 * @param {array} _fav
+	 * @param {array} _list
+	 */
+	updateContent: function (_fav, _list)
+	{
+		var fav = this.et2.getWidgetById('fav');
+		var list = this.et2.getWidgetById('list');
+		if (typeof _fav != 'undefined') fav.set_value({content:_fav});
+		if (typeof _list != 'undefined') list.set_value({content:_list});
 	}
 });

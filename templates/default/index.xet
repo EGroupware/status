@@ -9,7 +9,7 @@
 			</columns>
 			<rows>
 				<row class="th" height="40" width="40">
-					<image class="iphoto" width="100%" height="25" src="favorites" onclick="app.status.add_to_fav"/>
+					<image class="iphoto" width="100%" height="25" src="fav_filter" onclick="app.status.add_to_fav"/>
 				</row>
 				<row class="row $row_cont[class]" id="$row_cont[id]">
 					<hbox>
