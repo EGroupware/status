@@ -57,7 +57,8 @@ app.classes.status = AppJS.extend(
 	handle_actions: function (_action, _selected)
 	{
 		var data = _selected[0]['data'];
-		var favorites = Object.values(egw.preference('fav', 'status'));
+		var fav = egw.preference('fav', 'status') || {};
+		var favorites = Object.values(fav);
 		switch (_action.id)
 		{
 			case 'fav':

@@ -245,7 +245,6 @@ class Hooks {
 	 */
 	public static function getUserName($_user = null)
 	{
-		$user = $_user ? $_user : $GLOBALS['egw_info']['user']['account_lid'];
-		return strtolower($user);
+		return $_user ? $_user : $GLOBALS['egw_info']['user']['account_lid'];
 	}
 }

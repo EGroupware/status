@@ -116,7 +116,7 @@ class Ui {
 			{
 				foreach ($content['fav'] as $item)
 				{
-					if ($item['id'] == $fav) $temp[] = $item;
+					if (strtolower($item['id']) == $fav) $temp[] = $item;
 				}
 			}
 			$content['fav'] = $temp;
