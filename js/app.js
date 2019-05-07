@@ -71,7 +71,11 @@ app.classes.status = AppJS.extend(
 				}
 				egw.set_preference('status', 'fav', favorites);
 				break;
-
+			case 'mail':
+				egw.accountData(data.account_id, 'account_email',null, function(_data){
+					egw.open_link('mailto:' + _data[data.account_id]);
+				});
+				break;
 		}
 		this.refresh();
 	},
