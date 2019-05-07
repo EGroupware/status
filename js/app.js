@@ -45,6 +45,7 @@ app.classes.status = AppJS.extend(
 	{
 		// call parent
 		this._super.apply(this, arguments);
+		if (app.rocketchat) app.rocketchat.getUpdates();
 	},
 
 	/**
@@ -142,8 +143,47 @@ app.classes.status = AppJS.extend(
 	updateContent: function (_fav, _list)
 	{
 		var fav = this.et2.getWidgetById('fav');
+		var content = this.et2.getArrayMgr('content');
 		var list = this.et2.getWidgetById('list');
-		if (typeof _fav != 'undefined') fav.set_value({content:_fav});
-		if (typeof _list != 'undefined') list.set_value({content:_list});
+		if (typeof _fav != 'undefined')
+		{
+			fav.set_value({content:_fav});
+			content.data.fav = _fav;
+		}
+		if (typeof _list != 'undefined')
+		{
+			list.set_value({content:_list});
+			content.data.list = _list
+		}
+		this.et2.setArrayMgr('content', content);
+	},
+
+	/**
+	 * Merge given content with existing ones and updates the lists
+	 *
+	 * @param {array} _content
+	 */
+	mergeContent: function (_content)
+	{
+		var fav = this.et2.getArrayMgr('content').getEntry('fav');
+		var list = this.et2.getArrayMgr('content').getEntry('list');
+		for (var i in _content)
+		{
+			for (var f in fav)
+			{
+				if (fav[f] && fav[f]['id'] && _content[i]['id'] == fav[f]['id'])
+				{
+					jQuery.extend(fav[f], _content[i]);
+				}
+			}
+			for (var l in list)
+			{
+				if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id'])
+				{
+					jQuery.extend(list[l], _content[i]);
+				}
+			}
+		}
+		this.updateContent(fav, list);
 	}
 });
