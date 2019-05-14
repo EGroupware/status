@@ -16,10 +16,10 @@
 						<hbox class="avatar" statustext="$row_cont[hint]">
 							<image src="$row_cont[icon]" class="iphoto" />
 						</hbox>
-						<description id="${row}[stat0]" class="stat0" background="$row_cont[bg0]"/>
-						<description id="${row}[stat1]" class="stat1" background="$row_cont[bg1]"/>
-						<description id="${row}[stat2]" class="stat2" background="$row_cont[bg2]"/>
-						<description id="${row}[stat3]" class="stat3" background="$row_cont[bg3]"/>
+						<description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]"/>
+						<description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]"/>
+						<description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]"/>
+						<description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]"/>
 					</hbox>
 				</row>
 			</rows>

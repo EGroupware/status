@@ -135,8 +135,7 @@ class Hooks {
 					'hint' => $contact['n_given']. ' ' . $contact['n_family'],
 					'stat' => [
 						'status' => [
-							'active' => $onlines[$id],
-							'bg' => 'api/templates/default/images/logo64x64.png'
+							'active' => $onlines[$id]
 						]
 					]
 				];

@@ -21,37 +21,42 @@ div#egw_fw_sidebar_r {
 }
 
 tr span.stat0 {
-	width: 15px;
-    height: 15px;
+	width: 13px;
+    height: 13px;
     position: absolute;
     left: 0px;
     border-radius: 50%;
     z-index: 100000;
-    background-size: 15px;
+    background-size: 13px;
     background-repeat: no-repeat;
 }
 
 tr span.stat1 {
-	width: 15px;
-    height: 15px;
+	width: 14px;
+    height: 14px;
     position: absolute;
     left: 0px;
 	bottom: 0px;
     border-radius: 50%;
     z-index: 100000;
-    background-size: 15px;
+    background-size: 14px;
     background-repeat: no-repeat;
+	color: #2d2b2b;
+    font-weight: bold;
+	text-align: center;
+	font-size: 10px;
+	line-height: 14px;
 }
 
 tr span.stat2 {
-	width: 15px;
-    height: 15px;
+	width: 13px;
+    height: 13px;
     position: absolute;
     right: 0px;
 	top: 0px;
     border-radius: 50%;
     z-index: 100000;
-    background-size: 15px;
+    background-size: 13px;
     background-repeat: no-repeat;
 }
 
@@ -66,11 +71,11 @@ tr span.stat3 {
     background-size: 15px;
     background-repeat: no-repeat;
 }
-tr.egw_online_false {
-	opacity: 0.5;
+tr.egw_offline {
+	opacity: 0.3;
 }
 
-tr.egw_online_true {
+tr.egw_online {
 	opacity: 1;
 }
 #status-index_fav {
@@ -106,3 +111,39 @@ tr.egw_online_true {
 #status-index_status-index-fav #status-index_fav td.iphoto img {
     margin-top: 5px;
 }
+
+#status-index_status-index-fav tr.row .online,
+#status-index_status-index-fav tr.row .busy,
+#status-index_status-index-fav tr.row .away,
+#status-index_status-index-fav tr.row .offline{
+	border:2px solid #f0f7fe;
+}
+#status-index_status-index-list tr.row .online,
+#status-index_status-index-list tr.row .busy,
+#status-index_status-index-list tr.row .away,
+#status-index_status-index-list tr.row .offline{
+	border:2px solid white;
+}
+
+#status-index_status-index-fav tr.row .online,
+#status-index_status-index-list tr.row .online {
+	background-color: #2de0a5;
+	color: black;
+}
+#status-index_status-index-fav tr.row .away,
+#status-index_status-index-list tr.row .away {
+	background-color: #ffd21f;
+	color: black;
+}
+#status-index_status-index-fav tr.row .busy,
+#status-index_status-index-list tr.row .busy {
+	background-color: #f5455c;
+	color:white;
+}
+#status-index_status-index-fav tr.row .offline,
+#status-index_status-index-list tr.row .offline {
+	background-color: #1f2329;
+	color: white;
+}
+
+

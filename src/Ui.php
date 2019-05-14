@@ -82,10 +82,14 @@ class Ui {
 						$skeys[$GLOBALS['egw_info']['user']['preferences']['status']['status'.$key]] : $skeys[$key];
 				if (!empty($item['stat'][$skey]['active']))
 				{
-					$stat['stat'.$key] = true;
 					if (!empty($item['stat'][$skey]['notification']))
 					{
-						$stat['notification'.$key] = $item['stat'][$skey]['notification'];
+						$stat['stat'.$key] = $item['stat'][$skey]['notification'];
+					}
+
+					if (!empty($item['stat'][$skey]['class']))
+					{
+						$stat['class'.$key] = $item['stat'][$skey]['class'];
 					}
 
 					if (!empty($item['stat'][$skey]['bg']))
@@ -100,6 +104,7 @@ class Ui {
 				'account_id' => $item['account_id'],
 				'hint' => $item['hint'],
 				'icon' => $item['icon'],
+				'class' => $item['stat']['status']['active'] ? 'egw_online' : 'egw_offline',
 			], (array)$stat);
 		}
 
