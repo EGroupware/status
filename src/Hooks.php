@@ -99,7 +99,7 @@ class Hooks {
 		$stat = $rows = $readonlys = $users = $onlines = [];
 		$accesslog = new \admin_accesslog();
 		$contact_obj = new Api\Contacts();
-		$total = $accesslog->get_rows(array('session_list' => true), $rows, $readonlys);
+		$total = $accesslog->get_rows(array('session_list' => 'active'), $rows, $readonlys);
 		if ($total > 0)
 		{
 			unset($rows['no_lo'], $rows['no_total']);
