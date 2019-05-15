@@ -89,6 +89,9 @@ tr.egw_online {
   background-color: #f0f7ff;
   border-bottom: 5px solid #2c4760;
 }
+#status-index_fav img.iphoto.et2_clickable:hover {
+  filter: invert(1);
+}
 #status-index_status-index-list tr.row div.et2_hbox,
 #status-index_status-index-fav tr.row div.et2_hbox {
   display: inline-block;
