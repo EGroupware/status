@@ -160,6 +160,16 @@ class Ui {
 			$a =  Api\Hooks::process('status-get_actions', $app, true);
 			$actions += $a[$app];
 		}
+		foreach ($actions as $key => $action)
+		{
+			if ($action['default'])
+			{
+				uksort($actions, function($a) use ($key) {
+					return $key != $a ? 1 : -1;
+				});
+				break;
+			}
+		}
 		return $actions;
 	}
 
