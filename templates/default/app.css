@@ -145,8 +145,8 @@ tr.egw_online {
 }
 #status-index_status-index-fav tr.row .offline,
 #status-index_status-index-list tr.row .offline {
-	background-color: #1f2329;
-	color: white;
+	background-color: #cbced1;
+	color: black;
 }
 
 
