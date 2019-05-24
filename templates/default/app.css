@@ -6,8 +6,8 @@ div#egw_fw_sidebar_r {
     background: white;
     width: 50px;
     right: 0;
-    height: ~"calc(100% - 60px)";
-    top: 43px;
+    height: ~"calc(100% - 45px)";
+    top: 45px;
     border-left: 1px solid #b4b4b4;
 	border-top: 1px solid #b4b4b4;
 	overflow-y: auto;
