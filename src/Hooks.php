@@ -119,8 +119,10 @@ class Hooks {
 
 		foreach ($users as $user)
 		{
-			if ($user['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
-
+			if (in_array($user['account_lid'], ['anonymous', $GLOBALS['egw_info']['user']['account_lid']]))
+			{
+				continue;
+			}
 			$contact = $contact_obj->read('account:'.$user['account_id'], true);
 			$id = self::getUserName($user['account_lid']);
 			if ($id)
@@ -132,19 +134,20 @@ class Hooks {
 						'contact_id' => $contact['id'],
 						'etag' => $contact['etag']
 					]),
-					'hint' => $contact['n_given']. ' ' . $contact['n_family'],
+					'hint' => $contact['n_given'] . ' ' . $contact['n_family'],
 					'stat' => [
 						'status' => [
 							'active' => $onlines[$id]
 						]
-					]
+					],
+					'lastlogin' => $user['account_lastlogin'],
 				];
 			}
 		}
 		uasort ($stat, function ($a ,$b){
 			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active'])
 			{
-				return 0;
+				return $b['lastlogin'] - $a['lastlogin'];
 			}
 			return ($a['stat']['egw']['active'] < $b['stat']['egw']['active']) ? 1 : -1;
 		});
