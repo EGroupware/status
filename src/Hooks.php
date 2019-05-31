@@ -96,26 +96,11 @@ class Hooks {
 	{
 		if ($data['app'] != self::APPNAME) return [];
 
-		$stat = $rows = $readonlys = $users = $onlines = [];
-		$accesslog = new \admin_accesslog();
+		$stat = [];
+
 		$contact_obj = new Api\Contacts();
-		$total = $accesslog->get_rows(array('session_list' => 'active'), $rows, $readonlys);
-		if ($total > 0)
-		{
-			unset($rows['no_lo'], $rows['no_total']);
-			foreach ($rows as $row)
-			{
-				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
-				$id = Api\Accounts::id2name($row['account_id'], 'account_lid');
-				$onlines [$id] = (int)(time() - $row['li']);
-			}
-		}
-		\admin_ui::get_users([
-			'filter' => 'accounts',
-			'order' => 'account_lastlogin',
-			'sort' => 'DESC',
-			'active' => true
-		], $users);
+
+		Api\Cache::setSession(self::APPNAME, 'account_state', md5(json_encode($users = self::getUsers())));
 
 		foreach ($users as $user)
 		{
@@ -137,7 +122,7 @@ class Hooks {
 					'hint' => $contact['n_given'] . ' ' . $contact['n_family'],
 					'stat' => [
 						'status' => [
-							'active' => $onlines[$id]
+							'active' => $user['online']
 						]
 					],
 					'lastlogin' => $user['account_lastlogin'],
@@ -248,5 +233,59 @@ class Hooks {
 	public static function getUserName($_user = null)
 	{
 		return $_user ? $_user : $GLOBALS['egw_info']['user']['account_lid'];
+	}
+
+	/**
+	 * Update state
+	 */
+	public static function updateState()
+	{
+		$account_state = Api\Cache::getSession(self::APPNAME, 'account_state');
+		$current_state = md5(json_encode(self::getUsers()));
+		$response = Api\Json\Response::get();
+		if ($account_state != $current_state)
+		{
+			// update the status list
+			$response->call('app.status.refresh');
+		}
+		// nothing to update
+	}
+
+	/**
+	 * Query list of active online users ordered by lastlogin
+	 *
+	 * @return array
+	 */
+	public static function getUsers ()
+	{
+		$users = $rows = $readonlys = $onlines = [];
+		$accesslog = new \admin_accesslog();
+
+
+		// get list of users
+		\admin_ui::get_users([
+			'filter' => 'accounts',
+			'order' => 'account_lastlogin',
+			'sort' => 'DESC',
+			'active' => true
+		], $users);
+
+		// get list of interactive online users
+		$total = $accesslog->get_rows(array('session_list' => 'active'), $rows, $readonlys);
+		if ($total > 0)
+		{
+			unset($rows['no_lo'], $rows['no_total']);
+			foreach ($rows as $row)
+			{
+				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
+				$onlines [$row['account_id']] = true;
+			}
+		}
+
+		foreach($users as &$user)
+		{
+			if ($onlines[$user['account_id']]) $user['online'] = true;
+		}
+		return $users;
 	}
 }
