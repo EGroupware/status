@@ -45,7 +45,6 @@ app.classes.status = AppJS.extend(
 	{
 		// call parent
 		this._super.apply(this, arguments);
-		if (app.rocketchat) app.rocketchat.getUpdates();
 	},
 
 	/**
