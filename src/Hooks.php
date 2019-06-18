@@ -177,51 +177,6 @@ class Hooks {
 	 */
 	static function settings() {
 
-		$sel_options = self::getStatKeys();
-		/* Settings array for this app */
-		$settings = array(
-			'status0' => array(
-				'type'   => 'select',
-				'label'  => 'Status indicator no. 1 (top left corner)',
-				'name'   => 'status0',
-				'values' => $sel_options,
-				'help'   => '',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> 'status',
-			),
-			'status1' => array(
-				'type'   => 'select',
-				'label'  => 'Status indicator no. 2 (bottom left corner)',
-				'name'   => 'status1',
-				'values' => $sel_options,
-				'help'   => '',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> '',
-			),
-			'status2' => array(
-				'type'   => 'select',
-				'label'  => 'Status indicator no. 3 (top right corner)',
-				'name'   => 'status2',
-				'values' => $sel_options,
-				'help'   => '',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> '',
-			),
-			'status3' => array(
-				'type'   => 'select',
-				'label'  => 'Status indicator no. 4 (bottom right corner)',
-				'name'   => 'status3',
-				'values' => $sel_options,
-				'help'   => '',
-				'xmlrpc' => True,
-				'admin'  => False,
-				'default'=> '',
-			)
-		);
-		return $settings;
 	}
 
 	/**
