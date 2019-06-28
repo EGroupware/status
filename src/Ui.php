@@ -28,6 +28,11 @@ class Ui {
 		'index' => true
 	];
 
+	/**
+	 * Id delimiter
+	 */
+	const ID_DELIMITER = ':';
+
 	/*
 	 *
 	 */
@@ -78,8 +83,7 @@ class Ui {
 			$stat = [];
 			foreach (['0','1','2','3'] as $key)
 			{
-				$skey = $skeys[$GLOBALS['egw_info']['user']['preferences']['status']['status'.$key]] ?
-						$skeys[$GLOBALS['egw_info']['user']['preferences']['status']['status'.$key]] : $skeys[$key];
+				$skey = $skeys[$key];
 				if (!empty($item['stat'][$skey]['active']))
 				{
 					if (!empty($item['stat'][$skey]['notification']))
@@ -98,7 +102,7 @@ class Ui {
 					}
 				}
 			}
-			$isFav = in_array(strtolower($item['id']), self::mapFavoritesIds2Names());
+			$isFav = in_array(self::_fetchId($item),	self::mapFavoritesIds2Names());
 			$content[$isFav ? 'fav' : 'list'][] = array_merge([
 				'id' => $item['id'],
 				'account_id' => $item['account_id'],
@@ -108,7 +112,7 @@ class Ui {
 			], (array)$stat);
 		}
 
-		if (count($content['fav']) < 2) {
+		if (empty($content['fav']) && count($content['fav']) < 2) {
 			// need to add an emptyrow to avoid getting grid rendering error because of
 			// lacking a row id
 			$content['fav'][] = ['id' => 'emptyrow'];
@@ -121,7 +125,7 @@ class Ui {
 			{
 				foreach ($content['fav'] as $item)
 				{
-					if (strtolower($item['id']) == $fav) $temp[] = $item;
+					if (self::_fetchId($item) == $fav) $temp[] = $item;
 				}
 			}
 			$content['fav'] = $temp;
@@ -130,6 +134,17 @@ class Ui {
 		array_unshift($content['list'], [''=>'']);
 		array_unshift($content['fav'], [''=>'']);
 		return $content;
+	}
+
+	/**
+	 * Fetch resolved Id
+	 *
+	 * @param type $item
+	 * @return string
+	 */
+	private static function _fetchId ($item)
+	{
+		return strtolower(strchr($item['account_id'], self::ID_DELIMITER) ? $item['account_id'] : $item['id']);
 	}
 
 	/**
@@ -180,7 +195,7 @@ class Ui {
 	static function mapFavoritesIds2Names ()
 	{
 		return array_map(function ($_id){
-			return strtolower(Api\Accounts::id2name($_id));
+			return (is_numeric($_id) ? strtolower(Api\Accounts::id2name($_id)) : $_id);
 		}, $GLOBALS['egw_info']['user']['preferences']['status']['fav']);
 	}
 
@@ -192,6 +207,10 @@ class Ui {
 	static function mapNames2Ids ($_names)
 	{
 		return array_map(function ($name) {
+			if (strchr($name, self::ID_DELIMITER))
+			{
+				return $name;
+			}
 			return Api\Accounts::getInstance()->name2id($name);
 		}, $_names);
 	}

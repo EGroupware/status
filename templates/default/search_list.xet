@@ -9,7 +9,7 @@
 			</columns>
 			<rows>
 				<row>
-					<taglist-account id="accounts" />
+					<taglist id="accounts" allowFreeEntries="false" autocomplete_url="EGroupware\Status\Hooks::ajax_search"/>
 				</row>
 			</rows>
 		</grid>

@@ -243,4 +243,58 @@ class Hooks {
 		}
 		return $users;
 	}
+
+	/**
+	 * Searches rocketchat users and accounts
+	 *
+	 * Find entries that match query parameter (from link system) and format them
+	 * as the widget expects, a list of {id: ..., label: ..., icon: ...} objects
+	 */
+	public static function ajax_search()
+	{
+		$app = $_REQUEST['app'];
+		$type = $_REQUEST['type'];
+		$query = $_REQUEST['query'];
+		$options = array();
+		$links = array();
+
+		// Only search if a query was provided - don't search for all accounts
+		if($query)
+		{
+			$options['account_type'] = 'accounts';
+			$links = Api\Accounts::link_query($query, $options);
+		}
+
+		$results = array();
+		foreach($links as $id => $name)
+		{
+			$results[] = array(
+				'id' => $id,
+				'label' => $name,
+				'icon' => Api\Egw::link('/api/avatar.php', array('account_id' => $id))
+			);
+		}
+		$hooks = Api\Hooks::implemented('status-getSearchParticipants');
+		foreach($hooks as $app)
+		{
+			$r = Api\Hooks::process(['location'=>'status-getSearchParticipants', 'app'=>$app], $app);
+			$results = array_merge_recursive ($results, $r[$app]);
+		}
+		usort($results, function ($a, $b) use ($query) {
+			$a_label = is_array($a["label"]) ? $a["label"]["label"] : $a["label"];
+			$b_label = is_array($b["label"]) ? $b["label"]["label"] : $b["label"];
+
+		    similar_text($query, $a_label, $percent_a);
+		    similar_text($query, $b_label, $percent_b);
+		    return $percent_a === $percent_b ? 0 : ($percent_a > $percent_b ? -1 : 1);
+		});
+
+		 // switch regular JSON response handling off
+		Api\Json\Request::isJSONRequest(false);
+
+		header('Content-Type: application/json; charset=utf-8');
+		echo json_encode($results);
+		exit;
+	}
+
 }

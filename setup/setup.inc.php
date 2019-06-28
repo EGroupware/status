@@ -25,7 +25,6 @@ $setup_info['status']['license']  = 'GPL';
 $setup_info['status']['description'] = '';
 
 /* The hooks this app includes, needed for hooks registration */
-$setup_info['status']['hooks']['framework_header'] = 'EGroupware\Status\Hooks::framework_header';
 $setup_info['status']['hooks']['status-getStatus'] = 'EGroupware\Status\Hooks::getStatus';
 $setup_info['status']['hooks']['status-get_actions'] = 'EGroupware\Status\Hooks::get_actions';
 $setup_info['status']['hooks']['settings'] = 'EGroupware\Status\Hooks::settings';
