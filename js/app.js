@@ -144,12 +144,12 @@ app.classes.status = AppJS.extend(
 		var fav = this.et2.getWidgetById('fav');
 		var content = this.et2.getArrayMgr('content');
 		var list = this.et2.getWidgetById('list');
-		if (typeof _fav != 'undefined')
+		if (_fav && typeof _fav != 'undefined')
 		{
 			fav.set_value({content:_fav});
 			content.data.fav = _fav;
 		}
-		if (typeof _list != 'undefined')
+		if (_list && typeof _list != 'undefined')
 		{
 			list.set_value({content:_list});
 			content.data.list = _list
