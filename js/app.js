@@ -73,9 +73,26 @@ app.classes.status = AppJS.extend(
 				egw.set_preference('status', 'fav', favorites);
 				break;
 			case 'mail':
-				egw.accountData(data.account_id, 'account_email',null, function(_data){
-					egw.open_link('mailto:' + _data[data.account_id]);
-				});
+				if (data.account_id.match(/:/))
+				{
+					egw.json(
+						"EGroupware\\Status\\Ui::ajax_getContactofLink",
+						["rocketchat", "rocketchat:non-egw"],
+						function(contact){
+							if (contact)
+							{
+								egw.open_link('mailto:' +contact[0]['email']);
+							}
+						}
+					).sendRequest()
+				}
+				else
+				{
+					egw.accountData(data.account_id, 'account_email',null, function(_data){
+						egw.open_link('mailto:' + _data[data.account_id]);
+					});
+				}
+
 				break;
 		}
 		this.refresh();

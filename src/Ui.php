@@ -108,7 +108,8 @@ class Ui {
 				'account_id' => $item['account_id'],
 				'hint' => $item['hint'],
 				'icon' => $item['icon'],
-				'class' => $item['stat']['status']['active'] ? 'egw_online' : 'egw_offline',
+				'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
+				'link_to' => $item['link_to']
 			], (array)$stat);
 		}
 
@@ -213,5 +214,20 @@ class Ui {
 			}
 			return Api\Accounts::getInstance()->name2id($name);
 		}, $_names);
+	}
+
+	/**
+	 * Get contact info from link
+	 * 
+	 * @param type $app
+	 * @param type $id
+	 */
+	static function ajax_getContactofLink($app, $id)
+	{
+		$response = Api\Json\Response::get();
+		$links = array_values(Api\Link::get_links($app,$id));
+		$result = $GLOBALS['egw']->contacts->search(array('contact_id'=>$links[0]['id']), array('email','email_home'),
+			'', '', '', false, 'OR', false);
+		$response->data($result);
 	}
 }
