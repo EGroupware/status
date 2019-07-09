@@ -73,7 +73,7 @@ app.classes.status = AppJS.extend(
 				egw.set_preference('status', 'fav', favorites);
 				break;
 			case 'mail':
-				if (data.account_id.match(/:/))
+				if (typeof data.account_id == "string" && data.account_id.match(/:/))
 				{
 					egw.json(
 						"EGroupware\\Status\\Ui::ajax_getContactofLink",
