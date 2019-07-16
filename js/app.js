@@ -73,11 +73,11 @@ app.classes.status = AppJS.extend(
 				egw.set_preference('status', 'fav', favorites);
 				break;
 			case 'mail':
-				if (typeof data.account_id == "string" && data.account_id.match(/:/))
+				if (typeof data.account_id == "string" && data.account_id.match(/:/) && data.link_to)
 				{
 					egw.json(
 						"EGroupware\\Status\\Ui::ajax_getContactofLink",
-						["rocketchat", "rocketchat:non-egw"],
+						["rocketchat", data.link_to.id],
 						function(contact){
 							if (contact)
 							{
