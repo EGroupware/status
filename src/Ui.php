@@ -218,7 +218,7 @@ class Ui {
 
 	/**
 	 * Get contact info from link
-	 * 
+	 *
 	 * @param type $app
 	 * @param type $id
 	 */
@@ -226,7 +226,7 @@ class Ui {
 	{
 		$response = Api\Json\Response::get();
 		$links = array_values(Api\Link::get_links($app,$id));
-		$result = $GLOBALS['egw']->contacts->search(array('contact_id'=>$links[0]['id']), array('email','email_home'),
+		if (is_array($links)) $result = $GLOBALS['egw']->contacts->search(array('contact_id'=>$links[0]['id']), array('email','email_home'),
 			'', '', '', false, 'OR', false);
 		$response->data($result);
 	}

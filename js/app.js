@@ -77,7 +77,7 @@ app.classes.status = AppJS.extend(
 				{
 					egw.json(
 						"EGroupware\\Status\\Ui::ajax_getContactofLink",
-						["rocketchat", data.link_to.id],
+						["rocketchat", data.account_id],
 						function(contact){
 							if (contact)
 							{
