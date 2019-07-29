@@ -104,6 +104,10 @@ tr.egw_online {
 #egw_fw_sidebar_r::-webkit-scrollbar {
     width: 1px;
 }
+/*Firefox scrollbar width*/
+#egw_fw_sidebar_r{
+    scrollbar-width: none;
+}
 .fav_placeholder {
 	height: 40px;
 	background: silver;
