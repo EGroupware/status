@@ -171,15 +171,6 @@ class Hooks {
 	}
 
 	/**
-	 * populates $settings for the Api\Preferences
-	 *
-	 * @return array
-	 */
-	static function settings() {
-
-	}
-
-	/**
 	 * Get username from account_lid
 	 *
 	 * @param type $_user = null if user given then use user as account lid

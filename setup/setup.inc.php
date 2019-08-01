@@ -27,7 +27,6 @@ $setup_info['status']['description'] = '';
 /* The hooks this app includes, needed for hooks registration */
 $setup_info['status']['hooks']['status-getStatus'] = 'EGroupware\Status\Hooks::getStatus';
 $setup_info['status']['hooks']['status-get_actions'] = 'EGroupware\Status\Hooks::get_actions';
-$setup_info['status']['hooks']['settings'] = 'EGroupware\Status\Hooks::settings';
 $setup_info['status']['hooks']['check_notify'] = 'EGroupware\Status\Hooks::updateState';
 
 /* Dependencies for this app to work */
