@@ -123,7 +123,7 @@ app.classes.status = AppJS.extend(
 					}
 				}
 			},
-			title: egw.lang('Add to favorites'),
+			title: this.egw.lang('Add to favorites'),
 			buttons: [
 				{text: this.egw.lang("Add"), id: "add", class: "ui-priority-primary", default: true},
 				{text: this.egw.lang("Cancel"), id:"cancel"}
