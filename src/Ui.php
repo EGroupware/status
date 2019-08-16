@@ -195,9 +195,10 @@ class Ui {
 	 */
 	static function mapFavoritesIds2Names ()
 	{
-		return array_map(function ($_id){
+		return array_map(function ($_id)
+		{
 			return (is_numeric($_id) ? strtolower(Api\Accounts::id2name($_id)) : $_id);
-		}, $GLOBALS['egw_info']['user']['preferences']['status']['fav']);
+		}, (array)$GLOBALS['egw_info']['user']['preferences']['status']['fav']);
 	}
 
 	/**
