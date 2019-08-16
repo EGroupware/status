@@ -113,7 +113,7 @@ class Ui {
 			], (array)$stat);
 		}
 
-		if (empty($content['fav']) && count($content['fav']) < 2) {
+		if (empty($content['fav']) || count($content['fav']) < 2) {
 			// need to add an emptyrow to avoid getting grid rendering error because of
 			// lacking a row id
 			$content['fav'][] = ['id' => 'emptyrow'];
