@@ -35,7 +35,7 @@ class Hooks {
 		foreach($hooks as $app)
 		{
 			$s = Api\Hooks::process(['location'=>'status-getStatus', 'app'=>$app], $app);
-			$status = array_merge_recursive ($status, $s[$app]);
+			if (!empty($s[$app])) $status = array_merge_recursive ($status, $s[$app]);
 		}
 
 
