@@ -109,7 +109,8 @@ class Ui {
 				'hint' => $item['hint'],
 				'icon' => $item['icon'],
 				'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
-				'link_to' => $item['link_to']
+				'link_to' => $item['link_to'],
+				'data' => $item['stat']
 			], (array)$stat);
 		}
 
