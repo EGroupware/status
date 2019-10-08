@@ -133,7 +133,8 @@ app.classes.status = AppJS.extend(
 					value: '',
 			}},
 			template: egw.webserverUrl+'/status/templates/default/search_list.xet',
-			resizable: false
+			resizable: false,
+			width: 400,
 		}, et2_dialog._create_parent('status'));
 	},
 
