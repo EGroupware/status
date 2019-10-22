@@ -126,13 +126,15 @@ tr.egw_online {
 #status-index_status-index-fav tr.row .online,
 #status-index_status-index-fav tr.row .busy,
 #status-index_status-index-fav tr.row .away,
-#status-index_status-index-fav tr.row .offline {
+#status-index_status-index-fav tr.row .offline,
+#status-index_status-index-fav tr.row .room {
   border: 2px solid #f0f7fe;
 }
 #status-index_status-index-list tr.row .online,
 #status-index_status-index-list tr.row .busy,
 #status-index_status-index-list tr.row .away,
-#status-index_status-index-list tr.row .offline {
+#status-index_status-index-list tr.row .offline,
+#status-index_status-index-list tr.row .room {
   border: 2px solid white;
 }
 #status-index_status-index-fav tr.row .online,
@@ -153,6 +155,11 @@ tr.egw_online {
 #status-index_status-index-fav tr.row .offline,
 #status-index_status-index-list tr.row .offline {
   background-color: #cbced1;
+  color: black;
+}
+#status-index_status-index-fav tr.row .room,
+#status-index_status-index-list tr.row .room {
+  background-color: #2de0a5;
   color: black;
 }
 .slideIsUp #egw_fw_sidebar_r {

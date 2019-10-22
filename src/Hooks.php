@@ -244,7 +244,6 @@ class Hooks {
 	public static function ajax_search()
 	{
 		$app = $_REQUEST['app'];
-		$type = $_REQUEST['type'];
 		$query = $_REQUEST['query'];
 		$options = array();
 		$links = array();
