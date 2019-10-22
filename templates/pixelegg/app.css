@@ -159,8 +159,8 @@ tr.egw_online {
 }
 #status-index_status-index-fav tr.row .room,
 #status-index_status-index-list tr.row .room {
-  background-color: #2de0a5;
-  color: black;
+  background-color: #212f2b;
+  color: white;
 }
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
