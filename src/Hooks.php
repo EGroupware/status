@@ -115,14 +115,13 @@ class Hooks {
 				$stat [$id] = [
 					'id' => $id,
 					'account_id' => $user['account_id'],
-					'icon' => Api\Egw::link('/api/avatar.php', [
-						'contact_id' => $contact['id'],
-						'etag' => $contact['etag']
-					]),
+					'icon' => $contact['photo'],
 					'hint' => $contact['n_given'] . ' ' . $contact['n_family'],
 					'stat' => [
 						'status' => [
-							'active' => $user['online']
+							'active' => $user['online'],
+							'lname' => $contact['n_family'],
+							'fname' => $contact['n_given']
 						]
 					],
 					'lastlogin' => $user['account_lastlogin'],
