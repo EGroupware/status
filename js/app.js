@@ -81,7 +81,7 @@ app.classes.status = AppJS.extend(
 						function(contact){
 							if (contact)
 							{
-								egw.open_link('mailto:' +contact[0]['email']);
+								egw.open('', 'mail', 'add',{'preset[mailto]': +contact[0]['email']});
 							}
 						}
 					).sendRequest()
@@ -89,7 +89,7 @@ app.classes.status = AppJS.extend(
 				else
 				{
 					egw.accountData(data.account_id, 'account_email',null, function(_data){
-						egw.open_link('mailto:' + _data[data.account_id]);
+						egw.open('', 'mail', 'add', {'preset[mailto]':_data[data.account_id]});
 					});
 				}
 
