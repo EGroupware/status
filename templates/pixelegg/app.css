@@ -87,7 +87,7 @@ tr.egw_online {
 }
 #status-index_fav {
   background-color: #f0f7ff;
-  border-bottom: 5px solid #2c4760;
+  border-bottom: 4px solid #b4b4b4;
 }
 #status-index_fav img.iphoto.et2_clickable:hover {
   filter: invert(1);
