@@ -1,4 +1,13 @@
 "use strict";
+/**
+ * EGroupware - Status
+ *
+ * @link http://www.egroupware.org
+ * @package Status
+ * @author Hadi Nategh <hn-At-egroupware.org>
+ * @copyright (c) 2019 by Hadi Nategh <hn-At-egroupware.org>
+ * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -13,15 +22,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * EGroupware - Status
- *
- * @link http://www.egroupware.org
- * @package Status
- * @author Hadi Nategh <hn-At-egroupware.org>
- * @copyright (c) 2019 by Hadi Nategh <hn-At-egroupware.org>
- * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$
+/*egw:uses
+    /api/js/jsapi/egw_app.js;
  */
 var egw_app_1 = require("../../api/js/jsapi/egw_app");
 var statusApp = /** @class */ (function (_super) {
@@ -182,4 +184,3 @@ var statusApp = /** @class */ (function (_super) {
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;
-//# sourceMappingURL=app.js.map

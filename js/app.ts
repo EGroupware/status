@@ -6,7 +6,10 @@
  * @author Hadi Nategh <hn-At-egroupware.org>
  * @copyright (c) 2019 by Hadi Nategh <hn-At-egroupware.org>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
- * @version $Id$
+ */
+
+/*egw:uses
+	/api/js/jsapi/egw_app.js;
  */
 import {EgwApp} from "../../api/js/jsapi/egw_app";
 
