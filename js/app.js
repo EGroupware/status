@@ -184,3 +184,4 @@ var statusApp = /** @class */ (function (_super) {
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;
+//# sourceMappingURL=app.js.map
