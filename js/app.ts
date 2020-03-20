@@ -15,7 +15,6 @@ import {EgwApp} from "../../api/js/jsapi/egw_app";
 
 class statusApp extends EgwApp
 {
-	static readonly appname: 'status';
 
 	/**
 	 * Constructor
@@ -25,7 +24,7 @@ class statusApp extends EgwApp
 	constructor()
 	{
 		// call parent
-		super();
+		super('status');
 	}
 
 	/**

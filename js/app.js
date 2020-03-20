@@ -35,7 +35,7 @@ var statusApp = /** @class */ (function (_super) {
      */
     function statusApp() {
         // call parent
-        return _super.call(this) || this;
+        return _super.call(this, 'status') || this;
     }
     /**
      * Destructor
