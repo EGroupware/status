@@ -92,6 +92,11 @@ var statusApp = /** @class */ (function (_super) {
                     });
                 }
                 break;
+            case 'call':
+                egw.json("EGroupware\\Videoconference\\Call::ajax_video_call", [data.account_id], function (_url) {
+                    window.open(_url);
+                }).sendRequest();
+                break;
         }
         this.refresh();
     };
@@ -180,6 +185,9 @@ var statusApp = /** @class */ (function (_super) {
             }
         }
         this.updateContent(fav, list);
+    };
+    statusApp.prototype.isOnline = function (_action, _selected) {
+        return _selected[0].data.data.status.active;
     };
     return statusApp;
 }(egw_app_1.EgwApp));

@@ -96,6 +96,13 @@ class statusApp extends EgwApp
 				}
 
 				break;
+			case 'call':
+				egw.json(
+					"EGroupware\\Videoconference\\Call::ajax_video_call",
+					[data.account_id], function(_url){
+						window.open(_url);
+					}).sendRequest();
+				break;
 		}
 		this.refresh();
 	}
@@ -204,6 +211,11 @@ class statusApp extends EgwApp
 			}
 		}
 		this.updateContent(fav, list);
+	}
+
+	isOnline(_action, _selected)
+	{
+		return _selected[0].data.data.status.active;
 	}
 }
 app.classes.status = statusApp;
