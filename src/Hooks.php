@@ -12,6 +12,7 @@
 namespace EGroupware\Status;
 
 use EGroupware\Api;
+use EGroupware\Api\Config;
 
 class Hooks {
 	/**
@@ -20,17 +21,16 @@ class Hooks {
 	 */
 	const APPNAME = 'status';
 
+	const DEFAULT_VIDEOCONFERENCE_BACKEND = 'Jitsi';
 
 	/**
 	 * Status items
 	 *
 	 * @return array returns an array of status items as sorted based on fav preferences
-	 *
-	 * @todo favorites and sorting result
 	 */
 	public static function statusItems ()
 	{
-		$status = [];
+		$result = $status = [];
 		$hooks = Api\Hooks::implemented('status-getStatus');
 		foreach($hooks as $app)
 		{
@@ -38,8 +38,6 @@ class Hooks {
 			if (!empty($s[$app])) $status = array_merge_recursive ($status, $s[$app]);
 		}
 
-
-		//TODO: consider favorites and sorting orders
 		foreach ($status as &$s)
 		{
 			if (is_array($s['id'])) $s['id'] = $s['id'][0];
@@ -156,13 +154,20 @@ class Hooks {
 				'allowOnMultiple' => false,
 				'enabled' => false,
 				'onExecute' => 'javaScript:app.status.handle_actions'
+			],
+			'call' => [
+				'caption' => 'Video call',
+				'default' => true,
+				'allowOnMultiple' => true,
+				'onExecute' => 'javaScript:app.status.handle_actions',
+				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
 			]
 		];
 	}
 
 	/**
 	 * Get all implemented stat keys
-	 * @return type
+	 * @return array returns array of stat keys
 	 */
 	public static function getStatKeys ()
 	{
@@ -242,7 +247,6 @@ class Hooks {
 	 */
 	public static function ajax_search()
 	{
-		$app = $_REQUEST['app'];
 		$query = $_REQUEST['query'];
 		$options = array();
 		$links = array();
@@ -284,6 +288,44 @@ class Hooks {
 		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($results);
 		exit;
+	}
+
+	public static function menu ($data)
+	{
+		if ($GLOBALS['egw_info']['user']['apps']['admin']) {
+			$file = Array(
+				'Site Configuration' => Api\Egw::link('/index.php', 'menuaction=admin.admin_config.index&appname=' . self::APPNAME . '&ajax=true'),
+			);
+			if ($data['location'] == 'admin') {
+				display_section(self::APPNAME, $file);
+			}
+		}
+	}
+
+	/**
+	 * Set predefined settings
+	 *
+	 * @param array $config
+	 * @return array with additional Api\Config to merge
+	 */
+	public static function config(array $config)
+	{
+		$ret = [];
+		if (empty($config['videoconference']['backend']))
+		{
+			$ret['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
+		}
+		if (($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND || $ret['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND) && empty($config['videoconference']['jitsi']['jitsi.egroupware.org']))
+		{
+			$ret['videoconference']['jitsi']['jitsi_domain'] = 'jitsi.egroupware.org';
+		}
+		return $ret;
+	}
+
+	public static function isVideoconferenceDisabled ()
+	{
+		$config = Config::read('status');
+		return $config['videoconference']['disable'];
 	}
 
 }

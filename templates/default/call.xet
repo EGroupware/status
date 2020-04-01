@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="status.call" template="" lang="" group="0" version="1.9.001">
+        <hbox class="et2_prompt">
+            <image src="dialog_help" class="dialog_icon"/>
+            <vbox class="ui-dialog-content">
+                <hbox>
+                    <vbox>
+                         <description id="message_top"/>
+                        <avatar contact_id="$cont[avatar]"/>
+                        <label id="name"/>
+                    </vbox>
+                    <image id="stat_icon"/>
+                </hbox>
+                <description id="message_buttom"/>
+            </vbox>
+        </hbox>
+    </template>
+</overlay>

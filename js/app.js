@@ -93,9 +93,7 @@ var statusApp = /** @class */ (function (_super) {
                 }
                 break;
             case 'call':
-                egw.json("EGroupware\\Videoconference\\Call::ajax_video_call", [data.account_id], function (_url) {
-                    window.open(_url);
-                }).sendRequest();
+                this.makeCall(data);
                 break;
         }
         this.refresh();
@@ -188,6 +186,70 @@ var statusApp = /** @class */ (function (_super) {
     };
     statusApp.prototype.isOnline = function (_action, _selected) {
         return _selected[0].data.data.status.active;
+    };
+    /**
+     * Initiate call via action
+     * @param data
+     */
+    statusApp.prototype.makeCall = function (data) {
+        var callCancelled = false;
+        var button = [{ "button_id": 0, "text": 'cancel', id: '0', image: 'cancel' }];
+        var dialog = et2_createWidget("dialog", {
+            callback: function (_btn) {
+                if (_btn == et2_dialog.CANCEL_BUTTON) {
+                    callCancelled = true;
+                }
+            },
+            title: '',
+            buttons: button,
+            minWidth: 300,
+            minHeight: 200,
+            resizable: false,
+            type: et2_dialog.PLAIN_MESSAGE,
+            template: egw.webserverUrl + '/status/templates/default/call.xet',
+            value: { content: {
+                    "name": data.hint,
+                    "avatar": "account:" + data.account_id,
+                    "message_top": egw.lang('Initiating call to')
+                } }
+        });
+        setTimeout(function () {
+            if (!callCancelled) {
+                dialog.destroy();
+                egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data.account_id], function (_url) {
+                    window.open(_url);
+                }).sendRequest();
+            }
+        }, 3000);
+    };
+    /**
+     * gets called after receiving pushed call
+     * @param _data
+     */
+    statusApp.prototype.receivedCall = function (_data) {
+        var button = [
+            { "button_id": 1, "text": 'accept', id: '0', image: 'check', default: true },
+            { "button_id": 0, "text": 'reject', id: '0', image: 'cancel' }
+        ];
+        et2_createWidget("dialog", {
+            callback: function (_btn, value) {
+                if (_btn == et2_dialog.BUTTONS_OK) {
+                    window.open(value.url);
+                }
+            },
+            title: '',
+            buttons: button,
+            minWidth: 300,
+            minHeight: 200,
+            template: egw.webserverUrl + '/status/templates/default/call.xet',
+            value: { content: {
+                    "name": _data.caller.name,
+                    "avatar": "account:" + _data.caller.acc_id,
+                    "message_buttom": egw.lang('is calling'),
+                    "url": _data.call
+                } },
+            resizable: false
+        }, et2_dialog._create_parent('status'));
     };
     return statusApp;
 }(egw_app_1.EgwApp));

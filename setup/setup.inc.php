@@ -25,9 +25,11 @@ $setup_info['status']['license']  = 'GPL';
 $setup_info['status']['description'] = '';
 
 /* The hooks this app includes, needed for hooks registration */
-$setup_info['status']['hooks']['status-getStatus'] = 'EGroupware\Status\Hooks::getStatus';
-$setup_info['status']['hooks']['status-get_actions'] = 'EGroupware\Status\Hooks::get_actions';
-$setup_info['status']['hooks']['check_notify'] = 'EGroupware\Status\Hooks::updateState';
+$setup_info['status']['hooks']['status-getStatus'] = \EGroupware\Status\Hooks::class.'::getStatus';
+$setup_info['status']['hooks']['status-get_actions'] = \EGroupware\Status\Hooks::class.'::get_actions';
+$setup_info['status']['hooks']['check_notify'] = \EGroupware\Status\Hooks::class.'::updateState';
+$setup_info['status']['hooks']['config'] = \EGroupware\Status\Hooks::class.'::config';
+$setup_info['status']['hooks']['admin'] = \EGroupware\Status\Hooks::class.'::menu';
 
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(
