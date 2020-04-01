@@ -263,12 +263,12 @@ class statusApp extends EgwApp
 	receivedCall(_data)
 	{
 		let button = [
-			{"button_id": 1, "text": 'accept', id: '0', image: 'check', default: true},
+			{"button_id": 1, "text": 'accept', id: '1', image: 'check', default: true},
 			{"button_id": 0, "text": 'reject', id: '0', image: 'cancel'}
 		];
 		et2_createWidget("dialog",{
 			callback: function(_btn, value){
-				if (_btn == et2_dialog.BUTTONS_OK)
+				if (_btn == et2_dialog.OK_BUTTON)
 				{
 					window.open(value.url);
 				}
