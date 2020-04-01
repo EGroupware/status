@@ -200,19 +200,19 @@ var statusApp = /** @class */ (function (_super) {
                     callCancelled = true;
                 }
             },
-            title: '',
+            title: egw.lang('Initiating call to'),
             buttons: button,
             minWidth: 300,
             minHeight: 200,
             resizable: false,
-            type: et2_dialog.PLAIN_MESSAGE,
-            template: egw.webserverUrl + '/status/templates/default/call.xet',
-            value: { content: {
+            value: {
+                content: {
                     "name": data.hint,
-                    "avatar": "account:" + data.account_id,
-                    "message_top": egw.lang('Initiating call to')
-                } }
-        });
+                    "avatar": "account:" + data.account_id
+                }
+            },
+            template: egw.webserverUrl + '/status/templates/default/call.xet?'
+        }, et2_dialog._create_parent(this.appname));
         setTimeout(function () {
             if (!callCancelled) {
                 dialog.destroy();
@@ -241,15 +241,17 @@ var statusApp = /** @class */ (function (_super) {
             buttons: button,
             minWidth: 300,
             minHeight: 200,
-            template: egw.webserverUrl + '/status/templates/default/call.xet',
-            value: { content: {
+            value: {
+                content: {
                     "name": _data.caller.name,
                     "avatar": "account:" + _data.caller.acc_id,
                     "message_buttom": egw.lang('is calling'),
                     "url": _data.call
-                } },
-            resizable: false
-        }, et2_dialog._create_parent('status'));
+                }
+            },
+            resizable: false,
+            template: egw.webserverUrl + '/status/templates/default/call.xet'
+        }, et2_dialog._create_parent(this.appname));
     };
     return statusApp;
 }(egw_app_1.EgwApp));

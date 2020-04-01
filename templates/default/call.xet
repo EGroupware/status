@@ -4,7 +4,6 @@
 <overlay>
 	<template id="status.call" template="" lang="" group="0" version="1.9.001">
         <hbox class="et2_prompt">
-            <image src="dialog_help" class="dialog_icon"/>
             <vbox class="ui-dialog-content">
                 <hbox>
                     <vbox>
@@ -15,6 +14,7 @@
                     <image id="stat_icon"/>
                 </hbox>
                 <description id="message_buttom"/>
+                <textbox id="url" disabled="true"/>
             </vbox>
         </hbox>
     </template>
