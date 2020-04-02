@@ -49,6 +49,12 @@ class Call
 		$response->data($CallerUrl);
 	}
 
+	/**
+	 * Generates a full working meeting Url
+	 * @param $room room id
+	 * @param $context user data
+	 * @return mixed
+	 */
 	public static function genMeetingUrl ($room, $context)
 	{
 		$backend = self::_getBackendInstance($room, [
@@ -57,9 +63,14 @@ class Call
 		return $backend->getMeetingUrl();
 	}
 
+	/**
+	 * Generates a unique room ID
+	 * @return string
+	 * @throws \Exception
+	 */
 	public static function genUniqueRoomID()
 	{
-		return preg_replace('/\./','' , $_SERVER['HTTP_HOST']).Api\Auth::randomstring(20);
+		return str_replace(array('-', '.', ':', '/') , '',  $_SERVER['HTTP_HOST']).Api\Auth::randomstring(20);
 	}
 
 	/**
