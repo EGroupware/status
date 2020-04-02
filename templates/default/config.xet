@@ -31,14 +31,24 @@
 			    </row>
 				<row valign="middle" height="40">
 				    <groupbox>
-                        <caption label="Jitsi Server Settings"/>
-                        <vbox>
-                            <description value="Jitsi Domain" label="%s:"/>
-                            <description value="example: jitsi.egroupware.org"/>
+				        <vbox>
+                            <caption label="Jitsi Server Settings"/>
+                            <vbox>
+                                <description value="Jitsi Domain" label="%s:"/>
+                                <description value="example: jitsi.egroupware.org"/>
+                            </vbox>
+                            <hbox>
+                                <url id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"/>
+                            </hbox>
                         </vbox>
-                        <hbox>
-                            <url id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"/>
-                        </hbox>
+                        <vbox>
+                            <vbox>
+                                <description value="Jitsi Application Secret" label="%s:"/>
+                            </vbox>
+                            <hbox>
+                                <passwd id="newsettings[videoconference][jitsi][jitsi_application_secret]" width="300px"/>
+                            </hbox>
+                        </vbox>
 				    </groupbox>
 				</row>
 			</rows>
