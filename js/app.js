@@ -93,7 +93,11 @@ var statusApp = /** @class */ (function (_super) {
                 }
                 break;
             case 'call':
-                this.makeCall(data);
+                this.makeCall([{
+                        id: data.account_id,
+                        name: data.hint,
+                        avatar: "account:" + data.account_id
+                    }]);
                 break;
         }
         this.refresh();
@@ -184,12 +188,26 @@ var statusApp = /** @class */ (function (_super) {
         }
         this.updateContent(fav, list);
     };
+    statusApp.prototype.getEntireList = function () {
+        var fav = this.et2.getArrayMgr('content').getEntry('fav');
+        var list = this.et2.getArrayMgr('content').getEntry('list');
+        var result = [];
+        for (var f in fav) {
+            if (fav[f] && fav[f]['id'])
+                result.push(fav[f]);
+        }
+        for (var l in list) {
+            if (list[l] && list[l]['id'])
+                result.push(list[l]);
+        }
+        return result;
+    };
     statusApp.prototype.isOnline = function (_action, _selected) {
         return _selected[0].data.data.status.active;
     };
     /**
      * Initiate call via action
-     * @param data
+     * @param array data
      */
     statusApp.prototype.makeCall = function (data) {
         var callCancelled = false;
@@ -207,17 +225,14 @@ var statusApp = /** @class */ (function (_super) {
             minHeight: 200,
             resizable: false,
             value: {
-                content: {
-                    "name": data.hint,
-                    "avatar": "account:" + data.account_id
-                }
+                content: { list: data }
             },
             template: egw.webserverUrl + '/status/templates/default/call.xet?'
         }, et2_dialog._create_parent(this.appname));
         setTimeout(function () {
             if (!callCancelled) {
                 dialog.destroy();
-                egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data.account_id], function (_url) {
+                egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data], function (_url) {
                     statusApp._openCall(_url);
                 }).sendRequest();
             }
@@ -257,8 +272,10 @@ var statusApp = /** @class */ (function (_super) {
             minHeight: 200,
             value: {
                 content: {
-                    "name": _data.caller.name,
-                    "avatar": "account:" + _data.caller.acc_id,
+                    list: {
+                        "name": _data.caller.name,
+                        "avatar": "account:" + _data.caller.account_id,
+                    },
                     "message_buttom": egw.lang('is calling'),
                     "url": _data.call
                 }

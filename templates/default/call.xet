@@ -6,11 +6,20 @@
         <hbox class="et2_prompt">
             <vbox class="ui-dialog-content">
                 <hbox>
-                    <vbox>
-                         <description id="message_top"/>
-                        <avatar contact_id="$cont[avatar]"/>
-                        <label id="name"/>
-                    </vbox>
+                    <description id="message_top"/>
+                    <grid id="list">
+                        <columns>
+                            <column />
+                        </columns>
+                        <rows>
+                            <row>
+                                <vbox>
+                                    <avatar contact_id="$row_cont[avatar]"/>
+                                    <label id="${row}[name]"/>
+                                </vbox>
+                            </row>
+                        </rows>
+                    </grid>
                     <image id="stat_icon"/>
                 </hbox>
                 <description id="message_buttom"/>

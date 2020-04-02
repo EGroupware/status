@@ -24,29 +24,51 @@ class Call
 	 * @param string $id
 	 * @throws
 	 */
-	public static function ajax_video_call ($id)
+	public static function ajax_video_call ($data)
 	{
 		$response = Api\Json\Response::get();
 		$caller = [
 			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
 			'email' => $GLOBALS['egw_info']['user']['account_email'],
 			'avatar' => $_SERVER['HTTP_ORIGIN'].Api\Egw::link('/api/avatar.php', array('account_id' => $GLOBALS['egw_info']['user']['account_id'])),
-			'acc_id' => $GLOBALS['egw_info']['user']['account_id']
+			'account_id' => $GLOBALS['egw_info']['user']['account_id']
 		];
-		$backend = self::getBackendInstance(self::genRoomHash($GLOBALS['egw_info']['user']['account_lid'].$id), [
-			'user' => $caller
-		]);
-		self::pushCall($backend->getMeetingUrl(),$id, $caller);
-		$response->data($backend->getMeetingUrl());
+		$room = self::genUniqueRoomID();
+		$CallerUrl = self::genMeetingUrl($room, $caller);
+		foreach ($data as $user)
+		{
+			$callee = [
+				'name' => $user['name'],
+				'email' => $user['email'],
+				'avatar' => $_SERVER['HTTP_ORIGIN'].Api\Egw::link('/api/avatar.php', array('account_id' => $user['id'])),
+				'account_id' => $user['id']
+			];
+			$CalleeUrl = self::genMeetingUrl($room, $callee);
+			self::pushCall($CalleeUrl, $user['id'], $caller);
+		}
+		$response->data($CallerUrl);
 	}
 
-	/**s
+	public static function genMeetingUrl ($room, $context)
+	{
+		$backend = self::_getBackendInstance($room, [
+			'user' => $context
+		]);
+		return $backend->getMeetingUrl();
+	}
+
+	public static function genUniqueRoomID()
+	{
+		return preg_replace('/\./','' , $_SERVER['HTTP_HOST']).Api\Auth::randomstring(20);
+	}
+
+	/**
 	 *
 	 * @param $room
 	 * @param $context
 	 * @return bool
 	 */
-	public static function getBackendInstance($room, $context)
+	private static function _getBackendInstance($room, $context)
 	{
 		$config = Api\Config::read('status');
 		$backend = 	$config['videoconference']['backend'] ? $config['videoconference']['backend'][0] : 'Jitsi';
