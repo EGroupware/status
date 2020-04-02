@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="status.config.videoconference" template="" lang="" group="0" version="19.1">
+		<grid width="100%" class="admin-config egwGridView_grid">
+			<columns>
+				<column width="250px"/>
+				<column/>
+			</columns>
+			<rows>
+			    <row valign="middle" height="40">
+                    <vbox>
+                        <description value="Video conference Enable" label="%s:"/>
+                        <select id="newsettings[videoconference][disable]" value="">
+                            <option value="">enable</option>
+                            <option value="true">disable</option>
+                        </select>
+                    </vbox>
+                </row>
+                <row valign="middle" height="40">
+               	    <vbox>
+                        <description value="Video conference backends" label="%s:"/>
+                        <description value="example: Jitsi"/>
+                    </vbox>
+                    <hbox>
+                        <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false">
+                            <option value="Jitsi">Jitsi Server</option>
+                        </taglist>
+                    </hbox>
+			    </row>
+				<row valign="middle" height="40">
+				    <groupbox>
+				        <vbox>
+                            <caption label="Jitsi Server Settings"/>
+                            <vbox>
+                                <description value="Jitsi Domain" label="%s:"/>
+                                <description value="example: jitsi.egroupware.org"/>
+                            </vbox>
+                            <hbox>
+                                <url id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"/>
+                            </hbox>
+                        </vbox>
+                        <vbox>
+                            <vbox>
+                                <description value="Jitsi Application Secret" label="%s:"/>
+                            </vbox>
+                            <hbox>
+                                <passwd id="newsettings[videoconference][jitsi][jitsi_application_secret]" width="300px"/>
+                            </hbox>
+                        </vbox>
+				    </groupbox>
+				</row>
+			</rows>
+		</grid>
+	</template>
+	<template id="status.config" template="" lang="" group="0" version="18.1">
+    		<tabbox id="tabs" width="100%">
+    			<tabs>
+    				<tab id="Videoconference" label="Video Conference"/>
+    			</tabs>
+    			<tabpanels>
+    				<template id="status.config.videoconference"/>
+    			</tabpanels>
+    		</tabbox>
+    	</template>
+</overlay>

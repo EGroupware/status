@@ -94,6 +94,14 @@ app.classes.status = AppJS.extend(
 				}
 
 				break;
+			case 'call':
+				this.makeCall([{
+					id: data.account_id,
+					name: data.hint,
+					avatar: "account:"+data.account_id
+				}]);
+
+				break;
 		}
 		this.refresh();
 	},
@@ -202,5 +210,118 @@ app.classes.status = AppJS.extend(
 			}
 		}
 		this.updateContent(fav, list);
+	},
+
+	getEntireList: function()
+	{
+		let fav = this.et2.getArrayMgr('content').getEntry('fav');
+		let list = this.et2.getArrayMgr('content').getEntry('list');
+		let result = [];
+		for (let f in fav)
+		{
+			if (fav[f] && fav[f]['id']) result.push(fav[f]);
+		}
+		for (let l in list)
+		{
+			if (list[l] && list[l]['id']) result.push(list[l]);
+		}
+		return result;
+	},
+
+	isOnline: function(_action, _selected)
+	{
+		return _selected[0].data.data.status.active;
+	},
+
+	/**
+	 * Initiate call via action
+	 * @param array data
+	 */
+	makeCall: function(data)
+	{
+		let callCancelled = false;
+		let self = this;
+		let button = [{"button_id": 0, "text": 'cancel', id: '0', image: 'cancel'}];
+		let dialog = et2_createWidget("dialog",{
+			callback: function(_btn){
+				if (_btn == et2_dialog.CANCEL_BUTTON)
+				{
+					callCancelled = true;
+				}
+			},
+			title: egw.lang('Initiating call to'),
+			buttons: button,
+			minWidth: 300,
+			minHeight: 200,
+			resizable: false,
+			value: {
+				content: {list:data}
+			},
+			template: egw.webserverUrl+'/status/templates/default/call.xet?'
+		}, et2_dialog._create_parent(this.appname));
+		setTimeout(function(){
+			if (!callCancelled)
+			{
+				dialog.destroy();
+				egw.json(
+					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+					[data], function(_url){
+						self._openCall(_url);
+					}).sendRequest();
+			}
+		}, 3000);
+	},
+
+	/**
+	 * Open call url with respecting opencallin preference
+	 * @param _url call url
+	 */
+	_openCall: function(_url)
+	{
+		if (egw.preference('opencallin', this.appname) == '1')
+		{
+			egw.openPopup(_url, 450, 450);
+		}
+		else
+		{
+			window.open(_url);
+		}
+	},
+
+	/**
+	 * gets called after receiving pushed call
+	 * @param _data
+	 */
+	receivedCall: function(_data)
+	{
+		let button = [
+			{"button_id": 1, "text": 'accept', id: '1', image: 'check', default: true},
+			{"button_id": 0, "text": 'reject', id: '0', image: 'cancel'}
+		];
+		let self = this;
+		et2_createWidget("dialog",{
+			callback: function(_btn, value){
+				if (_btn == et2_dialog.OK_BUTTON)
+				{
+					self._openCall(value.url);
+				}
+			},
+			title: '',
+			buttons: button,
+			minWidth: 300,
+			minHeight: 200,
+			value: {
+				content: {
+					list:{
+						"name":_data.caller.name,
+						"avatar": "account:"+_data.caller.account_id,
+					},
+					"message_buttom": egw.lang('is calling'),
+					"url": _data.call
+				}
+			},
+			resizable: false,
+			template: egw.webserverUrl+'/status/templates/default/call.xet'
+		}, et2_dialog._create_parent(this.appname));
 	}
 });

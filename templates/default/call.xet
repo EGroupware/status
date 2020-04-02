@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="status.call" template="" lang="" group="0" version="1.9.001">
+        <hbox class="et2_prompt">
+            <vbox class="ui-dialog-content">
+                <hbox>
+                    <description id="message_top"/>
+                    <grid id="list">
+                        <columns>
+                            <column />
+                        </columns>
+                        <rows>
+                            <row>
+                                <vbox>
+                                    <avatar contact_id="$row_cont[avatar]"/>
+                                    <label id="${row}[name]"/>
+                                </vbox>
+                            </row>
+                        </rows>
+                    </grid>
+                    <image id="stat_icon"/>
+                </hbox>
+                <description id="message_buttom"/>
+                <textbox id="url" disabled="true"/>
+            </vbox>
+        </hbox>
+    </template>
+</overlay>
