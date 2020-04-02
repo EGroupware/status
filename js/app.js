@@ -193,6 +193,7 @@ var statusApp = /** @class */ (function (_super) {
      */
     statusApp.prototype.makeCall = function (data) {
         var callCancelled = false;
+        var self = this;
         var button = [{ "button_id": 0, "text": 'cancel', id: '0', image: 'cancel' }];
         var dialog = et2_createWidget("dialog", {
             callback: function (_btn) {
@@ -217,10 +218,22 @@ var statusApp = /** @class */ (function (_super) {
             if (!callCancelled) {
                 dialog.destroy();
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data.account_id], function (_url) {
-                    window.open(_url);
+                    statusApp._openCall(_url);
                 }).sendRequest();
             }
         }, 3000);
+    };
+    /**
+     * Open call url with respecting opencallin preference
+     * @param _url call url
+     */
+    statusApp._openCall = function (_url) {
+        if (egw.preference('opencallin', statusApp.appname) == '1') {
+            egw.openPopup(_url, 450, 450);
+        }
+        else {
+            window.open(_url);
+        }
     };
     /**
      * gets called after receiving pushed call
@@ -231,10 +244,11 @@ var statusApp = /** @class */ (function (_super) {
             { "button_id": 1, "text": 'accept', id: '1', image: 'check', default: true },
             { "button_id": 0, "text": 'reject', id: '0', image: 'cancel' }
         ];
+        var self = this;
         et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_dialog.OK_BUTTON) {
-                    window.open(value.url);
+                    statusApp._openCall(value.url);
                 }
             },
             title: '',
@@ -253,6 +267,7 @@ var statusApp = /** @class */ (function (_super) {
             template: egw.webserverUrl + '/status/templates/default/call.xet'
         }, et2_dialog._create_parent(this.appname));
     };
+    statusApp.appname = 'status';
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;

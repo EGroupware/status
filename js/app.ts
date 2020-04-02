@@ -15,6 +15,7 @@ import {EgwApp} from "../../api/js/jsapi/egw_app";
 
 class statusApp extends EgwApp
 {
+	static readonly appname = 'status';
 
 	/**
 	 * Constructor
@@ -222,6 +223,7 @@ class statusApp extends EgwApp
 	makeCall(data)
 	{
 		let callCancelled = false;
+		let self = this;
 		let button = [{"button_id": 0, "text": 'cancel', id: '0', image: 'cancel'}];
 		let dialog = et2_createWidget("dialog",{
 			callback: function(_btn){
@@ -250,10 +252,26 @@ class statusApp extends EgwApp
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
 					[data.account_id], function(_url){
-						window.open(_url);
+						statusApp._openCall(_url);
 					}).sendRequest();
 			}
 		}, 3000);
+	}
+
+	/**
+	 * Open call url with respecting opencallin preference
+	 * @param _url call url
+	 */
+	private static _openCall(_url)
+	{
+		if (egw.preference('opencallin', statusApp.appname) == '1')
+		{
+			egw.openPopup(_url, 450, 450);
+		}
+		else
+		{
+			window.open(_url);
+		}
 	}
 
 	/**
@@ -266,11 +284,12 @@ class statusApp extends EgwApp
 			{"button_id": 1, "text": 'accept', id: '1', image: 'check', default: true},
 			{"button_id": 0, "text": 'reject', id: '0', image: 'cancel'}
 		];
+		let self = this;
 		et2_createWidget("dialog",{
 			callback: function(_btn, value){
 				if (_btn == et2_dialog.OK_BUTTON)
 				{
-					window.open(value.url);
+					statusApp._openCall(value.url);
 				}
 			},
 			title: '',

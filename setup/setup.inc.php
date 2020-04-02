@@ -30,6 +30,7 @@ $setup_info['status']['hooks']['status-get_actions'] = \EGroupware\Status\Hooks:
 $setup_info['status']['hooks']['check_notify'] = \EGroupware\Status\Hooks::class.'::updateState';
 $setup_info['status']['hooks']['config'] = \EGroupware\Status\Hooks::class.'::config';
 $setup_info['status']['hooks']['admin'] = \EGroupware\Status\Hooks::class.'::menu';
+$setup_info['status']['hooks']['settings'] = \EGroupware\Status\Hooks::class.'::settings';
 
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(

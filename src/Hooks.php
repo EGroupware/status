@@ -328,4 +328,31 @@ class Hooks {
 		return $config['videoconference']['disable'];
 	}
 
+	/**
+	 * Settings for preferences
+	 *
+	 * @return array with settings
+	 */
+	static function settings()
+	{
+		return [
+			'1.section' => [
+				'type'  => 'section',
+				'title' => lang('Video Conference'),
+				'no_lang'=> true,
+				'xmlrpc' => false,
+				'admin'  => false
+			],
+			'opencallin' => [
+				'type'   => 'select',
+				'label'  => 'Open call in',
+				'name'   => 'opencallin',
+				'values' => [0 => lang('new window'), 1 => lang('popup')],
+				'help'   => 'Open call in new window/popup',
+				'xmlrpc' => false,
+				'admin'  => false,
+				'default'=> 0,
+			]
+		];
+	}
 }

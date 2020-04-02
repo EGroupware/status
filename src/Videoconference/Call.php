@@ -46,7 +46,7 @@ class Call
 	 * @param $context
 	 * @return bool
 	 */
-	private function getBackendInstance($room, $context)
+	public static function getBackendInstance($room, $context)
 	{
 		$config = Api\Config::read('status');
 		$backend = 	$config['videoconference']['backend'] ? $config['videoconference']['backend'][0] : 'Jitsi';
@@ -63,7 +63,7 @@ class Call
 	 *
 	 * @throws Api\Json\Exception
 	 */
-	public function pushCall ($call, $callee, $caller)
+	public static function pushCall ($call, $callee, $caller)
 	{
 		$p = new Api\Json\Push($callee);
 		$p->call('app.status.receivedCall',[
