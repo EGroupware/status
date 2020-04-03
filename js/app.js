@@ -272,10 +272,10 @@ var statusApp = /** @class */ (function (_super) {
             minHeight: 200,
             value: {
                 content: {
-                    list: {
-                        "name": _data.caller.name,
-                        "avatar": "account:" + _data.caller.account_id,
-                    },
+                    list: [{
+                            "name": _data.caller.name,
+                            "avatar": "account:" + _data.caller.account_id,
+                        }],
                     "message_buttom": egw.lang('is calling'),
                     "url": _data.call
                 }

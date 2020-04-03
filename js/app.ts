@@ -315,10 +315,10 @@ class statusApp extends EgwApp
 			minHeight: 200,
 			value: {
 				content: {
-					list:{
+					list:[{
 						"name":_data.caller.name,
 						"avatar": "account:"+_data.caller.account_id,
-					},
+					}],
 					"message_buttom": egw.lang('is calling'),
 					"url": _data.call
 				}
