@@ -162,6 +162,11 @@ tr.egw_online {
   background-color: #212f2b;
   color: white;
 }
+.ui-dialog-content tr.tile {
+  display: inline-block;
+  float: left;
+  padding: 2px;
+}
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
   height: calc(100% - 45px);

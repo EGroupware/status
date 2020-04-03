@@ -12,7 +12,7 @@
                             <column />
                         </columns>
                         <rows>
-                            <row>
+                            <row class="tile">
                                 <vbox>
                                     <avatar contact_id="$row_cont[avatar]"/>
                                     <label id="${row}[name]"/>

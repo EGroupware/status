@@ -198,14 +198,14 @@ app.classes.status = AppJS.extend(
 			{
 				if (fav[f] && fav[f]['id'] && _content[i]['id'] == fav[f]['id'])
 				{
-					jQuery.extend(fav[f], _content[i]);
+					jQuery.extend(true, fav[f], _content[i]);
 				}
 			}
 			for (var l in list)
 			{
 				if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id'])
 				{
-					jQuery.extend(list[l], _content[i]);
+					jQuery.extend(true, list[l], _content[i]);
 				}
 			}
 		}
@@ -257,7 +257,7 @@ app.classes.status = AppJS.extend(
 			value: {
 				content: {list:data}
 			},
-			template: egw.webserverUrl+'/status/templates/default/call.xet?'
+			template: egw.webserverUrl+'/status/templates/default/call.xet'
 		}, et2_dialog._create_parent(this.appname));
 		setTimeout(function(){
 			if (!callCancelled)
@@ -312,10 +312,10 @@ app.classes.status = AppJS.extend(
 			minHeight: 200,
 			value: {
 				content: {
-					list:{
+					list:[{
 						"name":_data.caller.name,
 						"avatar": "account:"+_data.caller.account_id,
-					},
+					}],
 					"message_buttom": egw.lang('is calling'),
 					"url": _data.call
 				}
