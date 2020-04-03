@@ -201,14 +201,14 @@ class statusApp extends EgwApp
 			{
 				if (fav[f] && fav[f]['id'] && _content[i]['id'] == fav[f]['id'])
 				{
-					jQuery.extend(fav[f], _content[i]);
+					jQuery.extend(true, fav[f], _content[i]);
 				}
 			}
 			for (let l in list)
 			{
 				if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id'])
 				{
-					jQuery.extend(list[l], _content[i]);
+					jQuery.extend(true, list[l], _content[i]);
 				}
 			}
 		}
@@ -260,7 +260,7 @@ class statusApp extends EgwApp
 			value: {
 				content: {list:data}
 			},
-			template: egw.webserverUrl+'/status/templates/default/call.xet?'
+			template: egw.webserverUrl+'/status/templates/default/call.xet'
 		}, et2_dialog._create_parent(this.appname));
 		setTimeout(function(){
 			if (!callCancelled)
