@@ -323,5 +323,14 @@ app.classes.status = AppJS.extend(
 			resizable: false,
 			template: egw.webserverUrl+'/status/templates/default/call.xet'
 		}, et2_dialog._create_parent(this.appname));
+
+		egw.notification(this.egw.lang('Status'), {
+			body: this.egw.lang('You have a call from %1', _data.caller.name),
+			icon: egw.webserverUrl+'/api/avatar.php?account_id='+ _data.caller.account_id,
+			onclick: function () {
+				window.focus();
+			},
+			requireInteraction: true
+		});
 	}
 });
