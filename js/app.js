@@ -295,8 +295,8 @@ app.classes.status = AppJS.extend(
 	receivedCall: function(_data)
 	{
 		let button = [
-			{"button_id": 1, "text": 'accept', id: '1', image: 'check', default: true},
-			{"button_id": 0, "text": 'reject', id: '0', image: 'cancel'}
+			{"button_id": 1, "text": 'accept', id: '1', image: 'accept_call', default: true},
+			{"button_id": 0, "text": 'reject', id: '0', image: 'hangup'}
 		];
 		let self = this;
 		et2_createWidget("dialog",{
@@ -329,6 +329,7 @@ app.classes.status = AppJS.extend(
 			icon: egw.webserverUrl+'/api/avatar.php?account_id='+ _data.caller.account_id,
 			onclick: function () {
 				window.focus();
+
 			},
 			requireInteraction: true
 		});
