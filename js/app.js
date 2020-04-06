@@ -256,8 +256,8 @@ var statusApp = /** @class */ (function (_super) {
      */
     statusApp.prototype.receivedCall = function (_data) {
         var button = [
-            { "button_id": 1, "text": 'accept', id: '1', image: 'check', default: true },
-            { "button_id": 0, "text": 'reject', id: '0', image: 'cancel' }
+            { "button_id": 1, "text": 'accept', id: '1', image: 'accept_call', default: true },
+            { "button_id": 0, "text": 'reject', id: '0', image: 'hangup' }
         ];
         var self = this;
         et2_createWidget("dialog", {
