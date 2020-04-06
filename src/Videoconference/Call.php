@@ -30,7 +30,7 @@ class Call
 		$caller = [
 			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
 			'email' => $GLOBALS['egw_info']['user']['account_email'],
-			'avatar' => Api\Framework::getUrl(Api\Egw::link('/api/avatar.php', array('account_id' => $GLOBALS['egw_info']['user']['account_id']))),
+			'avatar' => (string)(new Api\Contacts\Photo('account:'.$GLOBALS['egw_info']['user']['account_id'])),
 			'account_id' => $GLOBALS['egw_info']['user']['account_id']
 		];
 		$room = self::genUniqueRoomID();
@@ -40,7 +40,7 @@ class Call
 			$callee = [
 				'name' => $user['name'],
 				'email' => $user['email'],
-				'avatar' => Api\Framework::getUrl(Api\Egw::link('/api/avatar.php', array('account_id' => $user['id']))),
+				'avatar' => (string)(new Api\Contacts\Photo('account:'.$user['id'])),
 				'account_id' => $user['id']
 			];
 			$CalleeUrl = self::genMeetingUrl($room, $callee);
