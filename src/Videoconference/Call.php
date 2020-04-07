@@ -40,7 +40,7 @@ class Call
 			$callee = [
 				'name' => $user['name'],
 				'email' => $user['email'],
-				'avatar' => (string)(new Api\Contacts\Photo('account:'.$user['id'])),
+				'avatar' => (string)(new Api\Contacts\Photo('account:'.$user['id'], true)),
 				'account_id' => $user['id']
 			];
 			$CalleeUrl = self::genMeetingUrl($room, $callee);
