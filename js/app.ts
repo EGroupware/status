@@ -305,10 +305,13 @@ class statusApp extends EgwApp
 
 	notificationPopup(_url)
 	{
-		let buttons = [{"button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true}];
+		let buttons = [
+			{"button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true},
+			{"button_id": 0, "text": 'close', id: '0', image: 'close'}
+		];
 
 		let data = statusApp._resolveJwtUrl2data(_url);
-		this.receivedCall(data, true, buttons, 'A call from');
+		this.receivedCall(data, true, buttons, 'A call from', '');
 	}
 
 	/**
