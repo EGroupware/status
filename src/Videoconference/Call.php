@@ -30,7 +30,7 @@ class Call
 		$caller = [
 			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
 			'email' => $GLOBALS['egw_info']['user']['account_email'],
-			'avatar' => (string)(new Api\Contacts\Photo('account:'.$GLOBALS['egw_info']['user']['account_id'])),
+			'avatar' => (string)(new Api\Contacts\Photo('account:'.$GLOBALS['egw_info']['user']['account_id'], true)),
 			'account_id' => $GLOBALS['egw_info']['user']['account_id']
 		];
 		$room = self::genUniqueRoomID();
