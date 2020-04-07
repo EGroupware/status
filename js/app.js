@@ -233,7 +233,7 @@ var statusApp = /** @class */ (function (_super) {
             if (!callCancelled) {
                 dialog.destroy();
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data], function (_url) {
-                    statusApp._openCall(_url);
+                    self.openCall(_url);
                 }).sendRequest();
             }
         }, 3000);
@@ -242,7 +242,7 @@ var statusApp = /** @class */ (function (_super) {
      * Open call url with respecting opencallin preference
      * @param _url call url
      */
-    statusApp._openCall = function (_url) {
+    statusApp.prototype.openCall = function (_url) {
         if (egw.preference('opencallin', statusApp.appname) == '1') {
             egw.openPopup(_url, 450, 450);
         }
@@ -250,47 +250,70 @@ var statusApp = /** @class */ (function (_super) {
             window.open(_url);
         }
     };
+    statusApp._resolveJwtUrl2data = function (_url) {
+        var data = JSON.parse(atob(_url.split('.')[3]));
+        return {
+            call: _url,
+            caller: {
+                name: data.context.user.name,
+                account_id: data.context.user.account_id
+            }
+        };
+    };
+    statusApp.prototype.notificationPopup = function (_url) {
+        var buttons = [{ "button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true }];
+        var data = statusApp._resolveJwtUrl2data(_url);
+        this.receivedCall(data, true, buttons, 'A call from');
+    };
     /**
      * gets called after receiving pushed call
      * @param _data
      */
-    statusApp.prototype.receivedCall = function (_data) {
-        var button = [
+    statusApp.prototype.receivedCall = function (_data, _notify, _buttons, _message_top, _message_bottom) {
+        var buttons = _buttons || [
             { "button_id": 1, "text": 'accept', id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": 'reject', id: '0', image: 'hangup' }
         ];
+        var notify = (_notify !== null && _notify !== void 0 ? _notify : true);
+        var message_bottom = _message_bottom || 'is calling';
+        var message_top = _message_top || '';
         var self = this;
         et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_dialog.OK_BUTTON) {
-                    statusApp._openCall(value.url);
+                    self.openCall(value.url);
                 }
             },
             title: '',
-            buttons: button,
-            minWidth: 300,
+            buttons: buttons,
+            minWidth: 200,
             minHeight: 200,
+            modal: false,
+            position: "right bottom,right-50 bottom-10",
             value: {
                 content: {
                     list: [{
                             "name": _data.caller.name,
                             "avatar": "account:" + _data.caller.account_id,
                         }],
-                    "message_buttom": egw.lang('is calling'),
+                    "message_buttom": egw.lang(message_bottom),
+                    "message_top": egw.lang(message_top),
                     "url": _data.call
                 }
             },
             resizable: false,
             template: egw.webserverUrl + '/status/templates/default/call.xet'
         }, et2_dialog._create_parent(this.appname));
-        egw.notification(this.egw.lang('Status'), {
-            body: this.egw.lang('You have a call from %1', _data.caller.name),
-            icon: egw.webserverUrl + '/api/avatar.php?account_id=' + _data.caller.account_id,
-            onclick: function () {
-                window.focus();
-            },
-            requireInteraction: true
-        });
+        if (notify) {
+            egw.notification(this.egw.lang('Status'), {
+                body: this.egw.lang('You have a call from %1', _data.caller.name),
+                icon: egw.webserverUrl + '/api/avatar.php?account_id=' + _data.caller.account_id,
+                onclick: function () {
+                    window.focus();
+                },
+                requireInteraction: true
+            });
+        }
     };
     statusApp.appname = 'status';
     return statusApp;

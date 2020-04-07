@@ -269,7 +269,7 @@ class statusApp extends EgwApp
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
 					[data], function(_url){
-						statusApp._openCall(_url);
+						self.openCall(_url);
 					}).sendRequest();
 			}
 		}, 3000);
@@ -279,7 +279,7 @@ class statusApp extends EgwApp
 	 * Open call url with respecting opencallin preference
 	 * @param _url call url
 	 */
-	private static _openCall(_url)
+	openCall(_url)
 	{
 		if (egw.preference('opencallin', statusApp.appname) == '1')
 		{
@@ -291,50 +291,78 @@ class statusApp extends EgwApp
 		}
 	}
 
+	private static _resolveJwtUrl2data(_url)
+	{
+		let data = JSON.parse(atob(_url.split('.')[3]));
+		return {
+			call: _url,
+			caller: {
+				name: data.context.user.name,
+				account_id: data.context.user.account_id
+			}
+		};
+	}
+
+	notificationPopup(_url)
+	{
+		let buttons = [{"button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true}];
+
+		let data = statusApp._resolveJwtUrl2data(_url);
+		this.receivedCall(data, true, buttons, 'A call from');
+	}
+
 	/**
 	 * gets called after receiving pushed call
 	 * @param _data
 	 */
-	receivedCall(_data)
+	receivedCall(_data, _notify?, _buttons?, _message_top?, _message_bottom?)
 	{
-		let button = [
+		let buttons = _buttons || [
 			{"button_id": 1, "text": 'accept', id: '1', image: 'accept_call', default: true},
 			{"button_id": 0, "text": 'reject', id: '0', image: 'hangup'}
 		];
+		let notify = _notify?? true;
+		let message_bottom = _message_bottom || 'is calling';
+		let message_top = _message_top || '';
 		let self = this;
 		et2_createWidget("dialog",{
 			callback: function(_btn, value){
 				if (_btn == et2_dialog.OK_BUTTON)
 				{
-					statusApp._openCall(value.url);
+					self.openCall(value.url);
 				}
 			},
 			title: '',
-			buttons: button,
-			minWidth: 300,
+			buttons: buttons,
+			minWidth: 200,
 			minHeight: 200,
+			modal: false,
+			position:"right bottom,right-50 bottom-10",
 			value: {
 				content: {
 					list:[{
 						"name":_data.caller.name,
 						"avatar": "account:"+_data.caller.account_id,
 					}],
-					"message_buttom": egw.lang('is calling'),
+					"message_buttom": egw.lang(message_bottom),
+					"message_top": egw.lang(message_top),
 					"url": _data.call
 				}
 			},
 			resizable: false,
 			template: egw.webserverUrl+'/status/templates/default/call.xet'
 		}, et2_dialog._create_parent(this.appname));
-
-		egw.notification(this.egw.lang('Status'), {
-			body: this.egw.lang('You have a call from %1', _data.caller.name),
-			icon: egw.webserverUrl+'/api/avatar.php?account_id='+ _data.caller.account_id,
-			onclick: function () {
-				window.focus();
-			},
-			requireInteraction: true
-		});
+		if (notify)
+		{
+			egw.notification(this.egw.lang('Status'), {
+				body: this.egw.lang('You have a call from %1', _data.caller.name),
+				icon: egw.webserverUrl+'/api/avatar.php?account_id='+ _data.caller.account_id,
+				onclick: function () {
+					window.focus();
+				},
+				requireInteraction: true
+			});
+		}
 	}
 }
 app.classes.status = statusApp;
