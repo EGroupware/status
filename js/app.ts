@@ -311,7 +311,7 @@ class statusApp extends EgwApp
 		];
 
 		let data = statusApp._resolveJwtUrl2data(_url);
-		this.receivedCall(data, true, buttons, 'A call from', '');
+		this.receivedCall(data, true, buttons, 'A call from', ' ');
 	}
 
 	/**

@@ -266,7 +266,7 @@ var statusApp = /** @class */ (function (_super) {
             { "button_id": 0, "text": 'close', id: '0', image: 'close' }
         ];
         var data = statusApp._resolveJwtUrl2data(_url);
-        this.receivedCall(data, true, buttons, 'A call from', '');
+        this.receivedCall(data, true, buttons, 'A call from', ' ');
     };
     /**
      * gets called after receiving pushed call
