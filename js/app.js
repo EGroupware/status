@@ -244,7 +244,7 @@ var statusApp = /** @class */ (function (_super) {
      */
     statusApp.prototype.openCall = function (_url) {
         if (egw.preference('opencallin', statusApp.appname) == '1') {
-            egw.openPopup(_url, 450, 450);
+            egw.openPopup(_url, 800, 600);
         }
         else {
             window.open(_url);

@@ -283,7 +283,7 @@ class statusApp extends EgwApp
 	{
 		if (egw.preference('opencallin', statusApp.appname) == '1')
 		{
-			egw.openPopup(_url, 450, 450);
+			egw.openPopup(_url, 800, 600);
 		}
 		else
 		{
