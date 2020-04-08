@@ -298,7 +298,7 @@ class Hooks {
 			);
 			if ($data['location'] == 'admin') {
 				display_section(self::APPNAME, $file);
-}
+			}
 		}
 	}
 

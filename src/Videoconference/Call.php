@@ -50,9 +50,22 @@ class Call
 	}
 
 	/**
+	 * sends full working meeting Url to client
+	 * @param $room string room id
+	 * @param $context array user data
+	 * @throws Api\Json\Exception
+	 */
+	public static function ajax_genMeetingUrl ($room, $context)
+	{
+		$respose = Api\Json\Response::get();
+		if (empty($context['avatar'])) $context['avatar'] = new Api\Contacts\Photo("account:".$context['account_id'], false);
+		$respose->data([self::genMeetingUrl($room, $context)]);
+	}
+
+	/**
 	 * Generates a full working meeting Url
-	 * @param $room room id
-	 * @param $context user data
+	 * @param $room string room id
+	 * @param $context array user data
 	 * @return mixed
 	 */
 	public static function genMeetingUrl ($room, $context)
