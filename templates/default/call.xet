@@ -5,8 +5,8 @@
 	<template id="status.call" template="" lang="" group="0" version="1.9.001">
         <hbox class="et2_prompt">
             <vbox class="ui-dialog-content">
+                <description id="message_top"/>
                 <hbox>
-                    <description id="message_top"/>
                     <grid id="list">
                         <columns>
                             <column />

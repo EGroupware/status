@@ -288,26 +288,20 @@ app.classes.status = AppJS.extend(
 		}
 	},
 
-	_resolveJwtUrl2data(_url)
-	{
-		let data = JSON.parse(atob(_url.split('.')[3]));
-		return {
-			call: _url,
-			caller: {
-				name: data.context.user.name,
-				account_id: data.context.user.account_id
-			}
-		};
-	},
-
-	notificationPopup(_url)
+	notificationPopup(_url, _account_id, _name)
 	{
 		let buttons = [
 			{"button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true},
 			{"button_id": 0, "text": 'close', id: '0', image: 'close'}
 		];
 
-		let data = this._resolveJwtUrl2data(_url);
+		let data = {
+			call: _url,
+			caller: {
+				name: _name,
+				account_id: _account_id
+			}
+		};
 		this.receivedCall(data, true, buttons, 'A call from', ' ');
 	},
 
