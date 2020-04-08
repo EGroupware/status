@@ -1,6 +1,25 @@
 add to favorites	status	en	Add to favorites
+call	status	en	Call
+disable	status	en	disable
+enable	status	en	enable
+event owner	status	en	Event owner
+example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
+initiating call to	status	en	Initiating call to
+jitsi application secret	status	en	Jitsi Application Secret
+jitsi domain	status	en	Jitsi Domain
+jitsi server	status	en	Jitsi Server
+join	common	en	Join
 message	status	en	Message
+new window	status	en	new window
+open call in	status	en	Open call in
+open call in new window/popup	status	en	Open call in new window/popup
 remove from favorites	status	en	Remove from favorites
+schedule a call	status	en	Schedule a call
 status	common	en	Status
-videoconference	status	en	Video Conference
 title	status	en	title
+video conference backends	status	en	Video conference backends
+video conference enable	status	en	Video conference Enable
+video conference meeting	status	en	Video conference meeting
+videoconference	status	en	Video Conference
+you have a call from %1	status	en	You have a call from %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	en	You have a video conference meeting in %1 minutes, initiated by %2
