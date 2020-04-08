@@ -166,3 +166,4 @@ tr.egw_online {
 	float: left;
 	padding: 2px;
 }
+td.taglist_readonly .et2_taglist > div.ms-ctn{border:none}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
+<!-- $Id$ -->
+<overlay>
+	<template id="status.scheduled_call" template="" lang="" group="0" version="1.9.001">
+        <grid width="200" class="egwGridView_grid">
+            <columns>
+                <column width="30%"/>
+                <column />
+            </columns>
+            <rows>
+                <row class="th">
+                    <appicon src="calendar"/>
+                    <description value="Video conference meeting"/>
+                </row>
+                <row class="row" height="30">
+                    <description value="Event owner" label="%s:"/>
+                    <taglist-account id="account_id" readonly="true" class="taglist_readonly"/>
+                </row>
+                <row class="row" height="30">
+                    <description value="Title" label="%s:"/>
+                    <description id="title"/>
+                </row>
+            </rows>
+        </grid>
+        <textbox id="url" disabled="true"/>
+    </template>
+</overlay>

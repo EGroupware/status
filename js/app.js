@@ -250,19 +250,42 @@ var statusApp = /** @class */ (function (_super) {
             window.open(_url);
         }
     };
-    statusApp.prototype.notificationPopup = function (_url, _account_id, _name) {
+    statusApp.prototype.scheduled_receivedCall = function (_content, _notify) {
         var buttons = [
             { "button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": 'close', id: '0', image: 'close' }
         ];
-        var data = {
-            call: _url,
-            caller: {
-                name: _name,
-                account_id: _account_id
-            }
-        };
-        this.receivedCall(data, true, buttons, 'A call from', ' ');
+        var notify = _notify || true;
+        var content = _content || {};
+        var self = this;
+        et2_createWidget("dialog", {
+            callback: function (_btn, value) {
+                if (_btn == et2_dialog.OK_BUTTON) {
+                    self.openCall(value.url);
+                }
+            },
+            title: '',
+            buttons: buttons,
+            minWidth: 200,
+            minHeight: 300,
+            modal: false,
+            position: "right bottom,right-100 bottom-10",
+            value: {
+                content: content
+            },
+            resizable: false,
+            template: egw.webserverUrl + '/status/templates/default/scheduled_call.xet'
+        }, et2_dialog._create_parent(this.appname));
+        if (notify) {
+            egw.notification(this.egw.lang('Status'), {
+                body: this.egw.lang('You have a video conference meeting in %1 minutes, initiated by %2', (content['alarm-offset'] / 60), content.owner),
+                icon: egw.webserverUrl + '/api/avatar.php?account_id=' + content.account_id,
+                onclick: function () {
+                    window.focus();
+                },
+                requireInteraction: true
+            });
+        }
     };
     /**
      * gets called after receiving pushed call
