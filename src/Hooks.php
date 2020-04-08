@@ -315,9 +315,11 @@ class Hooks {
 		{
 			$ret['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
 		}
-		if (($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND || $ret['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND) && empty($config['videoconference']['jitsi']['jitsi.egroupware.org']))
+		if (($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND ||
+				$ret['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND) &&
+			empty($config['videoconference']['jitsi']['jitsi_domain']))
 		{
-			$ret['videoconference']['jitsi']['jitsi_domain'] = 'jitsi.egroupware.org';
+			$ret['videoconference']['jitsi']['jitsi_domain'] = 'jitsi.egroupware.net';
 		}
 		return $ret;
 	}

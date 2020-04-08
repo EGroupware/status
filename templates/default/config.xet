@@ -10,45 +10,50 @@
 			</columns>
 			<rows>
 			    <row valign="middle" height="40">
-                    <vbox>
-                        <description value="Video conference Enable" label="%s:"/>
-                        <select id="newsettings[videoconference][disable]" value="">
-                            <option value="">enable</option>
-                            <option value="true">disable</option>
-                        </select>
-                    </vbox>
+                    <description value="Video conference" label="%s:"/>
+                    <select id="newsettings[videoconference][disable]" value="">
+                        <option value="">enable</option>
+                        <option value="true">disable</option>
+                    </select>
                 </row>
                 <row valign="middle" height="40">
                	    <vbox>
                         <description value="Video conference backends" label="%s:"/>
                         <description value="example: Jitsi"/>
                     </vbox>
-                    <hbox>
-                        <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false">
-                            <option value="Jitsi">Jitsi Server</option>
-                        </taglist>
-                    </hbox>
+                    <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false">
+                        <option value="Jitsi">Jitsi Server</option>
+                    </taglist>
 			    </row>
 				<row valign="middle" height="40">
 				    <groupbox>
-				        <vbox>
-                            <caption label="Jitsi Server Settings"/>
-                            <vbox>
-                                <description value="Jitsi Domain" label="%s:"/>
-                                <description value="example: jitsi.egroupware.org"/>
-                            </vbox>
-                            <hbox>
-                                <url id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"/>
-                            </hbox>
-                        </vbox>
-                        <vbox>
-                            <vbox>
-                                <description value="Jitsi Application Secret" label="%s:"/>
-                            </vbox>
-                            <hbox>
-                                <passwd id="newsettings[videoconference][jitsi][jitsi_application_secret]" width="300px"/>
-                            </hbox>
-                        </vbox>
+                        <caption label="Jitsi Server Settings"/>
+				        <grid width="100%">
+                            <columns>
+                                <column width="200px"/>
+                                <column/>
+                            </columns>
+                            <rows>
+                                <row>
+                                    <vbox>
+                                        <description value="Jitsi Domain" label="%s:"/>
+                                        <description value="example: jitsi.egroupware.org"/>
+                                    </vbox>
+                                    <textbox id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"/>
+                                </row>
+                                <row height="30px" valign="bottom">
+                                    <description value="Use JWT authentication" label="%s:" span="all"/>
+                                </row>
+                                <row>
+                                    <description value="Jitsi Application ID" label="%s:"/>
+                                    <textbox id="newsettings[videoconference][jitsi][jitsi_application_id]" width="300px"/>
+                                </row>
+                                <row>
+                                    <description value="Jitsi Application Secret" label="%s:"/>
+                                    <passwd id="newsettings[videoconference][jitsi][jitsi_application_secret]" width="300px"/>
+                                </row>
+                            </rows>
+                        </grid>
 				    </groupbox>
 				</row>
 			</rows>

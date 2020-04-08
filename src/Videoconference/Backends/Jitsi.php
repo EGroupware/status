@@ -89,9 +89,9 @@ class Jitsi implements Iface
 		$signer = new Sha256();
 
 		$this->payload = [
-			'iss' => $this->config['jitsi_application_id'] ?? 'egroupware',
+			'iss' => $this->config['jitsi_application_id'] ?: 'egroupware',
 			'aud' => self::AUD,
-			'sub' => $this->config['jitsi_domain'] ?? 'jitsi.egroupware.org',
+			'sub' => $this->config['jitsi_domain'] ?: 'jitsi.egroupware.net',
 			'room' => $_room ? $_room : '*',
 			'secret' => $this->config['jitsi_application_secret']
 		];
@@ -122,9 +122,7 @@ class Jitsi implements Iface
 		catch (\Exception $e)
 		{
 			error_log(__METHOD__."() failed to generate token:".$e->getMessage());
-			return false;
 		}
-		return false;
 	}
 
 	/**
