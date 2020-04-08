@@ -250,22 +250,18 @@ var statusApp = /** @class */ (function (_super) {
             window.open(_url);
         }
     };
-    statusApp._resolveJwtUrl2data = function (_url) {
-        var data = JSON.parse(atob(_url.split('.')[3]));
-        return {
-            call: _url,
-            caller: {
-                name: data.context.user.name,
-                account_id: data.context.user.account_id
-            }
-        };
-    };
-    statusApp.prototype.notificationPopup = function (_url) {
+    statusApp.prototype.notificationPopup = function (_url, _account_id, _name) {
         var buttons = [
             { "button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": 'close', id: '0', image: 'close' }
         ];
-        var data = statusApp._resolveJwtUrl2data(_url);
+        var data = {
+            call: _url,
+            caller: {
+                name: _name,
+                account_id: _account_id
+            }
+        };
         this.receivedCall(data, true, buttons, 'A call from', ' ');
     };
     /**
