@@ -147,12 +147,14 @@ class Hooks {
 			'fav' => [
 				'caption' => 'Add to favorites',
 				'allowOnMultiple' => false,
+				'icon' => 'fav_filter',
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			],
 			'unfavorite' => [
 				'caption' => 'Remove from favorites',
 				'allowOnMultiple' => false,
 				'enabled' => false,
+				'icon' => 'delete',
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			],
 			'call' => [
