@@ -241,7 +241,7 @@ app.classes.status = AppJS.extend(
 	{
 		let callCancelled = false;
 		let self = this;
-		let button = [{"button_id": 0, "text": 'cancel', id: '0', image: 'cancel'}];
+		let button = [{"button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel'}];
 		let dialog = et2_createWidget("dialog",{
 			callback: function(_btn){
 				if (_btn == et2_dialog.CANCEL_BUTTON)
@@ -291,8 +291,8 @@ app.classes.status = AppJS.extend(
 	scheduled_receivedCall(_content, _notify)
 	{
 		let buttons = [
-			{"button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true},
-			{"button_id": 0, "text": 'close', id: '0', image: 'close'}
+			{"button_id": 1, "text": egw.lang('Join'), id: '1', image: 'accept_call', default: true},
+			{"button_id": 0, "text": egw.lang('Close'), id: '0', image: 'close'}
 		];
 		let notify = _notify || true;
 		let content = _content || {};
@@ -336,8 +336,8 @@ app.classes.status = AppJS.extend(
 	receivedCall(_data, _notify, _buttons, _message_top, _message_bottom)
 	{
 		let buttons = _buttons || [
-			{"button_id": 1, "text": 'accept', id: '1', image: 'accept_call', default: true},
-			{"button_id": 0, "text": 'reject', id: '0', image: 'hangup'}
+			{"button_id": 1, "text": egw.lang('Accept'), id: '1', image: 'accept_call', default: true},
+			{"button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup'}
 		];
 		let notify = (_notify !== null && _notify !== void 0 ? _notify : true);
 		let message_bottom = _message_bottom || 'is calling';
