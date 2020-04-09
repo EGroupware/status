@@ -7,7 +7,7 @@
             <vbox class="ui-dialog-content">
                 <description id="message_top"/>
                 <hbox>
-                    <grid id="list">
+                    <grid id="list" width="200">
                         <columns>
                             <column />
                         </columns>
