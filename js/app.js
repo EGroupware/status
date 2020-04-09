@@ -212,7 +212,7 @@ var statusApp = /** @class */ (function (_super) {
     statusApp.prototype.makeCall = function (data) {
         var callCancelled = false;
         var self = this;
-        var button = [{ "button_id": 0, "text": 'cancel', id: '0', image: 'cancel' }];
+        var button = [{ "button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel' }];
         var dialog = et2_createWidget("dialog", {
             callback: function (_btn) {
                 if (_btn == et2_dialog.CANCEL_BUTTON) {
@@ -252,8 +252,8 @@ var statusApp = /** @class */ (function (_super) {
     };
     statusApp.prototype.scheduled_receivedCall = function (_content, _notify) {
         var buttons = [
-            { "button_id": 1, "text": 'Join', id: '1', image: 'accept_call', default: true },
-            { "button_id": 0, "text": 'close', id: '0', image: 'close' }
+            { "button_id": 1, "text": egw.lang('Join'), id: '1', image: 'accept_call', default: true },
+            { "button_id": 0, "text": egw.lang('Close'), id: '0', image: 'close' }
         ];
         var notify = _notify || true;
         var content = _content || {};
@@ -293,8 +293,8 @@ var statusApp = /** @class */ (function (_super) {
      */
     statusApp.prototype.receivedCall = function (_data, _notify, _buttons, _message_top, _message_bottom) {
         var buttons = _buttons || [
-            { "button_id": 1, "text": 'accept', id: '1', image: 'accept_call', default: true },
-            { "button_id": 0, "text": 'reject', id: '0', image: 'hangup' }
+            { "button_id": 1, "text": egw.lang('Accept'), id: '1', image: 'accept_call', default: true },
+            { "button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup' }
         ];
         var notify = (_notify !== null && _notify !== void 0 ? _notify : true);
         var message_bottom = _message_bottom || 'is calling';
