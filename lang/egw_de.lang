@@ -1,5 +1,4 @@
 add to favorites	status	de	Zu Favoriten hinzufügen
-call	status	de	Anruf starten
 disable	status	de	Deaktivieren
 enable	status	de	Aktivieren
 event owner	status	de	Initiator Videokonferenz
@@ -17,9 +16,10 @@ remove from favorites	status	de	Aus Favoriten entfernen
 schedule a call	status	de	Als Termin planen
 status	common	de	Status
 title	status	de	Title
+video call	common	de	Videoanruf
+video conference	common	de	Videokonferenz
 video conference backends	status	de	Videokonferenz-System
 video conference enable	status	de	Videokonferenz aktivieren
 video conference meeting	status	de	Videokonferenz-Sitzung
-videoconference	status	de	Videokonferenz
 you have a call from %1	status	de	Sie haben einen Anruf von %1
 you have a video conference meeting in %1 minutes, initiated by %2	status	de	Sie haben eine Videokonferenz in %1 Minuten, eingeladen von %2

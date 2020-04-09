@@ -156,7 +156,8 @@ class Hooks {
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			],
 			'call' => [
-				'caption' => 'Video call',
+				'caption' => 'Video Call',
+				'icon' => 'status/videoconference_call',
 				'default' => true,
 				'allowOnMultiple' => true,
 				'onExecute' => 'javaScript:app.status.handle_actions',
