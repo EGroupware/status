@@ -421,6 +421,7 @@ class statusApp extends EgwApp
 		let self = this;
 		return {
 			start: function (_loop){
+				if (!self._ring) return;
 				let loop = _loop || false;
 				self._ring[0].loop = loop;
 				self._ring[0].play().then(function(){
@@ -432,6 +433,7 @@ class statusApp extends EgwApp
 				});
 			},
 			stop: function (){
+				if (!self._ring) return;
 				self._ring[0].pause();
 			},
 			initiate: function(){
