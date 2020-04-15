@@ -357,6 +357,16 @@ class Hooks {
 				'xmlrpc' => false,
 				'admin'  => false,
 				'default'=> 0,
+			],
+			'ringtone' => [
+				'type'   => 'select',
+				'label'  => 'enable ring tone',
+				'name'   => 'ringtone',
+				'values' => [1 => lang('yes'), 0 => lang('no')],
+				'help'   => 'Enable ring tone while receiving a call',
+				'xmlrpc' => false,
+				'admin'  => false,
+				'default'=> 1,
 			]
 		];
 	}

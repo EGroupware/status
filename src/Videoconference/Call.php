@@ -46,7 +46,7 @@ class Call
 			$CalleeUrl = self::genMeetingUrl($room, $callee);
 			self::pushCall($CalleeUrl, $user['id'], $caller);
 		}
-		$response->data($CallerUrl);
+		$response->data(['caller' => $CallerUrl, 'callee' => $CalleeUrl]);
 	}
 
 	/**

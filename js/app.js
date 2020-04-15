@@ -34,8 +34,11 @@ var statusApp = /** @class */ (function (_super) {
      * @memberOf app.status
      */
     function statusApp() {
+        var _this = 
         // call parent
-        return _super.call(this, 'status') || this;
+        _super.call(this, 'status') || this;
+        _this._ring = null;
+        return _this;
     }
     /**
      * Destructor
@@ -55,6 +58,13 @@ var statusApp = /** @class */ (function (_super) {
     statusApp.prototype.et2_ready = function (_et2, _name) {
         // call parent
         _super.prototype.et2_ready.call(this, _et2, _name);
+        if (egw.preference('ringtone', 'status')) {
+            this._ring = jQuery(document.createElement('audio')).attr({ id: 'status-ring', src: 'status/assets/ring.mp3' }).appendTo('#status-index_status-index-fav');
+            var self_1 = this;
+            jQuery('body').one('click', function () {
+                self_1._controllRingTone().initiate();
+            });
+        }
     };
     /**
      * Handle executed action on selected row and refresh the list
@@ -96,7 +106,8 @@ var statusApp = /** @class */ (function (_super) {
                 this.makeCall([{
                         id: data.account_id,
                         name: data.hint,
-                        avatar: "account:" + data.account_id
+                        avatar: "account:" + data.account_id,
+                        data: data
                     }]);
                 break;
         }
@@ -203,7 +214,8 @@ var statusApp = /** @class */ (function (_super) {
         return result;
     };
     statusApp.prototype.isOnline = function (_action, _selected) {
-        return _selected[0].data.data.status.active;
+        var _a;
+        return _selected[0].data.data.status.active || ((_a = app.rocketchat) === null || _a === void 0 ? void 0 : _a.isRCActive(_action, _selected));
     };
     /**
      * Initiate call via action
@@ -233,7 +245,22 @@ var statusApp = /** @class */ (function (_super) {
             if (!callCancelled) {
                 dialog.destroy();
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data], function (_url) {
-                    self.openCall(_url);
+                    var _a;
+                    self.openCall(_url.caller);
+                    if ((_a = app.rocketchat) === null || _a === void 0 ? void 0 : _a.isRCActive(null, [{ data: data[0].data }])) {
+                        app.rocketchat.restapi_call('chat_PostMessage', {
+                            roomId: data[0].data.data.rocketchat._id,
+                            attachments: [
+                                {
+                                    "collapsed": false,
+                                    "color": "#009966",
+                                    "title": egw.lang("Click to Join!"),
+                                    "title_link": _url.callee,
+                                    "thumb_url": "https://raw.githubusercontent.com/EGroupware/status/master/templates/pixelegg/images/videoconference_call.svg",
+                                }
+                            ]
+                        });
+                    }
                 }).sendRequest();
             }
         }, 3000);
@@ -258,6 +285,7 @@ var statusApp = /** @class */ (function (_super) {
         var notify = _notify || true;
         var content = _content || {};
         var self = this;
+        this._controllRingTone().start();
         et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_dialog.OK_BUTTON) {
@@ -300,11 +328,13 @@ var statusApp = /** @class */ (function (_super) {
         var message_bottom = _message_bottom || 'is calling';
         var message_top = _message_top || '';
         var self = this;
+        this._controllRingTone().start(true);
         et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
                 }
+                self._controllRingTone().stop();
             },
             title: '',
             buttons: buttons,
@@ -337,7 +367,35 @@ var statusApp = /** @class */ (function (_super) {
             });
         }
     };
+    statusApp.prototype._controllRingTone = function () {
+        var self = this;
+        return {
+            start: function (_loop) {
+                var loop = _loop || false;
+                self._ring[0].loop = loop;
+                self._ring[0].play().then(function () {
+                    window.setTimeout(function () {
+                        self._controllRingTone().stop();
+                    }, statusApp.MISSEd_CALL_TIMEOUT); // stop ringing automatically after 10s
+                }, function (_error) {
+                    console.log('Error happened: ' + _error);
+                });
+            },
+            stop: function () {
+                self._ring[0].pause();
+            },
+            initiate: function () {
+                self._ring[0].mute = true;
+                self._ring[0].play().then(function () {
+                }, function (_error) {
+                    console.log('Error happened: ' + _error);
+                });
+                this.stop();
+            }
+        };
+    };
     statusApp.appname = 'status';
+    statusApp.MISSEd_CALL_TIMEOUT = 10000;
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;
