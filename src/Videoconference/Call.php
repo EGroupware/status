@@ -24,26 +24,25 @@ class Call
 	 * @param string $id
 	 * @throws
 	 */
-	public static function ajax_video_call ($data)
+	public static function ajax_video_call($data)
 	{
 		$response = Api\Json\Response::get();
 		$caller = [
 			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
 			'email' => $GLOBALS['egw_info']['user']['account_email'],
-			'avatar' => (string)(new Api\Contacts\Photo('account:'.$GLOBALS['egw_info']['user']['account_id'], true)),
+			'avatar' => (string)(new Api\Contacts\Photo('account:' . $GLOBALS['egw_info']['user']['account_id'], true)),
 			'account_id' => $GLOBALS['egw_info']['user']['account_id']
 		];
 		$room = self::genUniqueRoomID();
-		$CallerUrl = self::genMeetingUrl($room, $caller);
-		foreach ($data as $user)
-		{
+		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $data[0]['audioonly']]);
+		foreach ($data as $user) {
 			$callee = [
 				'name' => $user['name'],
 				'email' => $user['email'],
-				'avatar' => (string)(new Api\Contacts\Photo('account:'.$user['id'], true)),
+				'avatar' => (string)(new Api\Contacts\Photo('account:' . $user['id'], true)),
 				'account_id' => $user['id']
 			];
-			$CalleeUrl = self::genMeetingUrl($room, $callee);
+			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly']]);
 			self::pushCall($CalleeUrl, $user['id'], $caller);
 		}
 		$response->data(['caller' => $CallerUrl, 'callee' => $CalleeUrl]);
@@ -55,24 +54,47 @@ class Call
 	 * @param $context array user data
 	 * @throws Api\Json\Exception
 	 */
-	public static function ajax_genMeetingUrl ($room, $context)
+	public static function ajax_genMeetingUrl($room, $context)
 	{
 		$respose = Api\Json\Response::get();
-		if (empty($context['avatar'])) $context['avatar'] = new Api\Contacts\Photo("account:".$context['account_id'], false);
+		if (empty($context['avatar'])) $context['avatar'] = new Api\Contacts\Photo("account:" . $context['account_id'], false);
 		$respose->data([self::genMeetingUrl($room, $context)]);
+	}
+
+	public static function ajax_setMissedCallNotification($data)
+	{
+		$p = new Api\Json\Push($data['caller']['account_id']);
+
+		$p->call('app.status.didNotPickUp', [
+			id => $GLOBALS['egw_info']['user']['account_id'],
+			name => $GLOBALS['egw_info']['user']['account_fullname'],
+			avatar => 'account:'.$GLOBALS['egw_info']['user']['account_id']
+		]);
+
+		$n = new \notifications();
+		$n->set_receivers([$GLOBALS['egw_info']['user']['account_id']]);
+		$n->set_sender($data['caller']['account_id']);
+		$n->set_subject(lang("Missed call"));
+		$n->set_popupdata('status', ['caller'=>$data['caller']['account_id'], 'app' => 'status']);
+		$n->set_popupmessage(lang("You have a missed call from %1", $data['caller']['name']));
+		$n->set_message(lang("You have a missed call from %1", $data['caller']['name']));
+		$n->send();
 	}
 
 	/**
 	 * Generates a full working meeting Url
 	 * @param $room string room id
 	 * @param $context array user data
+	 * @param $extra array extra url options
+	 *
 	 * @return mixed
 	 */
-	public static function genMeetingUrl ($room, $context)
+	public static function genMeetingUrl ($room, $context, $extra = [])
 	{
 		$backend = self::_getBackendInstance($room, [
 			'user' => $context
 		]);
+		if (method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
 		return $backend->getMeetingUrl();
 	}
 

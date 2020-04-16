@@ -102,11 +102,13 @@ var statusApp = /** @class */ (function (_super) {
                     });
                 }
                 break;
+            case 'audiocall':
             case 'call':
                 this.makeCall([{
                         id: data.account_id,
                         name: data.hint,
                         avatar: "account:" + data.account_id,
+                        audioonly: _action.id == 'audiocall' ? true : false,
                         data: data
                     }]);
                 break;
@@ -328,11 +330,19 @@ var statusApp = /** @class */ (function (_super) {
         var message_bottom = _message_bottom || 'is calling';
         var message_top = _message_top || '';
         var self = this;
+        var isCallAnswered = false;
+        var timeToPickup = window.setTimeout(function () {
+            if (!isCallAnswered) {
+                egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function () { }).sendRequest();
+                dialog.destroy();
+            }
+        }, statusApp.MISSED_CALL_TIMEOUT);
         this._controllRingTone().start(true);
-        et2_createWidget("dialog", {
+        var dialog = et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
+                    isCallAnswered = true;
                 }
                 self._controllRingTone().stop();
             },
@@ -378,7 +388,7 @@ var statusApp = /** @class */ (function (_super) {
                 self._ring[0].play().then(function () {
                     window.setTimeout(function () {
                         self._controllRingTone().stop();
-                    }, statusApp.MISSEd_CALL_TIMEOUT); // stop ringing automatically after 10s
+                    }, statusApp.MISSED_CALL_TIMEOUT); // stop ringing automatically after 10s
                 }, function (_error) {
                     console.log('Error happened: ' + _error);
                 });
@@ -398,8 +408,16 @@ var statusApp = /** @class */ (function (_super) {
             }
         };
     };
+    statusApp.prototype.didNotPickUp = function (_data) {
+        var self = this;
+        et2_dialog.show_dialog(function (_btn) {
+            if (et2_dialog.YES_BUTTON == _btn) {
+                self.makeCall([_data]);
+            }
+        }, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
+    };
     statusApp.appname = 'status';
-    statusApp.MISSEd_CALL_TIMEOUT = 10000;
+    statusApp.MISSED_CALL_TIMEOUT = 10000;
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;

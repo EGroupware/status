@@ -14,7 +14,8 @@ namespace EGroupware\Status;
 use EGroupware\Api;
 use EGroupware\Api\Config;
 
-class Hooks {
+class Hooks
+{
 	/**
 	 * App name
 	 * var string
@@ -28,18 +29,16 @@ class Hooks {
 	 *
 	 * @return array returns an array of status items as sorted based on fav preferences
 	 */
-	public static function statusItems ()
+	public static function statusItems()
 	{
 		$result = $status = [];
 		$hooks = Api\Hooks::implemented('status-getStatus');
-		foreach($hooks as $app)
-		{
-			$s = Api\Hooks::process(['location'=>'status-getStatus', 'app'=>$app], $app);
-			if (!empty($s[$app])) $status = array_merge_recursive ($status, $s[$app]);
+		foreach ($hooks as $app) {
+			$s = Api\Hooks::process(['location' => 'status-getStatus', 'app' => $app], $app);
+			if (!empty($s[$app])) $status = array_merge_recursive($status, $s[$app]);
 		}
 
-		foreach ($status as &$s)
-		{
+		foreach ($status as &$s) {
 			if (is_array($s['id'])) $s['id'] = $s['id'][0];
 			$result [] = $s;
 		}
@@ -54,43 +53,43 @@ class Hooks {
 	 *
 	 * Status array structure:
 	 * [
-	 *		[id] => [
-	 *			'id' => account_lid,
-	 *			'account_id' => account_id,
-	 *			'icon' => Icon to show as avatar for the item,
-	 *			'hint' => Text to show as tooltip for the item,
-	 *			'stat' => [
-	 *				[status id] => [
-	 *					'notifications' => An integer number representing number of notifications,
-	 *										this is an aggregation value which might gets added up
-	 *										with other stat id related to the item.
-	 *					'active' => int value to show item activeness
-	 *				]
-	 *			]
-	 *		]
+	 *        [id] => [
+	 *            'id' => account_lid,
+	 *            'account_id' => account_id,
+	 *            'icon' => Icon to show as avatar for the item,
+	 *            'hint' => Text to show as tooltip for the item,
+	 *            'stat' => [
+	 *                [status id] => [
+	 *                    'notifications' => An integer number representing number of notifications,
+	 *                                        this is an aggregation value which might gets added up
+	 *                                        with other stat id related to the item.
+	 *                    'active' => int value to show item activeness
+	 *                ]
+	 *            ]
+	 *        ]
 	 * ]
 	 *
 	 * An item example:
 	 * [
-	 *		'hn' => [
-	 *			'id' => 'hn',
-	 *			'account_id' => 7,
-	 *			'icon' => Api\Egw::link('/api/avatar.php', [
-	 *				'contact_id' => 7,
-	 * 				'etag' => 11
-	 * 			]),
-	 *			'hint' => 'Hadi Nategh (hn@egroupware.org)',
-	 *			'stat' => [
-	 *				'status' => [
-	 *					'notifications' => 5,
-	 *					'active' => 1
-	 *				]
-	 *			]
-	 *		]
+	 *        'hn' => [
+	 *            'id' => 'hn',
+	 *            'account_id' => 7,
+	 *            'icon' => Api\Egw::link('/api/avatar.php', [
+	 *                'contact_id' => 7,
+	 *                'etag' => 11
+	 *            ]),
+	 *            'hint' => 'Hadi Nategh (hn@egroupware.org)',
+	 *            'stat' => [
+	 *                'status' => [
+	 *                    'notifications' => 5,
+	 *                    'active' => 1
+	 *                ]
+	 *            ]
+	 *        ]
 	 * ]
 	 *
 	 */
-	public static function getStatus ($data)
+	public static function getStatus($data)
 	{
 		if ($data['app'] != self::APPNAME) return [];
 
@@ -100,16 +99,13 @@ class Hooks {
 
 		Api\Cache::setSession(self::APPNAME, 'account_state', md5(json_encode($users = self::getUsers())));
 
-		foreach ($users as $user)
-		{
-			if (in_array($user['account_lid'], ['anonymous', $GLOBALS['egw_info']['user']['account_lid']]))
-			{
+		foreach ($users as $user) {
+			if (in_array($user['account_lid'], ['anonymous', $GLOBALS['egw_info']['user']['account_lid']])) {
 				continue;
 			}
-			$contact = $contact_obj->read('account:'.$user['account_id'], true);
+			$contact = $contact_obj->read('account:' . $user['account_id'], true);
 			$id = self::getUserName($user['account_lid']);
-			if ($id)
-			{
+			if ($id) {
 				$stat [$id] = [
 					'id' => $id,
 					'account_id' => $user['account_id'],
@@ -126,9 +122,8 @@ class Hooks {
 				];
 			}
 		}
-		uasort ($stat, function ($a ,$b){
-			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active'])
-			{
+		uasort($stat, function ($a, $b) {
+			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active']) {
 				return $b['lastlogin'] - $a['lastlogin'];
 			}
 			return ($a['stat']['egw']['active'] < $b['stat']['egw']['active']) ? 1 : -1;
@@ -141,7 +136,7 @@ class Hooks {
 	 *
 	 * @return array return an array of actions
 	 */
-	public static function get_actions ()
+	public static function get_actions()
 	{
 		return [
 			'fav' => [
@@ -164,6 +159,14 @@ class Hooks {
 				'allowOnMultiple' => true,
 				'onExecute' => 'javaScript:app.status.handle_actions',
 				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
+			],
+			'audiocall' => [
+				'caption' => 'Audio Call',
+				'icon' => 'accept_call',
+				'default' => true,
+				'allowOnMultiple' => true,
+				'onExecute' => 'javaScript:app.status.handle_actions',
+				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
 			]
 		];
 	}
@@ -172,7 +175,7 @@ class Hooks {
 	 * Get all implemented stat keys
 	 * @return array returns array of stat keys
 	 */
-	public static function getStatKeys ()
+	public static function getStatKeys()
 	{
 		return Api\Hooks::implemented('status-getStatus');
 	}
@@ -196,8 +199,7 @@ class Hooks {
 		$account_state = Api\Cache::getSession(self::APPNAME, 'account_state');
 		$current_state = md5(json_encode(self::getUsers()));
 		$response = Api\Json\Response::get();
-		if ($account_state != $current_state)
-		{
+		if ($account_state != $current_state) {
 			// update the status list
 			$response->call('app.status.refresh');
 		}
@@ -209,7 +211,7 @@ class Hooks {
 	 *
 	 * @return array
 	 */
-	public static function getUsers ()
+	public static function getUsers()
 	{
 		$users = $rows = $readonlys = $onlines = [];
 		$accesslog = new \admin_accesslog();
@@ -225,18 +227,15 @@ class Hooks {
 
 		// get list of interactive online users
 		$total = $accesslog->get_rows(array('session_list' => 'active'), $rows, $readonlys);
-		if ($total > 0)
-		{
+		if ($total > 0) {
 			unset($rows['no_lo'], $rows['no_total']);
-			foreach ($rows as $row)
-			{
+			foreach ($rows as $row) {
 				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
 				$onlines [$row['account_id']] = true;
 			}
 		}
 
-		foreach($users as &$user)
-		{
+		foreach ($users as &$user) {
 			if ($onlines[$user['account_id']]) $user['online'] = true;
 		}
 		return $users;
@@ -255,15 +254,13 @@ class Hooks {
 		$links = array();
 
 		// Only search if a query was provided - don't search for all accounts
-		if($query)
-		{
+		if ($query) {
 			$options['account_type'] = 'accounts';
 			$links = Api\Accounts::link_query($query, $options);
 		}
 
 		$results = array();
-		foreach($links as $id => $name)
-		{
+		foreach ($links as $id => $name) {
 			$results[] = array(
 				'id' => $id,
 				'label' => $name,
@@ -271,21 +268,20 @@ class Hooks {
 			);
 		}
 		$hooks = Api\Hooks::implemented('status-getSearchParticipants');
-		foreach($hooks as $app)
-		{
-			$r = Api\Hooks::process(['location'=>'status-getSearchParticipants', 'app'=>$app], $app);
-			$results = array_merge_recursive ($results, $r[$app]);
+		foreach ($hooks as $app) {
+			$r = Api\Hooks::process(['location' => 'status-getSearchParticipants', 'app' => $app], $app);
+			$results = array_merge_recursive($results, $r[$app]);
 		}
 		usort($results, function ($a, $b) use ($query) {
 			$a_label = is_array($a["label"]) ? $a["label"]["label"] : $a["label"];
 			$b_label = is_array($b["label"]) ? $b["label"]["label"] : $b["label"];
 
-		    similar_text($query, $a_label, $percent_a);
-		    similar_text($query, $b_label, $percent_b);
-		    return $percent_a === $percent_b ? 0 : ($percent_a > $percent_b ? -1 : 1);
+			similar_text($query, $a_label, $percent_a);
+			similar_text($query, $b_label, $percent_b);
+			return $percent_a === $percent_b ? 0 : ($percent_a > $percent_b ? -1 : 1);
 		});
 
-		 // switch regular JSON response handling off
+		// switch regular JSON response handling off
 		Api\Json\Request::isJSONRequest(false);
 
 		header('Content-Type: application/json; charset=utf-8');
@@ -293,7 +289,7 @@ class Hooks {
 		exit;
 	}
 
-	public static function menu ($data)
+	public static function menu($data)
 	{
 		if ($GLOBALS['egw_info']['user']['apps']['admin']) {
 			$file = Array(
@@ -314,20 +310,18 @@ class Hooks {
 	public static function config(array $config)
 	{
 		$ret = [];
-		if (empty($config['videoconference']['backend']))
-		{
+		if (empty($config['videoconference']['backend'])) {
 			$ret['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
 		}
 		if (($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND ||
 				$ret['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND) &&
-			empty($config['videoconference']['jitsi']['jitsi_domain']))
-		{
+			empty($config['videoconference']['jitsi']['jitsi_domain'])) {
 			$ret['videoconference']['jitsi']['jitsi_domain'] = 'jitsi.egroupware.net';
 		}
 		return $ret;
 	}
 
-	public static function isVideoconferenceDisabled ()
+	public static function isVideoconferenceDisabled()
 	{
 		$config = Config::read('status');
 		return $config['videoconference']['disable'];
@@ -342,31 +336,53 @@ class Hooks {
 	{
 		return [
 			'1.section' => [
-				'type'  => 'section',
+				'type' => 'section',
 				'title' => lang('Video Conference'),
-				'no_lang'=> true,
+				'no_lang' => true,
 				'xmlrpc' => false,
-				'admin'  => false
+				'admin' => false
 			],
 			'opencallin' => [
-				'type'   => 'select',
-				'label'  => 'Open call in',
-				'name'   => 'opencallin',
+				'type' => 'select',
+				'label' => 'Open call in',
+				'name' => 'opencallin',
 				'values' => [0 => lang('new window'), 1 => lang('popup')],
-				'help'   => 'Open call in new window/popup',
+				'help' => 'Open call in new window/popup',
 				'xmlrpc' => false,
-				'admin'  => false,
-				'default'=> 0,
+				'admin' => false,
+				'default' => 0,
 			],
 			'ringtone' => [
-				'type'   => 'select',
-				'label'  => 'enable ring tone',
-				'name'   => 'ringtone',
+				'type' => 'select',
+				'label' => 'enable ring tone',
+				'name' => 'ringtone',
 				'values' => [1 => lang('yes'), 0 => lang('no')],
-				'help'   => 'Enable ring tone while receiving a call',
+				'help' => 'Enable ring tone while receiving a call',
 				'xmlrpc' => false,
-				'admin'  => false,
-				'default'=> 1,
+				'admin' => false,
+				'default' => 1,
+			]
+		];
+	}
+
+	/**
+	 * Method to construct notifications actions
+	 *
+	 * @param type $params
+	 * @return type
+	 */
+	public static function notifications_actions($params)
+	{
+		Api\Translation::add_app('status');
+		return [
+			[
+				'id' => 'callback',
+				'caption' => lang('Callback'),
+				'icon' => 'accept_call',
+				'onExecute' => 'app.status.makeCall([{'.
+					'id:"'.$params['data']['caller'].'",'.
+					'name:"'.Api\Accounts::id2name($params['data']['caller'], 'account_fullname').'",'.
+					'avatar:"'. 'account:'.$params['data']['caller'].'"}])'
 			]
 		];
 	}

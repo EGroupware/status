@@ -19,7 +19,7 @@ class statusApp extends EgwApp
 
 	private _ring : JQuery = null;
 
-	private static MISSEd_CALL_TIMEOUT : number = 10000;
+	private static MISSED_CALL_TIMEOUT : number = 10000;
 
 	/**
 	 * Constructor
@@ -109,11 +109,13 @@ class statusApp extends EgwApp
 				}
 
 				break;
+			case 'audiocall':
 			case 'call':
 				this.makeCall([{
 					id: data.account_id,
 					name: data.hint,
 					avatar: "account:"+data.account_id,
+					audioonly: _action.id == 'audiocall' ? true : false,
 					data: data
 				}]);
 
@@ -374,12 +376,21 @@ class statusApp extends EgwApp
 		let message_bottom = _message_bottom || 'is calling';
 		let message_top = _message_top || '';
 		let self = this;
+		let isCallAnswered = false;
+		let timeToPickup = window.setTimeout(function(){
+			if (!isCallAnswered)
+			{
+				egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function(){}).sendRequest();
+				dialog.destroy();
+			}
+		}, statusApp.MISSED_CALL_TIMEOUT);
 		this._controllRingTone().start(true);
-		et2_createWidget("dialog",{
+		var dialog = et2_createWidget("dialog",{
 			callback: function(_btn, value){
 				if (_btn == et2_dialog.OK_BUTTON)
 				{
 					self.openCall(value.url);
+					isCallAnswered = true;
 				}
 				self._controllRingTone().stop();
 			},
@@ -427,7 +438,7 @@ class statusApp extends EgwApp
 				self._ring[0].play().then(function(){
 					window.setTimeout(function(){
 						self._controllRingTone().stop();
-					}, statusApp.MISSEd_CALL_TIMEOUT) // stop ringing automatically after 10s
+					}, statusApp.MISSED_CALL_TIMEOUT) // stop ringing automatically after 10s
 				},function(_error){
 					console.log('Error happened: '+_error);
 				});
@@ -446,6 +457,17 @@ class statusApp extends EgwApp
 				this.stop();
 			}
 		}
+	}
+
+	public didNotPickUp(_data)
+	{
+		let self = this;
+		et2_dialog.show_dialog(function(_btn){
+			if (et2_dialog.YES_BUTTON == _btn)
+			{
+				self.makeCall([_data]);
+			}
+		}, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
 	}
 }
 app.classes.status = statusApp;
