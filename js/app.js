@@ -334,6 +334,12 @@ var statusApp = /** @class */ (function (_super) {
         var timeToPickup = window.setTimeout(function () {
             if (!isCallAnswered) {
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function () { }).sendRequest();
+                egw.accountData(_data.caller.account_id, 'account_lid', null, function (account) {
+                    self.mergeContent([{
+                            id: account[_data.caller.account_id],
+                            class1: 'missed-call',
+                        }]);
+                }, egw);
                 dialog.destroy();
             }
         }, statusApp.MISSED_CALL_TIMEOUT);

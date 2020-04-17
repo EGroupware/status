@@ -170,6 +170,23 @@ tr.egw_online {
 td.taglist_readonly .et2_taglist > div.ms-ctn {
   border: none;
 }
+#status-index_status-index-fav tr.row span.stat1.missed-call,
+#status-index_status-index-list tr.row span.stat1.missed-call {
+  background-image: url(../../../pixelegg/images/hangup.svg);
+  background-position: center;
+  background-color: black;
+  font-size: 0;
+  border: 2px solid #f0f7fe;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  border-radius: 50%;
+  z-index: 100000;
+  background-size: 14px;
+  background-repeat: no-repeat;
+}
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
   height: calc(100% - 45px);

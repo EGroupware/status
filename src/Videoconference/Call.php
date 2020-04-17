@@ -74,9 +74,8 @@ class Call
 		$n = new \notifications();
 		$n->set_receivers([$GLOBALS['egw_info']['user']['account_id']]);
 		$n->set_sender($data['caller']['account_id']);
-		$n->set_subject(lang("Missed call"));
-		$n->set_popupdata('status', ['caller'=>$data['caller']['account_id'], 'app' => 'status']);
-		$n->set_popupmessage(lang("You have a missed call from %1", $data['caller']['name']));
+		$n->set_subject(lang("Missed call from %1", $data['caller']['name']));
+		$n->set_popupdata('status', ['caller'=>$data['caller']['account_id'], 'app' => 'status', 'onSeenAction' => 'app.status.refresh()']);
 		$n->set_message(lang("You have a missed call from %1", $data['caller']['name']));
 		$n->send();
 	}
