@@ -58,7 +58,7 @@ class Call
 	public static function ajax_genMeetingUrl ($room, $context)
 	{
 		$respose = Api\Json\Response::get();
-		if (empty($context['avatar'])) $context['avatar'] = new Api\Contacts\Photo("account:".$context['account_id'], false);
+		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
 		$respose->data([self::genMeetingUrl($room, $context)]);
 	}
 
