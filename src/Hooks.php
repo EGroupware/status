@@ -214,8 +214,6 @@ class Hooks
 	public static function getUsers()
 	{
 		$users = $rows = $readonlys = $onlines = [];
-		$accesslog = new \admin_accesslog();
-
 
 		// get list of users
 		\admin_ui::get_users([
@@ -225,18 +223,12 @@ class Hooks
 			'active' => true
 		], $users);
 
-		// get list of interactive online users
-		$total = $accesslog->get_rows(array('session_list' => 'active'), $rows, $readonlys);
-		if ($total > 0) {
-			unset($rows['no_lo'], $rows['no_total']);
-			foreach ($rows as $row) {
-				if ($row['account_id'] == $GLOBALS['egw_info']['user']['account_id']) continue;
-				$onlines [$row['account_id']] = true;
-			}
-		}
+		$push = new Api\Json\Push();
+		$online = $push->online();
 
-		foreach ($users as &$user) {
-			if ($onlines[$user['account_id']]) $user['online'] = true;
+		foreach($users as &$user)
+		{
+			if (in_array($user['account_id'], $online)) $user['online'] = true;
 		}
 		return $users;
 	}
