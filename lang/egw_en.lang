@@ -1,5 +1,7 @@
+%1 did not pickup your call, would you like to try again?	status	en	%1 did not pickup your call, would you like to try again?
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
+click to join!	status	en	Click to Join!
 disable	status	en	disable
 enable	status	en	enable
 event owner	status	en	Event owner
@@ -10,6 +12,7 @@ jitsi domain	status	en	Jitsi Domain
 jitsi server	status	en	Jitsi Server
 join	common	en	Join
 message	status	en	Message
+missed call from %1	status	en	Missed call from %1
 new window	status	en	new window
 open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup
@@ -23,4 +26,5 @@ video conference backends	status	en	Video conference backends
 video conference enable	status	en	Video conference Enable
 video conference meeting	status	en	Video conference meeting
 you have a call from %1	status	en	You have a call from %1
+you have a missed call from %1	status	en	You have a missed call from %1
 you have a video conference meeting in %1 minutes, initiated by %2	status	en	You have a video conference meeting in %1 minutes, initiated by %2

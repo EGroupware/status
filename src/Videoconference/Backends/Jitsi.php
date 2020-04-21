@@ -72,6 +72,10 @@ class Jitsi implements Iface
 	 */
 	private $config;
 
+	private $extraParams = [
+		'config.startAudioOnly' => false
+	];
+
 	/**
 	 * token constructor.
 	 * @param $_room string room id
@@ -144,7 +148,17 @@ class Jitsi implements Iface
 
 	public function getMeetingUrl ()
 	{
-		return 'https://'.$this->payload['sub'].'/'.$this->payload['room']."?jwt=".$this->_getToken();
+		return 'https://'.$this->payload['sub'].'/'.$this->payload['room']."?jwt=".$this->_getToken().'#'.$this->_getExtraParams();
+	}
+
+	public function setStartAudioOnly ($value = false)
+	{
+		$this->extraParams['config.startAudioOnly'] = $value;
+	}
+
+	private function _getExtraParams()
+	{
+		return http_build_query($this->extraParams,'#');
 	}
 
 	/**

@@ -13,6 +13,9 @@ app.classes.status = AppJS.extend(
 {
 	appname: 'status',
 
+	_ring : null,
+
+	MISSED_CALL_TIMEOUT : 30000,
 	/**
 	 * Constructor
 	 *
@@ -44,7 +47,15 @@ app.classes.status = AppJS.extend(
 	et2_ready: function(_et2, _name)
 	{
 		// call parent
-		this._super.apply(this, arguments);
+		super.et2_ready(_et2, _name);
+		if (egw.preference('ringtone', 'status'))
+		{
+			this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav');
+			let self = this;
+			jQuery('body').one('click', function(){
+				self._controllRingTone().initiate();
+			});
+		}
 	},
 
 	/**
@@ -52,7 +63,6 @@ app.classes.status = AppJS.extend(
 	 *
 	 * @param {type} _action
 	 * @param {type} _selected
-	 * @TODO Implementing Fav preference and refresh list
 	 */
 	handle_actions: function (_action, _selected)
 	{
@@ -94,11 +104,14 @@ app.classes.status = AppJS.extend(
 				}
 
 				break;
+			case 'audiocall':
 			case 'call':
 				this.makeCall([{
 					id: data.account_id,
 					name: data.hint,
-					avatar: "account:"+data.account_id
+					avatar: "account:"+data.account_id,
+					audioonly: _action.id == 'audiocall' ? true : false,
+					data: data
 				}]);
 
 				break;
@@ -230,7 +243,7 @@ app.classes.status = AppJS.extend(
 
 	isOnline: function(_action, _selected)
 	{
-		return _selected[0].data.data.status.active;
+		return _selected[0].data.data.status.active || (app.rocketchat && app.rocketchat.isRCActive(_action, _selected));
 	},
 
 	/**
@@ -266,7 +279,21 @@ app.classes.status = AppJS.extend(
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
 					[data], function(_url){
-						self.openCall(_url);
+						self.openCall(_url.caller);
+						if (app.rocketchat?.isRCActive(null, [{data:data[0].data}]))
+						{
+							app.rocketchat.restapi_call('chat_PostMessage', {
+								roomId:data[0].data.data.rocketchat._id,
+								attachments:[
+									{
+										"collapsed": false,
+										"color": "#009966",
+										"title": egw.lang("Click to Join!"),
+										"title_link": _url.callee,
+										"thumb_url": "https://raw.githubusercontent.com/EGroupware/status/master/templates/pixelegg/images/videoconference_call.svg",
+									}
+								]})
+						}
 					}).sendRequest();
 			}
 		}, 3000);
@@ -297,6 +324,7 @@ app.classes.status = AppJS.extend(
 		let notify = _notify || true;
 		let content = _content || {};
 		let self = this;
+		this._controllRingTone().start();
 		et2_createWidget("dialog",{
 			callback: function(_btn, value){
 				if (_btn == et2_dialog.OK_BUTTON)
@@ -343,12 +371,29 @@ app.classes.status = AppJS.extend(
 		let message_bottom = _message_bottom || 'is calling';
 		let message_top = _message_top || '';
 		let self = this;
-		et2_createWidget("dialog",{
+		let isCallAnswered = false;
+		let timeToPickup = window.setTimeout(function(){
+			if (!isCallAnswered)
+			{
+				egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function(){}).sendRequest();
+				egw.accountData(_data.caller.account_id, 'account_lid',null,function(account){
+					self.mergeContent([{
+						id: account[_data.caller.account_id],
+						class1: 'missed-call',
+					}]);
+				}, egw);
+				dialog.destroy();
+			}
+		}, this.MISSED_CALL_TIMEOUT);
+		this._controllRingTone().start(true);
+		var dialog = et2_createWidget("dialog",{
 			callback: function(_btn, value){
 				if (_btn == et2_dialog.OK_BUTTON)
 				{
 					self.openCall(value.url);
+					isCallAnswered = true;
 				}
+				self._controllRingTone().stop();
 			},
 			title: '',
 			buttons: buttons,
@@ -381,5 +426,48 @@ app.classes.status = AppJS.extend(
 				requireInteraction: true
 			});
 		}
+	},
+
+	_controllRingTone: function()
+	{
+		let self = this;
+		return {
+			start: function (_loop){
+				if (!self._ring) return;
+				let loop = _loop || false;
+				self._ring[0].loop = loop;
+				self._ring[0].play().then(function(){
+					window.setTimeout(function(){
+						self._controllRingTone().stop();
+					}, self.MISSED_CALL_TIMEOUT) // stop ringing automatically after 10s
+				},function(_error){
+					console.log('Error happened: '+_error);
+				});
+			},
+			stop: function (){
+				if (!self._ring) return;
+				self._ring[0].pause();
+			},
+			initiate: function(){
+				self._ring[0].mute = true;
+				self._ring[0].play().then(function(){
+
+				},function(_error){
+					console.log('Error happened: '+_error);
+				});
+				this.stop();
+			}
+		}
+	},
+
+	didNotPickUp: function(_data)
+	{
+		let self = this;
+		et2_dialog.show_dialog(function(_btn){
+			if (et2_dialog.YES_BUTTON == _btn)
+			{
+				self.makeCall([_data]);
+			}
+		}, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
 	}
 });
