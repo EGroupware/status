@@ -19,7 +19,7 @@ class statusApp extends EgwApp
 
 	private _ring : JQuery = null;
 
-	private static MISSED_CALL_TIMEOUT : number = 10000;
+	private static MISSED_CALL_TIMEOUT : number = 30000;
 
 	/**
 	 * Constructor

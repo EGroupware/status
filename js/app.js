@@ -423,7 +423,7 @@ var statusApp = /** @class */ (function (_super) {
         }, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
     };
     statusApp.appname = 'status';
-    statusApp.MISSED_CALL_TIMEOUT = 10000;
+    statusApp.MISSED_CALL_TIMEOUT = 30000;
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;
