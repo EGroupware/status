@@ -1,4 +1,26 @@
+accept	common	es-es	Aceptar
 add to favorites	status	es-es	Añadir a los favoritos
+disable	status	es-es	inhabilitar
+enable	status	es-es	habilitar
+event owner	status	es-es	Dueño del evento
+example: jitsi.egroupware.org	status	es-es	ejemplo: jitsi.egroupware.org
+initiating call to	status	es-es	Iniciando llamada a
+jitsi application secret	status	es-es	Secreto de la aplicación Jitsi
+jitsi domain	status	es-es	Dominio Jitsi
+jitsi server	status	es-es	Servidor Jitsi
+join	common	es-es	Unirse
 message	status	es-es	Mensaje
+new window	status	es-es	nueva ventana
+open call in	status	es-es	Abrir llamada en
+open call in new window/popup	status	es-es	Abrir llamada en una nueva ventana/ventana emergente
 remove from favorites	status	es-es	Remover de favoritos
+schedule a call	status	es-es	Programar una llamada
 status	common	es-es	Estado
+title	status	es-es	título
+video call	common	es-es	Videollamada
+video conference	common	es-es	videoconferencia
+video conference backends	status	es-es	Videoconferencia en plano-trasero
+video conference enable	status	es-es	Habilitar videoconferencia
+video conference meeting	status	es-es	Reunión de videoconferencia
+you have a call from %1	status	es-es	Tienes una llamada de %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	es-es	Tiene una reunión de videoconferencia en %1 minutos, iniciada por %2

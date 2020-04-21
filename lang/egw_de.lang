@@ -1,5 +1,7 @@
+%1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen, wollen Sie es nochmal versuchen?
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
+click to join!	status	de	Anklicken zum Teilnehmen!
 disable	status	de	Deaktivieren
 enable	status	de	Aktivieren
 event owner	status	de	Initiator Videokonferenz
@@ -10,6 +12,7 @@ jitsi domain	status	de	Jitsi Domain
 jitsi server	status	de	Jitsi
 join	common	de	Teilnehmen
 message	status	de	Nachricht
+missed call from %1	status	de	Versäumter Anruf von %1
 new window	status	de	Neues Fenster
 open call in	status	de	Öffne Videokonferenz als
 open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Popup öffnen
@@ -23,4 +26,5 @@ video conference backends	status	de	Videokonferenz-System
 video conference enable	status	de	Videokonferenz aktivieren
 video conference meeting	status	de	Videokonferenz-Sitzung
 you have a call from %1	status	de	Sie haben einen Anruf von %1
+you have a missed call from %1	status	de	Sie haben einen Anruf von %1 verpasst
 you have a video conference meeting in %1 minutes, initiated by %2	status	de	Sie haben eine Videokonferenz in %1 Minuten, eingeladen von %2
