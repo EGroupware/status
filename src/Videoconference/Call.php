@@ -66,9 +66,9 @@ class Call
 		$p = new Api\Json\Push($data['caller']['account_id']);
 
 		$p->call('app.status.didNotPickUp', [
-			id => $GLOBALS['egw_info']['user']['account_id'],
-			name => $GLOBALS['egw_info']['user']['account_fullname'],
-			avatar => 'account:'.$GLOBALS['egw_info']['user']['account_id']
+			'id' => $GLOBALS['egw_info']['user']['account_id'],
+			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
+			'avatar' => 'account:'.$GLOBALS['egw_info']['user']['account_id']
 		]);
 
 		$n = new \notifications();
