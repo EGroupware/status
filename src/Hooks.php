@@ -139,10 +139,24 @@ class Hooks
 	public static function get_actions()
 	{
 		return [
+			'call' => [
+				'caption' => 'Video Call',
+				'icon' => 'status/videoconference_call',
+				'default' => true,
+				'onExecute' => 'javaScript:app.status.handle_actions',
+				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
+			],
+			'audiocall' => [
+				'caption' => 'Audio Call',
+				'icon' => 'accept_call',
+				'onExecute' => 'javaScript:app.status.handle_actions',
+				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
+			],
 			'fav' => [
 				'caption' => 'Add to favorites',
 				'allowOnMultiple' => false,
 				'icon' => 'fav_filter',
+				'group' => 1,
 				'onExecute' => 'javaScript:app.status.handle_actions'
 			],
 			'unfavorite' => [
@@ -150,23 +164,8 @@ class Hooks
 				'allowOnMultiple' => false,
 				'enabled' => false,
 				'icon' => 'delete',
+				'group' => 1,
 				'onExecute' => 'javaScript:app.status.handle_actions'
-			],
-			'call' => [
-				'caption' => 'Video Call',
-				'icon' => 'status/videoconference_call',
-				'default' => true,
-				'allowOnMultiple' => true,
-				'onExecute' => 'javaScript:app.status.handle_actions',
-				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
-			],
-			'audiocall' => [
-				'caption' => 'Audio Call',
-				'icon' => 'accept_call',
-				'default' => true,
-				'allowOnMultiple' => true,
-				'onExecute' => 'javaScript:app.status.handle_actions',
-				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
 			]
 		];
 	}
