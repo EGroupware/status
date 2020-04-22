@@ -47,7 +47,7 @@ app.classes.status = AppJS.extend(
 	et2_ready: function(_et2, _name)
 	{
 		// call parent
-		this._super.et2_ready(_et2, _name);
+		this._super.apply(this, arguments);
 		if (egw.preference('ringtone', 'status'))
 		{
 			this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav');
