@@ -206,6 +206,26 @@ class Hooks
 	}
 
 	/**
+	 * Push user status to all after session is created
+	 *
+	 * @param type $_data
+	 */
+	public static function sessionCreated($_data)
+	{
+		if ($_data['session_type'] == "webgui")
+		{
+			$push = new Api\Json\Push(Api\Json\Push::ALL);
+			$push->call('app.status.mergeContent',[
+				[
+					'id' => $GLOBALS['egw_info']['user']['account_lid'],
+					'class' => 'egw_online',
+					'data' => ['stat' => ['active' => true]]
+				]
+			]);
+		}
+	}
+
+	/**
 	 * Query list of active online users ordered by lastlogin
 	 *
 	 * @return array
