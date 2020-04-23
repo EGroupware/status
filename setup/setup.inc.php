@@ -32,6 +32,7 @@ $setup_info['status']['hooks']['config'] = \EGroupware\Status\Hooks::class.'::co
 $setup_info['status']['hooks']['admin'] = \EGroupware\Status\Hooks::class.'::menu';
 $setup_info['status']['hooks']['settings'] = \EGroupware\Status\Hooks::class.'::settings';
 $setup_info['status']['hooks']['notifications_actions'] = \EGroupware\Status\Hooks::class.'::notifications_actions';
+$setup_info['status']['hooks']['session_created'] =  \EGroupware\Status\Hooks::class.'::sessionCreated';
 
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(
