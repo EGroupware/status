@@ -469,5 +469,56 @@ app.classes.status = AppJS.extend(
 				self.makeCall([_data]);
 			}
 		}, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
+	},
+
+	phoneCall: function(_action, _selected)
+	{
+		let data = _selected[0]['data'];
+
+		let target = '';
+		switch(_action.id)
+		{
+			case 'addressbook_tel_work':
+				target = data.data.status.tel_work;
+				break;
+			case 'addressbook_tel_cell':
+				target = data.data.status.tel_cell;
+				break;
+			case 'addressbook_tel_prefer':
+				target = data.data.status.tel_prefer;
+				break;
+			case 'addressbook_tel_home':
+				target = data.data.status.tel_home;
+				break;
+		}
+		if (target)
+		{
+			let url = et2_createWidget('url-phone', {id:'temp_url_phone', readonly: true}, this.et2);
+			url.set_value(target);
+			url.span.click();
+			url.destroy();
+		}
+	},
+
+	phoneIsAvailable: function(_action, _selected)
+	{
+		let data = _selected[0]['data'];
+
+		switch(_action.id)
+		{
+			case 'addressbook_tel_work':
+				if (data.data.status.tel_work) return true;
+				break;
+			case 'addressbook_tel_cell':
+				if (data.data.status.tel_cell) return true;
+				break;
+			case 'addressbook_tel_prefer':
+				if (data.data.status.tel_prefer) return true;
+				break;
+			case 'addressbook_tel_home':
+				if (data.data.status.tel_home) return true;
+				break;
+		}
+		return false;
 	}
 });

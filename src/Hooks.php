@@ -115,7 +115,11 @@ class Hooks
 						'status' => [
 							'active' => $user['online'],
 							'lname' => $contact['n_family'],
-							'fname' => $contact['n_given']
+							'fname' => $contact['n_given'],
+							'tel_prefer' => $contact[$contact['tel_prefer']],
+							'tel_work' => $contact['tel_work'],
+							'tel_cell' => $contact['tel_cell'],
+							'tell_home' => $contact['tel_home'],
 						]
 					],
 					'lastlogin' => $user['account_lastlogin'],
