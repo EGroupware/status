@@ -25,7 +25,8 @@ class Ui {
 	 * @var array
 	 */
 	public $public_functions = [
-		'index' => true
+		'index' => true,
+		'room' => true
 	];
 
 	/**
@@ -36,7 +37,7 @@ class Ui {
 	/*
 	 *
 	 */
-	function index($content=null)
+	public function index($content=null)
 	{
 		$tpl = new Api\Etemplate('status.index');
 
@@ -58,6 +59,19 @@ class Ui {
 		}
 
 		return $tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array(), array());
+	}
+
+	/**
+	 *
+	 * @param type $content
+	 * @return type
+	 */
+	public function room($content=null)
+	{
+		$tpl = new Api\Etemplate('status.room');
+		$content['frame'] = $_GET['frame'] ? $_GET['frame'] : '';
+		$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
+		return $tpl->exec('status.EGroupware\\Status\\Ui.room', $content,array(), array());
 	}
 
 	/**

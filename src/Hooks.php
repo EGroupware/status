@@ -156,6 +156,12 @@ class Hooks
 				'onExecute' => 'javaScript:app.status.handle_actions',
 				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
 			],
+			'invite' => [
+				'caption' => 'Invite to call',
+				'icon' => 'add',
+				'onExecute' => 'javaScript:app.status.handle_actions',
+				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isThereAnyCall'
+			],
 			'fav' => [
 				'caption' => 'Add to favorites',
 				'allowOnMultiple' => false,
@@ -223,7 +229,7 @@ class Hooks
 				[
 					'id' => $GLOBALS['egw_info']['user']['account_lid'],
 					'class' => 'egw_online',
-					'data' => ['stat' => ['active' => true]]
+					'data' => ['status' => ['active' => true]]
 				]
 			]);
 		}
@@ -400,5 +406,23 @@ class Hooks
 					'avatar:"'. 'account:'.$params['data']['caller'].'"}])'
 			]
 		];
+	}
+
+	/**
+	 * Register Jitsi domain for CSP policies frame-src
+	 *
+	 * @param $location "connect-src" | "frame-src"
+	 * @return array
+	 */
+	public static function csp_frame_src($location)
+	{
+		$config = Api\Config::read('status');
+		$srcs = [];
+		if (!empty($config['videoconference']['jitsi']['jitsi_domain']))
+		{
+			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference']['jitsi']['jitsi_domain']);
+
+		}
+		return $srcs;
 	}
 }

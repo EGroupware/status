@@ -53,14 +53,27 @@ class statusApp extends EgwApp
 	{
 		// call parent
 		super.et2_ready(_et2, _name);
-		if (egw.preference('ringtone', 'status'))
+		switch (_name)
 		{
-			this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav');
-			let self = this;
-			jQuery('body').one('click', function(){
-				self._controllRingTone().initiate();
-			});
+			case 'status.index':
+				if (egw.preference('ringtone', 'status'))
+				{
+					this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav');
+					let self = this;
+					jQuery('body').one('click', function(){
+						self._controllRingTone().initiate();
+					});
+				}
+				break;
+			case 'status.room':
+				let room = this.et2.getArrayMgr('content').getEntry('room');
+				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
+				window.addEventListener("beforeunload", function(e){
+					window.opener.sessionStorage.removeItem('status-videoconference-session')
+				 }, false);
+				break;
 		}
+
 	}
 
 	/**
@@ -120,6 +133,14 @@ class statusApp extends EgwApp
 				}]);
 
 				break;
+			case 'invite':
+				this.inviteToCall([{
+					id: data.account_id,
+					name: data.hint,
+					avatar: "account:"+data.account_id,
+					audioonly: _action.id == 'audiocall' ? true : false,
+					data: data
+				}], egw.getSessionItem('status', 'videoconference-session'));
 		}
 		this.refresh();
 	}
@@ -283,7 +304,7 @@ class statusApp extends EgwApp
 				dialog.destroy();
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
-					[data], function(_url){
+					[data, data[0]['room']], function(_url){
 						self.openCall(_url.caller);
 						if (app.rocketchat?.isRCActive(null, [{data:data[0].data}]))
 						{
@@ -310,13 +331,17 @@ class statusApp extends EgwApp
 	 */
 	openCall(_url)
 	{
+		let link = egw.link('/index.php', {
+				menuaction: 'status.\\EGroupware\\Status\\Ui.room',
+				frame: _url
+			});
 		if (egw.preference('opencallin', statusApp.appname) == '1')
 		{
-			egw.openPopup(_url, 800, 600);
+			 egw.open_link(link, '_blank');
 		}
 		else
 		{
-			window.open(_url);
+			egw.openPopup(link, 800, 600, '', 'status');
 		}
 	}
 
@@ -437,7 +462,7 @@ class statusApp extends EgwApp
 	{
 		let self = this;
 		return {
-			start: function (_loop){
+			start: function (_loop?){
 				if (!self._ring) return;
 				let loop = _loop || false;
 				self._ring[0].loop = loop;
@@ -525,6 +550,65 @@ class statusApp extends EgwApp
 				break;
 		}
 		return false;
+	}
+
+	public videoconference_invite ()
+	{
+		let url = this.et2.getArrayMgr('content').getEntry('frame');
+
+		let self = this;
+		et2_createWidget("dialog",
+			{
+				callback: function(_button_id, _value)
+				{
+					if (_button_id == 'add' && _value)
+					{
+						let data = [];
+						for (let i in _value.accounts)
+						{
+							data.push({
+								id: _value.accounts[i],
+								name: '',
+								avatar: "account:"+_value.accounts[i]
+							})
+						}
+						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, statusApp.videoconference_fetchRoomFromUrl(url), true], function(){
+
+						}).sendRequest();
+					}
+				},
+				title: this.egw.lang('Invite to this meeting'),
+				buttons: [
+					{text: this.egw.lang("Invite"), id: "add", class: "ui-priority-primary", default: true},
+					{text: this.egw.lang("Cancel"), id:"cancel"}
+				],
+				value:{
+					content:{
+						value: '',
+					}},
+				template: egw.webserverUrl+'/status/templates/default/search_list.xet',
+				resizable: false,
+				width: 400,
+			}, et2_dialog._create_parent('status'));
+	}
+
+	public static videoconference_fetchRoomFromUrl(_url)
+	{
+		if (_url)
+		{
+			return _url.split(/\?jwt/)[0].split('/').pop();
+		}
+		return null;
+	}
+
+	public isThereAnyCall(_action, _selected)
+	{
+		return this.isOnline(_action, _selected) && egw.getSessionItem('status', 'videoconference-session');
+	}
+
+	public inviteToCall(_data, _room)
+	{
+		egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [_data, _room , true], function(){}).sendRequest();
 	}
 }
 app.classes.status = statusApp;
