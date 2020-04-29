@@ -19,7 +19,7 @@ open call in	status	de	Öffne Videokonferenz als
 open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Popup öffnen
 remove from favorites	status	de	Aus Favoriten entfernen
 schedule a call	status	de	Als Termin planen
-status	common	de	Status
+status	common	de	Status/Videokonferenz
 title	status	de	Title
 video call	common	de	Videoanruf
 video conference	common	de	Videokonferenz

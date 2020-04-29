@@ -1,12 +1,14 @@
 %1 did not pickup your call, would you like to try again?	status	en	%1 did not pickup your call, would you like to try again?
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
+audio call	status	en	Audio Call
 click to join!	status	en	Click to Join!
 disable	status	en	disable
 enable	status	en	enable
 event owner	status	en	Event owner
 example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
 initiating call to	status	en	Initiating call to
+invite to current call	common	en	Invite to current call
 jitsi application secret	status	en	Jitsi Application Secret
 jitsi domain	status	en	Jitsi Domain
 jitsi server	status	en	Jitsi Server
@@ -18,7 +20,7 @@ open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup
 remove from favorites	status	en	Remove from favorites
 schedule a call	status	en	Schedule a call
-status	common	en	Status
+status	common	en	Status/Videoconference
 title	status	en	title
 video call	common	en	Video Call
 video conference	common	en	Video Conference
