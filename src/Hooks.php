@@ -157,8 +157,8 @@ class Hooks
 				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isOnline'
 			],
 			'invite' => [
-				'caption' => 'Invite to call',
-				'icon' => 'add',
+				'caption' => 'Invite to current call',
+				'icon' => 'status/videoconference_join',
 				'onExecute' => 'javaScript:app.status.handle_actions',
 				'enabled' => self::isVideoconferenceDisabled() ? false : 'javaScript:app.status.isThereAnyCall'
 			],

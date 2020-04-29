@@ -7,6 +7,7 @@ enable	status	en	enable
 event owner	status	en	Event owner
 example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
 initiating call to	status	en	Initiating call to
+invite to current call	common	en	Invite to current call
 jitsi application secret	status	en	Jitsi Application Secret
 jitsi domain	status	en	Jitsi Domain
 jitsi server	status	en	Jitsi Server
