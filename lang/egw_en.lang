@@ -1,6 +1,7 @@
 %1 did not pickup your call, would you like to try again?	status	en	%1 did not pickup your call, would you like to try again?
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
+audio call	status	en	Audio Call
 click to join!	status	en	Click to Join!
 disable	status	en	disable
 enable	status	en	enable
