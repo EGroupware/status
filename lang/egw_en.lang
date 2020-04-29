@@ -18,7 +18,9 @@ missed call from %1	status	en	Missed call from %1
 new window	status	en	new window
 open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup
+phone call	status	en	Phone call
 remove from favorites	status	en	Remove from favorites
+room id	status	en	Room ID
 schedule a call	status	en	Schedule a call
 status	common	en	Status/Videoconference
 title	status	en	title

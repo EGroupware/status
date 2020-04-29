@@ -421,7 +421,10 @@ class Hooks
 		if (!empty($config['videoconference']['jitsi']['jitsi_domain']))
 		{
 			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference']['jitsi']['jitsi_domain']);
-
+			if (in_array($config['videoconference']['jitsi']['jitsi_domain'], ['jitsi.egroupware.org', 'jitsi.egroupware.net']))
+			{
+				$srcs[] = 'https://www.egroupware.org/';
+			}
 		}
 		return $srcs;
 	}
