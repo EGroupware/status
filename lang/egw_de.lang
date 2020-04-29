@@ -1,13 +1,14 @@
 %1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen, wollen Sie es nochmal versuchen?
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
-call	status	de	Audioanruf
+audio call	status	de	Audioanruf
 click to join!	status	de	Anklicken zum Teilnehmen!
 disable	status	de	Deaktivieren
 enable	status	de	Aktivieren
 event owner	status	de	Initiator Videokonferenz
 example: jitsi.egroupware.org	status	de	Beispiel: jitsi.egroupware.org
 initiating call to	status	de	Einleiten eines Anrufs an
+invite to current call	common	de	Zum aktuellen Anruf einladen
 jitsi application secret	status	de	Jitsi Secret
 jitsi domain	status	de	Jitsi Domain
 jitsi server	status	de	Jitsi
