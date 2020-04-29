@@ -1,7 +1,7 @@
 %1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen, wollen Sie es nochmal versuchen?
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
-call	status	de	Anruf starten
+call	status	de	Audioanruf
 click to join!	status	de	Anklicken zum Teilnehmen!
 disable	status	de	Deaktivieren
 enable	status	de	Aktivieren
@@ -17,7 +17,9 @@ missed call from %1	status	de	Versäumter Anruf von %1
 new window	status	de	Neues Fenster
 open call in	status	de	Öffne Videokonferenz als
 open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Popup öffnen
+phone call	status	de	Telefonanruf
 remove from favorites	status	de	Aus Favoriten entfernen
+room id	status	de	Raumnummer
 schedule a call	status	de	Als Termin planen
 status	common	de	Status/Videokonferenz
 title	status	de	Title
