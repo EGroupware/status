@@ -104,15 +104,20 @@ class Call
 	 * @param $room string room id
 	 * @param $context array user data
 	 * @param $extra array extra url options
+	 * @param int|DateTime $start start time, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|DateTime $end expriation time, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
 	 * @return mixed
 	 */
-	public static function genMeetingUrl ($room, $context, $extra = [])
+	public static function genMeetingUrl ($room, $context, $extra = [], $start=null, $end=null)
 	{
 		$backend = self::_getBackendInstance($room, [
 			'user' => $context
-		]);
+		], $start instanceof \DateTime ? $start->getTimestamp() : $start,
+			$end instanceof \DateTime ? $end->getTimestamp() : $end);
+
 		if (method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
+
 		return $backend->getMeetingUrl();
 	}
 
@@ -123,23 +128,27 @@ class Call
 	 */
 	public static function genUniqueRoomID()
 	{
-		return str_replace(array('-', '.', ':', '/') , '',  $_SERVER['HTTP_HOST']).Api\Auth::randomstring(20);
+		return str_replace('/' , '',  $_SERVER['HTTP_HOST']).'-'.Api\Auth::randomstring(20);
 	}
 
 	/**
+	 * Factory
 	 *
-	 * @param $room
-	 * @param $context
-	 * @return bool
+	 * @param string $room room-id
+	 * @param array $context values for keys 'name', 'email', 'avatar', 'account_id'
+	 * @param int|DateTime $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|DateTime $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 *
+	 * @return Backends\Jitsi|Backends\Iface
 	 */
-	private static function _getBackendInstance($room, $context)
+	private static function _getBackendInstance($room, $context, $start=null, $end=null)
 	{
 		$config = Api\Config::read('status');
 		$backend = 	$config['videoconference']['backend'] ? $config['videoconference']['backend'][0] : 'Jitsi';
 		if (!in_array($backend, self::BACKENDS) || $config['videoconference']['disable'] === true) return false;
 		$instance = '\\EGroupware\\Status\\Videoconference\\Backends\\'.$backend;
 
-		return new $instance($room, $context);
+		return new $instance($room, $context, $start, $end);
 	}
 
 	/**

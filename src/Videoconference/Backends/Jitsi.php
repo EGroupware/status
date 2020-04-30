@@ -11,6 +11,7 @@
 
 namespace EGroupware\Status\Videoconference\Backends;
 
+use EGroupware\Api;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Key;
@@ -35,14 +36,14 @@ class Jitsi implements Iface
 	const UID = 1;
 
 	/**
-	 * the time token can live after being issued
+	 * Expiration grace-time of token
 	 */
-	const EXP = 3600;
+	const EXP_GRACETIME = 3600;
 
 	/**
-	 * the time that the token can be used after being issued
+	 * Not before grace-time the token
 	 */
-	const BNF = 0;
+	const NBF_GRACETIME = 3600;
 
 	/**
 	 * @var object \Lcobucci\JWT\Token
@@ -77,19 +78,20 @@ class Jitsi implements Iface
 	];
 
 	/**
-	 * token constructor.
-	 * @param $_room string room id
-	 * @param $_context array of users data
+	 * Constructor
 	 *
-	 * @return object|bool token object| false
+	 * @param string $room room-id
+	 * @param array $context values for keys 'name', 'email', 'avatar', 'account_id'
+	 * @param int $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int $end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 */
-	public function __construct($_room, $_context)
+	public function __construct($_room, $_context, $_start=nul, $_end=null)
 	{
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['jitsi'];
 		$this->iat = time();
-		$nbf = $this->iat + self::BNF;
-		$this->exp = $this->iat + self::EXP;
+		$nbf = max(($_start ?: $this->iat) - self::NBF_GRACETIME, $this->iat);
+		$this->exp = ($_end ?: $this->iat) + self::EXP_GRACETIME;
 		$signer = new Sha256();
 
 		$this->payload = [

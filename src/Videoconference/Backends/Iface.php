@@ -12,7 +12,15 @@ namespace EGroupware\Status\Videoconference\Backends;
 
 interface Iface
 {
-	function __construct($room, $context);
+	/**
+	 * Constructor
+	 *
+	 * @param string $room room-id
+	 * @param array $context values for keys 'name', 'email', 'avatar', 'account_id'
+	 * @param int $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 */
+	function __construct($room, array $context, $start=null, $end=null);
 
 	function getMeetingURL();
 
