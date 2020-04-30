@@ -69,7 +69,7 @@ class Ui {
 	public function room($content=null)
 	{
 		$tpl = new Api\Etemplate('status.room');
-		$content['frame'] = $_GET['frame'] ? $_GET['frame'] : '';
+		$content['frame'] = $_GET['frame'] ? (is_array($_GET['frame']) ? $_GET['frame'][0] : $_GET['frame']) : '';
 		$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
 		return $tpl->exec('status.EGroupware\\Status\\Ui.room', $content,array(), array());
 	}
