@@ -416,7 +416,7 @@ class Hooks
 	 */
 	public static function csp_frame_src($location)
 	{
-		$config = Api\Config::read('status');
+		$config = self::config(Api\Config::read('status'));
 		$srcs = [];
 		if (!empty($config['videoconference']['jitsi']['jitsi_domain']))
 		{
