@@ -330,16 +330,16 @@ class Hooks
 	 */
 	public static function config(array $config)
 	{
-		$ret = [];
-		if (empty($config['videoconference']['backend'])) {
-			$ret['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
+		if (empty($config['videoconference']['backend']))
+		{
+			$config['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
 		}
-		if (($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND ||
-				$ret['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND) &&
-			empty($config['videoconference']['jitsi']['jitsi_domain'])) {
-			$ret['videoconference']['jitsi']['jitsi_domain'] = 'jitsi.egroupware.net';
+		if ($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND &&
+			empty($config['videoconference']['jitsi']['jitsi_domain']))
+		{
+			$config['videoconference']['jitsi']['jitsi_domain'] = 'jitsi.egroupware.net';
 		}
-		return $ret;
+		return $config;
 	}
 
 	public static function isVideoconferenceDisabled()
