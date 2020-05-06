@@ -288,7 +288,7 @@ class statusApp extends EgwApp
 					callCancelled = true;
 				}
 			},
-			title: egw.lang('Initiating call to'),
+			title: this.egw.lang('Initiating call to'),
 			buttons: button,
 			minWidth: 300,
 			minHeight: 200,
@@ -498,7 +498,7 @@ class statusApp extends EgwApp
 			{
 				self.makeCall([_data]);
 			}
-		}, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
+		}, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
 	}
 
 	public phoneCall(_action, _selected)

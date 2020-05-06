@@ -5,6 +5,8 @@ audio call	status	de	Audioanruf
 click to join!	status	de	Anklicken zum Teilnehmen!
 disable	status	de	Deaktivieren
 enable	status	de	Aktivieren
+enable ring tone	status	de	Klingelton
+enable ring tone while receiving a call	status	de	Klingelton beim Empfang eines Anrufs aktivieren
 event owner	status	de	Initiator Videokonferenz
 example: jitsi.egroupware.org	status	de	Beispiel: jitsi.egroupware.org
 initiating call to	status	de	Einleiten eines Anrufs an

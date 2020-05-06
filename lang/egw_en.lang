@@ -5,6 +5,8 @@ audio call	status	en	Audio Call
 click to join!	status	en	Click to Join!
 disable	status	en	disable
 enable	status	en	enable
+enable ring tone	status	en	Enable ring tone
+enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
 event owner	status	en	Event owner
 example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
 initiating call to	status	en	Initiating call to

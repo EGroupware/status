@@ -252,7 +252,7 @@ var statusApp = /** @class */ (function (_super) {
                     callCancelled = true;
                 }
             },
-            title: egw.lang('Initiating call to'),
+            title: this.egw.lang('Initiating call to'),
             buttons: button,
             minWidth: 300,
             minHeight: 200,
@@ -443,7 +443,7 @@ var statusApp = /** @class */ (function (_super) {
             if (et2_dialog.YES_BUTTON == _btn) {
                 self.makeCall([_data]);
             }
-        }, egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
+        }, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
     };
     statusApp.prototype.phoneCall = function (_action, _selected) {
         var data = _selected[0]['data'];
