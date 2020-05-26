@@ -209,12 +209,24 @@ class statusApp extends EgwApp
 		let fav = this.et2.getWidgetById('fav');
 		let content = this.et2.getArrayMgr('content');
 		let list = this.et2.getWidgetById('list');
-		if (_fav && typeof _fav != 'undefined')
+		let isEqual = function (_a, _b)
 		{
+			if (_a.length != _b.length) return false;
+			for (let i in _a)
+			{
+				if (JSON.stringify(_a[i]) != JSON.stringify(_b[i])) return false;
+			}
+			return true;
+		};
+
+		if (_fav && typeof _fav != 'undefined' && !isEqual(content.data.fav, _fav))
+		{
+			if (content.data.fav.lenght == _fav.length)
+
 			fav.set_value({content:_fav});
 			content.data.fav = _fav;
 		}
-		if (_list && typeof _list != 'undefined')
+		if (_list && typeof _list != 'undefined' && !isEqual(content.data.list, _list))
 		{
 			list.set_value({content:_list});
 			content.data.list = _list
