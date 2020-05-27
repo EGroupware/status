@@ -144,11 +144,17 @@ var statusApp = /** @class */ (function (_super) {
             callback: function (_button_id, _value) {
                 if (_button_id == 'add' && _value) {
                     for (var i in _value.accounts) {
+                        var added = false;
                         for (var j in list) {
-                            if (list[j]['account_id'] == _value.accounts[i]) {
+                            if (list[j] && list[j]['account_id'] == _value.accounts[i]) {
+                                added = true;
                                 self.handle_actions({ id: 'fav' }, [{ data: list[j] }]);
                             }
                         }
+                        if (!added)
+                            self.handle_actions({ id: 'fav' }, [{ data: {
+                                        account_id: _value.accounts[i]
+                                    } }]);
                     }
                 }
             },
@@ -197,12 +203,11 @@ var statusApp = /** @class */ (function (_super) {
             }
             return true;
         };
-        if (_fav && typeof _fav != 'undefined' && !isEqual(content.data.fav, _fav)) {
-            if (content.data.fav.lenght == _fav.length)
-                fav.set_value({ content: _fav });
+        if (_fav && typeof _fav != 'undefined' && !isEqual(fav.getArrayMgr('content').data, _fav)) {
+            fav.set_value({ content: _fav });
             content.data.fav = _fav;
         }
-        if (_list && typeof _list != 'undefined' && !isEqual(content.data.list, _list)) {
+        if (_list && typeof _list != 'undefined' && !isEqual(list.getArrayMgr('content').data, _list)) {
             list.set_value({ content: _list });
             content.data.list = _list;
         }
