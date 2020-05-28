@@ -243,17 +243,54 @@ class Hooks
 	public static function getUsers()
 	{
 		$users = $rows = $readonlys = $onlines = [];
-
+		$pref_groups = explode(',', $GLOBALS['egw_info']['user']['preferences']['status']['groups']);
+		$filter = [];
+		if (empty($pref_groups) || in_array('_A',$pref_groups))
+		{
+			$filter = 'accounts';
+		}
+		else
+		{
+			foreach ($pref_groups as $g)
+			{
+				switch ($g)
+				{
+					case "_A":
+						continue;
+					case "_P":
+						array_push($filter, $GLOBALS['egw_info']['user']['account_primary_group']);
+						break;
+					default :
+						array_push($filter, $g);
+				}
+			}
+			$filter = implode(',', $filter);
+		}
 		// get list of users
 		\admin_ui::get_users([
-			'filter' => 'accounts',
+			'filter' => $filter,
 			'order' => 'account_lastlogin',
 			'sort' => 'DESC',
-			'active' => true
+			'active' => true,
+			'num_rows' => 50 //fetch max 50 users
 		], $users);
 
 		$push = new Api\Json\Push();
 		$online = $push->online();
+
+		$ids = array_column($users, 'account_id');
+
+		foreach ($GLOBALS['egw_info']['user']['preferences']['status']['fav'] as $fav)
+		{
+			if (is_numeric($fav) && !in_array($fav, $ids))
+			{
+				// add already favorite accounts which are not in the users
+				array_push ($users, [
+					'account_lid' => Api\Accounts::id2name($fav, 'account_lid'),
+					'account_id' => $fav
+				]);
+			}
+		}
 
 		foreach($users as &$user)
 		{
@@ -355,6 +392,16 @@ class Hooks
 	 */
 	static function settings()
 	{
+		$groups = array(
+			'_A' => lang('ALL'),
+			'_P' => lang('Primary Group'),
+		);
+		foreach($GLOBALS['egw']->accounts->search(array('type' => 'groups')) as $acc)
+		{
+			$groups[$acc['account_id']] = Api\Accounts::format_username(
+				$acc['account_lid'], $acc['account_firstname'], $acc['account_lastname'], $acc['account_id']);
+		}
+
 		return [
 			'1.section' => [
 				'type' => 'section',
@@ -382,6 +429,14 @@ class Hooks
 				'xmlrpc' => false,
 				'admin' => false,
 				'default' => 1,
+			],
+			'groups' => [
+				'type' => 'multiselect',
+				'label' => 'Predefined group of users to be listed',
+				'name'=> 'groups',
+				'values' => $groups,
+				'help' => 'Users of selected groups will be listed.',
+				'default' => '_A'
 			]
 		];
 	}

@@ -95,7 +95,7 @@ class Call
 		$n->set_sender($data['caller']['account_id']);
 		$n->set_subject(lang("Missed call from %1", $data['caller']['name']));
 		$n->set_popupdata('status', ['caller'=>$data['caller']['account_id'], 'app' => 'status', 'onSeenAction' => 'app.status.refresh()']);
-		$n->set_message(lang("You have a missed call from %1", $data['caller']['name']));
+		$n->set_message(Api\DateTime::to().": ".lang("You have a missed call from %1", $data['caller']['name']));
 		$n->send();
 	}
 
@@ -173,7 +173,7 @@ class Call
 
 	/**
 	 * retrives room id from a given full url
-	 * 
+	 *
 	 * @param type $url
 	 * @return type
 	 */

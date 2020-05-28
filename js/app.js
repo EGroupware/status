@@ -154,13 +154,18 @@ app.classes.status = AppJS.extend(
 				{
 					for (var i in _value.accounts)
 					{
+						var added = false;
 						for (var j in list)
 						{
-							if (list[j]['account_id'] == _value.accounts[i])
+							if (list[j] && list[j]['account_id'] == _value.accounts[i])
 							{
+								added = true;
 								self.handle_actions({id: 'fav'}, [{data: list[j]}]);
 							}
 						}
+						if (!added) self.handle_actions({id: 'fav'}, [{data:{
+							account_id:_value.accounts[i]
+						}}]);
 					}
 				}
 			},
@@ -203,15 +208,25 @@ app.classes.status = AppJS.extend(
 		var fav = this.et2.getWidgetById('fav');
 		var content = this.et2.getArrayMgr('content');
 		var list = this.et2.getWidgetById('list');
-		if (_fav && typeof _fav != 'undefined')
+		var isEqual = function (_a, _b)
+		{
+			if (_a.length != _b.length) return false;
+			for (var i in _a)
+			{
+				if (JSON.stringify(_a[i]) != JSON.stringify(_b[i])) return false;
+			}
+			return true;
+		};
+
+		if (_fav && typeof _fav != 'undefined' && !isEqual(fav.getArrayMgr('content').data, _fav))
 		{
 			fav.set_value({content:_fav});
 			content.data.fav = _fav;
 		}
-		if (_list && typeof _list != 'undefined')
+		if (_list && typeof _list != 'undefined' && !isEqual(list.getArrayMgr('content').data, _list))
 		{
 			list.set_value({content:_list});
-			content.data.list = _list
+			content.data.list = _list;
 		}
 		this.et2.setArrayMgr('content', content);
 	},
