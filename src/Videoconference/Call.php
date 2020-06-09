@@ -186,4 +186,20 @@ class Call
 		}
 		return is_array($parts) ? array_pop($parts) : "";
 	}
+
+	/**
+	 * Get a regex that we can use to recognize "our" calls
+	 */
+	public static function getMeetingRegex()
+	{
+		$regex = 'https://.*(\r?\n)*';
+		$backend = self::_getBackendInstance(0,[]);
+
+		if (method_exists($backend, 'getRegex'))
+		{
+			$regex = $backend->getRegex();
+		}
+
+		return $regex;
+	}
 }
