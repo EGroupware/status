@@ -172,4 +172,12 @@ class Jitsi implements Iface
 	{
 		return $this->_isTokenExpired();
 	}
+
+	/**
+	 * Give a regex to recognize "our" urls
+	 */
+	public function getRegex()
+	{
+		return 'https://'.$this->payload['sub'].'/'.str_replace('/' , '',  $_SERVER['HTTP_HOST']).'.*';
+	}
 }
