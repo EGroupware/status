@@ -1,0 +1,41 @@
+%1 did not pickup your call, would you like to try again?	status	fr	%1 n'a pas répondu à votre appel, essayer à nouveau ?
+accept	common	fr	Accepter
+add to favorites	status	fr	Ajouter au favoris
+audio call	status	fr	Appel audio
+callback	status	fr	Rappel
+click to join!	status	fr	Cliquer pour joindre !
+disable	status	fr	désactiver
+enable	status	fr	activer
+event owner	status	fr	Propriétaire de l'événement
+example: jitsi	status	fr	exemple : Jitsi
+example: jitsi.egroupware.org	status	fr	exemple: jitsi.egroupware.org
+initiating call to	status	fr	Initier l'appel vers
+invite	status	fr	Inviter
+invite to current call	common	fr	Inviter à l'appel en cours
+invite to this meeting	status	fr	Inviter à cette réunion
+jitsi application id	status	fr	ID Jitsi
+jitsi application secret	status	fr	Mot de passe Jitsi
+jitsi domain	status	fr	Domaine Jitsi
+jitsi server	status	fr	Serveur Jitsi
+jitsi server settings	status	fr	Paramètres de serveur Jitsi
+join	common	fr	Joindre
+message	status	fr	Message
+missed call from %1	status	fr	Appel manqué de %1
+new window	status	fr	nouvelle fenêtre
+open call in	status	fr	Ouvrir l'appel dans
+open call in new window/popup	status	fr	Ouvrir l'appel dans une nouvelle fenêtre/popup
+phone call	status	fr	Appel téléphonique
+remove from favorites	status	fr	Retirer des favoris
+room id	status	fr	ID de salle
+schedule a call	status	fr	Planifier un appel
+status	common	fr	Statut/Visioconférence
+title	status	fr	Titre
+use jwt authentication	status	fr	Utiliser l'authentification JWT
+video call	common	fr	Appel vidéo
+video conference	common	fr	Visio-conférence
+video conference backends	status	fr	Backend de visio-conférence
+video conference enable	status	fr	Permettre les visio-conférences
+video conference meeting	status	fr	Réunion en visio-conférence
+you have a call from %1	status	fr	Vous avez un appel de %1
+you have a missed call from %1	status	fr	Vous avez un appel manqué de %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	fr	Vous avez une visio-conférence dans %1 minutes, initiée par %2
