@@ -2,18 +2,23 @@
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
 audio call	status	en	Audio Call
+callback	status	en	Callback
 click to join!	status	en	Click to Join!
 disable	status	en	disable
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
 enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
 event owner	status	en	Event owner
+example: jitsi	status	en	example: Jitsi
 example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
 initiating call to	status	en	Initiating call to
 invite to current call	common	en	Invite to current call
+invite to this meeting	status	en	Invite to this meeting
+jitsi application id	status	en	Jitsi Application ID
 jitsi application secret	status	en	Jitsi Application Secret
 jitsi domain	status	en	Jitsi Domain
 jitsi server	status	en	Jitsi Server
+jitsi server settings	status	en	Jitsi Server Settings
 join	common	en	Join
 message	status	en	Message
 missed call from %1	status	en	Missed call from %1
@@ -26,6 +31,7 @@ room id	status	en	Room ID
 schedule a call	status	en	Schedule a call
 status	common	en	Status/Videoconference
 title	status	en	title
+use jwt authentication	status	en	Use JWT authentication
 video call	common	en	Video Call
 video conference	common	en	Video Conference
 video conference backends	status	en	Video conference backends
