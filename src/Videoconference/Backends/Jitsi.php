@@ -178,6 +178,6 @@ class Jitsi implements Iface
 	 */
 	public function getRegex()
 	{
-		return 'https://'.$this->payload['sub'].'/'.str_replace('/' , '',  $_SERVER['HTTP_HOST']).'.*';
+		return 'https://'.$this->payload['sub'].'/'.str_replace('/' , '', Api\Header\Http::host().'.*';
 	}
 }
