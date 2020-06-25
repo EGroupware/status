@@ -280,7 +280,7 @@ class Hooks
 
 		$ids = array_column($users, 'account_id');
 
-		foreach ($GLOBALS['egw_info']['user']['preferences']['status']['fav'] as $fav)
+		foreach ((array)$GLOBALS['egw_info']['user']['preferences']['status']['fav'] as $fav)
 		{
 			if (is_numeric($fav) && !in_array($fav, $ids))
 			{
