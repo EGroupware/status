@@ -97,7 +97,7 @@ class Jitsi implements Iface
 		$this->payload = [
 			'iss' => $this->config['jitsi_application_id'] ?: 'egroupware',
 			'aud' => self::AUD,
-			'sub' => $this->config['jitsi_domain'] ?: 'jitsi.egroupware.net',
+			'sub' => str_replace('jitsi.egroupware.net', '', $this->config['jitsi_domain']) ?: 'meet.jit.si',
 			'room' => $_room ? $_room : '*',
 			'secret' => $this->config['jitsi_application_secret']
 		];
