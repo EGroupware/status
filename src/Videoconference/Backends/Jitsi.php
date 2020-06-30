@@ -152,7 +152,7 @@ class Jitsi implements Iface
 
 	public function getMeetingUrl ()
 	{
-		if (!empty($this->config['jitsi_application_id'])) $jwt = "?jwt=".$this->_getToken();
+		$jwt = !empty($this->config['jitsi_application_id']) ? "?jwt=".$this->_getToken() : '';
 		return 'https://'.$this->payload['sub'].'/'.$this->payload['room'].$jwt.'#'.$this->_getExtraParams();
 	}
 
