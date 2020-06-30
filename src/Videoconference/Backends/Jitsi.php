@@ -152,7 +152,8 @@ class Jitsi implements Iface
 
 	public function getMeetingUrl ()
 	{
-		return 'https://'.$this->payload['sub'].'/'.$this->payload['room']."?jwt=".$this->_getToken().'#'.$this->_getExtraParams();
+		$jwt = !empty($this->config['jitsi_application_id']) ? "?jwt=".$this->_getToken() : '';
+		return 'https://'.$this->payload['sub'].'/'.$this->payload['room'].$jwt.'#'.$this->_getExtraParams();
 	}
 
 	public function setStartAudioOnly ($value = false)
