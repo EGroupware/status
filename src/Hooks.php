@@ -371,7 +371,7 @@ class Hooks
 		{
 			$config['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
 		}
-		if ($config['videoconference']['backend'] == self::DEFAULT_VIDEOCONFERENCE_BACKEND &&
+		if (in_array(self::DEFAULT_VIDEOCONFERENCE_BACKEND, (array)$config['videoconference']['backend']) &&
 			(empty($config['videoconference']['jitsi']['jitsi_domain']) ||
 				$config['videoconference']['jitsi']['jitsi_domain'] === 'jitsi.egroupware.net'))
 		{
