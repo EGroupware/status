@@ -272,6 +272,7 @@ class Hooks
 			'order' => 'account_lastlogin',
 			'sort' => 'DESC',
 			'active' => true,
+			'filter2' => 'enabled',
 			'num_rows' => 50 //fetch max 50 users
 		], $users);
 
