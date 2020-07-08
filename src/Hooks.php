@@ -256,7 +256,8 @@ class Hooks
 				switch ($g)
 				{
 					case "_A":
-						continue;
+						// Skip to the next group
+						continue 2;
 					case "_P":
 						array_push($filter, $GLOBALS['egw_info']['user']['account_primary_group']);
 						break;
