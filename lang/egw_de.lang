@@ -14,6 +14,7 @@ example: jitsi.egroupware.org	status	de	Beispiel: jitsi.egroupware.org
 initiating call to	status	de	Einleiten eines Anrufs an
 invite to current call	common	de	Zum aktuellen Anruf einladen
 invite to this meeting	status	de	Zu dieser Videokonferenz einladen
+is calling	status	de	ruft an
 jitsi application id	status	de	Jitsi Application ID
 jitsi application secret	status	de	Jitsi Secret
 jitsi domain	status	de	Jitsi Domain
