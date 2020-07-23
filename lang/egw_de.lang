@@ -21,6 +21,7 @@ jitsi domain	status	de	Jitsi Domain
 jitsi server	status	de	Jitsi-Server
 jitsi server settings	status	de	Jitsi Server-Einstellungen
 join	common	de	Teilnehmen
+link to contact	status	de	Kontakt verknüpfen
 message	status	de	Nachricht
 missed call from %1	status	de	Versäumter Anruf von %1
 new window	status	de	Neues Fenster

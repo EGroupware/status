@@ -21,6 +21,7 @@ jitsi domain	status	en	Jitsi Domain
 jitsi server	status	en	Jitsi Server
 jitsi server settings	status	en	Jitsi Server Settings
 join	common	en	Join
+link to contact	status	en	Link to contact
 message	status	en	Message
 missed call from %1	status	en	Missed call from %1
 new window	status	en	new window
