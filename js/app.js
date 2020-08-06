@@ -219,8 +219,8 @@ var statusApp = /** @class */ (function (_super) {
      * @param {array} _content
      */
     statusApp.prototype.mergeContent = function (_content) {
-        var fav = this.et2.getArrayMgr('content').getEntry('fav');
-        var list = this.et2.getArrayMgr('content').getEntry('list');
+        var fav = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('fav')));
+        var list = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('list')));
         for (var i in _content) {
             for (var f in fav) {
                 if (fav[f] && fav[f]['id'] && _content[i]['id'] == fav[f]['id']) {
