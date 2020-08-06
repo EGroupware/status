@@ -244,8 +244,8 @@ class statusApp extends EgwApp
 	 */
 	mergeContent(_content)
 	{
-		let fav = this.et2.getArrayMgr('content').getEntry('fav');
-		let list = this.et2.getArrayMgr('content').getEntry('list');
+		let fav = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('fav')));
+		let list = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('list')));
 		for (let i in _content)
 		{
 			for (let f in fav)
