@@ -102,7 +102,9 @@ class Jitsi implements Iface
 			'secret' => $this->config['jitsi_application_secret']
 		];
 		// Prosody in Jitsi expects all values of user context to be type of string otherwise will throw an error
-		$context['user'] = array_map(function($val){return (string)$val;}, $_context['user']);
+		$context['user'] = array_map(function($val){
+			return (string)$val;
+		}, (array)$_context['user']);
 		try {
 			$this->token = (new Builder())
 				// Configures the issuer (iss claim)
