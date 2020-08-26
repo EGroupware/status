@@ -225,7 +225,7 @@ class Hooks
 		if ($_data['session_type'] == "webgui")
 		{
 			$push = new Api\Json\Push(Api\Json\Push::ALL);
-			$push->call('app.status.mergeContent',[
+			$push->call('framework.execPushBroadcastAppStatus',[
 				[
 					'id' => $GLOBALS['egw_info']['user']['account_lid'],
 					'class' => 'egw_online',
