@@ -217,8 +217,9 @@ var statusApp = /** @class */ (function (_super) {
      * Merge given content with existing ones and updates the lists
      *
      * @param {array} _content
+     * @param {boolean} _topList if true it pushes the content to top of the list
      */
-    statusApp.prototype.mergeContent = function (_content) {
+    statusApp.prototype.mergeContent = function (_content, _topList) {
         var fav = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('fav')));
         var list = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('list')));
         for (var i in _content) {
@@ -230,6 +231,8 @@ var statusApp = /** @class */ (function (_super) {
             for (var l in list) {
                 if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id']) {
                     jQuery.extend(true, list[l], _content[i]);
+                    if (_topList)
+                        list.splice(1, 0, list.splice(l, 1)[0]);
                 }
             }
         }

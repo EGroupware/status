@@ -241,8 +241,9 @@ class statusApp extends EgwApp
 	 * Merge given content with existing ones and updates the lists
 	 *
 	 * @param {array} _content
+	 * @param {boolean} _topList if true it pushes the content to top of the list
 	 */
-	mergeContent(_content)
+	mergeContent(_content, _topList)
 	{
 		let fav = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('fav')));
 		let list = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('list')));
@@ -260,6 +261,7 @@ class statusApp extends EgwApp
 				if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id'])
 				{
 					jQuery.extend(true, list[l], _content[i]);
+					if (_topList) list.splice(1, 0, list.splice(l, 1)[0]);
 				}
 			}
 		}
