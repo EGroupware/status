@@ -92,6 +92,7 @@ class Ui {
 	{
 		$skeys = Hooks::getStatKeys();
 		$content = [];
+		$onlines = []; // preserves online users for further proceessing in list
 		foreach (Hooks::statusItems() as $item)
 		{
 			$stat = [];
@@ -117,16 +118,33 @@ class Ui {
 				}
 			}
 			$isFav = in_array(self::_fetchId($item),	self::mapFavoritesIds2Names());
-			$content[$isFav ? 'fav' : 'list'][] = array_merge([
-				'id' => $item['id'],
-				'account_id' => $item['account_id'],
-				'hint' => $item['hint'],
-				'icon' => $item['icon'],
-				'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
-				'link_to' => $item['link_to'],
-				'data' => $item['stat']
-			], (array)$stat);
+			if (!$isFav && $item['stat']['status']['active'])
+			{
+				$onlines[] = array_merge([
+					'id' => $item['id'],
+					'account_id' => $item['account_id'],
+					'hint' => $item['hint'],
+					'icon' => $item['icon'],
+					'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
+					'link_to' => $item['link_to'],
+					'data' => $item['stat']
+				], (array)$stat);
+			}
+			else
+			{
+				$content[$isFav ? 'fav' : 'list'][] = array_merge([
+					'id' => $item['id'],
+					'account_id' => $item['account_id'],
+					'hint' => $item['hint'],
+					'icon' => $item['icon'],
+					'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
+					'link_to' => $item['link_to'],
+					'data' => $item['stat']
+				], (array)$stat);
+			}
 		}
+		// push current online users in the list to the top position
+		if (!empty($onlines)) $content['list'] = array_merge($onlines, $content['list']);
 
 		if (empty($content['fav']) || count($content['fav']) < 2) {
 			// need to add an emptyrow to avoid getting grid rendering error because of
