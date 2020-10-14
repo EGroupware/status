@@ -23,6 +23,7 @@
                     </vbox>
                     <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false">
                         <option value="Jitsi">Jitsi Server</option>
+                        <option value="BBB">BigBlueButton Server</option>
                     </taglist>
 			    </row>
 				<row valign="middle" height="40">
@@ -56,6 +57,30 @@
                         </grid>
 				    </groupbox>
 				</row>
+				<row valign="middle" height="40">
+                    <groupbox>
+                        <caption label="BBB Server Settings"/>
+                        <grid width="100%">
+                            <columns>
+                                <column width="200px"/>
+                                <column/>
+                            </columns>
+                            <rows>
+                                <row>
+                                    <vbox>
+                                        <description value="BBB Api url" label="%s:"/>
+                                        <description value="example: "/>
+                                    </vbox>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_api_url]" width="300px"/>
+                                </row>
+                                <row>
+                                    <description value="BBB Api secret" label="%s:"/>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_api_secret]" width="300px"/>
+                                </row>
+                            </rows>
+                        </grid>
+                    </groupbox>
+                </row>
 			</rows>
 		</grid>
 	</template>

@@ -85,7 +85,7 @@ class Jitsi implements Iface
 	 * @param int $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
 	 * @param int $end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 */
-	public function __construct($_room, $_context, $_start=nul, $_end=null)
+	public function __construct($_room, $_context, $_start=null, $_end=null)
 	{
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['jitsi'];

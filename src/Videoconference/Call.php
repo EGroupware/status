@@ -18,7 +18,7 @@ class Call
 	/**
 	 * Backend modules class name
 	 */
-	const BACKENDS = ['Jitsi'];
+	const BACKENDS = ['Jitsi', 'BBB'];
 
 	/**
 	 * @param string $id
