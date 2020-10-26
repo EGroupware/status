@@ -15,6 +15,8 @@ namespace EGroupware\Status\Videoconference\Backends;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
+use BigBlueButton\Parameters\JoinMeetingParameters;
+
 
 class BBB Implements Iface
 {
@@ -35,6 +37,16 @@ class BBB Implements Iface
 	private $config;
 
 	/**
+	 * @var string
+	 */
+	private $moderatorPW;
+
+	/**
+	 * @var string
+	 */
+	private $attendeePW;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string $_room room-id
@@ -46,20 +58,26 @@ class BBB Implements Iface
 	{
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['bbb'];
-		//todo: set BBB_SECRET and BBB_API_URL
+		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
+		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
 		$this->bbb = new BigBlueButton();
 		$this->meetingParams = new CreateMeetingParameters($_room, $_context['user']['name']);
+
 		$response = $this->bbb->createMeeting($this->meetingParams);
 		if ($response->getReturnCode() == 'FAILED') {
 			return 'Can\'t create room!';
 		} else {
 			//TODO
+			$this->attendeePW = $response->getAttendeePassword();
+			$this->moderatorPW = $response->getModeratorPassword();
 		}
+
 	}
 
 	public function getMeetingUrl ()
 	{
-		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName());
+		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $this->moderatorPW);
+		$meetingParams->setRedirect(true);
 		return $this->bbb->getJoinMeetingURL($meetingParams);
 	}
 

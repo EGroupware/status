@@ -69,9 +69,14 @@
                                 <row>
                                     <vbox>
                                         <description value="BBB Api url" label="%s:"/>
-                                        <description value="example: "/>
                                     </vbox>
-                                    <textbox id="newsettings[videoconference][bbb][bbb_api_url]" width="300px"/>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_domain]" width="300px"/>
+                                </row>
+                                <row>
+                                    <vbox>
+                                        <description value="BBB server wildcard domain" label="%s:"/>
+                                    </vbox>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_csp]" width="300px"/>
                                 </row>
                                 <row>
                                     <description value="BBB Api secret" label="%s:"/>

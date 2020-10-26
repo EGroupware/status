@@ -476,14 +476,16 @@ class Hooks
 	{
 		$config = self::config(Api\Config::read('status'));
 		$srcs = [];
-		if (!empty($config['videoconference']['jitsi']['jitsi_domain']))
+		$backend = strtolower($config['videoconference']['backend'][0]);
+		if (!empty($config['videoconference'][$backend][$backend.'_domain']))
 		{
-			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference']['jitsi']['jitsi_domain']);
-			if (in_array($config['videoconference']['jitsi']['jitsi_domain'], ['jitsi.egroupware.org', 'jitsi.egroupware.net']))
+			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference'][$backend][$backend.'_domain']);
+			if (in_array($config['videoconference'][$backend][$backend.'_domain'], ['jitsi.egroupware.org', 'jitsi.egroupware.net']))
 			{
 				$srcs[] = 'https://www.egroupware.org/';
 			}
 		}
+		if (!empty($config['videoconference'][$backend][$backend.'_csp'])) $srcs[] = $config['videoconference'][$backend][$backend.'_csp'];
 		return $srcs;
 	}
 }
