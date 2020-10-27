@@ -231,6 +231,8 @@ var statusApp = /** @class */ (function (_super) {
             for (var l in list) {
                 if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id']) {
                     jQuery.extend(true, list[l], _content[i]);
+                    if (_content[i]['stat1'] > 0)
+                        _topList = true;
                     if (_topList)
                         list.splice(1, 0, list.splice(l, 1)[0]);
                 }
@@ -253,8 +255,8 @@ var statusApp = /** @class */ (function (_super) {
         return result;
     };
     statusApp.prototype.isOnline = function (_action, _selected) {
-        var _a;
-        return _selected[0].data.data.status.active || ((_a = app.rocketchat) === null || _a === void 0 ? void 0 : _a.isRCActive(_action, _selected));
+        var _c;
+        return _selected[0].data.data.status.active || ((_c = app.rocketchat) === null || _c === void 0 ? void 0 : _c.isRCActive(_action, _selected));
     };
     /**
      * Initiate call via action
@@ -284,9 +286,9 @@ var statusApp = /** @class */ (function (_super) {
             if (!callCancelled) {
                 dialog.destroy();
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, data[0]['room']], function (_url) {
-                    var _a;
+                    var _c;
                     self.openCall(_url.caller);
-                    if ((_a = app.rocketchat) === null || _a === void 0 ? void 0 : _a.isRCActive(null, [{ data: data[0].data }])) {
+                    if ((_c = app.rocketchat) === null || _c === void 0 ? void 0 : _c.isRCActive(null, [{ data: data[0].data }])) {
                         app.rocketchat.restapi_call('chat_PostMessage', {
                             roomId: data[0].data.data.rocketchat._id,
                             attachments: [
