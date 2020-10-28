@@ -231,9 +231,7 @@ var statusApp = /** @class */ (function (_super) {
             for (var l in list) {
                 if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id']) {
                     jQuery.extend(true, list[l], _content[i]);
-                    if (_content[i]['stat1'] > 0)
-                        _topList = true;
-                    if (_topList)
+                    if (_topList || _content[i]['stat1'] > 0)
                         list.splice(1, 0, list.splice(l, 1)[0]);
                 }
             }
