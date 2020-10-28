@@ -10,15 +10,16 @@ event owner	status	fr	Propriétaire de l'événement
 example: jitsi	status	fr	exemple : Jitsi
 example: jitsi.egroupware.org	status	fr	exemple: jitsi.egroupware.org
 initiating call to	status	fr	Initier l'appel vers
-invite	status	fr	Inviter
 invite to current call	common	fr	Inviter à l'appel en cours
 invite to this meeting	status	fr	Inviter à cette réunion
+is calling	status	fr	est en train d'appeler
 jitsi application id	status	fr	ID Jitsi
 jitsi application secret	status	fr	Mot de passe Jitsi
 jitsi domain	status	fr	Domaine Jitsi
 jitsi server	status	fr	Serveur Jitsi
 jitsi server settings	status	fr	Paramètres de serveur Jitsi
 join	common	fr	Joindre
+link to contact	status	fr	Lien vers le contact
 message	status	fr	Message
 missed call from %1	status	fr	Appel manqué de %1
 new window	status	fr	nouvelle fenêtre
