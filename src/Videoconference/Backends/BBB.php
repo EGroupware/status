@@ -87,4 +87,23 @@ class BBB Implements Iface
 		// TODO: Implement isMeetingValid() method.
 		return true;
 	}
+
+	/**
+	 * End meeting forcibly
+	 * @param $room
+	 */
+	public function deleteRoom($room)
+	{
+		$this->bbb->endMeeting($room);
+	}
+
+	/**
+	 * @param $url
+	 * return string returns room id
+	 */
+	public static function fetchRoomFromUrl($url)
+	{
+		parse_str(parse_url($url)['query'], $params);
+		return $params['meetingID'];
+	}
 }

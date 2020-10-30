@@ -26,4 +26,6 @@ interface Iface
 
 	function isMeetingValid();
 
+	static function fetchRoomFromUrl($url);
+
 }

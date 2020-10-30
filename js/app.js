@@ -69,10 +69,11 @@ var statusApp = /** @class */ (function (_super) {
                 }
                 break;
             case 'status.room':
-                var room = this.et2.getArrayMgr('content').getEntry('room');
-                egw(window.opener).setSessionItem('status', 'videoconference-session', room);
+                var room_1 = this.et2.getArrayMgr('content').getEntry('room');
+                egw(window.opener).setSessionItem('status', 'videoconference-session', room_1);
                 window.addEventListener("beforeunload", function (e) {
                     window.opener.sessionStorage.removeItem('status-videoconference-session');
+                    egw.json("EGroupware\Status\Videoconference\Call::ajax_deleteRoom", [room_1], function () { }).sendRequest();
                 }, false);
                 break;
         }

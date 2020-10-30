@@ -70,6 +70,7 @@ class statusApp extends EgwApp
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
 				window.addEventListener("beforeunload", function(e){
 					window.opener.sessionStorage.removeItem('status-videoconference-session')
+					egw.json("EGroupware\Status\Videoconference\Call::ajax_deleteRoom", [room], function(){}).sendRequest();
 				 }, false);
 				break;
 		}

@@ -183,4 +183,18 @@ class Jitsi implements Iface
 	{
 		return 'https://'.$this->payload['sub'].'/'.str_replace('/' , '', Api\Header\Http::host().'.*');
 	}
+
+	/**
+	 * @param $url
+	 * @return mixed|string returns room id
+	 */
+	public static function fetchRoomFromUrl($url)
+	{
+		if ($url)
+		{
+			$parts = explode('?jwt=', $url);
+			if (is_array($parts)) $parts = explode('/', $parts[0]);
+		}
+		return is_array($parts) ? array_pop($parts) : "";
+	}
 }

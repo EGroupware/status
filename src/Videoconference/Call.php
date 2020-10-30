@@ -179,12 +179,8 @@ class Call
 	 */
 	public static function fetchRoomFromUrl ($url)
 	{
-		if ($url)
-		{
-			$parts = explode('?jwt=', $url);
-			if (is_array($parts)) $parts = explode('/', $parts[0]);
-		}
-		return is_array($parts) ? array_pop($parts) : "";
+		$backend = self::_getBackendInstance(0,[]);
+		return $backend::fetchRoomFromUrl($url);
 	}
 
 	/**
@@ -201,5 +197,11 @@ class Call
 		}
 
 		return $regex;
+	}
+
+	static function ajax_deleteRoom($room)
+	{
+		$backend = self::_getBackendInstance($room);
+		if (method_exists($backend, 'deleteRoom')) $backend->deleteRoom($room);
 	}
 }
