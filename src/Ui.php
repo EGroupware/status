@@ -186,7 +186,7 @@ class Ui {
 	 *
 	 * @param array $orders newly ordered list
 	 */
-	public static function ajax_fav_sorting ($orders)
+	public static function ajax_fav_sorting ($exec_id, $orders)
 	{
 		// the first row belongs to an empty placeholder and it should not participate
 		// in sorting
