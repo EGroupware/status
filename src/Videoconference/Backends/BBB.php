@@ -12,10 +12,13 @@
 
 namespace EGroupware\Status\Videoconference\Backends;
 
+use BigBlueButton\Parameters\EndMeetingParameters;
+use EGroupware\Api\Auth;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
+use EGroupware\Api\DateTime;
 
 
 class BBB Implements Iface
@@ -64,18 +67,24 @@ class BBB Implements Iface
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 
-		$response = $this->bbb->createMeeting($this->meetingParams);
-		if ($response->getReturnCode() == 'FAILED') {
-			return 'Can\'t create room!';
-		} else {
+		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
+		{
+			$response = $meeting->getMeeting();
+		}
+		else
+		{
+			$response = $this->bbb->createMeeting($this->meetingParams);
+			if ($response->getReturnCode() == 'FAILED') {
+				return 'Can\'t create room!';
+			}
 			$this->moderatorPW = $response->getModeratorPassword();
 		}
-
 	}
 
 	public function getMeetingUrl ($_context=null)
 	{
 		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $_context['position'] == 'callee'? $this->meetingParams->getAttendeePassword() : $this->moderatorPW);
+		$meetingParams->setCustomParameter('isModerator', ($_context['position'] == 'caller' && $this->moderatorPW));
 		$meetingParams->setRedirect(true);
 		return $this->bbb->getJoinMeetingURL($meetingParams);
 	}
@@ -115,14 +124,21 @@ class BBB Implements Iface
 
 	/**
 	 * End meeting forcibly
-	 * @param $room
+	 * @param array $params
+	 * @param bool $force
 	 */
-	public function deleteRoom($room)
+	public function deleteRoom(array $params, $force=true)
 	{
-		$this->bbb->endMeeting($room);
+		$meetingInfo = $this->bbb->getMeetingInfo($this->meetingParams);
+		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()
+			|| !$force && $meetingInfo->getMeeting()->getModeratorCount() > 1) return;
+		$endMeetingParams = new EndMeetingParameters($params['meetingID'], $meetingInfo->getMeeting()->getModeratorPassword());
+		$this->bbb->endMeeting($endMeetingParams);
 	}
 
 	/**
+	 * Fetch room from url
+	 *
 	 * @param $url
 	 * return string returns room id
 	 */

@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
     /api/js/jsapi/egw_app.js;
  */
 var egw_app_1 = require("../../api/js/jsapi/egw_app");
+var et2_widget_dialog_1 = require("../../api/js/etemplate/et2_widget_dialog");
 var statusApp = /** @class */ (function (_super) {
     __extends(statusApp, _super);
     /**
@@ -70,10 +71,21 @@ var statusApp = /** @class */ (function (_super) {
                 break;
             case 'status.room':
                 var room_1 = this.et2.getArrayMgr('content').getEntry('room');
+                var url_1 = this.et2.getArrayMgr('content').getEntry('frame');
                 egw(window.opener).setSessionItem('status', 'videoconference-session', room_1);
                 window.addEventListener("beforeunload", function (e) {
                     window.opener.sessionStorage.removeItem('status-videoconference-session');
-                    egw.json("EGroupware\Status\Videoconference\Call::ajax_deleteRoom", [room_1], function () { }).sendRequest();
+                    if (url_1.match(/isModerator\=(1|true)/i)) {
+                        et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
+                            if (_b == 1) {
+                                egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room_1, url_1], function () { }).sendRequest();
+                                return true;
+                            }
+                        }, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
+                    }
+                    // Cancel the event
+                    e.preventDefault();
+                    e.returnValue = 'test';
                 }, false);
                 break;
         }
@@ -172,7 +184,7 @@ var statusApp = /** @class */ (function (_super) {
             template: egw.webserverUrl + '/status/templates/default/search_list.xet',
             resizable: false,
             width: 400,
-        }, et2_dialog._create_parent('status'));
+        }, et2_widget_dialog_1.et2_dialog._create_parent('status'));
     };
     /**
      * Refresh the list
@@ -267,7 +279,7 @@ var statusApp = /** @class */ (function (_super) {
         var button = [{ "button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel' }];
         var dialog = et2_createWidget("dialog", {
             callback: function (_btn) {
-                if (_btn == et2_dialog.CANCEL_BUTTON) {
+                if (_btn == et2_widget_dialog_1.et2_dialog.CANCEL_BUTTON) {
                     callCancelled = true;
                 }
             },
@@ -280,7 +292,7 @@ var statusApp = /** @class */ (function (_super) {
                 content: { list: data }
             },
             template: egw.webserverUrl + '/status/templates/default/call.xet'
-        }, et2_dialog._create_parent(this.appname));
+        }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
         setTimeout(function () {
             if (!callCancelled) {
                 dialog.destroy();
@@ -332,7 +344,7 @@ var statusApp = /** @class */ (function (_super) {
         this._controllRingTone().start();
         et2_createWidget("dialog", {
             callback: function (_btn, value) {
-                if (_btn == et2_dialog.OK_BUTTON) {
+                if (_btn == et2_widget_dialog_1.et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
                 }
             },
@@ -347,7 +359,7 @@ var statusApp = /** @class */ (function (_super) {
             },
             resizable: false,
             template: egw.webserverUrl + '/status/templates/default/scheduled_call.xet'
-        }, et2_dialog._create_parent(this.appname));
+        }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
         if (notify) {
             egw.notification(this.egw.lang('Status'), {
                 body: this.egw.lang('You have a video conference meeting in %1 minutes, initiated by %2', (content['alarm-offset'] / 60), content.owner),
@@ -388,7 +400,7 @@ var statusApp = /** @class */ (function (_super) {
         this._controllRingTone().start(true);
         var dialog = et2_createWidget("dialog", {
             callback: function (_btn, value) {
-                if (_btn == et2_dialog.OK_BUTTON) {
+                if (_btn == et2_widget_dialog_1.et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
                     isCallAnswered = true;
                 }
@@ -413,7 +425,7 @@ var statusApp = /** @class */ (function (_super) {
             },
             resizable: false,
             template: egw.webserverUrl + '/status/templates/default/call.xet'
-        }, et2_dialog._create_parent(this.appname));
+        }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
         if (notify) {
             egw.notification(this.egw.lang('Status'), {
                 body: this.egw.lang('You have a call from %1', _data.caller.name),
@@ -458,8 +470,8 @@ var statusApp = /** @class */ (function (_super) {
     };
     statusApp.prototype.didNotPickUp = function (_data) {
         var self = this;
-        et2_dialog.show_dialog(function (_btn) {
-            if (et2_dialog.YES_BUTTON == _btn) {
+        et2_widget_dialog_1.et2_dialog.show_dialog(function (_btn) {
+            if (et2_widget_dialog_1.et2_dialog.YES_BUTTON == _btn) {
                 self.makeCall([_data]);
             }
         }, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
@@ -541,7 +553,7 @@ var statusApp = /** @class */ (function (_super) {
             template: egw.webserverUrl + '/status/templates/default/search_list.xet',
             resizable: false,
             width: 400,
-        }, et2_dialog._create_parent('status'));
+        }, et2_widget_dialog_1.et2_dialog._create_parent('status'));
     };
     statusApp.videoconference_fetchRoomFromUrl = function (_url) {
         if (_url) {

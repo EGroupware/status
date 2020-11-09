@@ -201,9 +201,21 @@ class Call
 		return $regex;
 	}
 
-	static function ajax_deleteRoom($room)
+	/**
+	 * Ajax function to call a room to end
+	 * @param $room
+	 * @param $url
+	 */
+	static function ajax_deleteRoom($room, $url)
 	{
-		$backend = self::_getBackendInstance($room);
-		if (method_exists($backend, 'deleteRoom')) $backend->deleteRoom($room);
+		$backend = self::_getBackendInstance($room, []);
+		if (method_exists($backend, 'deleteRoom'))
+		{
+			if($url)
+			{
+				parse_str(parse_url($url)['query'], $params);
+			}
+			$backend->deleteRoom($params, false);
+		}
 	}
 }

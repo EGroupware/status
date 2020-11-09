@@ -12,6 +12,7 @@
 	/api/js/jsapi/egw_app.js;
  */
 import {EgwApp} from "../../api/js/jsapi/egw_app";
+import {et2_dialog} from "../../api/js/etemplate/et2_widget_dialog";
 
 class statusApp extends EgwApp
 {
@@ -67,10 +68,23 @@ class statusApp extends EgwApp
 				break;
 			case 'status.room':
 				let room = this.et2.getArrayMgr('content').getEntry('room');
+				let url = this.et2.getArrayMgr('content').getEntry('frame');
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
 				window.addEventListener("beforeunload", function(e){
-					window.opener.sessionStorage.removeItem('status-videoconference-session')
-					egw.json("EGroupware\Status\Videoconference\Call::ajax_deleteRoom", [room], function(){}).sendRequest();
+					window.opener.sessionStorage.removeItem('status-videoconference-session');
+					if (url.match(/isModerator\=(1|true)/i))
+					{
+						et2_dialog.show_dialog(function(_b){
+							if (_b == 1)
+							{
+								egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function(){}).sendRequest();
+								return true;
+							}
+						}, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.", "End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
+					}
+					// Cancel the event
+					e.preventDefault();
+					e.returnValue='test';
 				 }, false);
 				break;
 		}
