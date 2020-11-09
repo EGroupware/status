@@ -22,7 +22,7 @@ interface Iface
 	 */
 	function __construct($room, array $context, $start=null, $end=null);
 
-	function getMeetingURL();
+	function getMeetingURL($context=null);
 
 	function isMeetingValid();
 

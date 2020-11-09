@@ -42,11 +42,6 @@ class BBB Implements Iface
 	private $moderatorPW;
 
 	/**
-	 * @var string
-	 */
-	private $attendeePW;
-
-	/**
 	 * Constructor
 	 *
 	 * @param string $_room room-id
@@ -56,31 +51,61 @@ class BBB Implements Iface
 	 */
 	public function __construct($_room, $_context, $_start=null, $_end=null)
 	{
+		// don't go further if no room given
+		if (!$_room) return;
+		// try to resolve meetingID if the whole url is given as room
+		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['bbb'];
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
 		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
+
 		$this->bbb = new BigBlueButton();
-		$this->meetingParams = new CreateMeetingParameters($_room, $_context['user']['name']);
+		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
+		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 
 		$response = $this->bbb->createMeeting($this->meetingParams);
 		if ($response->getReturnCode() == 'FAILED') {
 			return 'Can\'t create room!';
 		} else {
-			//TODO
-			$this->attendeePW = $response->getAttendeePassword();
 			$this->moderatorPW = $response->getModeratorPassword();
 		}
 
 	}
 
-	public function getMeetingUrl ()
+	public function getMeetingUrl ($_context=null)
 	{
-		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $this->moderatorPW);
+		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $_context['position'] == 'callee'? $this->meetingParams->getAttendeePassword() : $this->moderatorPW);
 		$meetingParams->setRedirect(true);
 		return $this->bbb->getJoinMeetingURL($meetingParams);
 	}
 
+	private static function checkResources($res_id, $_start, $_end)
+	{
+		$resources = new \resources_bo($GLOBALS['egw_info']['user']['account_id']);
+		return $resources->checkUseable($res_id, $_start, $_end);
+	}
+
+	private static function checkEvent($_roomid, $_res_id, $_start, $_end)
+	{
+		$cal = new \calendar_boupdate();
+		$events = $cal->search([
+			'start' => $_start,
+			'end' => $_end,
+			'users' => ['r'.$_res_id],
+			'cfs' => ['#videoconference'],
+			'ignore_acl' => true,
+			'enum_groups' => false,
+		]);
+		if ($events)
+		{
+			foreach ($events as $event)
+			{
+				if ($event['##videoconference'] == $_roomid) return ['cal' => $cal, 'event' => $event];
+			}
+		}
+		return ['cal' => $cal];
+	}
 
 	function isMeetingValid()
 	{

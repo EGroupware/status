@@ -37,7 +37,8 @@ class Call
 			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
 			'email' => $GLOBALS['egw_info']['user']['account_email'],
 			'avatar' => (string)(new Api\Contacts\Photo('account:' . $GLOBALS['egw_info']['user']['account_id'], true)),
-			'account_id' => $GLOBALS['egw_info']['user']['account_id']
+			'account_id' => $GLOBALS['egw_info']['user']['account_id'],
+			'position' => 'caller'
 		];
 		$room = $_room ? $_room : self::genUniqueRoomID();
 		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $data[0]['audioonly']]);
@@ -52,7 +53,8 @@ class Call
 				'name' => $user['name'],
 				'email' => $user['email'],
 				'avatar' => (string)(new Api\Contacts\Photo('account:' . $user['id'], true)),
-				'account_id' => $user['id']
+				'account_id' => $user['id'],
+				'position' => 'callee'
 			];
 			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly']]);
 			self::pushCall($CalleeUrl, $user['id'], $caller, $_npn);
@@ -118,7 +120,7 @@ class Call
 
 		if (method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
 
-		return $backend->getMeetingUrl();
+		return $backend->getMeetingUrl($context);
 	}
 
 	/**
