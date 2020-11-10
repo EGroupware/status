@@ -34,6 +34,7 @@ $setup_info['status']['hooks']['settings'] = \EGroupware\Status\Hooks::class.'::
 $setup_info['status']['hooks']['notifications_actions'] = \EGroupware\Status\Hooks::class.'::notifications_actions';
 $setup_info['status']['hooks']['session_created'] =  \EGroupware\Status\Hooks::class.'::sessionCreated';
 $setup_info['status']['hooks']['csp-frame-src'] = \EGroupware\Status\Hooks::class.'::csp_frame_src';
+$setup_info['status']['hooks']['config_after_save'] = \EGroupware\Status\Hooks::class.'::config_after_save';
 
 /* Dependencies for this app to work */
 $setup_info['status']['depends'][] = array(

@@ -82,6 +82,14 @@
                                     <description value="BBB Api secret" label="%s:"/>
                                     <textbox id="newsettings[videoconference][bbb][bbb_api_secret]" width="300px"/>
                                 </row>
+                                <row>
+                                    <description value="Number of seats" label="%s:"/>
+                                    <int id="newsettings[videoconference][bbb][bbb_seats]" width="300px" min="0"/>
+                                </row>
+                                <row>
+                                    <description value="Estimated call session duration, default is an hour" label="%s:"/>
+                                    <int id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="1" min="0" max="24"/>
+                                </row>
                             </rows>
                         </grid>
                     </groupbox>

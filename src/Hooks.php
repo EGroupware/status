@@ -13,6 +13,7 @@ namespace EGroupware\Status;
 
 use EGroupware\Api;
 use EGroupware\Api\Config;
+use resources_bo;
 
 class Hooks
 {
@@ -23,6 +24,8 @@ class Hooks
 	const APPNAME = 'status';
 
 	const DEFAULT_VIDEOCONFERENCE_BACKEND = 'Jitsi';
+
+	const SERVER_RESOURCE_PREFIX_NAME = 'meeting-room-';
 
 	/**
 	 * Status items
@@ -380,6 +383,44 @@ class Hooks
 			$config['videoconference']['jitsi']['jitsi_domain'] = 'meet.jit.si';
 		}
 		return $config;
+	}
+
+	/**
+	 * Creates resource for bbb-server
+	 * @param $_content
+	 */
+	public static function config_after_save($_content)
+	{
+		if ($_content['location'] != 'config_after_save' && $_content['appname'] == 'status') return;
+		$config = $_content['newsettings']['videoconference'];
+		if (in_array('BBB', (array)$config['backend']))
+		{
+
+			$res_id = Api\Config::read('status')['bbb_res_id'];
+			$resources = new resources_bo($GLOBALS['egw_info']['user']['account_id']);
+			$resource = $resources->read($res_id);
+			if (!$resource || $resource['deleted']) $resource = $res_id = null;
+			if ($config['bbb']['bbb_seats'] > 0)
+			{
+				$resource['useable'] = $resource['quantity'] = $config['bbb']['bbb_seats'];
+				$res_id = $config['bbb']['bbb_res_id'] = $resources->save(array_merge([
+					'res_id' => $res_id,
+					'name' => self::SERVER_RESOURCE_PREFIX_NAME.'bbb',
+					'quantity' => $config['bbb']['bbb_seats'],
+					'useable' => $config['bbb']['bbb_seats'],
+					'cat_id' => '', //TODO: get general cat-id
+					'bookable' => true
+				], $resource));
+				if ($res_id)
+				{
+					Api\Config::save_value('bbb_res_id', $res_id, 'status');
+				}
+			}
+			elseif($res_id && $resource)
+			{
+				$resources->delete($res_id);
+			}
+		}
 	}
 
 	public static function isVideoconferenceDisabled()
