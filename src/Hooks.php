@@ -25,7 +25,7 @@ class Hooks
 
 	const DEFAULT_VIDEOCONFERENCE_BACKEND = 'Jitsi';
 
-	const SERVER_RESOURCE_PREFIX_NAME = 'meeting-room-';
+	const SERVER_RESOURCE_PREFIX_NAME = 'Meeting room ';
 
 	/**
 	 * Status items
@@ -402,13 +402,14 @@ class Hooks
 			if (!$resource || $resource['deleted']) $resource = $res_id = null;
 			if ($config['bbb']['bbb_seats'] > 0)
 			{
+				$category = new Api\Categories('', 'resources');
 				$resource['useable'] = $resource['quantity'] = $config['bbb']['bbb_seats'];
 				$res_id = $config['bbb']['bbb_res_id'] = $resources->save(array_merge([
 					'res_id' => $res_id,
-					'name' => self::SERVER_RESOURCE_PREFIX_NAME.'bbb',
+					'name' => lang(self::SERVER_RESOURCE_PREFIX_NAME.'%1','BigBlueButton'),
 					'quantity' => $config['bbb']['bbb_seats'],
 					'useable' => $config['bbb']['bbb_seats'],
-					'cat_id' => '', //TODO: get general cat-id
+					'cat_id' => $category->name2id('Locations'),
 					'bookable' => true
 				], $resource));
 				if ($res_id)
