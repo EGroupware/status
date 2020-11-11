@@ -337,7 +337,8 @@ class statusApp extends EgwApp
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
 					[data, data[0]['room']], function(_url){
-						self.openCall(_url.caller);
+						if (_url && _url.msg) egw.message(_url.msg.message, _url.msg.type);
+						if (_url.caller) self.openCall(_url.caller);
 						if (app.rocketchat?.isRCActive(null, [{data:data[0].data}]))
 						{
 							app.rocketchat.restapi_call('chat_PostMessage', {
@@ -604,8 +605,10 @@ class statusApp extends EgwApp
 								avatar: "account:"+_value.accounts[i]
 							})
 						}
-						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, statusApp.videoconference_fetchRoomFromUrl(url), true], function(){
-
+						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+							[data, statusApp.videoconference_fetchRoomFromUrl(url), true, true],
+							function(_data){
+							if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
 						}).sendRequest();
 					}
 				},
@@ -640,7 +643,10 @@ class statusApp extends EgwApp
 
 	public inviteToCall(_data, _room)
 	{
-		egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [_data, _room , true], function(){}).sendRequest();
+		egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+			[_data, _room , true, true], function(_data){
+			if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
+		}).sendRequest();
 	}
 }
 app.classes.status = statusApp;

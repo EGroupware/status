@@ -19,6 +19,7 @@ use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use EGroupware\Api\DateTime;
+use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 
 
 class BBB Implements Iface
@@ -62,14 +63,17 @@ class BBB Implements Iface
 		$this->config = $config['videoconference']['bbb'];
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
 		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
+		$start = $_start??time();
+		$end = $_end??$start+($this->config['bbb_call_duration']*3600);
 
 		$this->bbb = new BigBlueButton();
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
+		$this->meetingParams->setDuration($end - $start);
 
 		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
 		{
-			$response = $meeting->getMeeting();
+			return $meeting->getMeeting();
 		}
 		else
 		{
@@ -89,31 +93,61 @@ class BBB Implements Iface
 		return $this->bbb->getJoinMeetingURL($meetingParams);
 	}
 
-	private static function checkResources($res_id, $_start, $_end)
+	/**
+	 * Check resources
+	 *
+	 * @param $_room
+	 * @param $_start
+	 * @param $_end
+	 * @param $_participants
+	 * @param $_is_invite_to
+	 * @throws NoResourceAvailable
+	 */
+	public function checkResources($_room, $_start, $_end, $_participants, $_is_invite_to)
 	{
+		$config = Config::read('status');
 		$resources = new \resources_bo($GLOBALS['egw_info']['user']['account_id']);
-		return $resources->checkUseable($res_id, $_start, $_end);
-	}
+		$resource = $resources->checkUseable($config['bbb_res_id'], $_start, $_end);
+		$message = lang('There is no free seats left to make/join this call!');
+		$cal_res_index = "r".$config['bbb_res_id'];
+		$start = $_start??time();
+		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
+		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
+		$_participants[$cal_res_index] =  "A".$num_participants;
 
-	private static function checkEvent($_roomid, $_res_id, $_start, $_end)
-	{
-		$cal = new \calendar_boupdate();
-		$events = $cal->search([
-			'start' => $_start,
-			'end' => $_end,
-			'users' => ['r'.$_res_id],
-			'cfs' => ['#videoconference'],
-			'ignore_acl' => true,
-			'enum_groups' => false,
-		]);
-		if ($events)
+		$event = [
+			'title' => $room,
+			'##videoconference' => $room,
+			'start' => $start,
+			'end' => $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']*3600),
+			'participants' => $_participants,
+			'owner' => $GLOBALS['egw_info']['user']['account_id'],
+			'participant_types' => ['r', $config['bbb_res_id']]
+		];
+
+		if ($resource['useable'] < $num_participants)
 		{
-			foreach ($events as $event)
-			{
-				if ($event['##videoconference'] == $_roomid) return ['cal' => $cal, 'event' => $event];
-			}
+			throw new NoResourceAvailable($message);
 		}
-		return ['cal' => $cal];
+
+		$cal = new \calendar_boupdate();
+
+		$res = $cal->update($event, false, false, true);
+		if (is_array($res))
+		{
+			foreach ($res as $r) {
+				if ($r['title'] == $event['title'] && $event['start']>=$r['start'] && $event['start'] <= $r['end'])
+				{
+					$n = (intval(substr($r['participants'][$cal_res_index] ,1))
+						+ intval(substr($event['participants'][$cal_res_index],1)));
+					$event['id'] = $r['id'];
+					$event['participants'] = $event['participants'] + $r['participants'];
+					$event['participants'][$cal_res_index] = "A".$n;
+				}
+			}
+			$res = $cal->update($event, true, false, true);
+		}
+		if (is_array($res)) throw new NoResourceAvailable($message);
 	}
 
 	function isMeetingValid()

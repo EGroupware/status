@@ -298,7 +298,10 @@ var statusApp = /** @class */ (function (_super) {
                 dialog.destroy();
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, data[0]['room']], function (_url) {
                     var _c;
-                    self.openCall(_url.caller);
+                    if (_url && _url.msg)
+                        egw.message(_url.msg.message, _url.msg.type);
+                    if (_url.caller)
+                        self.openCall(_url.caller);
                     if ((_c = app.rocketchat) === null || _c === void 0 ? void 0 : _c.isRCActive(null, [{ data: data[0].data }])) {
                         app.rocketchat.restapi_call('chat_PostMessage', {
                             roomId: data[0].data.data.rocketchat._id,
@@ -536,7 +539,9 @@ var statusApp = /** @class */ (function (_super) {
                             avatar: "account:" + _value.accounts[i]
                         });
                     }
-                    egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, statusApp.videoconference_fetchRoomFromUrl(url), true], function () {
+                    egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, statusApp.videoconference_fetchRoomFromUrl(url), true, true], function (_data) {
+                        if (_data && _data.msg)
+                            egw(window).message(_data.msg.message, _data.msg.type);
                     }).sendRequest();
                 }
             },
@@ -565,7 +570,10 @@ var statusApp = /** @class */ (function (_super) {
         return this.isOnline(_action, _selected) && egw.getSessionItem('status', 'videoconference-session');
     };
     statusApp.prototype.inviteToCall = function (_data, _room) {
-        egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [_data, _room, true], function () { }).sendRequest();
+        egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [_data, _room, true, true], function (_data) {
+            if (_data && _data.msg)
+                egw(window).message(_data.msg.message, _data.msg.type);
+        }).sendRequest();
     };
     statusApp.appname = 'status';
     statusApp.MISSED_CALL_TIMEOUT = 30000;

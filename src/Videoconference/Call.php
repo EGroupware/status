@@ -12,6 +12,7 @@
 namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
+use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 
 class Call
 {
@@ -30,7 +31,7 @@ class Call
 	 *
 	 * @throws
 	 */
-	public static function ajax_video_call($data, $_room = null, $_npn = false)
+	public static function ajax_video_call($data, $_room = null, $_npn = false, $_is_invite_to = false)
 	{
 		$response = Api\Json\Response::get();
 		$caller = [
@@ -40,8 +41,23 @@ class Call
 			'account_id' => $GLOBALS['egw_info']['user']['account_id'],
 			'position' => 'caller'
 		];
-		$room = $_room ? $_room : self::genUniqueRoomID();
-		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $data[0]['audioonly']]);
+		// set the owner of the call event
+		$participants = [$caller['account_id']=>'ACHAIR'];
+		foreach ($data as $p)
+		{
+			// set all participants
+			$participants[$p['id']] = 'A';
+		}
+		$room = $_room?? self::genUniqueRoomID();
+		try {
+			self::checkResources($room, null, null, $participants, $_is_invite_to);
+		}
+		catch(NoResourceAvailable $e)
+		{
+			$response->data(['msg' => ['message' => $e->getMessage(), 'type'=>'error']]);
+			return;
+		}
+		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $data[0]['audioonly'], 'participants'=> $participants]);
 		foreach ($data as $user) {
 			// try to fill out missing information
 			if ($user['id'] && (!$user['name'] || !$user['email']))
@@ -56,7 +72,7 @@ class Call
 				'account_id' => $user['id'],
 				'position' => 'callee'
 			];
-			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly']]);
+			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly'], 'participants' => $participants]);
 			self::pushCall($CalleeUrl, $user['id'], $caller, $_npn);
 		}
 		$response->data(['caller' => $CallerUrl, 'callee' => $CalleeUrl]);
@@ -99,6 +115,25 @@ class Call
 		$n->set_popupdata('status', ['caller'=>$data['caller']['account_id'], 'app' => 'status', 'onSeenAction' => 'app.status.refresh()']);
 		$n->set_message(Api\DateTime::to().": ".lang("You have a missed call from %1", $data['caller']['name']));
 		$n->send();
+	}
+
+	/**
+	 * Check available resources
+	 *
+	 * @param $_room
+	 * @param $_start
+	 * @param $_end
+	 * @param $_participants
+	 * @param $_is_invite_to
+	 * @throws NoResourceAvailable
+	 */
+	private static function checkResources($_room, $_start, $_end, $_participants, $_is_invite_to)
+	{
+		$backend = self::_getBackendInstance(0, []);
+		if (method_exists($backend, 'checkResources'))
+		{
+			$backend->checkResources($_room, $_start, $_end, $_participants, $_is_invite_to);
+		}
 	}
 
 	/**
