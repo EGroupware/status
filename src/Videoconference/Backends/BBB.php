@@ -107,13 +107,14 @@ class BBB Implements Iface
 	{
 		$config = Config::read('status');
 		$resources = new \resources_bo($GLOBALS['egw_info']['user']['account_id']);
-		$resource = $resources->checkUseable($config['bbb_res_id'], $_start, $_end);
 		$message = lang('There is no free seats left to make/join this call!');
 		$cal_res_index = "r".$config['bbb_res_id'];
 		$start = $_start??time();
+		$end = $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']*3600);
 		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
 		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
 		$_participants[$cal_res_index] =  "A".$num_participants;
+		$resource = $resources->checkUseable($config['bbb_res_id'], $start, $end);
 
 		$event = [
 			'title' => $room,
