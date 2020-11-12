@@ -8,12 +8,14 @@
 				<column width="100px"/>
 				<column/>
 				<column width="50px"/>
+				<column width="50px"/>
 			</columns>
 			<rows>
 				<row class="dialogHeader">
 					<description value="Room id" label="%s:"/>
 					<textbox readonly="true" id="room"/>
 					<buttononly label="Invite" id="add" background="add" onclick="app.status.videoconference_invite"/>
+                    <buttononly label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting"/>
 				</row>
 				<row>
 					<hbox class="frame_parent">

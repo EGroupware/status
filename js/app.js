@@ -57,6 +57,7 @@ var statusApp = /** @class */ (function (_super) {
      * @param {string} _name template name
      */
     statusApp.prototype.et2_ready = function (_et2, _name) {
+        var _c;
         // call parent
         _super.prototype.et2_ready.call(this, _et2, _name);
         switch (_name) {
@@ -70,22 +71,23 @@ var statusApp = /** @class */ (function (_super) {
                 }
                 break;
             case 'status.room':
-                var room_1 = this.et2.getArrayMgr('content').getEntry('room');
-                var url_1 = this.et2.getArrayMgr('content').getEntry('frame');
-                egw(window.opener).setSessionItem('status', 'videoconference-session', room_1);
+                var room = this.et2.getArrayMgr('content').getEntry('room');
+                var url = this.et2.getArrayMgr('content').getEntry('frame');
+                var end = this.et2.getDOMWidgetById('end');
+                var isModerator_1 = (_c = url.match(/isModerator\=(1|true)/i), (_c !== null && _c !== void 0 ? _c : false));
+                var self_2 = this;
+                if (isModerator_1) {
+                    end.set_disabled(false);
+                }
+                egw(window.opener).setSessionItem('status', 'videoconference-session', room);
                 window.addEventListener("beforeunload", function (e) {
                     window.opener.sessionStorage.removeItem('status-videoconference-session');
-                    if (url_1.match(/isModerator\=(1|true)/i)) {
-                        et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
-                            if (_b == 1) {
-                                egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room_1, url_1], function () { }).sendRequest();
-                                return true;
-                            }
-                        }, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
+                    if (isModerator_1) {
+                        self_2.videoconference_endMeeting();
+                        // Cancel the event
+                        e.preventDefault();
+                        e.returnValue = '';
                     }
-                    // Cancel the event
-                    e.preventDefault();
-                    e.returnValue = 'test';
                 }, false);
                 break;
         }
@@ -559,6 +561,24 @@ var statusApp = /** @class */ (function (_super) {
             resizable: false,
             width: 400,
         }, et2_widget_dialog_1.et2_dialog._create_parent('status'));
+    };
+    /**
+     * end session
+     * @private
+     */
+    statusApp.prototype.videoconference_endMeeting = function () {
+        var _c;
+        var room = this.et2.getArrayMgr('content').getEntry('room');
+        var url = this.et2.getArrayMgr('content').getEntry('frame');
+        var isModerator = (_c = url.match(/isModerator\=(1|true)/i), (_c !== null && _c !== void 0 ? _c : false));
+        if (isModerator) {
+            et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
+                if (_b == 1) {
+                    egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function () { }).sendRequest();
+                    return true;
+                }
+            }, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
+        }
     };
     statusApp.videoconference_fetchRoomFromUrl = function (_url) {
         if (_url) {

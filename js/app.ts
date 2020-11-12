@@ -69,22 +69,23 @@ class statusApp extends EgwApp
 			case 'status.room':
 				let room = this.et2.getArrayMgr('content').getEntry('room');
 				let url = this.et2.getArrayMgr('content').getEntry('frame');
+				let end = this.et2.getDOMWidgetById('end');
+				let isModerator = url.match(/isModerator\=(1|true)/i)??false;
+				let self = this;
+				if (isModerator)
+				{
+					end.set_disabled(false);
+				}
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
 				window.addEventListener("beforeunload", function(e){
 					window.opener.sessionStorage.removeItem('status-videoconference-session');
-					if (url.match(/isModerator\=(1|true)/i))
+					if (isModerator)
 					{
-						et2_dialog.show_dialog(function(_b){
-							if (_b == 1)
-							{
-								egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function(){}).sendRequest();
-								return true;
-							}
-						}, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.", "End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
+						self.videoconference_endMeeting();
+						// Cancel the event
+						e.preventDefault();
+						e.returnValue='';
 					}
-					// Cancel the event
-					e.preventDefault();
-					e.returnValue='test';
 				 }, false);
 				break;
 		}
@@ -625,6 +626,29 @@ class statusApp extends EgwApp
 				resizable: false,
 				width: 400,
 			}, et2_dialog._create_parent('status'));
+	}
+
+	/**
+	 * end session
+	 * @private
+	 */
+	public videoconference_endMeeting ()
+	{
+		let room = this.et2.getArrayMgr('content').getEntry('room');
+		let url = this.et2.getArrayMgr('content').getEntry('frame');
+		let isModerator = url.match(/isModerator\=(1|true)/i)??false;
+		if (isModerator)
+		{
+			et2_dialog.show_dialog(function(_b){
+				if (_b == 1)
+				{
+					egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url],
+						function(){}).sendRequest();
+					return true;
+				}
+			}, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.",
+				"End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
+		}
 	}
 
 	public static videoconference_fetchRoomFromUrl(_url)

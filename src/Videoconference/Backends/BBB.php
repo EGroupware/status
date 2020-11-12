@@ -19,6 +19,7 @@ use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use EGroupware\Api\DateTime;
+use EGroupware\Api\Exception;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 
 
@@ -89,6 +90,7 @@ class BBB Implements Iface
 	{
 		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $_context['position'] == 'callee'? $this->meetingParams->getAttendeePassword() : $this->moderatorPW);
 		$meetingParams->setCustomParameter('isModerator', ($_context['position'] == 'caller' && $this->moderatorPW));
+		if (!empty($_context['cal_id'])) $meetingParams->setCustomParameter('cal_id', $_context['cal_id']);
 		$meetingParams->setRedirect(true);
 		return $this->bbb->getJoinMeetingURL($meetingParams);
 	}
@@ -149,6 +151,26 @@ class BBB Implements Iface
 			$res = $cal->update($event, true, false, true);
 		}
 		if (is_array($res)) throw new NoResourceAvailable($message);
+		return $res;
+	}
+
+	/**
+	 * free up resources bound to the call event
+	 * @param $cal_id
+	 * @throw Exception
+	 */
+	private static function freeUpResource($cal_id)
+	{
+		$cal = new \calendar_boupdate();
+		$config = Config::read('status');
+		$event = $cal->read($cal_id);
+		unset($event['participants']['r'.$config['bbb_res_id']]);
+		$event['videoconference'] = false;
+		$res = $cal->update($event, true, false, false);
+		if (!is_numeric($res))
+		{
+			throw new Exception('freeing up resource from cal_id='.$cal_id.' failed!');
+		}
 	}
 
 	function isMeetingValid()
@@ -168,7 +190,14 @@ class BBB Implements Iface
 		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()
 			|| !$force && $meetingInfo->getMeeting()->getModeratorCount() > 1) return;
 		$endMeetingParams = new EndMeetingParameters($params['meetingID'], $meetingInfo->getMeeting()->getModeratorPassword());
-		$this->bbb->endMeeting($endMeetingParams);
+		try {
+			$this->bbb->endMeeting($endMeetingParams);
+			self::freeUpResource($params['cal_id']);
+		}
+		catch (\Exception $e)
+		{
+			error_log(__METHOD__."()".$e->getMessage());
+		}
 	}
 
 	/**
