@@ -13,6 +13,7 @@ namespace EGroupware\Status;
 
 use EGroupware\Api;
 use EGroupware\Api\Config;
+use EGroupware\Rocketchat\Api\Restapi;
 use resources_bo;
 
 class Hooks
@@ -395,7 +396,7 @@ class Hooks
 		$config = $_content['newsettings']['videoconference'];
 		if (in_array('BBB', (array)$config['backend']))
 		{
-
+			if (!$GLOBALS['egw_info']['user']['apps']['resources']) return;
 			$res_id = Api\Config::read('status')['bbb_res_id'];
 			$resources = new resources_bo($GLOBALS['egw_info']['user']['account_id']);
 			$resource = $resources->read($res_id);
@@ -403,13 +404,16 @@ class Hooks
 			if ($config['bbb']['bbb_seats'] > 0)
 			{
 				$category = new Api\Categories('', 'resources');
+				// Global category Locations seems to be case sensitive
+				$cat_id = $category->name2id('Locations')!= 0 ?
+					$category->name2id('Locations') : $category->name2id('locations');
 				$resource['useable'] = $resource['quantity'] = $config['bbb']['bbb_seats'];
 				$res_id = $config['bbb']['bbb_res_id'] = $resources->save(array_merge([
 					'res_id' => $res_id,
 					'name' => lang(self::SERVER_RESOURCE_PREFIX_NAME.'%1','BigBlueButton'),
 					'quantity' => $config['bbb']['bbb_seats'],
 					'useable' => $config['bbb']['bbb_seats'],
-					'cat_id' => $category->name2id('Locations'),
+					'cat_id' => $cat_id,
 					'bookable' => true
 				], $resource));
 				if ($res_id)
@@ -422,6 +426,32 @@ class Hooks
 				$resources->delete($res_id);
 			}
 		}
+	}
+
+	/**
+	 * Validate the configuration
+	 *
+	 * @param Array $data
+	 * @return string|null string with error or null on success
+	 */
+	public static function validate($data)
+	{
+		$config = Config::read('status');
+		$error = '';
+
+		if (in_array('BBB', (array)$config['videoconference']['backend']))
+		{
+			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = lang("\n-Resources app is missing!");
+			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= lang("\n-bbb domain is missing!");
+			if (!$data['videoconference']['bbb']['bbb_csp']) $error .= lang("\n-bbb CSP wild card domain is missing!");
+			if (!$data['videoconference']['bbb']['bbb_api_secret']) $error .= lang("\n-bbb Api secret is missing!");
+
+			$category = new Api\Categories('', 'resources');
+
+			if (!$config['bbb_res_id']) $error .= lang("\n-Could not save resources for bbb server!");
+			if ($category->name2id('Locations') == 0 && $category->name2id('locations') == 0) $error .= lang("\n-Resources global category Locations is missing!");
+		}
+		return $error != ''? $error : null;
 	}
 
 	public static function isVideoconferenceDisabled()
