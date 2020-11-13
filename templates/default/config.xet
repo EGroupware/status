@@ -87,8 +87,12 @@
                                     <int id="newsettings[videoconference][bbb][bbb_seats]" width="300px" min="0"/>
                                 </row>
                                 <row>
-                                    <description value="Estimated call session duration, default is an hour" label="%s:"/>
-                                    <int id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="1" min="0" max="24"/>
+                                    <description value="Estimated call session duration, default is 30 mintues" label="%s:"/>
+                                    <int id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="30" min="0" max="1440"/>
+                                </row>
+                                <row>
+                                    <description value="Fixed duration for session, session will be ended after duration is over" label="%s:"/>
+                                    <checkbox id="newsettings[videoconference][bbb][bbb_call_fixed_duration]"/>
                                 </row>
                             </rows>
                         </grid>

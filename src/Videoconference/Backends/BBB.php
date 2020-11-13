@@ -65,13 +65,12 @@ class BBB Implements Iface
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
 		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
 		$start = $_start??time();
-		$end = $_end??$start+($this->config['bbb_call_duration']*3600);
+		$end = $_end??$start+($this->config['bbb_call_duration']);
 
 		$this->bbb = new BigBlueButton();
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
-		$this->meetingParams->setDuration($end - $start);
-
+		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$end - $start: 0);
 		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
 		{
 			return $meeting->getMeeting();
@@ -112,7 +111,7 @@ class BBB Implements Iface
 		$message = lang('There is no free seats left to make/join this call!');
 		$cal_res_index = "r".$config['bbb_res_id'];
 		$start = $_start??time();
-		$end = $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']*3600);
+		$end = $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']);
 		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
 		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
 		$_participants[$cal_res_index] =  "A".$num_participants;
@@ -122,7 +121,7 @@ class BBB Implements Iface
 			'title' => $room,
 			'##videoconference' => $room,
 			'start' => $start,
-			'end' => $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']*3600),
+			'end' => $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']),
 			'participants' => $_participants,
 			'owner' => $GLOBALS['egw_info']['user']['account_id'],
 			'participant_types' => ['r', $config['bbb_res_id']]
@@ -188,7 +187,7 @@ class BBB Implements Iface
 	{
 		$meetingInfo = $this->bbb->getMeetingInfo($this->meetingParams);
 		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()
-			|| !$force && $meetingInfo->getMeeting()->getModeratorCount() > 1) return;
+			|| !$force && $meetingInfo->getMeeting()->getModeratorCount() >= 1) return;
 		$endMeetingParams = new EndMeetingParameters($params['meetingID'], $meetingInfo->getMeeting()->getModeratorPassword());
 		try {
 			$this->bbb->endMeeting($endMeetingParams);
