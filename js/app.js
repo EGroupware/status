@@ -74,20 +74,14 @@ var statusApp = /** @class */ (function (_super) {
                 var room = this.et2.getArrayMgr('content').getEntry('room');
                 var url = this.et2.getArrayMgr('content').getEntry('frame');
                 var end = this.et2.getDOMWidgetById('end');
-                var isModerator_1 = (_c = url.match(/isModerator\=(1|true)/i), (_c !== null && _c !== void 0 ? _c : false));
+                var isModerator = (_c = url.match(/isModerator\=(1|true)/i), (_c !== null && _c !== void 0 ? _c : false));
                 var self_2 = this;
-                if (isModerator_1) {
+                if (isModerator) {
                     end.set_disabled(false);
                 }
                 egw(window.opener).setSessionItem('status', 'videoconference-session', room);
                 window.addEventListener("beforeunload", function (e) {
                     window.opener.sessionStorage.removeItem('status-videoconference-session');
-                    if (isModerator_1) {
-                        self_2.videoconference_endMeeting();
-                        // Cancel the event
-                        e.preventDefault();
-                        e.returnValue = '';
-                    }
                 }, false);
                 break;
         }
@@ -577,7 +571,7 @@ var statusApp = /** @class */ (function (_super) {
                     egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function () { }).sendRequest();
                     return true;
                 }
-            }, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
+            }, "This window will end the session for everyone, are you sure want this?", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
         }
     };
     statusApp.videoconference_fetchRoomFromUrl = function (_url) {

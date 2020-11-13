@@ -186,8 +186,7 @@ class BBB Implements Iface
 	public function deleteRoom(array $params, $force=true)
 	{
 		$meetingInfo = $this->bbb->getMeetingInfo($this->meetingParams);
-		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()
-			|| !$force && $meetingInfo->getMeeting()->getModeratorCount() >= 1) return;
+		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()) return;
 		$endMeetingParams = new EndMeetingParameters($params['meetingID'], $meetingInfo->getMeeting()->getModeratorPassword());
 		try {
 			$this->bbb->endMeeting($endMeetingParams);

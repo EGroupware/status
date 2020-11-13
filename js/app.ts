@@ -79,13 +79,7 @@ class statusApp extends EgwApp
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
 				window.addEventListener("beforeunload", function(e){
 					window.opener.sessionStorage.removeItem('status-videoconference-session');
-					if (isModerator)
-					{
-						self.videoconference_endMeeting();
-						// Cancel the event
-						e.preventDefault();
-						e.returnValue='';
-					}
+
 				 }, false);
 				break;
 		}
@@ -646,7 +640,7 @@ class statusApp extends EgwApp
 						function(){}).sendRequest();
 					return true;
 				}
-			}, "If you are the last moderator of this room, closing this window will end the session for everyone unless you promote someone as moderator before closing this window.",
+			}, "This window will end the session for everyone, are you sure want this?",
 				"End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
 		}
 	}
