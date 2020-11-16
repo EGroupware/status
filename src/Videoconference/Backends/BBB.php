@@ -79,7 +79,7 @@ class BBB Implements Iface
 		{
 			$response = $this->bbb->createMeeting($this->meetingParams);
 			if ($response->getReturnCode() == 'FAILED') {
-				return 'Can\'t create room!';
+				throw new Exception($response->getMessage());
 			}
 			$this->moderatorPW = $response->getModeratorPassword();
 		}
@@ -111,7 +111,7 @@ class BBB Implements Iface
 		$message = lang('There is no free seats left to make/join this call!');
 		$cal_res_index = "r".$config['bbb_res_id'];
 		$start = $_start??time();
-		$end = $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']);
+		$end = $_end??$start+((int)$config['videoconference']['bbb']['bbb_call_duration']*60);
 		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
 		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
 		$_participants[$cal_res_index] =  "A".$num_participants;
@@ -121,7 +121,7 @@ class BBB Implements Iface
 			'title' => $room,
 			'##videoconference' => $room,
 			'start' => $start,
-			'end' => $_end??$start+($config['videoconference']['bbb']['bbb_call_duration']),
+			'end' => $end,
 			'participants' => $_participants,
 			'owner' => $GLOBALS['egw_info']['user']['account_id'],
 			'participant_types' => ['r', $config['bbb_res_id']]
