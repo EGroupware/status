@@ -128,7 +128,9 @@ class Call
 	 */
 	public static function genUniqueRoomID()
 	{
-		return str_replace('/' , '',  Api\Header\Http::host().'-'.Api\Auth::randomstring(20));
+		return str_replace('/' , '',
+			preg_replace('/:\d+$/', '', Api\Header\Http::host()).'-'.
+			Api\Auth::randomstring(20));
 	}
 
 	/**
