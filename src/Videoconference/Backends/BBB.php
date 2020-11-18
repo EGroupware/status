@@ -66,11 +66,12 @@ class BBB Implements Iface
 		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
 		$start = $_start??time();
 		$end = $_end??$start+($this->config['bbb_call_duration']);
+		$duration = $_end ? ($end - $start) / 60 : $end - $start;
 
 		$this->bbb = new BigBlueButton();
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
-		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$end - $start: 0);
+		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
 		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
 		{
 			return $meeting->getMeeting();
@@ -156,17 +157,19 @@ class BBB Implements Iface
 	/**
 	 * free up resources bound to the call event
 	 * @param $cal_id
+	 * @param $room
 	 * @throw Exception
 	 */
-	private static function freeUpResource($cal_id)
+	private static function freeUpResource($cal_id, $room)
 	{
 		$cal = new \calendar_boupdate();
 		$config = Config::read('status');
 		$event = $cal->read($cal_id);
 		unset($event['participants']['r'.$config['bbb_res_id']]);
 		$event['videoconference'] = false;
-		$res = $cal->update($event, true, false, false);
-		if (!is_numeric($res))
+		$res = ($room == $event['title']) ? $cal->delete($cal_id, 0, false, true)
+			: $cal->update($event, true, false, false);
+		if (!is_numeric($res) && !$res === true)
 		{
 			throw new Exception('freeing up resource from cal_id='.$cal_id.' failed!');
 		}
@@ -190,7 +193,7 @@ class BBB Implements Iface
 		$endMeetingParams = new EndMeetingParameters($params['meetingID'], $meetingInfo->getMeeting()->getModeratorPassword());
 		try {
 			$this->bbb->endMeeting($endMeetingParams);
-			self::freeUpResource($params['cal_id']);
+			self::freeUpResource($params['cal_id'], $params['meetingID']);
 		}
 		catch (\Exception $e)
 		{

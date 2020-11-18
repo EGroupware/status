@@ -83,13 +83,15 @@ class Call
 	 * sends full working meeting Url to client
 	 * @param $room string room id
 	 * @param $context array user data
+	 * @param null $start
+	 * @param null $end
 	 * @throws Api\Json\Exception
 	 */
-	public static function ajax_genMeetingUrl($room, $context)
+	public static function ajax_genMeetingUrl($room, $context, $start=null, $end=null)
 	{
 		$respose = Api\Json\Response::get();
 		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
-		$respose->data([self::genMeetingUrl($room, $context)]);
+		$respose->data([self::genMeetingUrl($room, $context, [], $start, $end)]);
 	}
 
 	/**
