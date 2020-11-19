@@ -13,7 +13,12 @@ namespace EGroupware\Status;
 
 use EGroupware\Api;
 use EGroupware\Api\Config;
+use EGroupware\OpenID\AdminCmds\Client;
+use EGroupware\OpenID\Entities\ClientEntity;
+use EGroupware\OpenID\Repositories\ClientRepository;
+use EGroupware\OpenID\Repositories\GrantRepository;
 use EGroupware\Rocketchat\Api\Restapi;
+use League\OAuth2\Server\Exception\OAuthServerException;
 use resources_bo;
 
 class Hooks
@@ -424,6 +429,24 @@ class Hooks
 			elseif($res_id && $resource)
 			{
 				$resources->delete($res_id);
+			}
+
+			//create openid client
+			$clients = new ClientRepository();
+			try {
+				$clients->getClientEntity($config['backend'], null, null, false);
+			}
+			catch (OAuthServerException $e)
+			{
+				unset($e);
+				$client = new ClientEntity();
+				$client->setIdentifier($config['backend']);
+				$client->setSecret(Api\Auth::randomstring(24));
+				$client->setName(lang('BigBlueButton token'));
+				$client->setScopes(['8']);
+				$client->setRefreshTokenTTL('P0S');	// no refresh token
+				$client->setRedirectUri($GLOBALS['egw_info']['server']['webserver_url'].'/');
+				$clients->persistNewClient($client);
 			}
 		}
 	}

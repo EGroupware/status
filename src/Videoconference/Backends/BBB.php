@@ -13,15 +13,14 @@
 namespace EGroupware\Status\Videoconference\Backends;
 
 use BigBlueButton\Parameters\EndMeetingParameters;
-use EGroupware\Api\Auth;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
-use EGroupware\Api\DateTime;
 use EGroupware\Api\Exception;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
-
+use EGroupware\OpenID\Token;
+use EGroupware\Api;
 
 class BBB Implements Iface
 {
@@ -78,6 +77,13 @@ class BBB Implements Iface
 		}
 		else
 		{
+			$token = new Token();
+			$jwt = $token->accessToken('bbb', ['videoconference'], 'PT1H',
+				false, null, ['context'=> array_merge([
+					'room' => $room
+				], $_context['user'])]);
+
+			$this->meetingParams->addMeta('endCallbackUrl', Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/src/videoconference/endCallback.php?jwt='.$jwt));
 			$response = $this->bbb->createMeeting($this->meetingParams);
 			if ($response->getReturnCode() == 'FAILED') {
 				throw new Exception($response->getMessage());
@@ -88,7 +94,8 @@ class BBB Implements Iface
 
 	public function getMeetingUrl ($_context=null)
 	{
-		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $_context['position'] == 'callee'? $this->meetingParams->getAttendeePassword() : $this->moderatorPW);
+		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $_context['position'] == 'caller'?
+			$this->moderatorPW:$this->meetingParams->getAttendeePassword());
 		$meetingParams->setCustomParameter('isModerator', ($_context['position'] == 'caller' && $this->moderatorPW));
 		if (!empty($_context['cal_id'])) $meetingParams->setCustomParameter('cal_id', $_context['cal_id']);
 		$meetingParams->setRedirect(true);
