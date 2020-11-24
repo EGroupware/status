@@ -15,7 +15,7 @@ namespace EGroupware\Status\Videoconference\Exception;
 
 use EGroupware\Api\Exception;
 
-class NoResourceAvailable extends Exception {
+class RoomIsNotReady extends Exception {
 
 }
 

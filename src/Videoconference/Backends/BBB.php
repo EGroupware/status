@@ -12,7 +12,9 @@
 
 namespace EGroupware\Status\Videoconference\Backends;
 
+use BigBlueButton\Core\Meeting;
 use BigBlueButton\Parameters\EndMeetingParameters;
+use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
@@ -21,6 +23,7 @@ use EGroupware\Api\Exception;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 use EGroupware\OpenID\Token;
 use EGroupware\Api;
+use EGroupware\Api\DateTime;
 
 class BBB Implements Iface
 {
@@ -46,12 +49,25 @@ class BBB Implements Iface
 	private $moderatorPW;
 
 	/**
+	 * @var bool
+	 */
+	private $isUserModerator;
+
+	/**
+	 * @var mixed
+	 */
+	private $roomNotReady;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string $_room room-id
 	 * @param array $_context values for keys 'name', 'email', 'avatar', 'account_id'
-	 * @param int $_start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int $_end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param int|null $_start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|null $_end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 *
+	 * @throw Exception
+	 * @return Meeting
 	 */
 	public function __construct($_room, $_context, $_start=null, $_end=null)
 	{
@@ -63,40 +79,64 @@ class BBB Implements Iface
 		$this->config = $config['videoconference']['bbb'];
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
 		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
-		$start = $_start??time();
+		$now = \calendar_boupdate::date2ts(new DateTime('now'));
+		$start = $_start??$now;
 		$end = $_end??$start+($this->config['bbb_call_duration']);
 		$duration = $_end ? ($end - $start) / 60 : $end - $start;
-
+		$this->roomNotReady = null;
+		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
-		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
+		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success() && $start <= $now)
 		{
+			if ($this->isUserModerator)
+			{
+				$this->moderatorPW = $meeting->getMeeting()->getModeratorPassword();
+			}
 			return $meeting->getMeeting();
 		}
-		else
+		elseif($this->isUserModerator && $start <= $now)
 		{
 			$token = new Token();
-			$jwt = $token->accessToken('bbb', ['videoconference'], 'PT1H',
+			$jwt = $token->accessToken('BBB', ['videoconference'], 'PT1H',
 				false, null, ['context'=> array_merge([
-					'room' => $room
+					'room' => $room,
+					'account_lid' => Api\Accounts::id2name($_context['user']['account_id'])
 				], $_context['user'])]);
 
-			$this->meetingParams->addMeta('endCallbackUrl', Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/src/videoconference/endCallback.php?jwt='.$jwt));
+			$this->meetingParams->setEndCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/src/Videoconference/endCallback.php?jwt='.$jwt));
 			$response = $this->bbb->createMeeting($this->meetingParams);
 			if ($response->getReturnCode() == 'FAILED') {
 				throw new Exception($response->getMessage());
 			}
 			$this->moderatorPW = $response->getModeratorPassword();
 		}
+		else
+		{
+			$this->roomNotReady = [
+				'error' => lang('Room is not yet ready!'),
+				'meetingID' => $room,
+				'cal_id' => $_context['user']['cal_id'],
+				'start' => \calendar_boupdate::date2ts($start),
+				'end' => $end
+			];
+		}
 	}
 
 	public function getMeetingUrl ($_context=null)
 	{
-		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $_context['position'] == 'caller'?
+		if (is_array($this->roomNotReady))
+		{
+			return Api\Framework::getUrl(Api\Framework::link('/index.php',
+				array_merge([
+					'menuaction' => 'status.EGroupware\\Status\\Ui.room',
+				], $this->roomNotReady)));
+		}
+		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $this->isUserModerator?
 			$this->moderatorPW:$this->meetingParams->getAttendeePassword());
-		$meetingParams->setCustomParameter('isModerator', ($_context['position'] == 'caller' && $this->moderatorPW));
+		$meetingParams->setCustomParameter('isModerator', $this->isUserModerator);
 		if (!empty($_context['cal_id'])) $meetingParams->setCustomParameter('cal_id', $_context['cal_id']);
 		$meetingParams->setRedirect(true);
 		return $this->bbb->getJoinMeetingURL($meetingParams);
@@ -111,6 +151,7 @@ class BBB Implements Iface
 	 * @param $_participants
 	 * @param $_is_invite_to
 	 * @throws NoResourceAvailable
+	 * @return int cal_id
 	 */
 	public function checkResources($_room, $_start, $_end, $_participants, $_is_invite_to)
 	{
@@ -162,6 +203,31 @@ class BBB Implements Iface
 	}
 
 	/**
+	 * Check if the user is moderator of room
+	 * @param string $_room not used
+	 * @param string $_id account_id:cal_id
+	 * @return bool
+	 */
+	public function isModerator(string $_room, string $_id)
+	{
+		unset($_room); //neccesarry by func signature
+
+		$id = explode(':', $_id);
+		if (!empty($id[1]))
+		{
+			$cal = new \calendar_boupdate();
+
+			$event = $cal->read($id[1]);
+
+			foreach ($event['participants'] as $user => $participant)
+			{
+				if ($user == $id[0] && $participant == "ACHAIR") return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * free up resources bound to the call event
 	 * @param $cal_id
 	 * @param $room
@@ -191,9 +257,8 @@ class BBB Implements Iface
 	/**
 	 * End meeting forcibly
 	 * @param array $params
-	 * @param bool $force
 	 */
-	public function deleteRoom(array $params, $force=true)
+	public function deleteRoom(array $params)
 	{
 		$meetingInfo = $this->bbb->getMeetingInfo($this->meetingParams);
 		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()) return;
@@ -212,7 +277,7 @@ class BBB Implements Iface
 	 * Fetch room from url
 	 *
 	 * @param $url
-	 * return string returns room id
+	 * @return string returns room id
 	 */
 	public static function fetchRoomFromUrl($url)
 	{

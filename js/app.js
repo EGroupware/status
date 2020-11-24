@@ -79,6 +79,10 @@ var statusApp = /** @class */ (function (_super) {
                 if (isModerator) {
                     end.set_disabled(false);
                 }
+                if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict'))) {
+                    this.et2.getDOMWidgetById('add').set_disabled(true);
+                    break;
+                }
                 egw(window.opener).setSessionItem('status', 'videoconference-session', room);
                 window.addEventListener("beforeunload", function (e) {
                     window.opener.sessionStorage.removeItem('status-videoconference-session');
@@ -588,6 +592,23 @@ var statusApp = /** @class */ (function (_super) {
             if (_data && _data.msg)
                 egw(window).message(_data.msg.message, _data.msg.type);
         }).sendRequest();
+    };
+    statusApp.prototype.videoconference_countdown_finished = function () {
+        var join = this.et2.getWidgetById('join');
+        join.set_disabled(false);
+    };
+    statusApp.prototype.videoconference_countdown_join = function () {
+        var content = this.et2.getArrayMgr('content').data;
+        egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl", [content.room,
+            {
+                name: egw.user('account_fullname'),
+                account_id: egw.user('account_id'),
+                email: egw.user('account_email'),
+                cal_id: content.cal_id
+            }, content.start, content.end], function (_url) {
+            app.status.openCall(_url);
+        }).sendRequest();
+        window.parent.close();
     };
     statusApp.appname = 'status';
     statusApp.MISSED_CALL_TIMEOUT = 30000;

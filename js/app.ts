@@ -76,6 +76,11 @@ class statusApp extends EgwApp
 				{
 					end.set_disabled(false);
 				}
+				if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict')))
+				{
+					this.et2.getDOMWidgetById('add').set_disabled(true);
+					break;
+				}
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
 				window.addEventListener("beforeunload", function(e){
 					window.opener.sessionStorage.removeItem('status-videoconference-session');
@@ -665,6 +670,28 @@ class statusApp extends EgwApp
 			[_data, _room , true, true], function(_data){
 			if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
 		}).sendRequest();
+	}
+
+	public videoconference_countdown_finished() {
+		let join = this.et2.getWidgetById('join');
+		join.set_disabled(false);
+	}
+
+	public videoconference_countdown_join()
+	{
+		let content = this.et2.getArrayMgr('content').data;
+		egw.json(
+			"EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl",
+			[content.room,
+				{
+					name:egw.user('account_fullname'),
+					account_id:egw.user('account_id'),
+					email:egw.user('account_email'),
+					cal_id:content.cal_id
+				}, content.start, content.end], function(_url){
+				app.status.openCall(_url);
+			}).sendRequest();
+		window.parent.close();
 	}
 }
 app.classes.status = statusApp;

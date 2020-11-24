@@ -69,8 +69,23 @@ class Ui {
 	public function room($content=null)
 	{
 		$tpl = new Api\Etemplate('status.room');
-		$content['frame'] = $_GET['frame'] ? (is_array($_GET['frame']) ? $_GET['frame'][0] : $_GET['frame']) : '';
-		$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
+		if ($_GET['error'])
+		{
+			$content = [
+				'frame'=>'',
+				'room' => $_GET['meetingID'],
+				'error' => $_GET['error'],
+				'start' => (int) $_GET['start'],
+				'end' => $_GET['end'],
+				'cal_id' => $_GET['cal_id']
+			];
+		}
+		else
+		{
+			$content['frame'] = $_GET['frame'] ? (is_array($_GET['frame']) ? $_GET['frame'][0] : $_GET['frame']) : '';
+			$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
+			$content['restrict'] = Api\Config::read('status')['videoconference']['backend'][0] == 'BBB';
+		}
 		return $tpl->exec('status.EGroupware\\Status\\Ui.room', $content,array(), array());
 	}
 

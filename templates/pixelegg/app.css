@@ -197,6 +197,32 @@ iframe#status-room_frame {
   position: relative;
   display: table;
 }
+#status-room .et2_countdown {
+  margin-left: 10px;
+  background: #f1f1f1;
+  font-size: 50pt;
+}
+#status-room .countdown-dialog tr.error_msg .et2_label {
+  background: #fddfdf;
+  line-height: 50px;
+  font-size: 11pt;
+  display: inline-block;
+  text-align: center;
+}
+#status-room .countdown-dialog td.timer {
+  height: 100%;
+}
+#status-room .countdown-dialog td.timer .et2_label {
+  line-height: 50px;
+  font-size: 11pt;
+  text-align: center;
+}
+#status-room .countdown-dialog td.timer .et2_countdown {
+  font-size: 50pt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
   height: calc(100% - 45px);

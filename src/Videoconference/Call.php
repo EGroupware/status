@@ -13,6 +13,7 @@ namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
+use EGroupware\Status\Videoconference\Exception\RoomIsNotReady;
 
 class Call
 {
@@ -91,7 +92,8 @@ class Call
 	{
 		$respose = Api\Json\Response::get();
 		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
-		$respose->data([self::genMeetingUrl($room, $context, [], $start, $end)]);
+		$context['position'] = self::isModerator($room, $context['account_id'].":".$context['cal_id']) ? 'caller' : 'callee';
+		$respose->data([self::genMeetingUrl($room, $context, [], \calendar_boupdate::date2ts($start), \calendar_boupdate::date2ts($end))]);
 	}
 
 	/**
@@ -141,6 +143,23 @@ class Call
 	}
 
 	/**
+	 * Check if the user is a moderator of room
+	 *
+	 * @param string $room
+	 * @param string|int $id
+	 * @return bool return true if is moderator
+	 */
+	private static function isModerator(string $room, $id)
+	{
+		$backend = self::_getBackendInstance(0, []);
+		if (method_exists($backend, 'isModerator'))
+		{
+			return $backend->isModerator($room, $id);
+		}
+		return false;
+	}
+
+	/**
 	 * Generates a full working meeting Url
 	 * @param $room string room id
 	 * @param $context array user data
@@ -182,7 +201,7 @@ class Call
 	 * @param int|DateTime $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
 	 * @param int|DateTime $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
-	 * @return Backends\Jitsi|Backends\Iface
+	 * @return bool|Backends\Jitsi|Backends\Iface
 	 */
 	private static function _getBackendInstance($room, $context, $start=null, $end=null)
 	{
@@ -195,15 +214,15 @@ class Call
 	}
 
 	/**
-	 * @param $call string call url
-	 * @param $callee string account id of callee
-	 * @param $caller array info about caller
+	 * @param string $call call url
+	 * @param string $callee account id of callee
+	 * @param array $caller info about caller
 	 * @param boolean $npn no picked up notification, prevents caller from getting
 	 * notification about callee response state
 	 *
 	 * @throws Api\Json\Exception
 	 */
-	public static function pushCall ($call, $callee, $caller, $npn = false)
+	public static function pushCall (string $call, $callee, $caller, $npn = false)
 	{
 		$p = new Api\Json\Push($callee);
 		$p->call('app.status.receivedCall',[
@@ -217,10 +236,10 @@ class Call
 	/**
 	 * retrives room id from a given full url
 	 *
-	 * @param type $url
-	 * @return type
+	 * @param string $url
+	 * @return string
 	 */
-	public static function fetchRoomFromUrl ($url)
+	public static function fetchRoomFromUrl (string $url)
 	{
 		$backend = self::_getBackendInstance(0,[]);
 		return $backend::fetchRoomFromUrl($url);
@@ -250,13 +269,14 @@ class Call
 	static function ajax_deleteRoom($room, $url)
 	{
 		$backend = self::_getBackendInstance($room, []);
+		$params = [];
 		if (method_exists($backend, 'deleteRoom'))
 		{
 			if($url)
 			{
 				parse_str(parse_url($url)['query'], $params);
 			}
-			$backend->deleteRoom($params, false);
+			$backend->deleteRoom($params);
 		}
 	}
 }
