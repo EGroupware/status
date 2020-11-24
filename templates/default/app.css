@@ -228,3 +228,9 @@ iframe#status-room_frame {
 	justify-content: center;
 }
 
+#status-room .countdown-dialog td.timer #status-room_join {
+	background-position: 45% center;
+	height: 40px;
+	width: calc(100% - 6px);
+	margin-left: 10px;
+}

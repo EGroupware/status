@@ -223,6 +223,12 @@ iframe#status-room_frame {
   align-items: center;
   justify-content: center;
 }
+#status-room .countdown-dialog td.timer #status-room_join {
+  background-position: 45% center;
+  height: 40px;
+  width: calc(100% - 6px);
+  margin-left: 10px;
+}
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
   height: calc(100% - 45px);
