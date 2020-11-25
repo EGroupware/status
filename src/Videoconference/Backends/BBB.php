@@ -14,7 +14,6 @@ namespace EGroupware\Status\Videoconference\Backends;
 
 use BigBlueButton\Core\Meeting;
 use BigBlueButton\Parameters\EndMeetingParameters;
-use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
@@ -66,10 +65,10 @@ class BBB Implements Iface
 	 * @param int|null $_start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
 	 * @param int|null $_end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
-	 * @throw Exception
-	 * @return Meeting
+	 * @throws Exception
+	 * @return void|Meeting
 	 */
-	public function __construct($_room, $_context, $_start=null, $_end=null)
+	public function __construct($_room='', array $_context=[], $_start=null, $_end=null)
 	{
 		// don't go further if no room given
 		if (!$_room) return;
@@ -125,6 +124,10 @@ class BBB Implements Iface
 		}
 	}
 
+	/**
+	 * @param array|null $_context
+	 * @return string
+	 */
 	public function getMeetingUrl ($_context=null)
 	{
 		if (is_array($this->roomNotReady))
@@ -145,15 +148,15 @@ class BBB Implements Iface
 	/**
 	 * Check resources
 	 *
-	 * @param $_room
-	 * @param $_start
-	 * @param $_end
-	 * @param $_participants
-	 * @param $_is_invite_to
+	 * @param string $_room
+	 * @param int|null $_start
+	 * @param int|null $_end
+	 * @param array $_participants
+	 * @param bool $_is_invite_to
 	 * @throws NoResourceAvailable
 	 * @return int cal_id
 	 */
-	public function checkResources($_room, $_start, $_end, $_participants, $_is_invite_to)
+	public function checkResources($_room='', $_start=null, $_end=null, $_participants=[], $_is_invite_to=false)
 	{
 		$config = Config::read('status');
 		$resources = new \resources_bo($GLOBALS['egw_info']['user']['account_id']);
@@ -208,7 +211,7 @@ class BBB Implements Iface
 	 * @param string $_id account_id:cal_id
 	 * @return bool
 	 */
-	public function isModerator(string $_room, string $_id)
+	public function isModerator($_room='', $_id='')
 	{
 		unset($_room); //neccesarry by func signature
 
@@ -229,11 +232,11 @@ class BBB Implements Iface
 
 	/**
 	 * free up resources bound to the call event
-	 * @param $cal_id
-	 * @param $room
-	 * @throw Exception
+	 * @param string $cal_id
+	 * @param string $room
+	 * @throws Exception
 	 */
-	private static function freeUpResource($cal_id, $room)
+	private static function freeUpResource($cal_id='', $room='')
 	{
 		$cal = new \calendar_boupdate();
 		$config = Config::read('status');
@@ -276,10 +279,10 @@ class BBB Implements Iface
 	/**
 	 * Fetch room from url
 	 *
-	 * @param $url
+	 * @param string $url
 	 * @return string returns room id
 	 */
-	public static function fetchRoomFromUrl($url)
+	public static function fetchRoomFromUrl($url='')
 	{
 		parse_str(parse_url($url)['query'], $params);
 		return $params['meetingID'];
