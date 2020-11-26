@@ -19,6 +19,7 @@ use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use EGroupware\Api\Exception;
+use EGroupware\Status\Hooks;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 use EGroupware\OpenID\Token;
 use EGroupware\Api;
@@ -163,16 +164,17 @@ class BBB Implements Iface
 	 */
 	public function checkResources($_room='', $_start=null, $_end=null, $_participants=[], $_is_invite_to=false)
 	{
+		$res_id = Hooks::getVideoconferenceResourceId();
 		$config = Config::read('status');
 		$resources = new \resources_bo($GLOBALS['egw_info']['user']['account_id']);
 		$message = lang('There is no free seats left to make/join this call!');
-		$cal_res_index = "r".$config['bbb_res_id'];
+		$cal_res_index = "r".$res_id;
 		$start = $_start??time();
 		$end = $_end??$start+((int)$config['videoconference']['bbb']['bbb_call_duration']*60);
 		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
 		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
 		$_participants[$cal_res_index] =  "A".$num_participants;
-		$resource = $resources->checkUseable($config['bbb_res_id'], $start, $end);
+		$resource = $resources->checkUseable($res_id, $start, $end);
 
 		$event = [
 			'title' => $room,
@@ -181,7 +183,7 @@ class BBB Implements Iface
 			'end' => $end,
 			'participants' => $_participants,
 			'owner' => $GLOBALS['egw_info']['user']['account_id'],
-			'participant_types' => ['r', $config['bbb_res_id']]
+			'participant_types' => ['r', $res_id]
 		];
 
 		if ($resource['useable'] < $num_participants)
@@ -266,9 +268,9 @@ class BBB Implements Iface
 	private static function freeUpResource($cal_id='', $room='')
 	{
 		$cal = new \calendar_boupdate();
-		$config = Config::read('status');
+		$res_id = Hooks::getVideoconferenceResourceId();
 		$event = $cal->read($cal_id);
-		unset($event['participants']['r'.$config['bbb_res_id']]);
+		unset($event['participants']['r'.$res_id]);
 		$event['videoconference'] = false;
 		$res = ($room == $event['title']) ? $cal->delete($cal_id, 0, false, true)
 			: $cal->update($event, true, false, false);

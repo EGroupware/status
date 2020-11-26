@@ -484,6 +484,15 @@ class Hooks
 	}
 
 	/**
+	 * @return false|mixed
+	 */
+	public static function getVideoconferenceResourceId()
+	{
+		$config = Config::read('status');
+		return in_array('BBB', (array)$config['videoconference']['backend']) && $config['bbb_res_id'] ? $config['bbb_res_id'] : false;
+	}
+
+	/**
 	 * Settings for preferences
 	 *
 	 * @return array with settings
