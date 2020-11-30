@@ -114,7 +114,7 @@ class BBB Implements Iface
 			$this->moderatorPW = $response->getModeratorPassword();
 		}
 		// users invited as an external invited users via calendar (email addresses)
-		elseif (self::isAnExternalUser($_context['user']['account_id'].':'.$_context['user']['cal_id']))
+		elseif (self::isAnExternalUser($_context['user']['account_id']))
 		{
 			return; //simply return which wpould let getMeetingUrl do the rest to create the link
 		}
@@ -214,24 +214,12 @@ class BBB Implements Iface
 
 	/**
 	 * Check if the user is an external user
-	 * @param string $_id emailaddress:cal_id
+	 * @param string $_id account_id
 	 * @return bool
 	 */
 	public function isAnExternalUser($_id='')
 	{
-		$id = explode(':', $_id);
-		if (!empty($id[1]))
-		{
-			$cal = new \calendar_boupdate();
-
-			$event = $cal->read($id[1]);
-
-			foreach ($event['participants'] as $user => $participant)
-			{
-				if ($user == 'e'.$id[0]) return true;
-			}
-		}
-		return false;
+		return filter_var($_id, FILTER_VALIDATE_EMAIL)?true:false;
 	}
 
 	/**
@@ -253,7 +241,7 @@ class BBB Implements Iface
 
 			foreach ($event['participants'] as $user => $participant)
 			{
-				if ($user == $id[0] && $participant == "ACHAIR") return true;
+				if ($user == $id[0] && preg_match('/CHAIR/', $participant)) return true;
 			}
 		}
 		return false;
