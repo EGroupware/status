@@ -12,6 +12,7 @@
 namespace EGroupware\Status;
 
 use EGroupware\Api;
+use EGroupware\Status\Videoconference\Call;
 
 /**
  * Description of Ui
@@ -69,16 +70,19 @@ class Ui {
 	public function room($content=null)
 	{
 		$tpl = new Api\Etemplate('status.room');
+		$now = $now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
 		if ($_GET['error'])
 		{
 			$content = [
 				'frame'=>'',
 				'room' => $_GET['meetingID'],
-				'error' => $_GET['error'],
-				'start' => (int) $_GET['start'],
+				'error' => $now > $_GET['end'] ? lang(Call::MSG_MEETING_IN_THE_PAST) : $_GET['error'],
+				'start' => (int) $now > $_GET['end'] ? 0 : $_GET['start'],
 				'end' => $_GET['end'],
-				'cal_id' => $_GET['cal_id']
+				'cal_id' => $_GET['cal_id'],
+				'preparation' => $_GET['preparation']
 			];
+			if (intval($_GET['preparation'])+$now >= $_GET['start']) $tpl->setElementAttribute('join', 'disabled', false);
 		}
 		else
 		{

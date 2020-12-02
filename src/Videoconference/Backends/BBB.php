@@ -20,6 +20,7 @@ use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use EGroupware\Api\Exception;
 use EGroupware\Status\Hooks;
+use EGroupware\Status\Videoconference\Call;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 use EGroupware\OpenID\Token;
 use EGroupware\Api;
@@ -89,7 +90,7 @@ class BBB Implements Iface
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
-		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success() && $start <= $now)
+		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success() && $start <= $now && $now <= $end)
 		{
 			if ($this->isUserModerator)
 			{
@@ -97,7 +98,7 @@ class BBB Implements Iface
 			}
 			return $meeting->getMeeting();
 		}
-		elseif($this->isUserModerator && $start <= $now)
+		elseif($this->isUserModerator && ($start <= $now || $now + $this->config['bbb_call_preparation'] * 60 >= $start) && $now <= $end)
 		{
 			$token = new Token();
 			$jwt = $token->accessToken('BBB', ['videoconference'], 'PT1H',
@@ -121,12 +122,13 @@ class BBB Implements Iface
 		else
 		{
 			$this->roomNotReady = [
-				'error' => lang('Room is not yet ready!'),
+				'error' => $now > $end ? lang(Call::MSG_MEETING_IN_THE_PAST) : lang(Call::MSG_ROOM_IS_NOT_READY),
 				'meetingID' => $room,
 				'cal_id' => $_context['user']['cal_id'],
 				'start' => \calendar_boupdate::date2ts($start),
 				'end' => $end
 			];
+			if ($this->isUserModerator) $this->roomNotReady['preparation'] =  $this->config['bbb_call_preparation'] * 60;
 		}
 	}
 

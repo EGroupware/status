@@ -688,8 +688,12 @@ class statusApp extends EgwApp
 					account_id:egw.user('account_id'),
 					email:egw.user('account_email'),
 					cal_id:content.cal_id
-				}, content.start, content.end], function(_url){
-				app.status.openCall(_url);
+				}, content.start, content.end], function(_data){
+					if (_data)
+					{
+						if (_data.err) egw.message(_data.err, 'error');
+						if(_data.url) app.status.openCall(_data.url);
+					}
 			}).sendRequest();
 		window.parent.close();
 	}

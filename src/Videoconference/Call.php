@@ -27,6 +27,12 @@ class Call
 	const DEBUG = false;
 
 	/**
+	 * messages
+	 */
+	const MSG_MEETING_IN_THE_PAST = 'This meeting is no longer valid because it is in the past!';
+	const MSG_ROOM_IS_NOT_READY = 'Room is not yet ready!';
+
+	/**
 	 * Call function
 	 * @param array $_data
 	 * @param string|null $_room optional room id in order initiate a call within an
@@ -92,14 +98,23 @@ class Call
 	 * @param array $context user data
 	 * @param null $start
 	 * @param null $end
-	 * @throws Api\Json\Exception
+	 * @return void;
+	 * @throws Api\Json\Exception|Api\Exception
 	 */
 	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null)
 	{
 		$respose = Api\Json\Response::get();
+		$now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
+		$start = \calendar_boupdate::date2ts(new Api\DateTime($start));
+		$end = \calendar_boupdate::date2ts(new Api\DateTime($end));
+		if ($now > $end)
+		{
+			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
+			return;
+		}
 		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
 		$context['position'] = self::isModerator($room, $context['account_id'].":".$context['cal_id']) ? 'caller' : 'callee';
-		$respose->data([self::genMeetingUrl($room, $context, [], \calendar_boupdate::date2ts($start), \calendar_boupdate::date2ts($end))]);
+		$respose->data(['url' => self::genMeetingUrl($room, $context, [], $start, $end)]);
 	}
 
 	/**
