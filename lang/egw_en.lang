@@ -37,11 +37,12 @@ open call in new window/popup	status	en	Open call in new window/popup
 phone call	status	en	Phone call
 remove from favorites	status	en	Remove from favorites
 room id	status	en	Room ID
-room is not yet ready!	common	en	Room is not yet ready!
+room is not yet ready!	status	en	Room is not yet ready!
 schedule a call	status	en	Schedule a call
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	en	Set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:
-status	common	en	Status/Videoconference
-this meeting will start in	common	en	This meeting will start in
+status	status	en	Status/Videoconference
+this meeting is no longer valid because it is in the past!	status	en	This meeting is no longer valid because it is in the past!
+this meeting will start in	status	en	This meeting will start in
 title	status	en	title
 use jwt authentication	status	en	Use JWT authentication
 video call	common	en	Video Call

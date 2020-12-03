@@ -37,11 +37,11 @@ open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Popup ö
 phone call	status	de	Telefonanruf
 remove from favorites	status	de	Aus Favoriten entfernen
 room id	status	de	Raumnummer
-room is not yet ready!	common	de	Der Meetingraum ist noch nicht verfügbar!
+room is not yet ready!	status	de	Der Meetingraum ist noch nicht verfügbar!
 schedule a call	status	de	Als Termin planen
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	de	Legen Sie die Raumvorbereitungszeit für geplante Anrufe fest, der Moderator kann die Besprechung vor ihrer eigentlichen Startzeit beginnen, die Standardeinstellung ist 5 Minuten:
-status	common	de	Status/Videokonferenz
-this meeting will start in	common	de	Diese Videokonferenz beginnt in
+status	status	de	Status/Videokonferenz
+this meeting will start in	status	de	Diese Videokonferenz beginnt in
 title	status	de	Title
 use jwt authentication	status	de	Benutze JWT Authentifizierung
 video call	common	de	Videoanruf
