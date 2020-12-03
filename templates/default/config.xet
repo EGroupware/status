@@ -87,7 +87,7 @@
                                     <int id="newsettings[videoconference][bbb][bbb_seats]" width="300px" min="0"/>
                                 </row>
                                 <row>
-                                    <description value="Estimated call session duration, default is 30 mintues" label="%s:"/>
+                                    <description value="Estimated call session duration, default is 30 minutes" label="%s:"/>
                                     <int id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="30" min="0" max="1440" value="30"/>
                                 </row>
                                 <row>
