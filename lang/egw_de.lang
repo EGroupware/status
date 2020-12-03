@@ -41,6 +41,7 @@ room is not yet ready!	status	de	Der Meetingraum ist noch nicht verfügbar!
 schedule a call	status	de	Als Termin planen
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	de	Legen Sie die Raumvorbereitungszeit für geplante Anrufe fest, der Moderator kann die Besprechung vor ihrer eigentlichen Startzeit beginnen, die Standardeinstellung ist 5 Minuten:
 status	status	de	Status/Videokonferenz
+this meeting is no longer valid because it is in the past!	status	de Diese Videokonferenz ist nicht mehr gültig, da sie in der Vergangenheit liegt!
 this meeting will start in	status	de	Diese Videokonferenz beginnt in
 title	status	de	Title
 use jwt authentication	status	de	Benutze JWT Authentifizierung
