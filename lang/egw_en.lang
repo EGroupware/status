@@ -2,15 +2,22 @@
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
 audio call	status	en	Audio Call
+bbb api secret	status	en	BBB Api secret
+bbb api url	status	en	BBB Api url
+bbb server settings	status	en	BBB Server Settings
+bbb server wildcard domain	status	en	BBB server wildcard domain
+bigbluebutton server	status	en	BigBlueButton Server
 callback	status	en	Callback
 click to join!	status	en	Click to Join!
 disable	status	en	disable
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
 enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
+estimated call session duration, default is 30 minutes:	status	en	Estimated call session duration, default is 30 minutes:
 event owner	status	en	Event owner
 example: jitsi	status	en	example: Jitsi
 example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
+fixed duration for session, session will be ended after duration is over:	status	en	Fixed duration for session, session will be ended after duration is over:
 initiating call to	status	en	Initiating call to
 invite to current call	common	en	Invite to current call
 invite to this meeting	status	en	Invite to this meeting
@@ -30,8 +37,12 @@ open call in new window/popup	status	en	Open call in new window/popup
 phone call	status	en	Phone call
 remove from favorites	status	en	Remove from favorites
 room id	status	en	Room ID
+room is not yet ready!	status	en	Room is not yet ready!
 schedule a call	status	en	Schedule a call
-status	common	en	Status/Videoconference
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	en	Set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:
+status	status	en	Status/Videoconference
+this meeting is no longer valid because it is in the past!	status	en	This meeting is no longer valid because it is in the past!
+this meeting will start in	status	en	This meeting will start in
 title	status	en	title
 use jwt authentication	status	en	Use JWT authentication
 video call	common	en	Video Call

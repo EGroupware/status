@@ -3,24 +3,49 @@
 <!-- $Id$ -->
 <overlay>
 	<template id="status.room" template="" lang="" group="0" version="20.1" >
-		<grid width="100%" height="100%" resize_ratio="0">
+		<grid width="100%" height="100%" resize_ratio="0" disabled="$cont[error]">
 			<columns>
 				<column width="100px"/>
 				<column/>
+				<column width="50px"/>
 				<column width="50px"/>
 			</columns>
 			<rows>
 				<row class="dialogHeader">
 					<description value="Room id" label="%s:"/>
 					<textbox readonly="true" id="room"/>
-					<buttononly label="Invite" id="add" background="add" onclick="app.status.videoconference_invite"/>
+					<buttononly label="Invite" id="add" background="add" onclick="app.status.videoconference_invite" disabled="!$cont[frame]"/>
+                    <buttononly label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting"/>
 				</row>
 				<row>
 					<hbox class="frame_parent">
-						<iframe id="frame" width="100%" height="100%" allow="camera;microphone"/>
+						<iframe id="frame" width="100%" height="100%" allow="camera *; microphone *;"/>
 					</hbox>
 				</row>
 			</rows>
+		</grid>
+		<grid class="countdown-dialog" width="100%" height="100%" disabled="!$cont[error]">
+		    <columns>
+		        <column width="10%"/>
+                <column width="80%"/>
+                <column width="10%"/>
+            </columns>
+            <rows>
+                <row class="row error_msg" height="30px">
+                    <label/>
+                    <description class="et2_fullWidth" value="@error"/>
+                    <label/>
+                </row>
+                <row class="row">
+                    <label/>
+                    <vbox class="timer">
+                        <description class="et2_fullWidth" value="This meeting will start in"/>
+                        <countdown class="et2_fullWidth" time="@start" onFinish="app.status.videoconference_countdown_finished" alarm="@preparation" onAlarm="app.status.videoconference_countdown_finished"/>
+                        <buttononly label="Join" id="join" disabled="true" background_image="1" image="videoconference_join" onclick="app.status.videoconference_countdown_join"/>
+                    </vbox>
+                    <label/>
+                </row>
+            </rows>
 		</grid>
 	</template>
 </overlay>

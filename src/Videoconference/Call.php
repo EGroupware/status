@@ -12,36 +12,67 @@
 namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
+use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 
 class Call
 {
 	/**
 	 * Backend modules class name
 	 */
-	const BACKENDS = ['Jitsi'];
+	const BACKENDS = ['Jitsi', 'BBB'];
 
 	/**
-	 * @param string $id
-	 * @param string $_room optional room id in order initiate a call within an
+	 * debug mode
+	 */
+	const DEBUG = false;
+
+	/**
+	 * messages
+	 */
+	const MSG_MEETING_IN_THE_PAST = 'This meeting is no longer valid because it is in the past!';
+	const MSG_ROOM_IS_NOT_READY = 'Room is not yet ready!';
+
+	/**
+	 * Call function
+	 * @param array $_data
+	 * @param string|null $_room optional room id in order initiate a call within an
 	 * existing session
-	 * @param boolean $_npn no picked up notification,prevents caller from getting
+	 * @param bool $_npn no picked up notification,prevents caller from getting
 	 * notification about callee response state. It make sense to be switched on
 	 * when inviting to an existing session
-	 *
+	 * @param bool $_is_invite_to
 	 * @throws
 	 */
-	public static function ajax_video_call($data, $_room = null, $_npn = false)
+	public static function ajax_video_call($_data=[], $_room = null, $_npn = false, $_is_invite_to = false)
 	{
 		$response = Api\Json\Response::get();
 		$caller = [
 			'name' => $GLOBALS['egw_info']['user']['account_fullname'],
 			'email' => $GLOBALS['egw_info']['user']['account_email'],
 			'avatar' => (string)(new Api\Contacts\Photo('account:' . $GLOBALS['egw_info']['user']['account_id'], true)),
-			'account_id' => $GLOBALS['egw_info']['user']['account_id']
+			'account_id' => $GLOBALS['egw_info']['user']['account_id'],
+			'position' => 'caller'
 		];
-		$room = $_room ? $_room : self::genUniqueRoomID();
-		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $data[0]['audioonly']]);
-		foreach ($data as $user) {
+		// set the owner of the call event
+		$participants = [$caller['account_id']=>'ACHAIR'];
+		foreach ($_data as $p)
+		{
+			// set all participants
+			$participants[$p['id']] = 'A';
+		}
+		$room = $_room?? self::genUniqueRoomID();
+		try {
+			$cal_id = self::checkResources($room, null, null, $participants, $_is_invite_to);
+			if (is_numeric($cal_id)) $caller['cal_id'] = $cal_id;
+		}
+		catch(NoResourceAvailable $e)
+		{
+			$response->data(['msg' => ['message' => $e->getMessage(), 'type'=>'error']]);
+			return;
+		}
+		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $_data[0]['audioonly'], 'participants'=> $participants]);
+		$CalleeUrl = '';
+		foreach ($_data as $user) {
 			// try to fill out missing information
 			if ($user['id'] && (!$user['name'] || !$user['email']))
 			{
@@ -52,32 +83,47 @@ class Call
 				'name' => $user['name'],
 				'email' => $user['email'],
 				'avatar' => (string)(new Api\Contacts\Photo('account:' . $user['id'], true)),
-				'account_id' => $user['id']
+				'account_id' => $user['id'],
+				'position' => 'callee'
 			];
-			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly']]);
+			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly'], 'participants' => $participants]);
 			self::pushCall($CalleeUrl, $user['id'], $caller, $_npn);
 		}
 		$response->data(['caller' => $CallerUrl, 'callee' => $CalleeUrl]);
 	}
 
 	/**
-	 * sends full working meeting Url to client
-	 * @param $room string room id
-	 * @param $context array user data
-	 * @throws Api\Json\Exception
+	 * Sends full working meeting Url to client
+	 * @param string $room room id
+	 * @param array $context user data
+	 * @param null $start
+	 * @param null $end
+	 * @return void;
+	 * @throws Api\Json\Exception|Api\Exception
 	 */
-	public static function ajax_genMeetingUrl($room, $context)
+	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null)
 	{
 		$respose = Api\Json\Response::get();
+		$now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
+		$start = \calendar_boupdate::date2ts(new Api\DateTime($start));
+		$end = \calendar_boupdate::date2ts(new Api\DateTime($end));
+		if ($now > $end)
+		{
+			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
+			return;
+		}
 		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
-		$respose->data([self::genMeetingUrl($room, $context)]);
+		$context['position'] = self::isModerator($room, $context['account_id'].":".$context['cal_id']) ? 'caller' : 'callee';
+		$respose->data(['url' => self::genMeetingUrl($room, $context, [], $start, $end)]);
 	}
 
 	/**
+	 * Sets missed call notification
 	 *
-	 * @param type $data
+	 * @param array $data
+	 * @throws Api\Json\Exception
 	 */
-	public static function ajax_setMissedCallNotification($data)
+	public static function ajax_setMissedCallNotification(array $data=[])
 	{
 		if (!$data['npn'])
 		{
@@ -96,20 +142,72 @@ class Call
 		$n->set_subject(lang("Missed call from %1", $data['caller']['name']));
 		$n->set_popupdata('status', ['caller'=>$data['caller']['account_id'], 'app' => 'status', 'onSeenAction' => 'app.status.refresh()']);
 		$n->set_message(Api\DateTime::to().": ".lang("You have a missed call from %1", $data['caller']['name']));
-		$n->send();
+
+		try {
+			$n->send();
+		}
+		catch(\Exception $e)
+		{
+			if (self::DEBUG) error_log(__METHOD__."()".$e->getMessage());
+		}
+	}
+
+	/**
+	 * Check available resources
+	 *
+	 * @param string $_room
+	 * @param int|null $_start
+	 * @param int|null $_end
+	 * @param array $_participants
+	 * @param bool $_is_invite_to
+	 * @throws NoResourceAvailable
+	 * @return bool|int return cal_id
+	 */
+	private static function checkResources(string $_room, $_start=null, $_end=null, $_participants=[], $_is_invite_to=false)
+	{
+		$backend = self::_getBackendInstance(0, []);
+		if (method_exists($backend, 'checkResources'))
+		{
+			try {
+				return $backend->checkResources($_room, $_start, $_end, $_participants, $_is_invite_to);
+			}
+			catch (NoResourceAvailable $e)
+			{
+				throw $e;
+			}
+
+		}
+		return false;
+	}
+
+	/**
+	 * Check if the user is a moderator of room
+	 *
+	 * @param string $room
+	 * @param string|int $id
+	 * @return bool return true if is moderator
+	 */
+	private static function isModerator(string $room, $id)
+	{
+		$backend = self::_getBackendInstance(0, []);
+		if (method_exists($backend, 'isModerator'))
+		{
+			return $backend->isModerator($room, $id);
+		}
+		return false;
 	}
 
 	/**
 	 * Generates a full working meeting Url
-	 * @param $room string room id
-	 * @param $context array user data
-	 * @param $extra array extra url options
-	 * @param int|DateTime $start start time, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int|DateTime $end expriation time, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param string $room room id
+	 * @param array $context user data
+	 * @param array $extra extra url options
+	 * @param int|DateTime|null $start start time, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|DateTime|null $end expriation time, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
 	 * @return mixed
 	 */
-	public static function genMeetingUrl ($room, $context, $extra = [], $start=null, $end=null)
+	public static function genMeetingUrl (string $room, array $context=[], $extra = [], $start=null, $end=null)
 	{
 		$backend = self::_getBackendInstance($room, [
 			'user' => $context
@@ -118,7 +216,7 @@ class Call
 
 		if (method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
 
-		return $backend->getMeetingUrl();
+		return $backend->getMeetingUrl($context);
 	}
 
 	/**
@@ -138,12 +236,12 @@ class Call
 	 *
 	 * @param string $room room-id
 	 * @param array $context values for keys 'name', 'email', 'avatar', 'account_id'
-	 * @param int|DateTime $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int|DateTime $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param int|DateTime|null $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|DateTime|null $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
-	 * @return Backends\Jitsi|Backends\Iface
+	 * @return bool|Backends\Jitsi|Backends\Iface
 	 */
-	private static function _getBackendInstance($room, $context, $start=null, $end=null)
+	private static function _getBackendInstance(string $room, array $context=[], $start=null, $end=null)
 	{
 		$config = Api\Config::read('status');
 		$backend = 	$config['videoconference']['backend'] ? $config['videoconference']['backend'][0] : 'Jitsi';
@@ -154,15 +252,15 @@ class Call
 	}
 
 	/**
-	 * @param $call string call url
-	 * @param $callee string account id of callee
-	 * @param $caller array info about caller
+	 * @param string $call call url
+	 * @param string $callee account id of callee
+	 * @param array $caller info about caller
 	 * @param boolean $npn no picked up notification, prevents caller from getting
 	 * notification about callee response state
 	 *
 	 * @throws Api\Json\Exception
 	 */
-	public static function pushCall ($call, $callee, $caller, $npn = false)
+	public static function pushCall (string $call, string $callee, array $caller, $npn = false)
 	{
 		$p = new Api\Json\Push($callee);
 		$p->call('app.status.receivedCall',[
@@ -176,17 +274,13 @@ class Call
 	/**
 	 * retrives room id from a given full url
 	 *
-	 * @param type $url
-	 * @return type
+	 * @param string $url
+	 * @return string
 	 */
-	public static function fetchRoomFromUrl ($url)
+	public static function fetchRoomFromUrl (string $url)
 	{
-		if ($url)
-		{
-			$parts = explode('?jwt=', $url);
-			if (is_array($parts)) $parts = explode('/', $parts[0]);
-		}
-		return is_array($parts) ? array_pop($parts) : "";
+		$backend = self::_getBackendInstance(0,[]);
+		return $backend::fetchRoomFromUrl($url);
 	}
 
 	/**
@@ -203,5 +297,24 @@ class Call
 		}
 
 		return $regex;
+	}
+
+	/**
+	 * Ajax function to call a room to end
+	 * @param $room
+	 * @param $url
+	 */
+	static function ajax_deleteRoom($room, $url)
+	{
+		$backend = self::_getBackendInstance($room, []);
+		$params = [];
+		if (method_exists($backend, 'deleteRoom'))
+		{
+			if($url)
+			{
+				parse_str(parse_url($url)['query'], $params);
+			}
+			$backend->deleteRoom($params);
+		}
 	}
 }

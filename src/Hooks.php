@@ -13,6 +13,13 @@ namespace EGroupware\Status;
 
 use EGroupware\Api;
 use EGroupware\Api\Config;
+use EGroupware\OpenID\AdminCmds\Client;
+use EGroupware\OpenID\Entities\ClientEntity;
+use EGroupware\OpenID\Repositories\ClientRepository;
+use EGroupware\OpenID\Repositories\GrantRepository;
+use EGroupware\Rocketchat\Api\Restapi;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use resources_bo;
 
 class Hooks
 {
@@ -23,6 +30,8 @@ class Hooks
 	const APPNAME = 'status';
 
 	const DEFAULT_VIDEOCONFERENCE_BACKEND = 'Jitsi';
+
+	const SERVER_RESOURCE_PREFIX_NAME = 'Meeting room ';
 
 	/**
 	 * Status items
@@ -382,10 +391,105 @@ class Hooks
 		return $config;
 	}
 
+	/**
+	 * Creates resource for bbb-server
+	 * @param $_content
+	 */
+	public static function config_after_save($_content)
+	{
+		if ($_content['location'] != 'config_after_save' && $_content['appname'] == 'status') return;
+		$config = $_content['newsettings']['videoconference'];
+		if (in_array('BBB', (array)$config['backend']))
+		{
+			if (!$GLOBALS['egw_info']['user']['apps']['resources']) return;
+			$res_id = Api\Config::read('status')['bbb_res_id'];
+			$resources = new resources_bo($GLOBALS['egw_info']['user']['account_id']);
+			$resource = $resources->read($res_id);
+			if (!$resource || $resource['deleted']) $resource = $res_id = null;
+			if ($config['bbb']['bbb_seats'] > 0)
+			{
+				$category = new Api\Categories('', 'resources');
+				// Global category Locations seems to be case sensitive
+				$cat_id = $category->name2id('Locations')!= 0 ?
+					$category->name2id('Locations') : $category->name2id('locations');
+				$resource['useable'] = $resource['quantity'] = $config['bbb']['bbb_seats'];
+				$res_id = $config['bbb']['bbb_res_id'] = $resources->save(array_merge([
+					'res_id' => $res_id,
+					'name' => lang(self::SERVER_RESOURCE_PREFIX_NAME.'%1','BigBlueButton'),
+					'quantity' => $config['bbb']['bbb_seats'],
+					'useable' => $config['bbb']['bbb_seats'],
+					'cat_id' => $cat_id,
+					'bookable' => true
+				], $resource));
+				if ($res_id)
+				{
+					Api\Config::save_value('bbb_res_id', $res_id, 'status');
+				}
+			}
+			elseif($res_id && $resource)
+			{
+				$resources->delete($res_id);
+			}
+
+			//create openid client
+			$clients = new ClientRepository();
+			try {
+				$clients->getClientEntity($config['backend'], null, null, false);
+			}
+			catch (OAuthServerException $e)
+			{
+				unset($e);
+				$client = new ClientEntity();
+				$client->setIdentifier($config['backend']);
+				$client->setSecret(Api\Auth::randomstring(24));
+				$client->setName(lang('BigBlueButton token'));
+				$client->setScopes(['8']);
+				$client->setRefreshTokenTTL('P0S');	// no refresh token
+				$client->setRedirectUri($GLOBALS['egw_info']['server']['webserver_url'].'/');
+				$clients->persistNewClient($client);
+			}
+		}
+	}
+
+	/**
+	 * Validate the configuration
+	 *
+	 * @param Array $data
+	 * @return string|null string with error or null on success
+	 */
+	public static function validate($data)
+	{
+		$config = Config::read('status');
+		$error = '';
+
+		if (in_array('BBB', (array)$config['videoconference']['backend']))
+		{
+			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = lang("\n-Resources app is missing!");
+			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= lang("\n-bbb domain is missing!");
+			if (!$data['videoconference']['bbb']['bbb_csp']) $error .= lang("\n-bbb CSP wild card domain is missing!");
+			if (!$data['videoconference']['bbb']['bbb_api_secret']) $error .= lang("\n-bbb Api secret is missing!");
+
+			$category = new Api\Categories('', 'resources');
+
+			if (!$config['bbb_res_id']) $error .= lang("\n-Could not save resources for bbb server!");
+			if ($category->name2id('Locations') == 0 && $category->name2id('locations') == 0) $error .= lang("\n-Resources global category Locations is missing!");
+		}
+		return $error != ''? $error : null;
+	}
+
 	public static function isVideoconferenceDisabled()
 	{
 		$config = Config::read('status');
 		return $config['videoconference']['disable'];
+	}
+
+	/**
+	 * @return false|mixed
+	 */
+	public static function getVideoconferenceResourceId()
+	{
+		$config = Config::read('status');
+		return in_array('BBB', (array)$config['videoconference']['backend']) && $config['bbb_res_id'] ? $config['bbb_res_id'] : false;
 	}
 
 	/**
@@ -476,14 +580,16 @@ class Hooks
 	{
 		$config = self::config(Api\Config::read('status'));
 		$srcs = [];
-		if (!empty($config['videoconference']['jitsi']['jitsi_domain']))
+		$backend = strtolower($config['videoconference']['backend'][0]);
+		if (!empty($config['videoconference'][$backend][$backend.'_domain']))
 		{
-			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference']['jitsi']['jitsi_domain']);
-			if (in_array($config['videoconference']['jitsi']['jitsi_domain'], ['jitsi.egroupware.org', 'jitsi.egroupware.net']))
+			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference'][$backend][$backend.'_domain']);
+			if (in_array($config['videoconference'][$backend][$backend.'_domain'], ['jitsi.egroupware.org', 'jitsi.egroupware.net']))
 			{
 				$srcs[] = 'https://www.egroupware.org/';
 			}
 		}
+		if (!empty($config['videoconference'][$backend][$backend.'_csp'])) $srcs[] = $config['videoconference'][$backend][$backend.'_csp'];
 		return $srcs;
 	}
 }

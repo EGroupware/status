@@ -12,6 +12,7 @@
 namespace EGroupware\Status;
 
 use EGroupware\Api;
+use EGroupware\Status\Videoconference\Call;
 
 /**
  * Description of Ui
@@ -69,8 +70,26 @@ class Ui {
 	public function room($content=null)
 	{
 		$tpl = new Api\Etemplate('status.room');
-		$content['frame'] = $_GET['frame'] ? (is_array($_GET['frame']) ? $_GET['frame'][0] : $_GET['frame']) : '';
-		$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
+		$now = $now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
+		if ($_GET['error'])
+		{
+			$content = [
+				'frame'=>'',
+				'room' => $_GET['meetingID'],
+				'error' => $now > $_GET['end'] ? lang(Call::MSG_MEETING_IN_THE_PAST) : $_GET['error'],
+				'start' => (int) $now > $_GET['end'] ? 0 : $_GET['start'],
+				'end' => $_GET['end'],
+				'cal_id' => $_GET['cal_id'],
+				'preparation' => $_GET['preparation']
+			];
+			if (intval($_GET['preparation'])+$now >= $_GET['start']) $tpl->setElementAttribute('join', 'disabled', false);
+		}
+		else
+		{
+			$content['frame'] = $_GET['frame'] ? (is_array($_GET['frame']) ? $_GET['frame'][0] : $_GET['frame']) : '';
+			$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
+			$content['restrict'] = Api\Config::read('status')['videoconference']['backend'][0] == 'BBB';
+		}
 		return $tpl->exec('status.EGroupware\\Status\\Ui.room', $content,array(), array());
 	}
 
@@ -186,7 +205,7 @@ class Ui {
 	 *
 	 * @param array $orders newly ordered list
 	 */
-	public static function ajax_fav_sorting ($orders)
+	public static function ajax_fav_sorting ($exec_id, $orders)
 	{
 		// the first row belongs to an empty placeholder and it should not participate
 		// in sorting

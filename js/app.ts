@@ -12,6 +12,7 @@
 	/api/js/jsapi/egw_app.js;
  */
 import {EgwApp} from "../../api/js/jsapi/egw_app";
+import {et2_dialog} from "../../api/js/etemplate/et2_widget_dialog";
 
 class statusApp extends EgwApp
 {
@@ -67,9 +68,23 @@ class statusApp extends EgwApp
 				break;
 			case 'status.room':
 				let room = this.et2.getArrayMgr('content').getEntry('room');
+				let url = this.et2.getArrayMgr('content').getEntry('frame');
+				let end = this.et2.getDOMWidgetById('end');
+				let isModerator = url.match(/isModerator\=(1|true)/i)??false;
+				let self = this;
+				if (isModerator)
+				{
+					end.set_disabled(false);
+				}
+				if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict')))
+				{
+					this.et2.getDOMWidgetById('add').set_disabled(true);
+					break;
+				}
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
 				window.addEventListener("beforeunload", function(e){
-					window.opener.sessionStorage.removeItem('status-videoconference-session')
+					window.opener.sessionStorage.removeItem('status-videoconference-session');
+
 				 }, false);
 				break;
 		}
@@ -322,7 +337,8 @@ class statusApp extends EgwApp
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
 					[data, data[0]['room']], function(_url){
-						self.openCall(_url.caller);
+						if (_url && _url.msg) egw.message(_url.msg.message, _url.msg.type);
+						if (_url.caller) self.openCall(_url.caller);
 						if (app.rocketchat?.isRCActive(null, [{data:data[0].data}]))
 						{
 							app.rocketchat.restapi_call('chat_PostMessage', {
@@ -589,8 +605,10 @@ class statusApp extends EgwApp
 								avatar: "account:"+_value.accounts[i]
 							})
 						}
-						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, statusApp.videoconference_fetchRoomFromUrl(url), true], function(){
-
+						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+							[data, statusApp.videoconference_fetchRoomFromUrl(url), true, true],
+							function(_data){
+							if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
 						}).sendRequest();
 					}
 				},
@@ -609,6 +627,29 @@ class statusApp extends EgwApp
 			}, et2_dialog._create_parent('status'));
 	}
 
+	/**
+	 * end session
+	 * @private
+	 */
+	public videoconference_endMeeting ()
+	{
+		let room = this.et2.getArrayMgr('content').getEntry('room');
+		let url = this.et2.getArrayMgr('content').getEntry('frame');
+		let isModerator = url.match(/isModerator\=(1|true)/i)??false;
+		if (isModerator)
+		{
+			et2_dialog.show_dialog(function(_b){
+				if (_b == 1)
+				{
+					egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url],
+						function(){}).sendRequest();
+					return true;
+				}
+			}, "This window will end the session for everyone, are you sure want this?",
+				"End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
+		}
+	}
+
 	public static videoconference_fetchRoomFromUrl(_url)
 	{
 		if (_url)
@@ -625,7 +666,36 @@ class statusApp extends EgwApp
 
 	public inviteToCall(_data, _room)
 	{
-		egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [_data, _room , true], function(){}).sendRequest();
+		egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+			[_data, _room , true, true], function(_data){
+			if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
+		}).sendRequest();
+	}
+
+	public videoconference_countdown_finished() {
+		let join = this.et2.getWidgetById('join');
+		join.set_disabled(false);
+	}
+
+	public videoconference_countdown_join()
+	{
+		let content = this.et2.getArrayMgr('content').data;
+		egw.json(
+			"EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl",
+			[content.room,
+				{
+					name:egw.user('account_fullname'),
+					account_id:egw.user('account_id'),
+					email:egw.user('account_email'),
+					cal_id:content.cal_id
+				}, content.start, content.end], function(_data){
+					if (_data)
+					{
+						if (_data.err) egw.message(_data.err, 'error');
+						if(_data.url) app.status.openCall(_data.url);
+					}
+			}).sendRequest();
+		window.parent.close();
 	}
 }
 app.classes.status = statusApp;

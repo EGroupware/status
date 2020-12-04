@@ -13,7 +13,6 @@ namespace EGroupware\Status\Videoconference\Backends;
 
 use EGroupware\Api;
 use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use EGroupware\Api\Config;
@@ -80,12 +79,12 @@ class Jitsi implements Iface
 	/**
 	 * Constructor
 	 *
-	 * @param string $room room-id
-	 * @param array $context values for keys 'name', 'email', 'avatar', 'account_id'
-	 * @param int $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int $end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param string $_room room-id
+	 * @param array $_context values for keys 'name', 'email', 'avatar', 'account_id'
+	 * @param int|null $_start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|null $_end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 */
-	public function __construct($_room, $_context, $_start=nul, $_end=null)
+	public function __construct($_room='', $_context=[], $_start=null, $_end=null)
 	{
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['jitsi'];
@@ -152,12 +151,19 @@ class Jitsi implements Iface
 		return $this->token->__toString();
 	}
 
-	public function getMeetingUrl ()
+	/**
+	 * @param array|null $_context
+	 * @return string
+	 */
+	public function getMeetingUrl ($_context=null)
 	{
 		$jwt = !empty($this->config['jitsi_application_id']) ? "?jwt=".$this->_getToken() : '';
 		return 'https://'.$this->payload['sub'].'/'.$this->payload['room'].$jwt.'#'.$this->_getExtraParams();
 	}
 
+	/**
+	 * @param false $value
+	 */
 	public function setStartAudioOnly ($value = false)
 	{
 		$this->extraParams['config.startAudioOnly'] = $value;
@@ -182,5 +188,20 @@ class Jitsi implements Iface
 	public function getRegex()
 	{
 		return 'https://'.$this->payload['sub'].'/'.str_replace('/' , '', Api\Header\Http::host().'.*');
+	}
+
+	/**
+	 * @param string $url
+	 * @return mixed|string returns room id
+	 */
+	public static function fetchRoomFromUrl($url='')
+	{
+		$parts = [];
+		if ($url)
+		{
+			$parts = explode('?jwt=', $url);
+			if (is_array($parts)) $parts = explode('/', $parts[0]);
+		}
+		return is_array($parts) ? array_pop($parts) : "";
 	}
 }

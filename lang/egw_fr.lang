@@ -2,6 +2,8 @@
 accept	common	fr	Accepter
 add to favorites	status	fr	Ajouter au favoris
 audio call	status	fr	Appel audio
+bbb server settings	status	fr	Paramètre Serveur BBB
+bigbluebutton server	status	fr	Serveur BigBlueButton
 callback	status	fr	Rappel
 click to join!	status	fr	Cliquer pour joindre !
 disable	status	fr	désactiver
@@ -10,6 +12,7 @@ event owner	status	fr	Propriétaire de l'événement
 example: jitsi	status	fr	exemple : Jitsi
 example: jitsi.egroupware.org	status	fr	exemple: jitsi.egroupware.org
 initiating call to	status	fr	Initier l'appel vers
+invite	status	fr	Invité
 invite to current call	common	fr	Inviter à l'appel en cours
 invite to this meeting	status	fr	Inviter à cette réunion
 is calling	status	fr	est en train d'appeler
@@ -29,7 +32,7 @@ phone call	status	fr	Appel téléphonique
 remove from favorites	status	fr	Retirer des favoris
 room id	status	fr	ID de salle
 schedule a call	status	fr	Planifier un appel
-status	common	fr	Statut/Visioconférence
+status	common	fr	Statut
 title	status	fr	Titre
 use jwt authentication	status	fr	Utiliser l'authentification JWT
 video call	common	fr	Appel vidéo

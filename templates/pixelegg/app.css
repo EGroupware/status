@@ -31,6 +31,9 @@ div#egw_fw_sidebar_r {
 #egw_fw_sidebar_r tr.row td {
   position: relative;
 }
+#egw_fw_sidebar_r tr.row td .et2_hbox.et2_box_widget.avatar {
+  margin: 2px;
+}
 tr span.stat0 {
   width: 13px;
   height: 13px;
@@ -196,6 +199,38 @@ iframe#status-room_frame {
   height: 100%;
   position: relative;
   display: table;
+}
+#status-room .et2_countdown {
+  margin-left: 10px;
+  background: #f1f1f1;
+  font-size: 50pt;
+}
+#status-room .countdown-dialog tr.error_msg .et2_label {
+  background: #fddfdf;
+  line-height: 50px;
+  font-size: 11pt;
+  display: inline-block;
+  text-align: center;
+}
+#status-room .countdown-dialog td.timer {
+  height: 100%;
+}
+#status-room .countdown-dialog td.timer .et2_label {
+  line-height: 50px;
+  font-size: 11pt;
+  text-align: center;
+}
+#status-room .countdown-dialog td.timer .et2_countdown {
+  font-size: 50pt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#status-room .countdown-dialog td.timer #status-room_join {
+  background-position: 45% center;
+  height: 40px;
+  width: calc(100% - 6px);
+  margin-left: 10px;
 }
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;

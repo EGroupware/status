@@ -23,6 +23,7 @@
                     </vbox>
                     <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false">
                         <option value="Jitsi">Jitsi Server</option>
+                        <option value="BBB">BigBlueButton Server</option>
                     </taglist>
 			    </row>
 				<row valign="middle" height="40">
@@ -56,6 +57,51 @@
                         </grid>
 				    </groupbox>
 				</row>
+				<row valign="middle" height="40">
+                    <groupbox>
+                        <caption label="BBB Server Settings"/>
+                        <grid width="100%">
+                            <columns>
+                                <column width="200px"/>
+                                <column/>
+                            </columns>
+                            <rows>
+                                <row>
+                                    <vbox>
+                                        <description value="BBB Api url" label="%s:"/>
+                                    </vbox>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_domain]" width="300px"/>
+                                </row>
+                                <row>
+                                    <vbox>
+                                        <description value="BBB server wildcard domain" label="%s:"/>
+                                    </vbox>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_csp]" width="300px"/>
+                                </row>
+                                <row>
+                                    <description value="BBB Api secret" label="%s:"/>
+                                    <textbox id="newsettings[videoconference][bbb][bbb_api_secret]" width="300px"/>
+                                </row>
+                                <row>
+                                    <description value="Number of seats" label="%s:"/>
+                                    <int id="newsettings[videoconference][bbb][bbb_seats]" width="300px" min="0"/>
+                                </row>
+                                <row>
+                                    <description value="Estimated call session duration, default is 30 minutes" label="%s:"/>
+                                    <int id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="30" min="0" max="1440" value="30"/>
+                                </row>
+                                <row>
+                                    <description value="Fixed duration for session, session will be ended after duration is over" label="%s:"/>
+                                    <checkbox id="newsettings[videoconference][bbb][bbb_call_fixed_duration]"/>
+                                </row>
+                                <row>
+                                    <description value="Set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes" label="%s:"/>
+                                    <int id="newsettings[videoconference][bbb][bbb_call_preparation]" min="0" max="30" placeholder="5" value="5"/>
+                                </row>
+                            </rows>
+                        </grid>
+                    </groupbox>
+                </row>
 			</rows>
 		</grid>
 	</template>
