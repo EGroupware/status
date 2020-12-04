@@ -462,7 +462,7 @@ class Hooks
 		$config = Config::read('status');
 		$error = '';
 
-		if (in_array('BBB', (array)$config['videoconference']['backend']))
+		if (in_array('BBB', (array)$data['videoconference']['backend']))
 		{
 			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = lang("\n-Resources app is missing!");
 			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= lang("\n-bbb domain is missing!");
