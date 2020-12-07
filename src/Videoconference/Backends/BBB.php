@@ -108,7 +108,12 @@ class BBB Implements Iface
 				], $_context['user'])]);
 
 			$this->meetingParams->setEndCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/src/Videoconference/endCallback.php?jwt='.$jwt));
-			$response = $this->bbb->createMeeting($this->meetingParams);
+			try {
+				$response = $this->bbb->createMeeting($this->meetingParams);
+			}catch(\Exception $e)
+			{
+				throw new Exception(lang('Communicating with server %1 failed because of %2',$this->config['bbb_domain'], $e->getMessage()));
+			}
 			if ($response->getReturnCode() == 'FAILED') {
 				throw new Exception($response->getMessage());
 			}
