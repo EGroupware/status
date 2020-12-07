@@ -473,10 +473,10 @@ class Hooks
 
 		if (in_array('BBB', (array)$data['videoconference']['backend']))
 		{
-			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = lang("\n-Resources app is missing!");
-			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= lang("\n-bbb domain is missing!");
-			if (!$data['videoconference']['bbb']['bbb_csp']) $error .= lang("\n-bbb CSP wild card domain is missing!");
-			if (!$data['videoconference']['bbb']['bbb_api_secret']) $error .= lang("\n-bbb Api secret is missing!");
+			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = "\n-".lang("Resources app is missing!");
+			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= "\n-".lang("bbb domain is missing!");
+			if (!$data['videoconference']['bbb']['bbb_csp']) $error .= "\n-".lang("bbb CSP wild card domain is missing!");
+			if (!$data['videoconference']['bbb']['bbb_api_secret']) $error .= "\n-".lang("bbb Api secret is missing!");
 		}
 		return $error?? null;
 	}
