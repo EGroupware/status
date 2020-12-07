@@ -21,7 +21,7 @@
                         <description value="Video conference backends" label="%s:"/>
                         <description value="example: Jitsi"/>
                     </vbox>
-                    <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false">
+                    <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false" autocomplete_url="">
                         <option value="Jitsi">Jitsi Server</option>
                         <option value="BBB">BigBlueButton Server</option>
                     </taglist>
