@@ -2,8 +2,11 @@
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
 audio call	status	de	Audioanruf
+bbb Api secret is missing!	status	de	BigBlueButton-API Secret fehlt!
 bbb api secret	status	de	BigBlueButton-API Secret
 bbb api url	status	de	BigBlueButton-API URL
+bbb CSP wild card domain is missing!	status	de	BigBlueButton Server Wildcard Domain fehlt!
+bbb domain is missing!	status	de	BigBlueButton-Domäne fehlt!
 bbb server settings	status	de	BigBlueButton Server Einstellungen
 bbb server wildcard domain	status	de	BigBlueButton Server Wildcard Domain
 bigbluebutton server	status	de	BigBlueButton Server
@@ -36,6 +39,7 @@ open call in	status	de	Öffne Videokonferenz als
 open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Popup öffnen
 phone call	status	de	Telefonanruf
 remove from favorites	status	de	Aus Favoriten entfernen
+resources app is missing!	status	de	Fehlende Ausführungsrechte für die Ressourcen-Anwendung!
 room id	status	de	Raumnummer
 room is not yet ready!	status	de	Der Meetingraum ist noch nicht verfügbar!
 schedule a call	status	de	Als Termin planen
