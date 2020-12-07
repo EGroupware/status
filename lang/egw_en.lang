@@ -2,13 +2,17 @@
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
 audio call	status	en	Audio Call
+bbb Api secret is missing!	status	en	bbb Api secret is missing!
 bbb api secret	status	en	BBB Api secret
 bbb api url	status	en	BBB Api url
+bbb CSP wild card domain is missing!	status	en	bbb CSP wild card domain is missing!
+bbb domain is missing!	status	en	bbb domain is missing!
 bbb server settings	status	en	BBB Server Settings
 bbb server wildcard domain	status	en	BBB server wildcard domain
 bigbluebutton server	status	en	BigBlueButton Server
 callback	status	en	Callback
 click to join!	status	en	Click to Join!
+communicating with server %1 failed because of %2	status	en	Communicating with server %1 failed because of %2
 disable	status	en	disable
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
@@ -36,6 +40,7 @@ open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup
 phone call	status	en	Phone call
 remove from favorites	status	en	Remove from favorites
+resources app is missing!	status	en	Resources app is missing!
 room id	status	en	Room ID
 room is not yet ready!	status	en	Room is not yet ready!
 schedule a call	status	en	Schedule a call
