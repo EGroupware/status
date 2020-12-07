@@ -412,6 +412,16 @@ class Hooks
 				// Global category Locations seems to be case sensitive
 				$cat_id = $category->name2id('Locations')!= 0 ?
 					$category->name2id('Locations') : $category->name2id('locations');
+				// try to create Locations global cat if not there
+				if ($cat_id == 0) $cat_id = $category->add([
+					'appname' => 'resources',
+					'no_private'=> true,
+					'access' => 'public',
+					'all_cats' => 'all_no_acl',
+					'name' => 'Locations',
+					'owner' => Api\Categories::GLOBAL_ACCOUNT,
+					'parent' => 0]);
+
 				$resource['useable'] = $resource['quantity'] = $config['bbb']['bbb_seats'];
 				$saved_res_id = $resources->save(array_merge([
 					'res_id' => $res_id,
@@ -420,7 +430,7 @@ class Hooks
 					'useable' => $config['bbb']['bbb_seats'],
 					'cat_id' => $cat_id,
 					'bookable' => true
-				], $resource));
+				], $resource), true);
 				if (is_numeric($saved_res_id) && $saved_res_id != $res_id)
 				{
 					Api\Config::save_value('bbb_res_id', $saved_res_id, 'status');
@@ -467,20 +477,6 @@ class Hooks
 			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= lang("\n-bbb domain is missing!");
 			if (!$data['videoconference']['bbb']['bbb_csp']) $error .= lang("\n-bbb CSP wild card domain is missing!");
 			if (!$data['videoconference']['bbb']['bbb_api_secret']) $error .= lang("\n-bbb Api secret is missing!");
-
-			$category = new Api\Categories('', 'resources');
-
-			if (($cat_id = $category->name2id('Locations')) == 0)
-			{
-				if ($cat_id == 0 && ($cat_id = $category->name2id('locations')) == 0)
-				{
-					$error .= lang("\n-Resources global category Locations is missing!");
-				}
-				else
-				{
-					if (\resources_acl_bo::get_permissions($cat_id)) $error .= lang("\n-Maybe you don't have write permissions to use resources category locations (cat_id: %1)!", $cat_id);
-				}
-			}
 		}
 		return $error?? null;
 	}
