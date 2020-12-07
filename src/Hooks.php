@@ -397,12 +397,12 @@ class Hooks
 	 */
 	public static function config_after_save($_content)
 	{
-		if ($_content['location'] != 'config_after_save' && $_content['appname'] == 'status') return;
+		if ($_content['location'] != 'config_after_save' && $_content['appname'] != 'status') return;
 		$config = $_content['newsettings']['videoconference'];
 		if (in_array('BBB', (array)$config['backend']))
 		{
 			if (!$GLOBALS['egw_info']['user']['apps']['resources']) return;
-			$res_id = Api\Config::read('status')['bbb_res_id'];
+			$res_id = (int)Api\Config::read('status')['bbb_res_id'];
 			$resources = new resources_bo($GLOBALS['egw_info']['user']['account_id']);
 			$resource = $resources->read($res_id);
 			if (!$resource || $resource['deleted']) $resource = $res_id = null;
@@ -413,7 +413,7 @@ class Hooks
 				$cat_id = $category->name2id('Locations')!= 0 ?
 					$category->name2id('Locations') : $category->name2id('locations');
 				$resource['useable'] = $resource['quantity'] = $config['bbb']['bbb_seats'];
-				$res_id = $config['bbb']['bbb_res_id'] = $resources->save(array_merge([
+				$saved_res_id = $resources->save(array_merge([
 					'res_id' => $res_id,
 					'name' => lang(self::SERVER_RESOURCE_PREFIX_NAME.'%1','BigBlueButton'),
 					'quantity' => $config['bbb']['bbb_seats'],
@@ -421,9 +421,9 @@ class Hooks
 					'cat_id' => $cat_id,
 					'bookable' => true
 				], $resource));
-				if ($res_id)
+				if (is_numeric($saved_res_id) && $saved_res_id != $res_id)
 				{
-					Api\Config::save_value('bbb_res_id', $res_id, 'status');
+					Api\Config::save_value('bbb_res_id', $saved_res_id, 'status');
 				}
 			}
 			elseif($res_id && $resource)
@@ -459,7 +459,6 @@ class Hooks
 	 */
 	public static function validate($data)
 	{
-		$config = Config::read('status');
 		$error = '';
 
 		if (in_array('BBB', (array)$data['videoconference']['backend']))
@@ -471,10 +470,19 @@ class Hooks
 
 			$category = new Api\Categories('', 'resources');
 
-			if (!$config['bbb_res_id']) $error .= lang("\n-Could not save resources for bbb server!");
-			if ($category->name2id('Locations') == 0 && $category->name2id('locations') == 0) $error .= lang("\n-Resources global category Locations is missing!");
+			if (($cat_id = $category->name2id('Locations')) == 0)
+			{
+				if ($cat_id == 0 && ($cat_id = $category->name2id('locations')) == 0)
+				{
+					$error .= lang("\n-Resources global category Locations is missing!");
+				}
+				else
+				{
+					if (\resources_acl_bo::get_permissions($cat_id)) $error .= lang("\n-Maybe you don't have write permissions to use resources category locations (cat_id: %1)!", $cat_id);
+				}
+			}
 		}
-		return $error != ''? $error : null;
+		return $error?? null;
 	}
 
 	public static function isVideoconferenceDisabled()
