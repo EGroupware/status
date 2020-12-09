@@ -93,7 +93,7 @@ class BBB Implements Iface
 		$this->roomNotReady = null;
 		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
-		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['name']);
+		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
 		if (!empty($_context['extra']['participants'])) $this->meetingParams->setMaxParticipants(count($_context['extra']['participants'])+($this->config['bbb_call_extra_invites']??self::EXTRA_INVITES_DEFAULT));
@@ -158,7 +158,7 @@ class BBB Implements Iface
 					'menuaction' => 'status.EGroupware\\Status\\Ui.room',
 				], $this->roomNotReady)));
 		}
-		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $this->meetingParams->getMeetingName(), $this->isUserModerator?
+		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $_context['name'], $this->isUserModerator?
 			$this->moderatorPW:$this->meetingParams->getAttendeePassword());
 		$meetingParams->setCustomParameter('isModerator', $this->isUserModerator);
 		if (!empty($_context['cal_id'])) $meetingParams->setCustomParameter('cal_id', $_context['cal_id']);
