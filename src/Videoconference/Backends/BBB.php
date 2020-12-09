@@ -199,8 +199,7 @@ class BBB Implements Iface
 		}
 
 		$cal = new \calendar_boupdate();
-
-		$res = $cal->update($event, false, false, true);
+		$res = $cal->update($event, false, false, true, true, $msg, true);
 		if (is_array($res))
 		{
 			foreach ($res as $r) {
