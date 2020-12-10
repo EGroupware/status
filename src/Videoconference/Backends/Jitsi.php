@@ -104,6 +104,9 @@ class Jitsi implements Iface
 		$context['user'] = array_map(function($val){
 			return (string)$val;
 		}, (array)$_context['user']);
+		// Jitsi doesn't like more context params, we use these params in other backends though
+		unset($context['user']['cal_id'], $context['user']['title']);
+
 		try {
 			$this->token = (new Builder())
 				// Configures the issuer (iss claim)
