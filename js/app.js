@@ -266,8 +266,8 @@ var statusApp = /** @class */ (function (_super) {
         return result;
     };
     statusApp.prototype.isOnline = function (_action, _selected) {
-        var _c;
-        return _selected[0].data.data.status.active || ((_c = app.rocketchat) === null || _c === void 0 ? void 0 : _c.isRCActive(_action, _selected));
+        var _c, _d, _e;
+        return !(((_c = _selected[0].data.data.rocketchat) === null || _c === void 0 ? void 0 : _c.type) == 'c') && (((_d = _selected[0].data.data.status) === null || _d === void 0 ? void 0 : _d.active) || ((_e = app.rocketchat) === null || _e === void 0 ? void 0 : _e.isRCActive(_action, _selected)));
     };
     /**
      * Initiate call via action
@@ -480,20 +480,21 @@ var statusApp = /** @class */ (function (_super) {
         }, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
     };
     statusApp.prototype.phoneCall = function (_action, _selected) {
+        var _c, _d, _e, _f;
         var data = _selected[0]['data'];
         var target = '';
         switch (_action.id) {
             case 'addressbook_tel_work':
-                target = data.data.status.tel_work;
+                target = (_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_work;
                 break;
             case 'addressbook_tel_cell':
-                target = data.data.status.tel_cell;
+                target = (_d = data.data.status) === null || _d === void 0 ? void 0 : _d.tel_cell;
                 break;
             case 'addressbook_tel_prefer':
-                target = data.data.status.tel_prefer;
+                target = (_e = data.data.status) === null || _e === void 0 ? void 0 : _e.tel_prefer;
                 break;
             case 'addressbook_tel_home':
-                target = data.data.status.tel_home;
+                target = (_f = data.data.status) === null || _f === void 0 ? void 0 : _f.tel_home;
                 break;
         }
         if (target) {
@@ -504,22 +505,23 @@ var statusApp = /** @class */ (function (_super) {
         }
     };
     statusApp.prototype.phoneIsAvailable = function (_action, _selected) {
+        var _c, _d, _e, _f;
         var data = _selected[0]['data'];
         switch (_action.id) {
             case 'addressbook_tel_work':
-                if (data.data.status.tel_work)
+                if ((_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_work)
                     return true;
                 break;
             case 'addressbook_tel_cell':
-                if (data.data.status.tel_cell)
+                if ((_d = data.data.status) === null || _d === void 0 ? void 0 : _d.tel_cell)
                     return true;
                 break;
             case 'addressbook_tel_prefer':
-                if (data.data.status.tel_prefer)
+                if ((_e = data.data.status) === null || _e === void 0 ? void 0 : _e.tel_prefer)
                     return true;
                 break;
             case 'addressbook_tel_home':
-                if (data.data.status.tel_home)
+                if ((_f = data.data.status) === null || _f === void 0 ? void 0 : _f.tel_home)
                     return true;
                 break;
         }
