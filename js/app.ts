@@ -20,7 +20,7 @@ class statusApp extends EgwApp
 
 	private _ring : JQuery = null;
 
-	private static MISSED_CALL_TIMEOUT : number = 30000;
+	private static MISSED_CALL_TIMEOUT : number = 15000;
 
 	/**
 	 * Constructor
@@ -456,6 +456,8 @@ class statusApp extends EgwApp
 					self.openCall(value.url);
 					isCallAnswered = true;
 				}
+			},
+			beforeClose: function(){
 				self._controllRingTone().stop();
 			},
 			title: '',
@@ -502,7 +504,7 @@ class statusApp extends EgwApp
 				self._ring[0].play().then(function(){
 					window.setTimeout(function(){
 						self._controllRingTone().stop();
-					}, statusApp.MISSED_CALL_TIMEOUT) // stop ringing automatically after 10s
+					}, statusApp.MISSED_CALL_TIMEOUT) // stop ringing automatically
 				},function(_error){
 					console.log('Error happened: '+_error);
 				});
