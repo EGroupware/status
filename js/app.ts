@@ -301,7 +301,7 @@ class statusApp extends EgwApp
 
 	isOnline(_action, _selected)
 	{
-		return _selected[0].data.data.status.active || app.rocketchat?.isRCActive(_action, _selected);
+		return !(_selected[0].data.data.rocketchat?.type == 'c') && (_selected[0].data.data.status?.active || app.rocketchat?.isRCActive(_action, _selected));
 	}
 
 	/**
@@ -542,16 +542,16 @@ class statusApp extends EgwApp
 		switch(_action.id)
 		{
 			case 'addressbook_tel_work':
-				target = data.data.status.tel_work;
+				target = data.data.status?.tel_work;
 				break;
 			case 'addressbook_tel_cell':
-				target = data.data.status.tel_cell;
+				target = data.data.status?.tel_cell;
 				break;
 			case 'addressbook_tel_prefer':
-				target = data.data.status.tel_prefer;
+				target = data.data.status?.tel_prefer;
 				break;
 			case 'addressbook_tel_home':
-				target = data.data.status.tel_home;
+				target = data.data.status?.tel_home;
 				break;
 		}
 		if (target)
@@ -570,16 +570,16 @@ class statusApp extends EgwApp
 		switch(_action.id)
 		{
 			case 'addressbook_tel_work':
-				if (data.data.status.tel_work) return true;
+				if (data.data.status?.tel_work) return true;
 				break;
 			case 'addressbook_tel_cell':
-				if (data.data.status.tel_cell) return true;
+				if (data.data.status?.tel_cell) return true;
 				break;
 			case 'addressbook_tel_prefer':
-				if (data.data.status.tel_prefer) return true;
+				if (data.data.status?.tel_prefer) return true;
 				break;
 			case 'addressbook_tel_home':
-				if (data.data.status.tel_home) return true;
+				if (data.data.status?.tel_home) return true;
 				break;
 		}
 		return false;
