@@ -584,7 +584,7 @@ class Hooks
 	{
 		$config = self::config(Api\Config::read('status'));
 		$srcs = [];
-		$backend = strtolower($config['videoconference']['backend'][0]);
+		$backend = strtolower(is_array($config['videoconference']['backend'])?$config['videoconference']['backend'][0]:$config['videoconference']['backend']);
 		if (!empty($config['videoconference'][$backend][$backend.'_domain']))
 		{
 			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference'][$backend][$backend.'_domain']);
