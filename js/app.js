@@ -407,6 +407,8 @@ var statusApp = /** @class */ (function (_super) {
                     self.openCall(value.url);
                     isCallAnswered = true;
                 }
+            },
+            beforeClose: function () {
                 self._controllRingTone().stop();
             },
             title: '',
@@ -451,7 +453,7 @@ var statusApp = /** @class */ (function (_super) {
                 self._ring[0].play().then(function () {
                     window.setTimeout(function () {
                         self._controllRingTone().stop();
-                    }, statusApp.MISSED_CALL_TIMEOUT); // stop ringing automatically after 10s
+                    }, statusApp.MISSED_CALL_TIMEOUT); // stop ringing automatically
                 }, function (_error) {
                     console.log('Error happened: ' + _error);
                 });
@@ -618,7 +620,7 @@ var statusApp = /** @class */ (function (_super) {
         window.parent.close();
     };
     statusApp.appname = 'status';
-    statusApp.MISSED_CALL_TIMEOUT = 30000;
+    statusApp.MISSED_CALL_TIMEOUT = 15000;
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;
