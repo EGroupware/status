@@ -404,7 +404,7 @@ class Hooks
 			if (!$GLOBALS['egw_info']['user']['apps']['resources']) return;
 			$res_id = (int)Api\Config::read('status')['bbb_res_id'];
 			$resources = new resources_bo($GLOBALS['egw_info']['user']['account_id']);
-			$resource = $resources->read($res_id);
+			$resource = $resources->read($res_id, true);
 			if (!$resource || $resource['deleted']) $resource = $res_id = null;
 			if ($config['bbb']['bbb_seats'] > 0)
 			{

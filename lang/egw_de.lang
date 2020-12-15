@@ -1,3 +1,4 @@
+*important: bigbluebutton backend uses category Locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	de	*Wichtig: Das BigBlueButton-Backend verwendet die Kategorie Räume, um auf die Ressource "Meeting Room BigBlueButton" zuzugreifen, daher wird empfohlen, entsprechende Benutzerleserechte für die Kategorie Räume zu setzen.
 %1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen, wollen Sie es nochmal versuchen?
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
