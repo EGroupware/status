@@ -1,3 +1,4 @@
+*important: bigbluebutton backend uses category Locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	en	*Important: BigBlueButton backend uses category Locations in order to access to resource of "Meeting Room BigBlueButton" therefore it is recommended to set proper user read permissions for Locations category.
 %1 did not pickup your call, would you like to try again?	status	en	%1 did not pickup your call, would you like to try again?
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites

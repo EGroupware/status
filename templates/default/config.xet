@@ -67,14 +67,19 @@
                             </columns>
                             <rows>
                                 <row>
+                                    <description value='*Important: BigBlueButton backend uses category Locations in order to access to resource of "Meeting Room BigBlueButton" therefore it is recommended to set proper user read permissions for Locations category.'/>
+                                </row>
+                                <row>
                                     <vbox>
                                         <description value="BBB Api url" label="%s:"/>
+                                        <description value="example: https://app.bbbserver.de/de/bbb-integration/"/>
                                     </vbox>
                                     <textbox id="newsettings[videoconference][bbb][bbb_domain]" width="300px"/>
                                 </row>
                                 <row>
                                     <vbox>
                                         <description value="BBB server wildcard domain" label="%s:"/>
+                                        <description value="example: *.bbbserver.de"/>
                                     </vbox>
                                     <textbox id="newsettings[videoconference][bbb][bbb_csp]" width="300px"/>
                                 </row>

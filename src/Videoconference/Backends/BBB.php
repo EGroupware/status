@@ -79,7 +79,8 @@ class BBB Implements Iface
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['bbb'];
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
-		putenv('BBB_SERVER_BASE_URL='.$this->config['bbb_domain']);
+		putenv('BBB_SERVER_BASE_URL='.(substr($this->config['bbb_domain'], -4) == "/api" ?
+				substr($this->config['bbb_domain'],0,-3):$this->config['bbb_domain']));
 		$now = \calendar_boupdate::date2ts(new DateTime('now'));
 		$start = $_start??$now;
 		$end = $_end??$start+($this->config['bbb_call_duration']);
@@ -181,7 +182,7 @@ class BBB Implements Iface
 		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
 		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
 		$_participants[$cal_res_index] =  "A".$num_participants;
-		$resource = $resources->checkUseable($res_id, $start, $end);
+		$resource = $resources->checkUseable($res_id, $start, $end, true);
 
 		$event = [
 			'title' => $room,
