@@ -5,7 +5,7 @@
 	<template id="status.config.videoconference" template="" lang="" group="0" version="19.1">
 		<grid width="100%" class="admin-config egwGridView_grid">
 			<columns>
-				<column width="250px"/>
+				<column width="215px"/>
 				<column/>
 			</columns>
 			<rows>
