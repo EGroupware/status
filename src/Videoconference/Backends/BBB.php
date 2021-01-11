@@ -59,6 +59,11 @@ class BBB Implements Iface
 	 */
 	private $roomNotReady;
 
+	/*
+	 * Default config value of extra invites
+	 */
+	private const EXTRA_INVITES_DEFAULT = 2;
+
 	/**
 	 * Constructor
 	 *
@@ -91,6 +96,7 @@ class BBB Implements Iface
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
+		if (!empty($_context['extra']['participants'])) $this->meetingParams->setMaxParticipants(count($_context['extra']['participants'])+($this->config['bbb_call_extra_invites']??self::EXTRA_INVITES_DEFAULT));
 		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success() && $start <= $now && $now <= $end)
 		{
 			if ($this->isUserModerator)
@@ -108,7 +114,7 @@ class BBB Implements Iface
 					'account_lid' => Api\Accounts::id2name($_context['user']['account_id'])
 				], $_context['user'])]);
 
-			$this->meetingParams->setEndCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/src/Videoconference/endCallback.php?jwt='.$jwt));
+			$this->meetingParams->setEndCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/endCallback.php?jwt='.$jwt));
 			try {
 				$response = $this->bbb->createMeeting($this->meetingParams);
 			}catch(\Exception $e)
