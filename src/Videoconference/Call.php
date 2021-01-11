@@ -98,10 +98,11 @@ class Call
 	 * @param array $context user data
 	 * @param null $start
 	 * @param null $end
+	 * @param array $extra extra parameteres
 	 * @return void;
 	 * @throws Api\Json\Exception|Api\Exception
 	 */
-	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null)
+	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null, array $extra=[])
 	{
 		$respose = Api\Json\Response::get();
 		$now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
@@ -114,7 +115,7 @@ class Call
 		}
 		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
 		$context['position'] = self::isModerator($room, $context['account_id'].":".$context['cal_id']) ? 'caller' : 'callee';
-		$respose->data(['url' => self::genMeetingUrl($room, $context, [], $start, $end)]);
+		$respose->data(['url' => self::genMeetingUrl($room, $context, $extra, $start, $end)]);
 	}
 
 	/**
@@ -210,7 +211,8 @@ class Call
 	public static function genMeetingUrl (string $room, array $context=[], $extra = [], $start=null, $end=null)
 	{
 		$backend = self::_getBackendInstance($room, [
-			'user' => $context
+			'user' => $context,
+			'extra' => $extra
 		], $start instanceof \DateTime ? $start->getTimestamp() : $start,
 			$end instanceof \DateTime ? $end->getTimestamp() : $end);
 

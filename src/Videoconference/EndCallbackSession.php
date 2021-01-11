@@ -15,13 +15,12 @@ class EndCallbackSession
 		$token = new Token();
 		if (!$jwt || !($t=$token->validateJWT($jwt)))
 		{
-			throw new Exception('No valid Token found!');
-			exit();
+			return false;
 		}
 		if ($t)
 		{
 			$context = $t->getClaim('context');
-			//TODO: creating session and deleteing the cal event
+			return $GLOBALS['egw']->session->create($context['account'], '', 'text', true, false);
 		}
 	}
 }

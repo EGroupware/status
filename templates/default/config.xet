@@ -103,6 +103,10 @@
                                     <description value="Set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes" label="%s:"/>
                                     <int id="newsettings[videoconference][bbb][bbb_call_preparation]" min="0" max="30" placeholder="5" value="5"/>
                                 </row>
+                                <row>
+                                    <description value="Extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxParticipants value of the call."/>
+                                    <int id="newsettings[videoconference][bbb][bbb_call_extra_invites]" min="0" placeholder="2" value="2"/>
+                                </row>
                             </rows>
                         </grid>
                     </groupbox>
