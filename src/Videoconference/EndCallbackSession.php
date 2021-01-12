@@ -5,7 +5,6 @@ namespace EGroupware\Status\Videoconference;
 
 
 use EGroupware\OpenID\Token;
-use mysql_xdevapi\Exception;
 
 class EndCallbackSession
 {
@@ -20,7 +19,7 @@ class EndCallbackSession
 		if ($t)
 		{
 			$context = $t->getClaim('context');
-			return $GLOBALS['egw']->session->create($context['account'], '', 'text', true, false);
+			return $GLOBALS['egw']->session->create($context->account_lid, '', 'text', true, false);
 		}
 	}
 }
