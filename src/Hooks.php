@@ -339,7 +339,7 @@ class Hooks
 		$hooks = Api\Hooks::implemented('status-getSearchParticipants');
 		foreach ($hooks as $app) {
 			$r = Api\Hooks::process(['location' => 'status-getSearchParticipants', 'app' => $app], $app);
-			$results = array_merge_recursive($results, $r[$app]);
+			if (is_array($r[$app])) $results = array_merge_recursive($results, $r[$app]);
 		}
 		usort($results, function ($a, $b) use ($query) {
 			$a_label = is_array($a["label"]) ? $a["label"]["label"] : $a["label"];
