@@ -576,7 +576,10 @@ var statusApp = /** @class */ (function (_super) {
         if (isModerator) {
             et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
                 if (_b == 1) {
-                    egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function () { }).sendRequest();
+                    egw(window).loading_prompt(room, true, egw.lang('Ending the session ...'));
+                    egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function () {
+                        egw(window).loading_prompt(room, false);
+                    }).sendRequest();
                     return true;
                 }
             }, "This window will end the session for everyone, are you sure want this?", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);

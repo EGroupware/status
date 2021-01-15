@@ -309,6 +309,7 @@ class Call
 	static function ajax_deleteRoom($room, $url)
 	{
 		$backend = self::_getBackendInstance($room, []);
+		$response = Api\Json\Response::get();
 		$params = [];
 		if (method_exists($backend, 'deleteRoom'))
 		{
@@ -318,5 +319,6 @@ class Call
 			}
 			$backend->deleteRoom($params);
 		}
+		$response->data([]);
 	}
 }
