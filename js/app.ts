@@ -643,8 +643,11 @@ class statusApp extends EgwApp
 			et2_dialog.show_dialog(function(_b){
 				if (_b == 1)
 				{
+					egw(window).loading_prompt(room, true, egw.lang('Ending the session ...'));
 					egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url],
-						function(){}).sendRequest();
+						function(){
+							egw(window).loading_prompt(room, false);
+						}).sendRequest();
 					return true;
 				}
 			}, "This window will end the session for everyone, are you sure want this?",
