@@ -105,9 +105,9 @@ class Call
 	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null, array $extra=[])
 	{
 		$respose = Api\Json\Response::get();
-		$now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
-		$start = \calendar_boupdate::date2ts(new Api\DateTime($start));
-		$end = \calendar_boupdate::date2ts(new Api\DateTime($end));
+		$now = \calendar_boupdate::date2ts((new Api\DateTime('now'))->setServer());
+		$start = \calendar_boupdate::date2ts((new Api\DateTime($start))->setServer());
+		$end = \calendar_boupdate::date2ts((new Api\DateTime($end))->setServer());
 		if ($now > $end)
 		{
 			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
