@@ -69,8 +69,8 @@ class BBB Implements Iface
 	 *
 	 * @param string $_room room-id
 	 * @param array $_context values for keys 'name', 'email', 'avatar', 'account_id'
-	 * @param int|null $_start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int|null $_end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param int|null $_start start UTC timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|null $_end expiration UTC timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
 	 * @throws Exception
 	 * @return void|Meeting
@@ -86,7 +86,7 @@ class BBB Implements Iface
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
 		putenv('BBB_SERVER_BASE_URL='.(substr($this->config['bbb_domain'], -4) == "/api" ?
 				substr($this->config['bbb_domain'],0,-3):$this->config['bbb_domain']));
-		$now = \calendar_boupdate::date2ts(new DateTime('now'));
+		$now = time();
 		$start = $_start??$now;
 		$end = $_end??$start+($this->config['bbb_call_duration']);
 		$duration = $_end ? ($end - $start) / 60 : $end - $start;
@@ -137,7 +137,7 @@ class BBB Implements Iface
 				'error' => $now > $end ? lang(Call::MSG_MEETING_IN_THE_PAST) : lang(Call::MSG_ROOM_IS_NOT_READY),
 				'meetingID' => $room,
 				'cal_id' => $_context['user']['cal_id'],
-				'start' => \calendar_boupdate::date2ts($start),
+				'start' => $start,
 				'end' => $end
 			];
 			if ($this->isUserModerator) $this->roomNotReady['preparation'] =  $this->config['bbb_call_preparation'] * 60;
