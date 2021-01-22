@@ -96,8 +96,8 @@ class Call
 	 * Sends full working meeting Url to client
 	 * @param string $room room id
 	 * @param array $context user data
-	 * @param null $start
-	 * @param null $end
+	 * @param ?int $start
+	 * @param ?int $end
 	 * @param array $extra extra parameteres
 	 * @return void;
 	 * @throws Api\Json\Exception|Api\Exception
@@ -105,9 +105,9 @@ class Call
 	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null, array $extra=[])
 	{
 		$respose = Api\Json\Response::get();
-		$now = \calendar_boupdate::date2ts((new Api\DateTime('now'))->setServer());
-		$start = \calendar_boupdate::date2ts((new Api\DateTime($start))->setServer());
-		$end = \calendar_boupdate::date2ts((new Api\DateTime($end))->setServer());
+		$now = new Api\DateTime('now');
+		$start = new Api\DateTime($start);
+		$end = new Api\DateTime($end);
 		if ($now > $end)
 		{
 			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
@@ -213,8 +213,8 @@ class Call
 		$backend = self::_getBackendInstance($room, [
 			'user' => $context,
 			'extra' => $extra
-		], $start instanceof \DateTime ? $start->getTimestamp() : $start,
-			$end instanceof \DateTime ? $end->getTimestamp() : $end);
+		], (new Api\DateTime($start))->getTimestamp(),
+			(new Api\DateTime($end))->getTimestamp());
 
 		if (method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
 

@@ -81,8 +81,8 @@ class Jitsi implements Iface
 	 *
 	 * @param string $_room room-id
 	 * @param array $_context values for keys 'name', 'email', 'avatar', 'account_id'
-	 * @param int|null $_start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int|null $_end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param int|null $_start start UTC timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
+	 * @param int|null $_end expiration UTC timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 */
 	public function __construct($_room='', $_context=[], $_start=null, $_end=null)
 	{

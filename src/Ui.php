@@ -70,15 +70,17 @@ class Ui {
 	public function room($content=null)
 	{
 		$tpl = new Api\Etemplate('status.room');
-		$now = $now = \calendar_boupdate::date2ts(new Api\DateTime('now'));
+		// now time in UTC
+		$now = time();
 		if ($_GET['error'])
 		{
 			$content = [
 				'frame'=>'',
 				'room' => $_GET['meetingID'],
 				'error' => $now > $_GET['end'] ? lang(Call::MSG_MEETING_IN_THE_PAST) : $_GET['error'],
-				'start' => (int) $now > $_GET['end'] ? 0 : $_GET['start'],
-				'end' => $_GET['end'],
+				// Start and End time are in UTC, need to be converted to ET2 time format
+				'start' => (int) $now > $_GET['end'] ? 0 : (new Api\DateTime())->setTimestamp($_GET['start'])->format(Api\DateTime::ET2),
+				'end' => (new Api\DateTime())->setTimestamp($_GET['end'])->format(Api\DateTime::ET2),
 				'cal_id' => $_GET['cal_id'],
 				'preparation' => $_GET['preparation']
 			];
