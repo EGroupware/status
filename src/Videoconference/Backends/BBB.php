@@ -169,60 +169,86 @@ class BBB Implements Iface
 	 * Check resources
 	 *
 	 * @param string $_room
-	 * @param int|null $_start
-	 * @param int|null $_end
-	 * @param array $_participants
-	 * @param bool $_is_invite_to
+	 * @param array $_params
+	 * 	- start
+	 * 	- end
+	 * 	- participants
+	 * 	- invitation
 	 * @throws NoResourceAvailable
-	 * @return int cal_id
+	 * @return int cal_id returns cal_id if successful and throw exceptions otherwise
 	 */
-	public function checkResources($_room='', $_start=null, $_end=null, $_participants=[], $_is_invite_to=false)
+	public function checkResources($_room='', $_params = [])
 	{
 		$res_id = Hooks::getVideoconferenceResourceId();
 		$config = Config::read('status');
+		$cal = new \calendar_boupdate();
 		$resources = new \resources_bo($GLOBALS['egw_info']['user']['account_id']);
 		$message = lang('There is no free seats left to make/join this call!');
 		$cal_res_index = "r".$res_id;
-		$start = $_start??time();
-		$end = $_end??$start+((int)$config['videoconference']['bbb']['bbb_call_duration']*60);
+		$url_params = self::fetchParamsFromUrl($_room);
+		$start = $_params['start'] ? new Api\DateTime($_params['start']) : new Api\DateTime('now');
+
+		if ($_params['end'])
+		{
+			$end = new Api\DateTime($_params['end']);
+		}
+		else
+		{
+			$end = new Api\DateTime($start->format('ts'));
+			$end->add(((int)$config['videoconference']['bbb']['bbb_call_duration']*60).' seconds');
+		}
+
 		$room = parse_url($_room)['query'] ? self::fetchRoomFromUrl($_room) : $_room;
-		$num_participants = $_is_invite_to?count($_participants)-1:count($_participants);
-		$_participants[$cal_res_index] =  "A".$num_participants;
+		$num_participants = $_params['invitation']?count($_params['participants'])-1:count($_params['participants']);
+		$_params['participants'][$cal_res_index] =  "A".$num_participants;
+
+		// check resources on the given time period and throw exception when there's no resource left
 		$resource = $resources->checkUseable($res_id, $start, $end, true);
-
-		$event = [
-			'title' => $room,
-			'##videoconference' => $room,
-			'start' => $start,
-			'end' => $end,
-			'participants' => $_participants,
-			'owner' => $GLOBALS['egw_info']['user']['account_id'],
-			'participant_types' => ['r', $res_id]
-		];
-
 		if ($resource['useable'] < $num_participants)
 		{
 			throw new NoResourceAvailable($message);
 		}
 
-		$cal = new \calendar_boupdate();
-		$res = $cal->update($event, false, false, true, true, $msg, true);
-		if (is_array($res))
+		$cal_events = $url_params['cal_id'] ? $cal->read([$url_params['cal_id']], null, true) : [];
+		if (is_array($cal_events[$url_params['cal_id']]))
 		{
-			foreach ($res as $r) {
-				if ($r['title'] == $event['title'] && $event['start']>=$r['start'] && $event['start'] <= $r['end'])
+			$event = $cal_events[$url_params['cal_id']];
+			$event['participants'] = $_params['participants'];
+		}
+		else // create a new event (it happens in direct calls)
+		{
+			$event = [
+				'title' => $room,
+				'##videoconference' => $room,
+				'start' => Api\DateTime::user2server($start, 'ts'),
+				'end' => Api\DateTime::user2server($end, 'ts'),
+				'participants' => $_params['participants'],
+				'owner' => $GLOBALS['egw_info']['user']['account_id'],
+				'participant_types' => ['r', $res_id]
+			];
+			$cal_events = $cal->update($event, false, false, true, true, $msg, true);
+		}
+
+		if (is_array($cal_events))
+		{
+			foreach ($cal_events as $r) {
+				// add newly added participant for the event
+				if ($r['id'] == $event['id'] && $event['start']>=$r['start'] && $event['start'] <= $r['end'])
 				{
 					$n = (intval(substr($r['participants'][$cal_res_index] ,1))
 						+ intval(substr($event['participants'][$cal_res_index],1)));
-					$event['id'] = $r['id'];
 					$event['participants'] = $event['participants'] + $r['participants'];
 					$event['participants'][$cal_res_index] = "A".$n;
 				}
 			}
-			$res = $cal->update($event, true, false, true);
+
+			// update the event after participants update
+			$cal_events = $cal->update($event, true, false, true);
 		}
-		if (is_array($res)) throw new NoResourceAvailable($message);
-		return $res;
+		// there's still a confilict array then throw exception
+		if (is_array($cal_events)) throw new NoResourceAvailable($message);
+		// returns cal_id if successful
+		return $cal_events;
 	}
 
 	/**
@@ -316,5 +342,16 @@ class BBB Implements Iface
 	{
 		parse_str(parse_url($url)['query'], $params);
 		return $params['meetingID'];
+	}
+
+	/**
+	 * Fetsh all params from given url
+	 * @param string $url
+	 * @return array return parameteres
+	 */
+	public static function fetchParamsFromUrl($url='')
+	{
+		parse_str(parse_url($url)['query'], $params);
+		return $params;
 	}
 }
