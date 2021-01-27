@@ -220,8 +220,8 @@ class BBB Implements Iface
 			$event = [
 				'title' => $room,
 				'##videoconference' => $room,
-				'start' => Api\DateTime::user2server($start, 'ts'),
-				'end' => Api\DateTime::user2server($end, 'ts'),
+				'start' => $start,
+				'end' => $end,
 				'participants' => $_params['participants'],
 				'owner' => $GLOBALS['egw_info']['user']['account_id'],
 				'participant_types' => ['r', $res_id]
