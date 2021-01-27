@@ -62,7 +62,12 @@ class Call
 		}
 		$room = $_room?? self::genUniqueRoomID();
 		try {
-			$cal_id = self::checkResources($room, null, null, $participants, $_is_invite_to);
+			$cal_id = self::checkResources($room, [
+				'start' => null,
+				'end' => null,
+				'participants' => $participants,
+				'invitation' => $_is_invite_to
+			]);
 			if (is_numeric($cal_id)) $caller['cal_id'] = $cal_id;
 		}
 		catch(NoResourceAvailable $e)
@@ -157,20 +162,21 @@ class Call
 	 * Check available resources
 	 *
 	 * @param string $_room
-	 * @param int|null $_start
-	 * @param int|null $_end
-	 * @param array $_participants
-	 * @param bool $_is_invite_to
+	 * @param array $_params
+	 * 	- start
+	 * 	- end
+	 * 	- participants
+	 * 	- invitation
 	 * @throws NoResourceAvailable
 	 * @return bool|int return cal_id
 	 */
-	private static function checkResources(string $_room, $_start=null, $_end=null, $_participants=[], $_is_invite_to=false)
+	private static function checkResources(string $_room, $_params = [])
 	{
 		$backend = self::_getBackendInstance(0, []);
 		if (method_exists($backend, 'checkResources'))
 		{
 			try {
-				return $backend->checkResources($_room, $_start, $_end, $_participants, $_is_invite_to);
+				return $backend->checkResources($_room, $_params);
 			}
 			catch (NoResourceAvailable $e)
 			{
