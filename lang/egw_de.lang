@@ -1,24 +1,26 @@
-*important: bigbluebutton backend uses category Locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	de	*Wichtig: Das BigBlueButton-Backend verwendet die Kategorie Räume, um auf die Ressource "Meeting Room BigBlueButton" zuzugreifen, daher wird empfohlen, entsprechende Benutzerleserechte für die Kategorie Räume zu setzen.
-%1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen, wollen Sie es nochmal versuchen?
+%1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen. Wollen Sie es noch einmal versuchen?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	de	*Wichtig: Das BigBlueButton-Backend verwendet die Kategorie Räume, um auf die Ressource "Meeting Room BigBlueButton" zuzugreifen, daher wird empfohlen, entsprechende Benutzerleserechte für die Kategorie Räume zu setzen.
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
 audio call	status	de	Audioanruf
-bbb Api secret is missing!	status	de	BigBlueButton-API Secret fehlt!
 bbb api secret	status	de	BigBlueButton-API Secret
+bbb api secret is missing!	status	de	BigBlueButton-API Secret fehlt!
 bbb api url	status	de	BigBlueButton-API URL
-bbb CSP wild card domain is missing!	status	de	BigBlueButton Server Wildcard Domain fehlt!
+bbb csp wild card domain is missing!	status	de	BigBlueButton Server Wildcard Domain fehlt!
 bbb domain is missing!	status	de	BigBlueButton-Domäne fehlt!
 bbb server settings	status	de	BigBlueButton Server Einstellungen
 bbb server wildcard domain	status	de	BigBlueButton Server Wildcard Domain
-bigbluebutton server	status	de	BigBlueButton Server
+bigbluebutton server	status	de	BigBlueButton-Server
 callback	status	de	Rückruf
 click to join!	status	de	Anklicken zum Teilnehmen!
+communicating with server %1 failed because of %2	status	de	Die Kommunikation mit Server %1 ist aufgrund von %2 fehlgeschlagen
 disable	status	de	Deaktivieren
 enable	status	de	Aktivieren
 enable ring tone	status	de	Klingelton
 enable ring tone while receiving a call	status	de	Klingelton beim Empfang eines Anrufs aktivieren
+end meeting	status	de	Beende Konferenz
 estimated call session duration, default is 30 minutes:	status	de	Geschätzte Dauer der Anrufsitzung, Standard ist 30 Minuten:
-event owner	status	de	Initiator Videokonferenz
+event owner	status	de	Organisator Videokonferenz
 example: jitsi	status	de	Beispiel: Jitsi
 example: jitsi.egroupware.org	status	de	Beispiel: jitsi.egroupware.org
 fixed duration for session, session will be ended after duration is over:	status	de	Feste Sitzungsdauer, die Sitzung wird nach Ablauf der Dauer beendet:
@@ -42,11 +44,11 @@ phone call	status	de	Telefonanruf
 remove from favorites	status	de	Aus Favoriten entfernen
 resources app is missing!	status	de	Fehlende Ausführungsrechte für die Ressourcen-Anwendung!
 room id	status	de	Raumnummer
-room is not yet ready!	status	de	Der Meetingraum ist noch nicht verfügbar!
+room is not yet ready!	status	de	Der Konferenzraum ist noch nicht verfügbar!
 schedule a call	status	de	Als Termin planen
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	de	Legen Sie die Raumvorbereitungszeit für geplante Anrufe fest, der Moderator kann die Besprechung vor ihrer eigentlichen Startzeit beginnen, die Standardeinstellung ist 5 Minuten:
 status	status	de	Status/Videokonferenz
-this meeting is no longer valid because it is in the past!	status	de Diese Videokonferenz ist nicht mehr gültig, da sie in der Vergangenheit liegt!
+this meeting is no longer valid because it is in the past!	status	de	Diese Konferenz ist nicht mehr gültig, weil es in der Vergangenheit liegt!
 this meeting will start in	status	de	Diese Videokonferenz beginnt in
 title	status	de	Title
 use jwt authentication	status	de	Benutze JWT Authentifizierung
