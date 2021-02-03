@@ -2,13 +2,27 @@
 accept	common	fr	Accepter
 add to favorites	status	fr	Ajouter au favoris
 audio call	status	fr	Appel audio
+bbb api secret	status	fr	BBB Api secrète
+bbb api secret is missing!	status	fr	BBB Api secrète manquante !
+bbb api url	status	fr	BBB Api url
+bbb domain is missing!	status	fr	Domaine BBB manquant !
 bbb server settings	status	fr	Paramètre Serveur BBB
+bbb server wildcard domain	status	fr	BBB wildcard de domaine
 bigbluebutton server	status	fr	Serveur BigBlueButton
+bigbluebutton token	status	fr	Jeton BigBlueButton
 callback	status	fr	Rappel
 click to join!	status	fr	Cliquer pour joindre !
+direct call from %1	status	fr	appeil direct de %1
 disable	status	fr	désactiver
 enable	status	fr	activer
+enable ring tone	status	fr	Permttre la tonalité
+enable ring tone while receiving a call	status	fr	Permttre la tonalité à la réception d'un appel
+end meeting	status	fr	Terminer la réunion
+estimated call session duration, default is 30 minutes	status	fr	Durée estimée de la session, par défaut 30 minutes
+estimated call session duration, default is 30 minutes:	status	fr	Durée estimée de la session, par défaut 30 minutes :
 event owner	status	fr	Propriétaire de l'événement
+example: *.bbbserver.de	status	fr	exemple: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	fr	exemple: https://app.bbbserver.de/de/bbb-integration/
 example: jitsi	status	fr	exemple : Jitsi
 example: jitsi.egroupware.org	status	fr	exemple: jitsi.egroupware.org
 initiating call to	status	fr	Initier l'appel vers
@@ -26,13 +40,18 @@ link to contact	status	fr	Lien vers le contact
 message	status	fr	Message
 missed call from %1	status	fr	Appel manqué de %1
 new window	status	fr	nouvelle fenêtre
+number of seats	status	fr	Nombre de sièges
 open call in	status	fr	Ouvrir l'appel dans
 open call in new window/popup	status	fr	Ouvrir l'appel dans une nouvelle fenêtre/popup
 phone call	status	fr	Appel téléphonique
 remove from favorites	status	fr	Retirer des favoris
-room id	status	fr	ID de salle
+room id	status	fr	ID de salon
+room is not yet ready!	status	fr	Le salon n'est pas encore disponible :
 schedule a call	status	fr	Planifier un appel
-status	common	fr	Statut
+status	status	fr	Statut
+there is no free seats left to make/join this call!	status	fr	Il n'y a pas de siège disponible pour préparer/joindre cet appel !
+this meeting is no longer valid because it is in the past!	status	fr	Cette réunion n'est plus valide car dans le passée !
+this meeting will start in	status	fr	Cette réunion débute dans
 title	status	fr	Titre
 use jwt authentication	status	fr	Utiliser l'authentification JWT
 video call	common	fr	Appel vidéo

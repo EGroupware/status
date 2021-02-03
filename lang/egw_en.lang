@@ -1,12 +1,12 @@
-*important: bigbluebutton backend uses category Locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	en	*Important: BigBlueButton backend uses category Locations in order to access to resource of "Meeting Room BigBlueButton" therefore it is recommended to set proper user read permissions for Locations category.
 %1 did not pickup your call, would you like to try again?	status	en	%1 did not pickup your call, would you like to try again?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	en	*Important: BigBlueButton backend uses category Locations in order to access to resource of "Meeting Room BigBlueButton" therefore it is recommended to set proper user read permissions for Locations category.
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
 audio call	status	en	Audio Call
-bbb Api secret is missing!	status	en	bbb Api secret is missing!
 bbb api secret	status	en	BBB Api secret
+bbb api secret is missing!	status	en	bbb Api secret is missing!
 bbb api url	status	en	BBB Api url
-bbb CSP wild card domain is missing!	status	en	bbb CSP wild card domain is missing!
+bbb csp wild card domain is missing!	status	en	bbb CSP wild card domain is missing!
 bbb domain is missing!	status	en	bbb domain is missing!
 bbb server settings	status	en	BBB Server Settings
 bbb server wildcard domain	status	en	BBB server wildcard domain
@@ -18,6 +18,7 @@ disable	status	en	disable
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
 enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
+end meeting	status	en	End meeting
 estimated call session duration, default is 30 minutes:	status	en	Estimated call session duration, default is 30 minutes:
 event owner	status	en	Event owner
 example: jitsi	status	en	example: Jitsi
