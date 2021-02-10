@@ -513,6 +513,10 @@ class Hooks
 				$acc['account_lid'], $acc['account_firstname'], $acc['account_lastname'], $acc['account_id']);
 		}
 
+		for($i=5;$i<60;$i+=5)
+		{
+			$riningTimeouts[$i] = $i.' '.lang('seconds');
+		}
 		return [
 			'1.section' => [
 				'type' => 'section',
@@ -540,6 +544,13 @@ class Hooks
 				'xmlrpc' => false,
 				'admin' => false,
 				'default' => 1,
+			],
+			'ringingtimeout' => [
+				'type' => 'select',
+				'label' => 'ringing timeout',
+				'values' => $riningTimeouts,
+				'name' => 'ringingtimeout',
+				'default' => 15
 			],
 			'groups' => [
 				'type' => 'multiselect',

@@ -18,9 +18,10 @@ class statusApp extends EgwApp
 {
 	static readonly appname = 'status';
 
-	private _ring : JQuery = null;
+	private _ring : HTMLAudioElement = null;
 
-	private static MISSED_CALL_TIMEOUT : number = 15000;
+	private static MISSED_CALL_TIMEOUT : number = egw.preference('ringingtimeout', 'status') ?
+		parseInt(<string>egw.preference('ringingtimeout', 'status')) * 1000 : 15000;
 
 	/**
 	 * Constructor
@@ -59,7 +60,7 @@ class statusApp extends EgwApp
 			case 'status.index':
 				if (egw.preference('ringtone', 'status'))
 				{
-					this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav');
+					this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav')[0];
 					let self = this;
 					jQuery('body').one('click', function(){
 						self._controllRingTone().initiate();
@@ -500,8 +501,8 @@ class statusApp extends EgwApp
 			start: function (_loop?){
 				if (!self._ring) return;
 				let loop = _loop || false;
-				self._ring[0].loop = loop;
-				self._ring[0].play().then(function(){
+				self._ring.loop = loop;
+				self._ring.play().then(function(){
 					window.setTimeout(function(){
 						self._controllRingTone().stop();
 					}, statusApp.MISSED_CALL_TIMEOUT) // stop ringing automatically
@@ -511,11 +512,11 @@ class statusApp extends EgwApp
 			},
 			stop: function (){
 				if (!self._ring) return;
-				self._ring[0].pause();
+				self._ring.pause();
 			},
 			initiate: function(){
-				self._ring[0].mute = true;
-				self._ring[0].play().then(function(){
+				self._ring.muted = true;
+				self._ring.play().then(function(){
 
 				},function(_error){
 					console.log('Error happened: '+_error);
