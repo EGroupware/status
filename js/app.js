@@ -63,7 +63,7 @@ var statusApp = /** @class */ (function (_super) {
         switch (_name) {
             case 'status.index':
                 if (egw.preference('ringtone', 'status')) {
-                    this._ring = jQuery(document.createElement('audio')).attr({ id: 'status-ring', src: 'status/assets/ring.mp3' }).appendTo('#status-index_status-index-fav');
+                    this._ring = jQuery(document.createElement('audio')).attr({ id: 'status-ring', src: 'status/assets/ring.mp3' }).appendTo('#status-index_status-index-fav')[0];
                     var self_1 = this;
                     jQuery('body').one('click', function () {
                         self_1._controllRingTone().initiate();
@@ -74,7 +74,7 @@ var statusApp = /** @class */ (function (_super) {
                 var room = this.et2.getArrayMgr('content').getEntry('room');
                 var url = this.et2.getArrayMgr('content').getEntry('frame');
                 var end = this.et2.getDOMWidgetById('end');
-                var isModerator = (_c = url.match(/isModerator\=(1|true)/i), (_c !== null && _c !== void 0 ? _c : false));
+                var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
                 var self_2 = this;
                 if (isModerator) {
                     end.set_disabled(false);
@@ -383,7 +383,7 @@ var statusApp = /** @class */ (function (_super) {
             { "button_id": 1, "text": egw.lang('Accept'), id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup' }
         ];
-        var notify = (_notify !== null && _notify !== void 0 ? _notify : true);
+        var notify = _notify !== null && _notify !== void 0 ? _notify : true;
         var message_bottom = _message_bottom || 'is calling';
         var message_top = _message_top || '';
         var self = this;
@@ -449,8 +449,8 @@ var statusApp = /** @class */ (function (_super) {
                 if (!self._ring)
                     return;
                 var loop = _loop || false;
-                self._ring[0].loop = loop;
-                self._ring[0].play().then(function () {
+                self._ring.loop = loop;
+                self._ring.play().then(function () {
                     window.setTimeout(function () {
                         self._controllRingTone().stop();
                     }, statusApp.MISSED_CALL_TIMEOUT); // stop ringing automatically
@@ -461,11 +461,11 @@ var statusApp = /** @class */ (function (_super) {
             stop: function () {
                 if (!self._ring)
                     return;
-                self._ring[0].pause();
+                self._ring.pause();
             },
             initiate: function () {
-                self._ring[0].mute = true;
-                self._ring[0].play().then(function () {
+                self._ring.muted = true;
+                self._ring.play().then(function () {
                 }, function (_error) {
                     console.log('Error happened: ' + _error);
                 });
@@ -572,7 +572,7 @@ var statusApp = /** @class */ (function (_super) {
         var _c;
         var room = this.et2.getArrayMgr('content').getEntry('room');
         var url = this.et2.getArrayMgr('content').getEntry('frame');
-        var isModerator = (_c = url.match(/isModerator\=(1|true)/i), (_c !== null && _c !== void 0 ? _c : false));
+        var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
         if (isModerator) {
             et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
                 if (_b == 1) {
@@ -623,7 +623,8 @@ var statusApp = /** @class */ (function (_super) {
         window.parent.close();
     };
     statusApp.appname = 'status';
-    statusApp.MISSED_CALL_TIMEOUT = 15000;
+    statusApp.MISSED_CALL_TIMEOUT = egw.preference('ringingtimeout', 'status') ?
+        parseInt(egw.preference('ringingtimeout', 'status')) * 1000 : 15000;
     return statusApp;
 }(egw_app_1.EgwApp));
 app.classes.status = statusApp;
