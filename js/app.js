@@ -27,6 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var egw_app_1 = require("../../api/js/jsapi/egw_app");
 var et2_widget_dialog_1 = require("../../api/js/etemplate/et2_widget_dialog");
+var et2_core_widget_1 = require("../../api/js/etemplate/et2_core_widget");
 var statusApp = /** @class */ (function (_super) {
     __extends(statusApp, _super);
     /**
@@ -75,7 +76,6 @@ var statusApp = /** @class */ (function (_super) {
                 var url = this.et2.getArrayMgr('content').getEntry('frame');
                 var end = this.et2.getDOMWidgetById('end');
                 var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
-                var self_2 = this;
                 if (isModerator) {
                     end.set_disabled(false);
                 }
@@ -84,7 +84,7 @@ var statusApp = /** @class */ (function (_super) {
                     break;
                 }
                 egw(window.opener).setSessionItem('status', 'videoconference-session', room);
-                window.addEventListener("beforeunload", function (e) {
+                window.addEventListener("beforeunload", function () {
                     window.opener.sessionStorage.removeItem('status-videoconference-session');
                 }, false);
                 break;
@@ -123,7 +123,7 @@ var statusApp = /** @class */ (function (_super) {
                 else {
                     egw.accountData(data.account_id, 'account_email', null, function (_data) {
                         egw.open('', 'mail', 'add', { 'preset[mailto]': _data[data.account_id] });
-                    });
+                    }, this);
                 }
                 break;
             case 'audiocall':
@@ -132,7 +132,7 @@ var statusApp = /** @class */ (function (_super) {
                         id: data.account_id,
                         name: data.hint,
                         avatar: "account:" + data.account_id,
-                        audioonly: _action.id == 'audiocall' ? true : false,
+                        audioonly: _action.id == 'audiocall',
                         data: data
                     }]);
                 break;
@@ -141,7 +141,7 @@ var statusApp = /** @class */ (function (_super) {
                         id: data.account_id,
                         name: data.hint,
                         avatar: "account:" + data.account_id,
-                        audioonly: _action.id == 'audiocall' ? true : false,
+                        audioonly: _action.id == 'audiocall',
                         data: data
                     }], egw.getSessionItem('status', 'videoconference-session'));
         }
@@ -153,7 +153,7 @@ var statusApp = /** @class */ (function (_super) {
     statusApp.prototype.add_to_fav = function () {
         var list = this.et2.getArrayMgr('content').getEntry('list');
         var self = this;
-        et2_createWidget("dialog", {
+        et2_core_widget_1.et2_createWidget("dialog", {
             callback: function (_button_id, _value) {
                 if (_button_id == 'add' && _value) {
                     for (var i in _value.accounts) {
@@ -218,11 +218,11 @@ var statusApp = /** @class */ (function (_super) {
         };
         if (_fav && typeof _fav != 'undefined' && !isEqual(fav.getArrayMgr('content').data, _fav)) {
             fav.set_value({ content: _fav });
-            content.data.fav = _fav;
+            content.data['fav'] = _fav;
         }
         if (_list && typeof _list != 'undefined' && !isEqual(list.getArrayMgr('content').data, _list)) {
             list.set_value({ content: _list });
-            content.data.list = _list;
+            content.data['list'] = _list;
         }
         this.et2.setArrayMgr('content', content);
     };
@@ -271,13 +271,13 @@ var statusApp = /** @class */ (function (_super) {
     };
     /**
      * Initiate call via action
-     * @param array data
+     * @param data
      */
     statusApp.prototype.makeCall = function (data) {
         var callCancelled = false;
         var self = this;
         var button = [{ "button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel' }];
-        var dialog = et2_createWidget("dialog", {
+        var dialog = et2_core_widget_1.et2_createWidget("dialog", {
             callback: function (_btn) {
                 if (_btn == et2_widget_dialog_1.et2_dialog.CANCEL_BUTTON) {
                     callCancelled = true;
@@ -345,7 +345,7 @@ var statusApp = /** @class */ (function (_super) {
         var content = _content || {};
         var self = this;
         this._controllRingTone().start();
-        et2_createWidget("dialog", {
+        et2_core_widget_1.et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_widget_dialog_1.et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
@@ -377,6 +377,10 @@ var statusApp = /** @class */ (function (_super) {
     /**
      * gets called after receiving pushed call
      * @param _data
+     * @param _notify
+     * @param _buttons
+     * @param _message_top
+     * @param _message_bottom
      */
     statusApp.prototype.receivedCall = function (_data, _notify, _buttons, _message_top, _message_bottom) {
         var buttons = _buttons || [
@@ -388,7 +392,7 @@ var statusApp = /** @class */ (function (_super) {
         var message_top = _message_top || '';
         var self = this;
         var isCallAnswered = false;
-        var timeToPickup = window.setTimeout(function () {
+        window.setTimeout(function () {
             if (!isCallAnswered) {
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function () { }).sendRequest();
                 egw.accountData(_data.caller.account_id, 'account_lid', null, function (account) {
@@ -401,7 +405,7 @@ var statusApp = /** @class */ (function (_super) {
             }
         }, statusApp.MISSED_CALL_TIMEOUT);
         this._controllRingTone().start(true);
-        var dialog = et2_createWidget("dialog", {
+        var dialog = et2_core_widget_1.et2_createWidget("dialog", {
             callback: function (_btn, value) {
                 if (_btn == et2_widget_dialog_1.et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
@@ -448,8 +452,7 @@ var statusApp = /** @class */ (function (_super) {
             start: function (_loop) {
                 if (!self._ring)
                     return;
-                var loop = _loop || false;
-                self._ring.loop = loop;
+                self._ring.loop = _loop || false;
                 self._ring.play().then(function () {
                     window.setTimeout(function () {
                         self._controllRingTone().stop();
@@ -500,7 +503,7 @@ var statusApp = /** @class */ (function (_super) {
                 break;
         }
         if (target) {
-            var url = et2_createWidget('url-phone', { id: 'temp_url_phone', readonly: true }, this.et2);
+            var url = et2_core_widget_1.et2_createWidget('url-phone', { id: 'temp_url_phone', readonly: true }, this.et2);
             url.set_value(target);
             url.span.click();
             url.destroy();
@@ -531,8 +534,7 @@ var statusApp = /** @class */ (function (_super) {
     };
     statusApp.prototype.videoconference_invite = function () {
         var url = this.et2.getArrayMgr('content').getEntry('frame');
-        var self = this;
-        et2_createWidget("dialog", {
+        et2_core_widget_1.et2_createWidget("dialog", {
             callback: function (_button_id, _value) {
                 if (_button_id == 'add' && _value) {
                     var data = [];
@@ -605,14 +607,14 @@ var statusApp = /** @class */ (function (_super) {
         join.set_disabled(false);
     };
     statusApp.prototype.videoconference_countdown_join = function () {
-        var content = this.et2.getArrayMgr('content').data;
-        egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl", [content.room,
+        var content = this.et2.getArrayMgr('content');
+        egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl", [content.getEntry('room'),
             {
                 name: egw.user('account_fullname'),
                 account_id: egw.user('account_id'),
                 email: egw.user('account_email'),
-                cal_id: content.cal_id
-            }, content.start, content.end], function (_data) {
+                cal_id: content.getEntry('cal_id')
+            }, content.getEntry('start'), content.getEntry('end')], function (_data) {
             if (_data) {
                 if (_data.err)
                     egw.message(_data.err, 'error');
