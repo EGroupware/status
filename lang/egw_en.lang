@@ -41,8 +41,10 @@ new window	status	en	new window
 open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup
 phone call	status	en	Phone call
+predefined group of users to be listed	status	en	Predefined group of users to be listed
 remove from favorites	status	en	Remove from favorites
 resources app is missing!	status	en	Resources app is missing!
+ringing timeout	status	en	ringing timeout
 room id	status	en	Room ID
 room is not yet ready!	status	en	Room is not yet ready!
 schedule a call	status	en	Schedule a call
@@ -50,8 +52,10 @@ set room preparation time for scheduled calls, moderator can start meeting befor
 status	status	en	Status/Videoconference
 this meeting is no longer valid because it is in the past!	status	en	This meeting is no longer valid because it is in the past!
 this meeting will start in	status	en	This meeting will start in
+timeout for the ring tone for incoming calls.	status	en	Timeout for the ring tone for incoming calls.
 title	status	en	title
 use jwt authentication	status	en	Use JWT authentication
+Users of selected groups will be listed.	status	en	Users of selected groups will be listed.
 video call	common	en	Video Call
 video conference	common	en	Video Conference
 video conference backends	status	en	Video conference backends

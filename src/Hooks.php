@@ -550,6 +550,7 @@ class Hooks
 				'label' => 'ringing timeout',
 				'values' => $riningTimeouts,
 				'name' => 'ringingtimeout',
+				'help' => 'Timeout for the ring tone for incoming calls.',
 				'default' => 15
 			],
 			'groups' => [
