@@ -78,9 +78,10 @@ class Ui {
 				'frame'=>'',
 				'room' => $_GET['meetingID'],
 				'error' => $now > $_GET['end'] ? lang(Call::MSG_MEETING_IN_THE_PAST) : $_GET['error'],
-				// Start and End time are in UTC, need to be converted to ET2 time format
-				'start' => (int) $now > $_GET['end'] ? 0 : (new Api\DateTime())->setTimestamp($_GET['start'])->format(Api\DateTime::ET2),
-				'end' => (new Api\DateTime())->setTimestamp($_GET['end'])->format(Api\DateTime::ET2),
+				// Start and End time are in UTC
+				'start' => (int) $now > $_GET['end'] ? 0 :$_GET['start'],
+				'end' => $_GET['end'],
+				'countdown' => (int) $now > $_GET['end'] || $now > $_GET['start'] ? 0 : $_GET['start'] - $now,
 				'cal_id' => $_GET['cal_id'],
 				'preparation' => $_GET['preparation']
 			];

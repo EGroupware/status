@@ -31,7 +31,7 @@ class Call
 	 */
 	const MSG_MEETING_IN_THE_PAST = 'This meeting is no longer valid because it is in the past!';
 	const MSG_ROOM_IS_NOT_READY = 'Room is not yet ready!';
-
+	const MSG_ROOM_NOT_CREATED = 'Unable to join this room because it is not yet created by its moderator. Please try later.';
 	/**
 	 * Call function
 	 * @param array $_data

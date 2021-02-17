@@ -134,7 +134,8 @@ class BBB Implements Iface
 		else
 		{
 			$this->roomNotReady = [
-				'error' => $now > $end ? lang(Call::MSG_MEETING_IN_THE_PAST) : lang(Call::MSG_ROOM_IS_NOT_READY),
+				'error' => ($start <= $now && $now <= $end) ? lang(Call::MSG_ROOM_NOT_CREATED) :
+					($now > $end ? lang(Call::MSG_MEETING_IN_THE_PAST) : lang(Call::MSG_ROOM_IS_NOT_READY)),
 				'meetingID' => $room,
 				'cal_id' => $_context['user']['cal_id'],
 				'start' => $start,

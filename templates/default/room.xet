@@ -39,8 +39,8 @@
                 <row class="row">
                     <label/>
                     <vbox class="timer">
-                        <description class="et2_fullWidth" value="This meeting will start in"/>
-                        <countdown class="et2_fullWidth" value="@start" onFinish="app.status.videoconference_countdown_finished" alarm="@preparation" onAlarm="app.status.videoconference_countdown_finished"/>
+                        <description class="et2_fullWidth" value="This meeting will start in" disabled="!@countdown"/>
+                        <countdown class="et2_fullWidth" value="@countdown" onFinish="app.status.videoconference_countdown_finished" alarm="@preparation" onAlarm="app.status.videoconference_countdown_finished"/>
                         <buttononly label="Join" id="join" disabled="true" background_image="1" image="videoconference_join" onclick="app.status.videoconference_countdown_join"/>
                     </vbox>
                     <label/>
