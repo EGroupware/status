@@ -438,7 +438,7 @@ class statusApp extends EgwApp
 			{"button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup'}
 		];
 		let notify = _notify?? true;
-		let message_bottom = _message_bottom || 'is calling';
+		let message_bottom = _message_bottom || '';
 		let message_top = _message_top || '';
 		let self = this;
 		let isCallAnswered = false;
@@ -467,7 +467,7 @@ class statusApp extends EgwApp
 			beforeClose: function(){
 				self._controllRingTone().stop();
 			},
-			title: '',
+			title: 'Call from',
 			buttons: buttons,
 			minWidth: 200,
 			minHeight: 200,
@@ -485,7 +485,8 @@ class statusApp extends EgwApp
 				}
 			},
 			resizable: false,
-			template: egw.webserverUrl+'/status/templates/default/call.xet'
+			template: egw.webserverUrl+'/status/templates/default/call.xet',
+			dialogClass:"recievedCall"
 		}, et2_dialog._create_parent(this.appname));
 		if (notify)
 		{

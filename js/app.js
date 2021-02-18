@@ -388,7 +388,7 @@ var statusApp = /** @class */ (function (_super) {
             { "button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup' }
         ];
         var notify = _notify !== null && _notify !== void 0 ? _notify : true;
-        var message_bottom = _message_bottom || 'is calling';
+        var message_bottom = _message_bottom || '';
         var message_top = _message_top || '';
         var self = this;
         var isCallAnswered = false;
@@ -415,7 +415,7 @@ var statusApp = /** @class */ (function (_super) {
             beforeClose: function () {
                 self._controllRingTone().stop();
             },
-            title: '',
+            title: 'Call from',
             buttons: buttons,
             minWidth: 200,
             minHeight: 200,
@@ -433,7 +433,8 @@ var statusApp = /** @class */ (function (_super) {
                 }
             },
             resizable: false,
-            template: egw.webserverUrl + '/status/templates/default/call.xet'
+            template: egw.webserverUrl + '/status/templates/default/call.xet',
+            dialogClass: "recievedCall"
         }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
         if (notify) {
             egw.notification(this.egw.lang('Status'), {

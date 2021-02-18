@@ -100,14 +100,19 @@ tr.egw_online {
   display: inline-block;
 }
 #status-index_status-index-fav tr.row .avatar,
-#status-index_status-index-list tr.row .avatar {
+#status-index_status-index-list tr.row .avatar,
+#_list .avatar {
   width: 40px;
   height: 40px;
 }
 #status-index_status-index-fav tr.row .avatar img,
-#status-index_status-index-list tr.row .avatar img {
+#status-index_status-index-list tr.row .avatar img,
+#_list .avatar img {
   height: auto;
   width: 40px;
+}
+#_list .avatar {
+  display: inline-block;
 }
 #egw_fw_sidebar_r::-webkit-scrollbar {
   width: 1px;
@@ -231,6 +236,36 @@ iframe#status-room_frame {
   height: 40px;
   width: calc(100% - 6px);
   margin-left: 10px;
+}
+div.recievedCall .ui-widget-content {
+  display: block !important;
+  width: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0px;
+}
+div.recievedCall .ui-widget-content .et2_grid {
+  width: 100% !important;
+  margin: 0;
+}
+div.recievedCall .ui-widget-content .avatar {
+  border-color: white;
+  width: 80px !important;
+  height: 80px !important;
+  margin-right: 10px;
+  display: inline;
+  vertical-align: middle;
+}
+div.recievedCall .ui-widget-content .tile .et2_label {
+  vertical-align: middle;
+  font-size: 150%;
+  display: inline;
+}
+div.recievedCall .ui-dialog-buttonset {
+  padding-left: 0.8em !important;
+}
+div.recievedCall .et2_vbox.et2_box_widget.ui-dialog-content {
+  padding-left: 0.5em;
 }
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
