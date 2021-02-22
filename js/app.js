@@ -91,6 +91,27 @@ var statusApp = /** @class */ (function (_super) {
         }
     };
     /**
+     * Handle a push notification about entry changes from the websocket
+     *
+     * @param  pushData
+     * @param {string} pushData.app application name
+     * @param {(string|number)} pushData.id id of entry to refresh or null
+     * @param {string} pushData.type either 'update', 'edit', 'delete', 'add' or null
+     * - update: request just modified data from given rows.  Sorting is not considered,
+     *		so if the sort field is changed, the row will not be moved.
+     * - edit: rows changed, but sorting may be affected.  Requires full reload.
+     * - delete: just delete the given rows clientside (no server interaction neccessary)
+     * - add: requires full reload for proper sorting
+     * @param {object|null} pushData.acl Extra data for determining relevance.  eg: owner or responsible to decide if update is necessary
+     * @param {number} pushData.account_id User that caused the notification
+     */
+    statusApp.prototype.push = function (pushData) {
+        // EPL/calls does NOT care about other apps data
+        if (pushData.app !== 'stylite')
+            return;
+        // ToDo: show busy on phone for pushData.acl.account_id and pushData.acl.busy
+    };
+    /**
      * Handle executed action on selected row and refresh the list
      *
      * @param {type} _action
