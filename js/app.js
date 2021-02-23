@@ -58,7 +58,7 @@ var statusApp = /** @class */ (function (_super) {
      * @param {string} _name template name
      */
     statusApp.prototype.et2_ready = function (_et2, _name) {
-        var _c;
+        var _a;
         // call parent
         _super.prototype.et2_ready.call(this, _et2, _name);
         switch (_name) {
@@ -75,7 +75,7 @@ var statusApp = /** @class */ (function (_super) {
                 var room = this.et2.getArrayMgr('content').getEntry('room');
                 var url = this.et2.getArrayMgr('content').getEntry('frame');
                 var end = this.et2.getDOMWidgetById('end');
-                var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
+                var isModerator = (_a = url.match(/isModerator\=(1|true)/i), (_a !== null && _a !== void 0 ? _a : false));
                 if (isModerator) {
                     end.set_disabled(false);
                 }
@@ -109,7 +109,13 @@ var statusApp = /** @class */ (function (_super) {
         // EPL/calls does NOT care about other apps data
         if (pushData.app !== 'stylite')
             return;
-        // ToDo: show busy on phone for pushData.acl.account_id and pushData.acl.busy
+        var self = this;
+        egw.accountData(pushData.acl.account_id, 'account_lid', null, function (account) {
+            self.mergeContent([{
+                    id: account[pushData.acl.account_id],
+                    class2: pushData.acl.account_id && pushData.acl.busy ? 'on-phone' : ''
+                }]);
+        }, egw);
     };
     /**
      * Handle executed action on selected row and refresh the list
@@ -287,8 +293,8 @@ var statusApp = /** @class */ (function (_super) {
         return result;
     };
     statusApp.prototype.isOnline = function (_action, _selected) {
-        var _c, _d, _e;
-        return !(((_c = _selected[0].data.data.rocketchat) === null || _c === void 0 ? void 0 : _c.type) == 'c') && (((_d = _selected[0].data.data.status) === null || _d === void 0 ? void 0 : _d.active) || ((_e = app.rocketchat) === null || _e === void 0 ? void 0 : _e.isRCActive(_action, _selected)));
+        var _a, _b, _c;
+        return !(((_a = _selected[0].data.data.rocketchat) === null || _a === void 0 ? void 0 : _a.type) == 'c') && (((_b = _selected[0].data.data.status) === null || _b === void 0 ? void 0 : _b.active) || ((_c = app.rocketchat) === null || _c === void 0 ? void 0 : _c.isRCActive(_action, _selected)));
     };
     /**
      * Initiate call via action
@@ -318,12 +324,12 @@ var statusApp = /** @class */ (function (_super) {
             if (!callCancelled) {
                 dialog.destroy();
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [data, data[0]['room']], function (_url) {
-                    var _c;
+                    var _a;
                     if (_url && _url.msg)
                         egw.message(_url.msg.message, _url.msg.type);
                     if (_url.caller)
                         self.openCall(_url.caller);
-                    if ((_c = app.rocketchat) === null || _c === void 0 ? void 0 : _c.isRCActive(null, [{ data: data[0].data }])) {
+                    if ((_a = app.rocketchat) === null || _a === void 0 ? void 0 : _a.isRCActive(null, [{ data: data[0].data }])) {
                         app.rocketchat.restapi_call('chat_PostMessage', {
                             roomId: data[0].data.data.rocketchat._id,
                             attachments: [
@@ -408,7 +414,7 @@ var statusApp = /** @class */ (function (_super) {
             { "button_id": 1, "text": egw.lang('Accept'), id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup' }
         ];
-        var notify = _notify !== null && _notify !== void 0 ? _notify : true;
+        var notify = (_notify !== null && _notify !== void 0 ? _notify : true);
         var message_bottom = _message_bottom || '';
         var message_top = _message_top || '';
         var self = this;
@@ -507,21 +513,21 @@ var statusApp = /** @class */ (function (_super) {
         }, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
     };
     statusApp.prototype.phoneCall = function (_action, _selected) {
-        var _c, _d, _e, _f;
+        var _a, _b, _c, _d;
         var data = _selected[0]['data'];
         var target = '';
         switch (_action.id) {
             case 'addressbook_tel_work':
-                target = (_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_work;
+                target = (_a = data.data.status) === null || _a === void 0 ? void 0 : _a.tel_work;
                 break;
             case 'addressbook_tel_cell':
-                target = (_d = data.data.status) === null || _d === void 0 ? void 0 : _d.tel_cell;
+                target = (_b = data.data.status) === null || _b === void 0 ? void 0 : _b.tel_cell;
                 break;
             case 'addressbook_tel_prefer':
-                target = (_e = data.data.status) === null || _e === void 0 ? void 0 : _e.tel_prefer;
+                target = (_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_prefer;
                 break;
             case 'addressbook_tel_home':
-                target = (_f = data.data.status) === null || _f === void 0 ? void 0 : _f.tel_home;
+                target = (_d = data.data.status) === null || _d === void 0 ? void 0 : _d.tel_home;
                 break;
         }
         if (target) {
@@ -532,23 +538,23 @@ var statusApp = /** @class */ (function (_super) {
         }
     };
     statusApp.prototype.phoneIsAvailable = function (_action, _selected) {
-        var _c, _d, _e, _f;
+        var _a, _b, _c, _d;
         var data = _selected[0]['data'];
         switch (_action.id) {
             case 'addressbook_tel_work':
-                if ((_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_work)
+                if ((_a = data.data.status) === null || _a === void 0 ? void 0 : _a.tel_work)
                     return true;
                 break;
             case 'addressbook_tel_cell':
-                if ((_d = data.data.status) === null || _d === void 0 ? void 0 : _d.tel_cell)
+                if ((_b = data.data.status) === null || _b === void 0 ? void 0 : _b.tel_cell)
                     return true;
                 break;
             case 'addressbook_tel_prefer':
-                if ((_e = data.data.status) === null || _e === void 0 ? void 0 : _e.tel_prefer)
+                if ((_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_prefer)
                     return true;
                 break;
             case 'addressbook_tel_home':
-                if ((_f = data.data.status) === null || _f === void 0 ? void 0 : _f.tel_home)
+                if ((_d = data.data.status) === null || _d === void 0 ? void 0 : _d.tel_home)
                     return true;
                 break;
         }
@@ -593,10 +599,10 @@ var statusApp = /** @class */ (function (_super) {
      * @private
      */
     statusApp.prototype.videoconference_endMeeting = function () {
-        var _c;
+        var _a;
         var room = this.et2.getArrayMgr('content').getEntry('room');
         var url = this.et2.getArrayMgr('content').getEntry('frame');
-        var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
+        var isModerator = (_a = url.match(/isModerator\=(1|true)/i), (_a !== null && _a !== void 0 ? _a : false));
         if (isModerator) {
             et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
                 if (_b == 1) {

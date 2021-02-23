@@ -115,8 +115,13 @@ class statusApp extends EgwApp
 	{
 		// EPL/calls does NOT care about other apps data
 		if (pushData.app !== 'stylite') return;
-
-		// ToDo: show busy on phone for pushData.acl.account_id and pushData.acl.busy
+		let self = this;
+		egw.accountData(pushData.acl.account_id, 'account_lid',null,function(account){
+			self.mergeContent([{
+				id: account[pushData.acl.account_id],
+				class2: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': ''
+			}]);
+		}, egw);
 	}
 
 	/**
