@@ -35,8 +35,8 @@ div#egw_fw_sidebar_r {
   margin: 2px;
 }
 tr span.stat0 {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   left: 0px;
   border-radius: 50%;
@@ -61,8 +61,8 @@ tr span.stat1 {
   line-height: 14px;
 }
 tr span.stat2 {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   right: 0px;
   top: 0px;
@@ -72,8 +72,8 @@ tr span.stat2 {
   background-repeat: no-repeat;
 }
 tr span.stat3 {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   right: 0px;
   bottom: 0px;
@@ -267,28 +267,22 @@ div.recievedCall .ui-dialog-buttonset {
 div.recievedCall .et2_vbox.et2_box_widget.ui-dialog-content {
   padding-left: 0.5em;
 }
-tr.row span.stat2.on-phone {
-  background: #ff3e3e;
-  width: 41px;
-  filter: invert(0) hue-rotate(0deg) brightness(1.5);
-  height: 41px;
-  border-radius: 50%;
-  opacity: 0.6;
-  top: 2px;
-  right: 2px;
+tr.row span.on-phone {
+  background: #de4949e0;
+  border: 2px solid #f0f7fe;
 }
-tr span.stat2.on-phone:before {
+tr span.on-phone:before {
   content: ' ';
   background-image: url(../../../pixelegg/images/phone.svg);
   background-repeat: no-repeat;
-  background-size: 32px;
+  background-size: 10px;
   height: 100%;
   width: 100%;
   display: inline-block;
   filter: brightness(0) invert(0);
   opacity: 1;
   transform: rotate(80deg);
-  background-position: center 4px;
+  background-position: center;
 }
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;

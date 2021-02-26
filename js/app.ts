@@ -116,11 +116,19 @@ class statusApp extends EgwApp
 		// EPL/calls does NOT care about other apps data
 		if (pushData.app !== 'stylite') return;
 		let self = this;
-		egw.accountData(pushData.acl.account_id, 'account_lid',null,function(account){
-			self.mergeContent([{
+		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account){
+			let content = [{
 				id: account[pushData.acl.account_id],
 				class2: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': ''
-			}]);
+			}];
+			if (pushData.acl.account_id2)
+			{
+				 content.push({
+					id: account[pushData.acl.account_id2],
+					class2: pushData.acl.account_id2 && pushData.acl.busy ? 'on-phone': ''
+				});
+			}
+			self.mergeContent(content);
 		}, egw);
 	}
 

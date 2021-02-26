@@ -110,11 +110,18 @@ var statusApp = /** @class */ (function (_super) {
         if (pushData.app !== 'stylite')
             return;
         var self = this;
-        egw.accountData(pushData.acl.account_id, 'account_lid', null, function (account) {
-            self.mergeContent([{
+        egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid', null, function (account) {
+            var content = [{
                     id: account[pushData.acl.account_id],
                     class2: pushData.acl.account_id && pushData.acl.busy ? 'on-phone' : ''
-                }]);
+                }];
+            if (pushData.acl.account_id2) {
+                content.push({
+                    id: account[pushData.acl.account_id2],
+                    class2: pushData.acl.account_id2 && pushData.acl.busy ? 'on-phone' : ''
+                });
+            }
+            self.mergeContent(content);
         }, egw);
     };
     /**
