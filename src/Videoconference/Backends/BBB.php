@@ -293,7 +293,7 @@ class BBB Implements Iface
 	 * @param string $room
 	 * @throws Exception
 	 */
-	private static function freeUpResource($cal_id='', $room='')
+	public static function freeUpResource($cal_id='', $room='')
 	{
 		$cal = new \calendar_boupdate();
 		$res_id = Hooks::getVideoconferenceResourceId();

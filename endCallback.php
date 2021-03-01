@@ -20,8 +20,7 @@ $GLOBALS['egw_info'] = array(
 	$token = new Token();
 	if (($t=$token->validateJWT($jwt))) {
 		$context = $t->getClaim('context');
-		$cal = new \calendar_boupdate();
-		$cal->delete($context->cal_id);
+		Videoconference\Backends\BBB::freeUpResource($context->cal_id, $context->room);
 	}
 
 
