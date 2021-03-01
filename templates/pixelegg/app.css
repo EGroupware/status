@@ -288,3 +288,9 @@ tr span.on-phone:before {
   top: 45px;
   height: calc(100% - 45px);
 }
+div#egw_fw_sidebar_r {
+  height: calc(100% - 45px);
+}
+#status-room .countdown-dialog td.timer #status-room_join {
+  width: calc(100% - 6px);
+}
