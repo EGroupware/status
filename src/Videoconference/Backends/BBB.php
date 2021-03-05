@@ -93,9 +93,13 @@ class BBB Implements Iface
 		$this->roomNotReady = null;
 		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
+		// Meeting params
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
+		$this->meetingParams->setRecord(true);
+		$this->meetingParams->setAllowStartStopRecording(true);
+
 		if (!empty($_context['extra']['participants'])) $this->meetingParams->setMaxParticipants(count($_context['extra']['participants'])+($this->config['bbb_call_extra_invites']??self::EXTRA_INVITES_DEFAULT));
 		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success() && $start <= $now && $now <= $end)
 		{
@@ -129,7 +133,7 @@ class BBB Implements Iface
 		// users invited as an external invited users via calendar (email addresses)
 		elseif (self::isAnExternalUser($_context['user']['account_id']))
 		{
-			return; //simply return which wpould let getMeetingUrl do the rest to create the link
+			return; //simply return which would let getMeetingUrl do the rest to create the link
 		}
 		else
 		{
