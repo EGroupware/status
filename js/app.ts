@@ -119,13 +119,13 @@ class statusApp extends EgwApp
 		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account){
 			let content = [{
 				id: account[pushData.acl.account_id],
-				class2: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': ''
+				class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': ''
 			}];
 			if (pushData.acl.account_id2)
 			{
 				 content.push({
 					id: account[pushData.acl.account_id2],
-					class2: pushData.acl.account_id2 && pushData.acl.busy ? 'on-phone': ''
+					class3: pushData.acl.account_id2 && pushData.acl.busy ? 'on-phone': ''
 				});
 			}
 			self.mergeContent(content);
