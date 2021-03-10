@@ -16,10 +16,10 @@
 						<hbox class="avatar" statustext="$row_cont[hint]">
 							<lavatar contact_id="$row_cont[account_id]" src="$row_cont[icon]" fname="$row_cont[data][status][fname]" lname="$row_cont[data][status][lname]" class="iphoto" />
 						</hbox>
-						<description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]"/>
-						<description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]"/>
-						<description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]"/>
-						<description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]"/>
+						<description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]" statustext="$row_cont[title0]" onclick="$row_cont[action0]"/>
+						<description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]" statustext="$row_cont[title1]" onclick="$row_cont[action1]"/>
+						<description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]" statustext="$row_cont[title2]" onclick="$row_cont[action2]"/>
+						<description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]" statustext="$row_cont[title3]" onclick="$row_cont[action3]"/>
 					</hbox>
 				</row>
 			</rows>
@@ -37,10 +37,10 @@
 						<hbox class="avatar" statustext="$row_cont[hint]">
 							<lavatar contact_id="$row_cont[account_id]" src="$row_cont[icon]" fname="$row_cont[data][status][fname]" lname="$row_cont[data][status][lname]" class="iphoto" />
 						</hbox>
-						<description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]"/>
-						<description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]"/>
-						<description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]"/>
-						<description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]"/>
+						<description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]" statustext="$row_cont[title0]" onclick="$row_cont[action0]"/>
+						<description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]" statustext="$row_cont[title1]" onclick="$row_cont[action1]"/>
+						<description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]" statustext="$row_cont[title2]" onclick="$row_cont[action2]"/>
+						<description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]" statustext="$row_cont[title3]" onclick="$row_cont[action3]"/>
 					</hbox>
 				</row>
 			</rows>

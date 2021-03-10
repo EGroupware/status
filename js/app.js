@@ -113,7 +113,11 @@ var statusApp = /** @class */ (function (_super) {
         egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid', null, function (account) {
             var content = [{
                     id: account[pushData.acl.account_id],
-                    class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone' : ''
+                    class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone' : '',
+                    title3: pushData.acl.account_id && pushData.acl.busy ? account[pushData.acl.account_id] + ' ' + egw.lang('is busy on the phone') : '',
+                    class2: pushData.acl.account_id && pushData.acl.missed ? 'missed-call' : '',
+                    title2: pushData.acl.account_id && pushData.acl.missed ? egw.lang('Missed phone call from') + ' ' + account[pushData.acl.account_id] : '',
+                    action2: pushData.acl.account_id && pushData.acl.missed ? "app.status._phoneMissedCallback('" + account[pushData.acl.account_id] + "')" : ''
                 }];
             if (pushData.acl.account_id2) {
                 content.push({
@@ -518,6 +522,15 @@ var statusApp = /** @class */ (function (_super) {
                 self.makeCall([_data]);
             }
         }, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
+    };
+    statusApp.prototype._phoneMissedCallback = function (_from) {
+        var self = this;
+        return et2_widget_dialog_1.et2_dialog.show_dialog(function (_btn) {
+            if (_btn == et2_widget_dialog_1.et2_dialog.YES_BUTTON) {
+                egw.message(egw.lang("Calling back %1 ...", _from)); //TODO: needs an actual call url
+            }
+            self.mergeContent([{ id: _from, class2: '', action2: '' }]);
+        }, "Would you like to callback?", "Missed call", et2_widget_dialog_1.et2_dialog.BUTTONS_YES_NO);
     };
     statusApp.prototype.phoneCall = function (_action, _selected) {
         var _c, _d, _e, _f;

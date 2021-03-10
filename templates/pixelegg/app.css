@@ -19,7 +19,7 @@ div#egw_fw_sidebar_r {
   background: white;
   width: 50px;
   right: 0;
-  height: calc(55%);
+  height: calc(100% - 45px);
   top: 45px;
   border-left: 1px solid #b4b4b4;
   border-top: 1px solid #b4b4b4;
@@ -178,8 +178,7 @@ tr.egw_online {
 td.taglist_readonly .et2_taglist > div.ms-ctn {
   border: none;
 }
-#status-index_status-index-fav tr.row span.stat1.missed-call,
-#status-index_status-index-list tr.row span.stat1.missed-call {
+.missed-call {
   background-image: url(../../../pixelegg/images/hangup.svg);
   background-position: center;
   background-color: black;
@@ -188,8 +187,6 @@ td.taglist_readonly .et2_taglist > div.ms-ctn {
   width: 14px;
   height: 14px;
   position: absolute;
-  left: 0px;
-  bottom: 0px;
   border-radius: 50%;
   z-index: 100000;
   background-size: 14px;
@@ -234,7 +231,7 @@ iframe#status-room_frame {
 #status-room .countdown-dialog td.timer #status-room_join {
   background-position: 45% center;
   height: 40px;
-  width: calc(94%);
+  width: calc(100% - 6px);
   margin-left: 10px;
 }
 div.recievedCall .ui-widget-content {

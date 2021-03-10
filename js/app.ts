@@ -116,10 +116,14 @@ class statusApp extends EgwApp
 		// EPL/calls does NOT care about other apps data
 		if (pushData.app !== 'stylite') return;
 		let self = this;
-		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account){
+			egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account){
 			let content = [{
 				id: account[pushData.acl.account_id],
-				class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': ''
+				class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': '',
+				title3: pushData.acl.account_id && pushData.acl.busy ? account[pushData.acl.account_id]+' '+ egw.lang('is busy on the phone'): '',
+				class2: pushData.acl.account_id && pushData.acl.missed ? 'missed-call' : '',
+				title2: pushData.acl.account_id && pushData.acl.missed ? egw.lang('Missed phone call from')+' '+  account[pushData.acl.account_id]: '',
+				action2: pushData.acl.account_id && pushData.acl.missed ? "app.status._phoneMissedCallback('"+account[pushData.acl.account_id]+"')" : ''
 			}];
 			if (pushData.acl.account_id2)
 			{
@@ -579,6 +583,18 @@ class statusApp extends EgwApp
 				self.makeCall([_data]);
 			}
 		}, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
+	}
+
+	public _phoneMissedCallback (_from)
+	{
+		let self = this;
+		return et2_dialog.show_dialog(function(_btn){
+			if (_btn == et2_dialog.YES_BUTTON)
+			{
+				egw.message(egw.lang("Calling back %1 ...", _from)); //TODO: needs an actual call url
+			}
+			self.mergeContent([{id: _from, class2:'', action2:''}])
+		}, "Would you like to callback?", "Missed call", et2_dialog.BUTTONS_YES_NO);
 	}
 
 	public phoneCall(_action, _selected)
