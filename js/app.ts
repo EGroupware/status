@@ -114,9 +114,10 @@ class statusApp extends EgwApp
 	push(pushData)
 	{
 		// EPL/calls does NOT care about other apps data
-		if (pushData.app !== 'stylite') return;
+		if (pushData.app !== 'stylite' || pushData.type === 'delete' || typeof pushData.acl === 'undefined') return;
 		let self = this;
-			egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account){
+		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account)
+		{
 			let content = [{
 				id: account[pushData.acl.account_id],
 				class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': '',

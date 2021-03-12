@@ -107,7 +107,7 @@ var statusApp = /** @class */ (function (_super) {
      */
     statusApp.prototype.push = function (pushData) {
         // EPL/calls does NOT care about other apps data
-        if (pushData.app !== 'stylite')
+        if (pushData.app !== 'stylite' || pushData.type === 'delete' || typeof pushData.acl === 'undefined')
             return;
         var self = this;
         egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid', null, function (account) {
