@@ -19,7 +19,7 @@ div#egw_fw_sidebar_r {
   background: white;
   width: 50px;
   right: 0;
-  height: calc(100% - 45px);
+  height: calc(100% - 46px);
   top: 45px;
   border-left: 1px solid #b4b4b4;
   border-top: 1px solid #b4b4b4;
@@ -283,10 +283,10 @@ tr span.on-phone:before {
 }
 .slideIsUp #egw_fw_sidebar_r {
   top: 45px;
-  height: calc(100% - 45px);
+  height: calc(100% - 46px);
 }
 div#egw_fw_sidebar_r {
-  height: calc(100% - 45px);
+  height: calc(100% - 46px);
 }
 #status-room .countdown-dialog td.timer #status-room_join {
   width: calc(100% - 6px);
