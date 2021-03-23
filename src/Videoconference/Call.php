@@ -13,6 +13,7 @@ namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
+use Gettext\Extractors\Json;
 
 class Call
 {
@@ -326,5 +327,29 @@ class Call
 			$backend->deleteRoom($params);
 		}
 		$response->data([]);
+	}
+
+	static function getRecordings($room, $params, $fetchall=false)
+	{
+		$room = $room??'temp'; // it needs something as room to create a full instance
+		$backend = self::_getBackendInstance($room, []);
+		$res = [];
+		if (method_exists($backend, 'getRecordings'))
+		{
+			$res = $backend->getRecordings($params, $fetchall);
+		}
+		return $res;
+	}
+
+	static function ajax_getRecordings($room, $url)
+	{
+		$response = Api\Json\Response::get();
+		$params = [];
+		if($url)
+		{
+			parse_str(parse_url($url)['query'], $params);
+		}
+		$res = self::getRecordings($room, $params);
+		$response->data($res);
 	}
 }

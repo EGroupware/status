@@ -78,9 +78,11 @@ class statusApp extends EgwApp
 				let url = this.et2.getArrayMgr('content').getEntry('frame');
 				let end = this.et2.getDOMWidgetById('end');
 				let isModerator = url.match(/isModerator\=(1|true)/i)??false;
+				let recordings = this.et2.getDOMWidgetById('recordings');
 				if (isModerator)
 				{
 					end.set_disabled(false);
+					recordings.set_disabled(false);
 				}
 				if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict')))
 				{
@@ -720,6 +722,19 @@ class statusApp extends EgwApp
 			}, "This window will end the session for everyone, are you sure want this?",
 				"End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
 		}
+	}
+
+	/**
+	 *
+	 */
+	public videoconference_getRecordings()
+	{
+		let room = this.et2.getArrayMgr('content').getEntry('room');
+		egw.openPopup(egw.link('/index.php', {
+			menuaction: 'status.\\EGroupware\\Status\\Ui.vc_recordings',
+			room: room,
+
+		}), 800, 450, 'recordings', 'status');
 	}
 
 	public static videoconference_fetchRoomFromUrl(_url)

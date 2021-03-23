@@ -76,8 +76,10 @@ var statusApp = /** @class */ (function (_super) {
                 var url = this.et2.getArrayMgr('content').getEntry('frame');
                 var end = this.et2.getDOMWidgetById('end');
                 var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
+                var recordings = this.et2.getDOMWidgetById('recordings');
                 if (isModerator) {
                     end.set_disabled(false);
+                    recordings.set_disabled(false);
                 }
                 if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict'))) {
                     this.et2.getDOMWidgetById('add').set_disabled(true);
@@ -640,6 +642,16 @@ var statusApp = /** @class */ (function (_super) {
                 }
             }, "This window will end the session for everyone, are you sure want this?", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
         }
+    };
+    /**
+     *
+     */
+    statusApp.prototype.videoconference_getRecordings = function () {
+        var room = this.et2.getArrayMgr('content').getEntry('room');
+        egw.openPopup(egw.link('/index.php', {
+            menuaction: 'status.\\EGroupware\\Status\\Ui.vc_recordings',
+            room: room,
+        }), 800, 450, 'recordings', 'status');
     };
     statusApp.videoconference_fetchRoomFromUrl = function (_url) {
         if (_url) {

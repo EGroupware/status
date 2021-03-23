@@ -27,7 +27,8 @@ class Ui {
 	 */
 	public $public_functions = [
 		'index' => true,
-		'room' => true
+		'room' => true,
+		'vc_recordings' => true
 	];
 
 	/**
@@ -285,5 +286,50 @@ class Ui {
 		if (is_array($links)) $result = $GLOBALS['egw']->contacts->search(array('contact_id'=>$links[0]['id']), array('email','email_home'),
 			'', '', '', false, 'OR', false);
 		$response->data($result);
+	}
+
+	/**
+	 * @param null $content
+	 */
+	function vc_recordings($content=null)
+	{
+		$tpl = new Api\Etemplate('status.vc_recordings');
+		$room = $_GET['room'];
+		$isAdmin = $GLOBALS['egw_info']['user']['apps']['admin'] ? true : false;
+
+		if (!$content)
+		{
+			$recordings =  Call::getRecordings($room, []);
+
+			$content = [
+				'recordings'=> empty($recordings['error'])? $recordings : [],
+				'isAdmin' => $isAdmin,
+				'room' => $room,
+			];
+
+		}
+		else
+		{
+			$button = @key($content['button']);
+			unset($content['button']);
+			$room = trim($content['room']);
+			switch($button)
+			{
+				case 'all':
+				case 'get':
+					$recordings = Call::getRecordings($room, [], ($button === 'all' && $isAdmin));
+					$content['recordings'] = empty($recordings['error'])? $recordings : [];
+					break;
+			}
+		}
+		if (!empty($recordings['error'])) Api\Framework::message($recordings['error']);
+		$preserv = [
+			'room' => $content['room'],
+			'isAdmin' => $content['isAdmin']
+		];
+		// skip the first row in grid
+		array_unshift($content['recordings'], []);
+
+		$tpl->exec('status.EGroupware\\Status\\Ui.vc_recordings', $content,[],[], $preserv, 2);
 	}
 }

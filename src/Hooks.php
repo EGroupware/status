@@ -363,6 +363,7 @@ class Hooks
 		if ($GLOBALS['egw_info']['user']['apps']['admin']) {
 			$file = Array(
 				'Site Configuration' => Api\Egw::link('/index.php', 'menuaction=admin.admin_config.index&appname=' . self::APPNAME . '&ajax=true'),
+				'Videoconference Recordings' => 'javascript:egw.callFunc("app.status.videoconference_getRecordings")'
 			);
 			if ($data['location'] == 'admin') {
 				display_section(self::APPNAME, $file);
