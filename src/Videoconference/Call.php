@@ -331,25 +331,29 @@ class Call
 
 	static function getRecordings($room, $params, $fetchall=false)
 	{
-		$room = $room??'temp'; // it needs something as room to create a full instance
-		$backend = self::_getBackendInstance($room, []);
 		$res = [];
+		if (!$room || !$params['cal_id'])
+		{
+			$res['error'] = lang('No valid room found!');
+			return $res;
+		}
+
+		$cal = new \calendar_boupdate();
+		$event = $cal->read($params['cal_id']);
+
+		// ATM only participants should be allowed to get the recordings
+		if (!$event || !in_array($GLOBALS['egw_info']['user']['account_id'], array_keys($event['participants'])))
+		{
+			$res['error'] = lang('Access denied!');
+			return $res;
+		}
+
+		$backend = self::_getBackendInstance($room, []);
+
 		if (method_exists($backend, 'getRecordings'))
 		{
 			$res = $backend->getRecordings($params, $fetchall);
 		}
 		return $res;
-	}
-
-	static function ajax_getRecordings($room, $url)
-	{
-		$response = Api\Json\Response::get();
-		$params = [];
-		if($url)
-		{
-			parse_str(parse_url($url)['query'], $params);
-		}
-		$res = self::getRecordings($room, $params);
-		$response->data($res);
 	}
 }

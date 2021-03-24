@@ -4,17 +4,13 @@
 <overlay>
 	<template id="status.vc_recordings" template="" lang="" group="0" version="20.1" >
 		<vbox>
-			<hbox>
-				<hbox align="left">
-					<textbox id="room" size="60" blur="enter a room id"/>
-					<button id="button[get]" label="Get"/>
-				</hbox>
-				<button align="right" label="All recordings" id="button[all]" disabled="!@isAdmin"/>
+			<hbox class="dialogHeader">
+				<description id="title"/>
 			</hbox>
 			<grid id="recordings" width="100%" height="400px">
 				<columns>
+					<column width="40%"/>
 					<column width="10%"/>
-					<column/>
 					<column width="5%"/>
 					<column/>
 					<column/>
@@ -22,20 +18,20 @@
 				</columns>
 				<rows>
 					<row class="th">
-						<description value="room"/>
 						<description value="title"/>
-						<description value="status"/>
+						<description value="state"/>
 						<description value="type"/>
 						<description value="starttime"/>
 						<description value="endtime"/>
+						<description value="room"/>
 					</row>
 					<row class="row">
-						<description id="${row}[room]"/>
 						<description id="${row}[name]" href="$row_cont[url]"/>
 						<description id="${row}[state]"/>
 						<description id="${row}[type]"/>
 						<date-time id="${row}[starttime]" readonly="true"/>
 						<date-time id="${row}[endtime]" readonly="true"/>
+						<description id="${row}[room]"/>
 					</row>
 				</rows>
 			</grid>

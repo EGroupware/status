@@ -17,7 +17,6 @@
 					<textbox readonly="true" id="room"/>
 					<buttononly label="Invite" id="add" background="add" onclick="app.status.videoconference_invite" disabled="!$cont[frame]"/>
                     <buttononly label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting"/>
-					<buttononly label="Recordings" id="recordings" background="play" onclick="app.status.videoconference_getRecordings"/>
 				</row>
 				<row>
 					<hbox class="frame_parent">

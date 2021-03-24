@@ -362,8 +362,7 @@ class Hooks
 	{
 		if ($GLOBALS['egw_info']['user']['apps']['admin']) {
 			$file = Array(
-				'Site Configuration' => Api\Egw::link('/index.php', 'menuaction=admin.admin_config.index&appname=' . self::APPNAME . '&ajax=true'),
-				'Videoconference Recordings' => 'javascript:egw.callFunc("app.status.videoconference_getRecordings")'
+				'Site Configuration' => Api\Egw::link('/index.php', 'menuaction=admin.admin_config.index&appname=' . self::APPNAME . '&ajax=true')
 			);
 			if ($data['location'] == 'admin') {
 				display_section(self::APPNAME, $file);
@@ -495,6 +494,12 @@ class Hooks
 	{
 		$config = Config::read('status');
 		return in_array('BBB', (array)$config['videoconference']['backend']) && $config['bbb_res_id'] ? $config['bbb_res_id'] : false;
+	}
+
+	public static function isVCRecordingSupported()
+	{
+		$config = Config::read('status');
+		return in_array('BBB', (array)$config['videoconference']['backend'], true);
 	}
 
 	/**

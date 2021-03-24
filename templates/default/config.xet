@@ -107,6 +107,10 @@
                                     <description value="Extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxParticipants value of the call."/>
                                     <int id="newsettings[videoconference][bbb][bbb_call_extra_invites]" min="0" placeholder="2" value="2"/>
                                 </row>
+                                <row>
+                                    <description value="Disable recording" label="%s:"/>
+                                    <checkbox id="newsettings[videoconference][bbb][bbb_disable_recordings]"/>
+                                </row>
                             </rows>
                         </grid>
                     </groupbox>

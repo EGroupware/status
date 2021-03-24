@@ -644,13 +644,14 @@ var statusApp = /** @class */ (function (_super) {
         }
     };
     /**
-     *
+     * @param _room
      */
-    statusApp.prototype.videoconference_getRecordings = function () {
-        var room = this.et2.getArrayMgr('content').getEntry('room');
+    statusApp.prototype.videoconference_getRecordings = function (_room, _params) {
         egw.openPopup(egw.link('/index.php', {
             menuaction: 'status.\\EGroupware\\Status\\Ui.vc_recordings',
-            room: room,
+            room: _room,
+            cal_id: _params['cal_id'],
+            title: _params['title']
         }), 800, 450, 'recordings', 'status');
     };
     statusApp.videoconference_fetchRoomFromUrl = function (_url) {

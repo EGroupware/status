@@ -295,41 +295,28 @@ class Ui {
 	{
 		$tpl = new Api\Etemplate('status.vc_recordings');
 		$room = $_GET['room'];
-		$isAdmin = $GLOBALS['egw_info']['user']['apps']['admin'] ? true : false;
-
+		$cal_id = $_GET['cal_id'];
+		$title = $_GET['title'];
 		if (!$content)
 		{
-			$recordings =  Call::getRecordings($room, []);
-
+			$recordings =  Call::getRecordings($room, ['cal_id' => $cal_id]);
 			$content = [
 				'recordings'=> empty($recordings['error'])? $recordings : [],
-				'isAdmin' => $isAdmin,
 				'room' => $room,
+				'cal_id' => $cal_id,
+				'title' => $title
 			];
-
 		}
 		else
 		{
-			$button = @key($content['button']);
-			unset($content['button']);
-			$room = trim($content['room']);
-			switch($button)
-			{
-				case 'all':
-				case 'get':
-					$recordings = Call::getRecordings($room, [], ($button === 'all' && $isAdmin));
-					$content['recordings'] = empty($recordings['error'])? $recordings : [];
-					break;
-			}
+			$recordings = Call::getRecordings($content['room'], $content);
+			$content['recordings'] = empty($recordings['error'])? $recordings : [];
 		}
 		if (!empty($recordings['error'])) Api\Framework::message($recordings['error']);
-		$preserv = [
-			'room' => $content['room'],
-			'isAdmin' => $content['isAdmin']
-		];
+		$preserv = $content;
+		unset($preserv['recordings']);
 		// skip the first row in grid
 		array_unshift($content['recordings'], []);
-
 		$tpl->exec('status.EGroupware\\Status\\Ui.vc_recordings', $content,[],[], $preserv, 2);
 	}
 }

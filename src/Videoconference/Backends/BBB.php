@@ -92,12 +92,16 @@ class BBB Implements Iface
 		$duration = $_end ? ($end - $start) / 60 : $end - $start;
 		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
+
 		// Meeting params
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
-		$this->meetingParams->setRecord(true);
-		$this->meetingParams->setAllowStartStopRecording(true);
+
+		//Set recordings params
+		$this->meetingParams->setRecord(!$this->config['disable_recordings']);
+		$this->meetingParams->setAllowStartStopRecording(!$this->config['disable_recordings']);
+
 
 		if (!empty($_context['extra']['participants'])) $this->meetingParams->setMaxParticipants(count($_context['extra']['participants'])+($this->config['bbb_call_extra_invites']??self::EXTRA_INVITES_DEFAULT));
 		if ($start <= $now && $now <= $end && ($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
@@ -223,8 +227,16 @@ class BBB Implements Iface
 		}
 		else // create a new event (it happens in direct calls)
 		{
+			$names = [];
+			foreach ($_params['participants'] as $u => $p)
+			{
+				if (is_numeric($u) && $u !=  $GLOBALS['egw_info']['user']['account_id'])
+				{
+					$names[] = Api\Accounts::id2name($u, 'account_fullname');
+				}
+			}
 			$event = [
-				'title' => $room,
+				'title' => lang("video call: %1 to", $GLOBALS['egw_info']['user']['account_fullname'])." ".join(',', $names),
 				'##videoconference' => $room,
 				'start' => $start,
 				'end' => $end,
@@ -304,9 +316,8 @@ class BBB Implements Iface
 		$res_id = Hooks::getVideoconferenceResourceId();
 		$event = $cal->read($cal_id);
 		unset($event['participants']['r'.$res_id]);
-		$event['videoconference'] = false;
-		$res = ($room === $event['title']) ? $cal->delete($cal_id, 0, false, true)
-			: $cal->update($event, true, false, false);
+		$res = ($event['##videoconference'] == $room) ? $cal->update($event, true, false, false) : false;
+
 		if (!is_numeric($res) && !$res === true)
 		{
 			throw new Exception('freeing up resource from cal_id='.$cal_id.' failed!');

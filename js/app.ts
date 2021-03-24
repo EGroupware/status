@@ -725,15 +725,15 @@ class statusApp extends EgwApp
 	}
 
 	/**
-	 *
+	 * @param _room
 	 */
-	public videoconference_getRecordings()
+	public videoconference_getRecordings(_room, _params)
 	{
-		let room = this.et2.getArrayMgr('content').getEntry('room');
 		egw.openPopup(egw.link('/index.php', {
 			menuaction: 'status.\\EGroupware\\Status\\Ui.vc_recordings',
-			room: room,
-
+			room: _room,
+			cal_id: _params['cal_id'],
+			title: _params['title']
 		}), 800, 450, 'recordings', 'status');
 	}
 
