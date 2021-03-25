@@ -242,7 +242,8 @@ class BBB Implements Iface
 				'end' => $end,
 				'participants' => $_params['participants'],
 				'owner' => $GLOBALS['egw_info']['user']['account_id'],
-				'participant_types' => ['r', $res_id]
+				'participant_types' => ['r', $res_id],
+				'category' => $config['status_cat_videocall']
 			];
 			$cal_events = $cal->update($event, false, false, true, true, $msg, true);
 		}
