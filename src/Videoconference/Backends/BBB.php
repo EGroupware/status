@@ -14,6 +14,7 @@ namespace EGroupware\Status\Videoconference\Backends;
 
 use BigBlueButton\Core\Meeting;
 use BigBlueButton\Parameters\EndMeetingParameters;
+use BigBlueButton\Parameters\GetRecordingsParameters;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
@@ -24,7 +25,6 @@ use EGroupware\Status\Videoconference\Call;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 use EGroupware\OpenID\Token;
 use EGroupware\Api;
-use EGroupware\Api\DateTime;
 
 class BBB Implements Iface
 {
@@ -84,24 +84,27 @@ class BBB Implements Iface
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['bbb'];
 		putenv('BBB_SECRET='.$this->config['bbb_api_secret']);
-		putenv('BBB_SERVER_BASE_URL='.(substr($this->config['bbb_domain'], -4) == "/api" ?
+		putenv('BBB_SERVER_BASE_URL='.(substr($this->config['bbb_domain'], -4) === "/api" ?
 				substr($this->config['bbb_domain'],0,-3):$this->config['bbb_domain']));
 		$now = time();
 		$start = $_start??$now;
 		$end = $_end??$start+($this->config['bbb_call_duration']);
 		$duration = $_end ? ($end - $start) / 60 : $end - $start;
-		$this->roomNotReady = null;
 		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
+
 		// Meeting params
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
 		$this->meetingParams->setDuration($this->config['bbb_call_fixed_duration']?$duration: 0);
-		$this->meetingParams->setRecord(true);
-		$this->meetingParams->setAllowStartStopRecording(true);
+
+		//Set recordings params
+		$this->meetingParams->setRecord(!$this->config['disable_recordings']);
+		$this->meetingParams->setAllowStartStopRecording(!$this->config['disable_recordings']);
+
 
 		if (!empty($_context['extra']['participants'])) $this->meetingParams->setMaxParticipants(count($_context['extra']['participants'])+($this->config['bbb_call_extra_invites']??self::EXTRA_INVITES_DEFAULT));
-		if (($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success() && $start <= $now && $now <= $end)
+		if ($start <= $now && $now <= $end && ($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
 		{
 			if ($this->isUserModerator)
 			{
@@ -117,7 +120,7 @@ class BBB Implements Iface
 					'room' => $room,
 					'account_lid' => Api\Accounts::id2name($_context['user']['account_id'])
 				], $_context['user'])]);
-
+			// set end callback url
 			$this->meetingParams->setEndCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/endCallback.php?jwt='.$jwt));
 			try {
 				$response = $this->bbb->createMeeting($this->meetingParams);
@@ -125,7 +128,7 @@ class BBB Implements Iface
 			{
 				throw new Exception(lang('Communicating with server %1 failed because of %2',$this->config['bbb_domain'], $e->getMessage()));
 			}
-			if ($response->getReturnCode() == 'FAILED') {
+			if ($response->getReturnCode() === 'FAILED') {
 				throw new Exception($response->getMessage());
 			}
 			$this->moderatorPW = $response->getModeratorPassword();
@@ -150,10 +153,10 @@ class BBB Implements Iface
 	}
 
 	/**
-	 * @param array|null $_context
+	 * @param array|null $context
 	 * @return string
 	 */
-	public function getMeetingUrl ($_context=null)
+	public function getMeetingUrl ($context=null)
 	{
 		if (is_array($this->roomNotReady))
 		{
@@ -162,10 +165,10 @@ class BBB Implements Iface
 					'menuaction' => 'status.EGroupware\\Status\\Ui.room',
 				], $this->roomNotReady)));
 		}
-		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $_context['name'], $this->isUserModerator?
+		$meetingParams = new JoinMeetingParameters($this->meetingParams->getMeetingId(), $context['name'], $this->isUserModerator?
 			$this->moderatorPW:$this->meetingParams->getAttendeePassword());
 		$meetingParams->setCustomParameter('isModerator', $this->isUserModerator);
-		if (!empty($_context['cal_id'])) $meetingParams->setCustomParameter('cal_id', $_context['cal_id']);
+		if (!empty($context['cal_id'])) $meetingParams->setCustomParameter('cal_id', $context['cal_id']);
 		$meetingParams->setRedirect(true);
 		return $this->bbb->getJoinMeetingURL($meetingParams);
 	}
@@ -179,8 +182,8 @@ class BBB Implements Iface
 	 * 	- end
 	 * 	- participants
 	 * 	- invitation
-	 * @throws NoResourceAvailable
 	 * @return int cal_id returns cal_id if successful and throw exceptions otherwise
+	 * @throws NoResourceAvailable|Exception
 	 */
 	public function checkResources($_room='', $_params = [])
 	{
@@ -222,8 +225,16 @@ class BBB Implements Iface
 		}
 		else // create a new event (it happens in direct calls)
 		{
+			$names = [];
+			foreach ($_params['participants'] as $u => $p)
+			{
+				if (is_numeric($u) && $u !=  $GLOBALS['egw_info']['user']['account_id'])
+				{
+					$names[] = Api\Accounts::id2name($u, 'account_fullname');
+				}
+			}
 			$event = [
-				'title' => $room,
+				'title' => lang("video call: %1 to", $GLOBALS['egw_info']['user']['account_fullname'])." ".join(',', $names),
 				'##videoconference' => $room,
 				'start' => $start,
 				'end' => $end,
@@ -240,9 +251,9 @@ class BBB Implements Iface
 				// add newly added participant for the event
 				if ($r['id'] == $event['id'] && $event['start']>=$r['start'] && $event['start'] <= $r['end'])
 				{
-					$n = (intval(substr($r['participants'][$cal_res_index] ,1))
-						+ intval(substr($event['participants'][$cal_res_index],1)));
-					$event['participants'] = $event['participants'] + $r['participants'];
+					$n = (int)(substr($r['participants'][$cal_res_index] ,1))
+						+ (int)(substr($event['participants'][$cal_res_index],1));
+					$event['participants'] += $r['participants'];
 					$event['participants'][$cal_res_index] = "A".$n;
 				}
 			}
@@ -261,7 +272,7 @@ class BBB Implements Iface
 	 * @param string $_id account_id
 	 * @return bool
 	 */
-	public function isAnExternalUser($_id='')
+	public static function isAnExternalUser($_id='')
 	{
 		return filter_var($_id, FILTER_VALIDATE_EMAIL)?true:false;
 	}
@@ -272,7 +283,7 @@ class BBB Implements Iface
 	 * @param string $_id account_id:cal_id
 	 * @return bool
 	 */
-	public function isModerator($_room='', $_id='')
+	public static function isModerator($_room='', $_id='')
 	{
 		unset($_room); //neccesarry by func signature
 
@@ -285,7 +296,7 @@ class BBB Implements Iface
 
 			foreach ($event['participants'] as $user => $participant)
 			{
-				if ($user == $id[0] && preg_match('/CHAIR/', $participant)) return true;
+				if ($user == $id[0] && strpos($participant, 'CHAIR') !== FALSE) return true;
 			}
 		}
 		return false;
@@ -303,16 +314,15 @@ class BBB Implements Iface
 		$res_id = Hooks::getVideoconferenceResourceId();
 		$event = $cal->read($cal_id);
 		unset($event['participants']['r'.$res_id]);
-		$event['videoconference'] = false;
-		$res = ($room == $event['title']) ? $cal->delete($cal_id, 0, false, true)
-			: $cal->update($event, true, false, false);
+		$res = ($event['##videoconference'] == $room) ? $cal->update($event, true, false, false) : false;
+
 		if (!is_numeric($res) && !$res === true)
 		{
 			throw new Exception('freeing up resource from cal_id='.$cal_id.' failed!');
 		}
 	}
 
-	function isMeetingValid()
+	public function isMeetingValid()
 	{
 		// TODO: Implement isMeetingValid() method.
 		return true;
@@ -325,7 +335,7 @@ class BBB Implements Iface
 	public function deleteRoom(array $params)
 	{
 		$meetingInfo = $this->bbb->getMeetingInfo($this->meetingParams);
-		if (!$params || $params['password'] != $meetingInfo->getMeeting()->getModeratorPassword()) return;
+		if (!$params || $params['password'] !== $meetingInfo->getMeeting()->getModeratorPassword()) return;
 		$endMeetingParams = new EndMeetingParameters($params['meetingID'], $meetingInfo->getMeeting()->getModeratorPassword());
 		try {
 			$this->bbb->endMeeting($endMeetingParams);

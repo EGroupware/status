@@ -362,7 +362,7 @@ class Hooks
 	{
 		if ($GLOBALS['egw_info']['user']['apps']['admin']) {
 			$file = Array(
-				'Site Configuration' => Api\Egw::link('/index.php', 'menuaction=admin.admin_config.index&appname=' . self::APPNAME . '&ajax=true'),
+				'Site Configuration' => Api\Egw::link('/index.php', 'menuaction=admin.admin_config.index&appname=' . self::APPNAME . '&ajax=true')
 			);
 			if ($data['location'] == 'admin') {
 				display_section(self::APPNAME, $file);
@@ -388,6 +388,19 @@ class Hooks
 		{
 			$config['videoconference']['jitsi']['jitsi_domain'] = 'meet.jit.si';
 		}
+
+		// Add videoconference categories
+		foreach([
+					'status_cat_videocall' => ['name' => lang('Video call'),'data' => ['color' => '#9e7daf'],'description' => lang('Created by Status configuration')]
+				] as $conf => $cat)
+		{
+			if (empty($config[$conf]))
+			{
+				if (!isset($cats)) $cats = new Api\Categories(Api\Categories::GLOBAL_ACCOUNT, Api\Categories::GLOBAL_APPNAME);
+				Api\Config::save_value('status_cat_videocall',$cats->add($cat), 'status');
+			}
+		}
+
 		return $config;
 	}
 

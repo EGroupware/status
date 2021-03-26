@@ -13,6 +13,7 @@ namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
+use Gettext\Extractors\Json;
 
 class Call
 {
