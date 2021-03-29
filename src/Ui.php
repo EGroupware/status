@@ -304,7 +304,8 @@ class Ui {
 				'recordings'=> empty($recordings['error'])? $recordings : [],
 				'room' => $room,
 				'cal_id' => $cal_id,
-				'title' => $title
+				'title' => $title,
+				'moderator' => Call::isModerator($room, $GLOBALS['egw_info']['user']['account_id'].":".$cal_id)
 			];
 		}
 		else
@@ -318,5 +319,16 @@ class Ui {
 		// skip the first row in grid
 		array_unshift($content['recordings'], []);
 		$tpl->exec('status.EGroupware\\Status\\Ui.vc_recordings', $content,[],[], $preserv, 2);
+	}
+
+	/**
+	 * Delete recording action
+	 * @param $_params
+	 * @throws Api\Json\Exception
+	 */
+	public static function ajax_vc_deleteRecording($_params)
+	{
+		$response = Api\Json\Response::get();
+		$response->data(Call::delete_recording($_params['room'], $_params));
 	}
 }

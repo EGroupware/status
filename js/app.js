@@ -691,6 +691,19 @@ var statusApp = /** @class */ (function (_super) {
         }).sendRequest();
         window.parent.close();
     };
+    statusApp.prototype.vc_deleteRecording = function (_event, _widget) {
+        var recordings = this.et2.getArrayMgr('content').getEntry('recordings');
+        var id = _widget.id.replace('delete', '');
+        recordings[id]['cal_id'] = this.et2.getArrayMgr('content').getEntry('cal_id');
+        egw.json('EGroupware\\Status\\Ui::ajax_vc_deleteRecording', recordings[id], function (_data) {
+            if (_data['success']) {
+                this.et2.getInstanceManager().submit();
+            }
+            else {
+                egw.message(_data['error'], 'error');
+            }
+        }.bind(this)).sendRequest();
+    };
     statusApp.appname = 'status';
     statusApp.MISSED_CALL_TIMEOUT = egw.preference('ringingtimeout', 'status') ?
         parseInt(egw.preference('ringingtimeout', 'status')) * 1000 : 15000;

@@ -110,7 +110,7 @@ class BBB Implements Iface
 			{
 				$this->moderatorPW = $meeting->getMeeting()->getModeratorPassword();
 			}
-			return $meeting->getMeeting();
+			return;
 		}
 		elseif($this->isUserModerator && ($start <= $now || $now + $this->config['bbb_call_preparation'] * 60 >= $start) && $now <= $end)
 		{
@@ -236,7 +236,7 @@ class BBB Implements Iface
 				}
 			}
 			$event = [
-				'title' => lang("video call: %1 to", $GLOBALS['egw_info']['user']['account_fullname'])." ".join(',', $names),
+				'title' => lang("video call: %1 to", $GLOBALS['egw_info']['user']['account_fullname'])." ".implode(',', $names),
 				'##videoconference' => $room,
 				'start' => $start,
 				'end' => $end,
@@ -420,5 +420,27 @@ class BBB Implements Iface
 			$result['error'] = $records->getMessage();
 		}
 		return $result;
+	}
+
+	/**
+	 * Delete recording
+	 * @param $_params
+	 * @return array
+	 */
+	public function deleteRecordings($_params)
+	{
+		$result = [];
+		$meetingId = $_params['meetingID']?? $this->meetingParams->getMeetingId();
+		if (!$_params['recordid']) return ['error' => lang('No valid recordid found!')];
+		if (!self::isModerator($meetingId, $GLOBALS['egw_info']['user']['account_id'].':'.$_params['cal_id']))
+		{
+			$result['error'] = lang('Access denied!');
+			return $result;
+		}
+		$recordingParams = new GetRecordingsParameters();
+		$recordingParams->setMeetingId($meetingId);
+		$recordingParams->setRecordId($_params['recordid']);
+		$result = $this->bbb->deleteRecordings($recordingParams);
+		return $result->success() ? ['success' => $result->success()] : ['error' => $result->getMessage()];
 	}
 }

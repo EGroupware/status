@@ -15,6 +15,7 @@
 					<column/>
 					<column/>
 					<column/>
+					<column disabled="!@moderator"/>
 				</columns>
 				<rows>
 					<row class="th">
@@ -24,6 +25,7 @@
 						<description value="starttime"/>
 						<description value="endtime"/>
 						<description value="room"/>
+						<description value="action"  />
 					</row>
 					<row class="row">
 						<description id="${row}[name]" href="$row_cont[url]"/>
@@ -32,6 +34,7 @@
 						<date-time id="${row}[starttime]" readonly="true"/>
 						<date-time id="${row}[endtime]" readonly="true"/>
 						<description id="${row}[room]"/>
+						<button id="${row}delete" background_image="true" onclick="app.status.vc_deleteRecording" image="delete"/>
 					</row>
 				</rows>
 			</grid>

@@ -784,5 +784,22 @@ class statusApp extends EgwApp
 			}).sendRequest();
 		window.parent.close();
 	}
+
+	public vc_deleteRecording(_event, _widget)
+	{
+		let recordings = this.et2.getArrayMgr('content').getEntry('recordings');
+		let id = _widget.id.replace('delete', '');
+		recordings[id]['cal_id'] = this.et2.getArrayMgr('content').getEntry('cal_id');
+		egw.json('EGroupware\\Status\\Ui::ajax_vc_deleteRecording', recordings[id], function(_data){
+			if (_data['success'])
+			{
+				this.et2.getInstanceManager().submit();
+			}
+			else
+			{
+				egw.message(_data['error'], 'error');
+			}
+		}.bind(this)).sendRequest();
+	}
 }
 app.classes.status = statusApp;

@@ -195,7 +195,7 @@ class Call
 	 * @param string|int $id
 	 * @return bool return true if is moderator
 	 */
-	private static function isModerator(string $room, $id)
+	public static function isModerator(string $room, $id)
 	{
 		$backend = self::_getBackendInstance(0, []);
 		if (method_exists($backend, 'isModerator'))
@@ -313,7 +313,7 @@ class Call
 	 * @param $room
 	 * @param $url
 	 */
-	static function ajax_deleteRoom($room, $url)
+	public static function ajax_deleteRoom($room, $url)
 	{
 		$backend = self::_getBackendInstance($room, []);
 		$response = Api\Json\Response::get();
@@ -329,7 +329,7 @@ class Call
 		$response->data([]);
 	}
 
-	static function getRecordings($room, $params, $fetchall=false)
+	public static function getRecordings($room, $params, $fetchall=false)
 	{
 		$res = [];
 		if (!$room || !$params['cal_id'])
@@ -353,6 +353,29 @@ class Call
 		if (method_exists($backend, 'getRecordings'))
 		{
 			$res = $backend->getRecordings($params, $fetchall);
+		}
+		return $res;
+	}
+
+	/**
+	 * Delete recording
+	 * @param $_room
+	 * @param $_params
+	 * @return array
+	 */
+	public static function delete_recording($_room, $_params)
+	{
+		if (!$_room || !$_params['cal_id'])
+		{
+			$res['error'] = lang('No valid room found!');
+			return $res;
+		}
+
+		$backend = self::_getBackendInstance($_room, []);
+
+		if (method_exists($backend, 'deleteRecordings'))
+		{
+			$res = $backend->deleteRecordings($_params);
 		}
 		return $res;
 	}
