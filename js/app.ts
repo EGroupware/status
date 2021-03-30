@@ -64,7 +64,7 @@ class statusApp extends EgwApp
 			case 'status.index':
 				if (egw.preference('ringtone', 'status'))
 				{
-					this._ring = jQuery(document.createElement('audio')).attr({id:'status-ring', src:'status/assets/ring.mp3'}).appendTo('#status-index_status-index-fav')[0];
+					this._ring = new Audio('status/assets/ring.mp3');
 					let self = this;
 					jQuery('body').one('click', function(){
 						self._controllRingTone().initiate();
@@ -472,7 +472,7 @@ class statusApp extends EgwApp
 			minWidth: 200,
 			minHeight: 200,
 			modal: false,
-			position:"right bottom,right-50 bottom-10",
+			position:"right bottom,right-50 bottom",
 			value: {
 				content: {
 					list:[{
@@ -508,6 +508,7 @@ class statusApp extends EgwApp
 			start: function (_loop?){
 				if (!self._ring) return;
 				self._ring.loop = _loop || false;
+				self._ring.muted = false;
 				self._ring.play().then(function(){
 					window.setTimeout(function(){
 						self._controllRingTone().stop();
