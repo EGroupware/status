@@ -457,7 +457,7 @@ var statusApp = /** @class */ (function (_super) {
             minWidth: 200,
             minHeight: 200,
             modal: false,
-            position: "right bottom,right-50 bottom",
+            position: "right bottom, right bottom",
             value: {
                 content: {
                     list: [{
