@@ -15,6 +15,7 @@ callback	status	en	Callback
 click to join!	status	en	Click to Join!
 communicating with server %1 failed because of %2	status	en	Communicating with server %1 failed because of %2
 disable	status	en	disable
+disable recording	status	en	Disable recording
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
 enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
@@ -53,9 +54,9 @@ status	status	en	Status/Videoconference
 this meeting is no longer valid because it is in the past!	status	en	This meeting is no longer valid because it is in the past!
 this meeting will start in	status	en	This meeting will start in
 timeout for the ring tone for incoming calls.	status	en	Timeout for the ring tone for incoming calls.
-title	status	en	title
+title	status	en	Title
 use jwt authentication	status	en	Use JWT authentication
-Users of selected groups will be listed.	status	en	Users of selected groups will be listed.
+users of selected groups will be listed.	status	en	Users of selected groups will be listed.
 video call	common	en	Video Call
 video conference	common	en	Video Conference
 video conference backends	status	en	Video conference backends
