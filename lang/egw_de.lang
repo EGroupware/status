@@ -15,10 +15,11 @@ callback	status	de	Rückruf
 click to join!	status	de	Anklicken zum Teilnehmen!
 communicating with server %1 failed because of %2	status	de	Die Kommunikation mit Server %1 ist aufgrund von %2 fehlgeschlagen
 disable	status	de	Deaktivieren
+disable recording	status	de	Aufnahme deaktivieren:
 enable	status	de	Aktivieren
 enable ring tone	status	de	Klingelton
 enable ring tone while receiving a call	status	de	Klingelton beim Empfang eines Anrufs aktivieren
-end meeting	status	de	Beende Konferenz
+end meeting	status	de	Konferenz beenden
 estimated call session duration, default is 30 minutes:	status	de	Geschätzte Dauer der Anrufsitzung, Standard ist 30 Minuten:
 event owner	status	de	Organisator Videokonferenz
 example: jitsi	status	de	Beispiel: Jitsi
@@ -39,7 +40,7 @@ message	status	de	Nachricht
 missed call from %1	status	de	Versäumter Anruf von %1
 new window	status	de	Neues Fenster
 open call in	status	de	Öffne Videokonferenz als
-open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Popup öffnen
+open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Pop-up öffnen
 phone call	status	de	Telefonanruf
 predefined group of users to be listed	status	de	Zeige in der Status-Leiste nur die Benutzer der ausgewählten Gruppen an
 remove from favorites	status	de	Aus Favoriten entfernen
@@ -53,8 +54,9 @@ status	status	de	Status/Videokonferenz
 this meeting is no longer valid because it is in the past!	status	de	Diese Konferenz ist nicht mehr gültig, weil sie in der Vergangenheit liegt!
 this meeting will start in	status	de	Diese Videokonferenz beginnt in
 timeout for the ring tone for incoming calls.	status	de	Timeout für den Klingelton bei eingehenden Anrufen.
-title	status	de	Title
+title	status	de	Titel
 use jwt authentication	status	de	Benutze JWT Authentifizierung
+users of selected groups will be listed.	status	de	Die Benutzer der ausgewählten Gruppen werden angezeigt.
 video call	common	de	Videoanruf
 video conference	common	de	Videokonferenz
 video conference backends	status	de	Videokonferenz-System
