@@ -213,7 +213,7 @@ class Ui {
 	{
 		// the first row belongs to an empty placeholder and it should not participate
 		// in sorting
-		if ($orders[0] && $orders[0]['id'] == 'emptyrow') unset($orders[0]);
+		if (is_array($orders[0]) && $orders[0]['id'] == 'emptyrow') unset($orders[0]);
 		$GLOBALS['egw']->preferences->add('status','fav', array_values(self::mapNames2Ids($orders)));
 		$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 	}
