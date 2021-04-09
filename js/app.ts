@@ -120,7 +120,7 @@ class statusApp extends EgwApp
 		let self = this;
 		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account)
 		{
-			let content = [{
+			let content : any = [{
 				id: account[pushData.acl.account_id],
 				class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': '',
 				title3: pushData.acl.account_id && pushData.acl.busy ? account[pushData.acl.account_id]+' '+ egw.lang('is busy on the phone'): '',
@@ -604,7 +604,7 @@ class statusApp extends EgwApp
 				url.destroy();
 			}
 			self.mergeContent([{id: _from, class2:'', action2:''}])
-		}, "Would you like to callback?", "Missed call", et2_dialog.BUTTONS_YES_NO);
+		}, "Would you like to callback?", "Missed call", null, et2_dialog.BUTTONS_YES_NO);
 	}
 
 	public phoneCall(_action, _selected)

@@ -539,7 +539,7 @@ var statusApp = /** @class */ (function (_super) {
                 url.destroy();
             }
             self.mergeContent([{ id: _from, class2: '', action2: '' }]);
-        }, "Would you like to callback?", "Missed call", et2_widget_dialog_1.et2_dialog.BUTTONS_YES_NO);
+        }, "Would you like to callback?", "Missed call", null, et2_widget_dialog_1.et2_dialog.BUTTONS_YES_NO);
     };
     statusApp.prototype.phoneCall = function (_action, _selected) {
         var _c, _d, _e, _f;

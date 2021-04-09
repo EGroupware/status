@@ -12,7 +12,7 @@
 
 namespace EGroupware\Status\Videoconference\Backends;
 
-use BigBlueButton\Core\Meeting;
+use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use EGroupware\Api\Config;
@@ -72,8 +72,9 @@ class BBB Implements Iface
 	 * @param int|null $_start start UTC timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
 	 * @param int|null $_end expiration UTC timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
+	 * @return void
 	 * @throws Exception
-	 * @return void|Meeting
+	 *
 	 */
 	public function __construct($_room='', array $_context=[], $_start=null, $_end=null)
 	{
@@ -277,19 +278,18 @@ class BBB Implements Iface
 	 */
 	public static function isAnExternalUser($_id='')
 	{
-		return filter_var($_id, FILTER_VALIDATE_EMAIL)?true:false;
+		return (bool)filter_var($_id, FILTER_VALIDATE_EMAIL);
 	}
 
 	/**
 	 * Check if the user is moderator of room
-	 * @param string $_room not used
+	 * @param ?string $_room not used
 	 * @param string $_id account_id:cal_id
 	 * @return bool
+	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public static function isModerator($_room='', $_id='')
+	public static function isModerator(?string $_room=null, $_id='')
 	{
-		unset($_room); //neccesarry by func signature
-
 		$id = explode(':', $_id);
 		if (!empty($id[1]))
 		{
@@ -376,10 +376,11 @@ class BBB Implements Iface
 	/**
 	 * Get recordings
 	 *
-	 * @param $params values used for getting specific recordings
+	 * @param array $params values used for getting specific recordings
+	 * @param bool $fetchall
 	 * @return array returns an array of records or empty array.
 	 */
-	public function getRecordings($params, $fetchall=false)
+	public function getRecordings(array $params, bool $fetchall=false)
 	{
 		$recordingParams = new GetRecordingsParameters();
 		$meetingId = $params['meetingID']?? $this->meetingParams->getMeetingId();
@@ -409,9 +410,8 @@ class BBB Implements Iface
 						'endtime' => new Api\DateTime($r->getEndTime()/1000)
 					];
 				}
-			} catch (\JsonException $e)
+			} catch (Exception $e)
 			{
-
 				error_log(__METHOD__ . '()' . $e->getMessage());
 			}
 		}
@@ -437,9 +437,7 @@ class BBB Implements Iface
 			$result['error'] = lang('Access denied!');
 			return $result;
 		}
-		$recordingParams = new GetRecordingsParameters();
-		$recordingParams->setMeetingId($meetingId);
-		$recordingParams->setRecordId($_params['recordid']);
+		$recordingParams = new DeleteRecordingsParameters($_params['recordid']);
 		$result = $this->bbb->deleteRecordings($recordingParams);
 		return $result->success() ? ['success' => $result->success()] : ['error' => $result->getMessage()];
 	}

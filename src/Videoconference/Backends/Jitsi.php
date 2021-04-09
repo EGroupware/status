@@ -22,44 +22,32 @@ class Jitsi implements Iface
 	/**
 	 * JWT HEADER
 	 */
-	const HEADER = ['alg' => 'HS256', 'typ' => 'JWT'];
+	protected const HEADER = ['alg' => 'HS256', 'typ' => 'JWT'];
 
 	/**
 	 * the audience (aud claim)
 	 */
-	const AUD = 'EGroupware';
+	protected const AUD = 'EGroupware';
 
 	/**
 	 * uid number
 	 */
-	const UID = 1;
+	protected const UID = 1;
 
 	/**
 	 * Expiration grace-time of token
 	 */
-	const EXP_GRACETIME = 3600;
+	protected const EXP_GRACETIME = 3600;
 
 	/**
 	 * Not before grace-time the token
 	 */
-	const NBF_GRACETIME = 3600;
+	protected const NBF_GRACETIME = 3600;
 
 	/**
 	 * @var object \Lcobucci\JWT\Token
 	 */
 	private $token;
-
-	/**
-	 * the time token is issued
-	 * @var int
-	 */
-	private $iat;
-
-	/**
-	 * the token expiration time
-	 * @var int
-	 */
-	private $exp;
 
 	/**
 	 * contains jwt payload
@@ -88,20 +76,20 @@ class Jitsi implements Iface
 	{
 		$config = Config::read('status');
 		$this->config = $config['videoconference']['jitsi'];
-		$this->iat = time();
-		$nbf = max(($_start ?: $this->iat) - self::NBF_GRACETIME, $this->iat);
-		$this->exp = ($_end ?: $this->iat) + self::EXP_GRACETIME;
+		$iat = time();
+		$nbf = max(($_start ?: $iat) - self::NBF_GRACETIME, $iat);
+		$exp = ($_end ?: $iat) + self::EXP_GRACETIME;
 		$signer = new Sha256();
 
 		$this->payload = [
 			'iss' => $this->config['jitsi_application_id'] ?: 'egroupware',
 			'aud' => self::AUD,
 			'sub' => str_replace('jitsi.egroupware.net', '', $this->config['jitsi_domain']) ?: 'meet.jit.si',
-			'room' => $_room ? $_room : '*',
+			'room' => $_room ?: '*',
 			'secret' => $this->config['jitsi_application_secret']
 		];
 		// Prosody in Jitsi expects all values of user context to be type of string otherwise will throw an error
-		$context['user'] = array_map(function($val){
+		$context['user'] = array_map(static function($val){
 			return (string)$val;
 		}, (array)$_context['user']);
 		// Jitsi doesn't like more context params, we use these params in other backends though
@@ -119,11 +107,11 @@ class Jitsi implements Iface
 				// Configure the domain (sub claim)
 				->relatedTo($this->payload['sub'])
 				// Configures the time that the token was issue (iat claim)
-				->issuedAt($this->iat)
+				->issuedAt($iat)
 				// Configures the time that the token can be used (nbf claim)
 				->canOnlyBeUsedAfter($nbf)
 				// Configures the expiration time of the token (exp claim)
-				->expiresAt($this->exp)
+				->expiresAt($exp)
 				// Configure room
 				->withClaim('room', $this->payload['room'])
 				// Set context
@@ -151,14 +139,14 @@ class Jitsi implements Iface
 	 */
 	private function _getToken ()
 	{
-		return $this->token->__toString();
+		return $this->token->toString();
 	}
 
 	/**
-	 * @param array|null $_context
+	 * @param ?array $_context
 	 * @return string
 	 */
-	public function getMeetingUrl ($_context=null)
+	public function getMeetingUrl (?array $_context=null)
 	{
 		$jwt = !empty($this->config['jitsi_application_id']) ? "?jwt=".$this->_getToken() : '';
 		return 'https://'.$this->payload['sub'].'/'.$this->payload['room'].$jwt.'#'.$this->_getExtraParams();
