@@ -115,12 +115,6 @@ class Call
 		$now = new Api\DateTime('now');
 		$start = new Api\DateTime($_start);
 		$end = new Api\DateTime($_end);
-
-		if (self::DEBUG)
-		{
-			error_log(__METHOD__."() room=".$room." context=".array2string($context)." start=".json_encode($start)." end=".json_encode($end)." extra=".array2string($extra));
-		}
-
 		if ($now > $end)
 		{
 			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
