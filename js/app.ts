@@ -259,7 +259,7 @@ class statusApp extends EgwApp
 		// give it a delay to make sure the preferences data is updated before refreshing
 		window.setTimeout(function(){
 			egw.json('EGroupware\\Status\\Ui::ajax_refresh', [], function(_data){
-				self.updateContent(_data.fav, _data.list);
+				if (self.et2) self.updateContent(_data.fav, _data.list);
 			}).sendRequest();
 		}, 200);
 	}
