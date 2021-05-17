@@ -113,7 +113,7 @@ class BBB Implements Iface
 			}
 			return;
 		}
-		elseif($this->isUserModerator && ($start <= $now || $now + $this->config['bbb_call_preparation'] * 60 >= $start) && $now <= $end)
+		elseif(!$_context['user']['notify_only'] && $this->isUserModerator && ($start <= $now || $now + $this->config['bbb_call_preparation'] * 60 >= $start) && $now <= $end)
 		{
 			$token = new Token();
 			$jwt = $token->accessToken('BBB', ['videoconference'], 'PT1H',
