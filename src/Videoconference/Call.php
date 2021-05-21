@@ -25,7 +25,11 @@ class Call
 	/**
 	 * debug mode
 	 */
+<<<<<<< HEAD
 	const DEBUG = false;
+=======
+	public const DEBUG = false;
+>>>>>>> 9389545... Add some logging
 
 	/**
 	 * messages
@@ -112,8 +116,19 @@ class Call
 	{
 		$respose = Api\Json\Response::get();
 		$now = new Api\DateTime('now');
+<<<<<<< HEAD
 		$start = new Api\DateTime($start);
 		$end = new Api\DateTime($end);
+=======
+		$start = new Api\DateTime($_start);
+		$end = new Api\DateTime($_end);
+
+		if (self::DEBUG)
+		{
+			error_log(__METHOD__."() room=".$_room." context=".array2string($_context)." start=".$start." end=".$end." extra=".array2string($_extra));
+		}
+
+>>>>>>> 9389545... Add some logging
 		if ($now > $end)
 		{
 			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);

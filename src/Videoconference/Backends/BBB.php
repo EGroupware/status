@@ -12,7 +12,7 @@
 
 namespace EGroupware\Status\Videoconference\Backends;
 
-use BigBlueButton\Core\Meeting;
+use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use EGroupware\Api\Config;
@@ -72,8 +72,9 @@ class BBB Implements Iface
 	 * @param int|null $_start start UTC timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
 	 * @param int|null $_end expiration UTC timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
+	 * @return void
 	 * @throws Exception
-	 * @return void|Meeting
+	 *
 	 */
 	public function __construct($_room='', array $_context=[], $_start=null, $_end=null)
 	{
@@ -92,6 +93,11 @@ class BBB Implements Iface
 		$duration = $_end ? ($end - $start) / 60 : $end - $start;
 		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
+
+		if (Call::DEBUG)
+		{
+			error_log(__METHOD__.__LINE__."() room=".$_room." context=".array2string($_context)." start=".$start." end=".$end."isModerator=".$this->isUserModerator);
+		}
 
 		// Meeting params
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
@@ -126,6 +132,11 @@ class BBB Implements Iface
 			$this->meetingParams->setRecordingReadyCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/recordingReadyCallback.php'));
 			try {
 				$response = $this->bbb->createMeeting($this->meetingParams);
+
+				if (Call::DEBUG)
+				{
+					error_log(__METHOD__.__LINE__."Meeting created=".array2string($this->meetingParams)." user=".array2string($_context['user']));
+				}
 			}catch(\Exception $e)
 			{
 				throw new Exception(lang('Communicating with server %1 failed because of %2',$this->config['bbb_domain'], $e->getMessage()));
@@ -151,6 +162,11 @@ class BBB Implements Iface
 				'end' => $end
 			];
 			if ($this->isUserModerator) $this->roomNotReady['preparation'] =  $this->config['bbb_call_preparation'] * 60;
+
+			if (Call::DEBUG)
+			{
+				error_log(__METHOD__.__LINE__."Room not ready=".array2string($this->roomNotReady)." user=".array2string($_context['user']));
+			}
 		}
 	}
 
@@ -277,19 +293,18 @@ class BBB Implements Iface
 	 */
 	public static function isAnExternalUser($_id='')
 	{
-		return filter_var($_id, FILTER_VALIDATE_EMAIL)?true:false;
+		return (bool)filter_var($_id, FILTER_VALIDATE_EMAIL);
 	}
 
 	/**
 	 * Check if the user is moderator of room
-	 * @param string $_room not used
+	 * @param ?string $_room not used
 	 * @param string $_id account_id:cal_id
 	 * @return bool
+	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public static function isModerator($_room='', $_id='')
+	public static function isModerator(?string $_room=null, $_id='')
 	{
-		unset($_room); //neccesarry by func signature
-
 		$id = explode(':', $_id);
 		if (!empty($id[1]))
 		{
@@ -376,10 +391,11 @@ class BBB Implements Iface
 	/**
 	 * Get recordings
 	 *
-	 * @param $params values used for getting specific recordings
+	 * @param array $params values used for getting specific recordings
+	 * @param bool $fetchall
 	 * @return array returns an array of records or empty array.
 	 */
-	public function getRecordings($params, $fetchall=false)
+	public function getRecordings(array $params, bool $fetchall=false)
 	{
 		$recordingParams = new GetRecordingsParameters();
 		$meetingId = $params['meetingID']?? $this->meetingParams->getMeetingId();
@@ -409,9 +425,8 @@ class BBB Implements Iface
 						'endtime' => new Api\DateTime($r->getEndTime()/1000)
 					];
 				}
-			} catch (\JsonException $e)
+			} catch (Exception $e)
 			{
-
 				error_log(__METHOD__ . '()' . $e->getMessage());
 			}
 		}
@@ -437,9 +452,7 @@ class BBB Implements Iface
 			$result['error'] = lang('Access denied!');
 			return $result;
 		}
-		$recordingParams = new GetRecordingsParameters();
-		$recordingParams->setMeetingId($meetingId);
-		$recordingParams->setRecordId($_params['recordid']);
+		$recordingParams = new DeleteRecordingsParameters($_params['recordid']);
 		$result = $this->bbb->deleteRecordings($recordingParams);
 		return $result->success() ? ['success' => $result->success()] : ['error' => $result->getMessage()];
 	}

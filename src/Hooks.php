@@ -13,11 +13,8 @@ namespace EGroupware\Status;
 
 use EGroupware\Api;
 use EGroupware\Api\Config;
-use EGroupware\OpenID\AdminCmds\Client;
 use EGroupware\OpenID\Entities\ClientEntity;
 use EGroupware\OpenID\Repositories\ClientRepository;
-use EGroupware\OpenID\Repositories\GrantRepository;
-use EGroupware\Rocketchat\Api\Restapi;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use resources_bo;
 
@@ -27,11 +24,11 @@ class Hooks
 	 * App name
 	 * var string
 	 */
-	const APPNAME = 'status';
+	public const APPNAME = 'status';
 
-	const DEFAULT_VIDEOCONFERENCE_BACKEND = 'Jitsi';
+	public const DEFAULT_VIDEOCONFERENCE_BACKEND = 'Jitsi';
 
-	const SERVER_RESOURCE_PREFIX_NAME = 'Meeting room ';
+	public const SERVER_RESOURCE_PREFIX_NAME = 'Meeting room ';
 
 	/**
 	 * Status items
@@ -97,8 +94,9 @@ class Hooks
 	 *        ]
 	 * ]
 	 *
+	 * @throws \JsonException
 	 */
-	public static function getStatus($data)
+	public static function getStatus(array $data)
 	{
 		if ($data['app'] != self::APPNAME) return [];
 
@@ -106,7 +104,7 @@ class Hooks
 
 		$contact_obj = new Api\Contacts();
 
-		Api\Cache::setSession(self::APPNAME, 'account_state', md5(json_encode($users = self::getUsers())));
+		Api\Cache::setSession(self::APPNAME, 'account_state', md5(json_encode($users = self::getUsers(), JSON_THROW_ON_ERROR)));
 
 		foreach ($users as $user) {
 			if (in_array($user['account_lid'], ['anonymous', $GLOBALS['egw_info']['user']['account_lid']])) {
@@ -135,7 +133,7 @@ class Hooks
 				];
 			}
 		}
-		uasort($stat, function ($a, $b) {
+		uasort($stat, static function ($a, $b) {
 			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active']) {
 				return $b['lastlogin'] - $a['lastlogin'];
 			}
@@ -206,11 +204,12 @@ class Hooks
 	 */
 	public static function getUserName($_user = null)
 	{
-		return $_user ? $_user : $GLOBALS['egw_info']['user']['account_lid'];
+		return $_user ?: $GLOBALS['egw_info']['user']['account_lid'];
 	}
 
 	/**
 	 * Update state
+	 * @throws Api\Json\Exception
 	 */
 	public static function updateState()
 	{
@@ -227,9 +226,10 @@ class Hooks
 	/**
 	 * Push user status to all after session is created
 	 *
-	 * @param type $_data
+	 * @param array $_data
+	 * @throws Api\Json\Exception
 	 */
-	public static function sessionCreated($_data)
+	public static function sessionCreated(array $_data)
 	{
 		if ($_data['session_type'] == "webgui")
 		{
@@ -251,7 +251,7 @@ class Hooks
 	 */
 	public static function getUsers()
 	{
-		$users = $rows = $readonlys = $onlines = [];
+		$users = [];
 		$pref_groups = explode(',', $GLOBALS['egw_info']['user']['preferences']['status']['groups']);
 		$filter = [];
 		if (empty($pref_groups) || in_array('_A',$pref_groups))
@@ -268,10 +268,10 @@ class Hooks
 						// Skip to the next group
 						continue 2;
 					case "_P":
-						array_push($filter, $GLOBALS['egw_info']['user']['account_primary_group']);
+						$filter[] = $GLOBALS['egw_info']['user']['account_primary_group'];
 						break;
 					default :
-						array_push($filter, $g);
+						$filter[] = $g;
 				}
 			}
 			$filter = implode(',', $filter);
@@ -287,7 +287,7 @@ class Hooks
 		], $users);
 
 		$push = new Api\Json\Push();
-		$online = $push->online();
+		$online = $push::online();
 
 		$ids = array_column((array)$users, 'account_id');
 
@@ -296,10 +296,10 @@ class Hooks
 			if (is_numeric($fav) && !in_array((array)$fav, $ids))
 			{
 				// add already favorite accounts which are not in the users
-				array_push ($users, [
-					'account_lid' => Api\Accounts::id2name($fav, 'account_lid'),
+				$users[] = [
+					'account_lid' => Api\Accounts::id2name($fav),
 					'account_id' => $fav
-				]);
+				];
 			}
 		}
 
@@ -315,6 +315,7 @@ class Hooks
 	 *
 	 * Find entries that match query parameter (from link system) and format them
 	 * as the widget expects, a list of {id: ..., label: ..., icon: ...} objects
+	 * @noinspection PhpUnused
 	 */
 	public static function ajax_search()
 	{
@@ -341,7 +342,7 @@ class Hooks
 			$r = Api\Hooks::process(['location' => 'status-getSearchParticipants', 'app' => $app], $app);
 			if (is_array($r[$app])) $results = array_merge_recursive($results, $r[$app]);
 		}
-		usort($results, function ($a, $b) use ($query) {
+		usort($results, static function ($a, $b) use ($query) {
 			$a_label = is_array($a["label"]) ? $a["label"]["label"] : $a["label"];
 			$b_label = is_array($b["label"]) ? $b["label"]["label"] : $b["label"];
 
@@ -375,6 +376,7 @@ class Hooks
 	 *
 	 * @param array $config
 	 * @return array with additional Api\Config to merge
+	 * @throws Api\Exception\WrongParameter
 	 */
 	public static function config(array $config)
 	{
@@ -382,9 +384,9 @@ class Hooks
 		{
 			$config['videoconference']['backend'] = self::DEFAULT_VIDEOCONFERENCE_BACKEND;
 		}
-		if (in_array(self::DEFAULT_VIDEOCONFERENCE_BACKEND, (array)$config['videoconference']['backend']) &&
-			(empty($config['videoconference']['jitsi']['jitsi_domain']) ||
-				$config['videoconference']['jitsi']['jitsi_domain'] === 'jitsi.egroupware.net'))
+		if ((empty($config['videoconference']['jitsi']['jitsi_domain']) ||
+			$config['videoconference']['jitsi']['jitsi_domain'] === 'jitsi.egroupware.net')
+			&& in_array(self::DEFAULT_VIDEOCONFERENCE_BACKEND, (array)$config['videoconference']['backend']))
 		{
 			$config['videoconference']['jitsi']['jitsi_domain'] = 'meet.jit.si';
 		}
@@ -407,6 +409,8 @@ class Hooks
 	/**
 	 * Creates resource for bbb-server
 	 * @param $_content
+	 * @throws Api\Exception\WrongParameter
+	 * @throws \Exception
 	 */
 	public static function config_after_save($_content)
 	{
@@ -477,14 +481,14 @@ class Hooks
 	/**
 	 * Validate the configuration
 	 *
-	 * @param Array $data
+	 * @param array $data
 	 * @return string|null string with error or null on success
 	 */
-	public static function validate($data)
+	public static function validate(array $data)
 	{
 		$error = '';
 
-		if (in_array('BBB', (array)$data['videoconference']['backend']))
+		if (in_array('BBB', $data['videoconference']['backend']))
 		{
 			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = "\n-".lang("Resources app is missing!");
 			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= "\n-".lang("bbb domain is missing!");
@@ -520,7 +524,7 @@ class Hooks
 	 *
 	 * @return array with settings
 	 */
-	static function settings()
+	public static function settings()
 	{
 		$groups = array(
 			'_A' => lang('ALL'),
@@ -531,7 +535,7 @@ class Hooks
 			$groups[$acc['account_id']] = Api\Accounts::format_username(
 				$acc['account_lid'], $acc['account_firstname'], $acc['account_lastname'], $acc['account_id']);
 		}
-
+		$riningTimeouts = [];
 		for($i=5;$i<60;$i+=5)
 		{
 			$riningTimeouts[$i] = $i.' '.lang('seconds');
@@ -586,10 +590,11 @@ class Hooks
 	/**
 	 * Method to construct notifications actions
 	 *
-	 * @param type $params
-	 * @return type
+	 * @param array $params
+	 * @return array
+	 * @noinspection PhpUnused
 	 */
-	public static function notifications_actions($params)
+	public static function notifications_actions(array $params)
 	{
 		Api\Translation::add_app('status');
 		return [
@@ -608,10 +613,11 @@ class Hooks
 	/**
 	 * Register Jitsi domain for CSP policies frame-src
 	 *
-	 * @param $location "connect-src" | "frame-src"
 	 * @return array
+	 * @throws Api\Exception\WrongParameter
+	 * @noinspection PhpUnused
 	 */
-	public static function csp_frame_src($location)
+	public static function csp_frame_src()
 	{
 		$config = self::config(Api\Config::read('status'));
 		$srcs = [];

@@ -18,7 +18,7 @@ import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import {et2_url_ro} from "../../api/js/etemplate/et2_widget_url";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
-import {egw} from "../../api/js/jsapi/egw_global";
+import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 
 class statusApp extends EgwApp
 {
@@ -120,7 +120,7 @@ class statusApp extends EgwApp
 		let self = this;
 		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account)
 		{
-			let content = [{
+			let content : any = [{
 				id: account[pushData.acl.account_id],
 				class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone': '',
 				title3: pushData.acl.account_id && pushData.acl.busy ? account[pushData.acl.account_id]+' '+ egw.lang('is busy on the phone'): '',

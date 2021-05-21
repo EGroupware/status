@@ -19,26 +19,26 @@ interface Iface
 	 * @param int|null $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
 	 * @param int|null $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 */
-	function __construct($room='', array $context, $start=null, $end=null);
+	public function __construct($room='', array $context, $start=null, $end=null);
 
 	/**
 	 * Generate meeting url
-	 * @param array|null $context
+	 * @param ?array $_context
 	 * @return mixed
 	 */
-	function getMeetingURL($context=null);
+	public function getMeetingURL(?array $_context=null);
 
 	/**
 	 * Check if meeting token is valid
 	 * @return mixed
 	 */
-	function isMeetingValid();
+	public function isMeetingValid();
 
 	/**
 	 * Resolve room id from full url
 	 * @param string $url
 	 * @return mixed
 	 */
-	static function fetchRoomFromUrl(string $url);
+	public static function fetchRoomFromUrl(string $url);
 
 }
