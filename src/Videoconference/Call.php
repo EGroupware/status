@@ -25,7 +25,7 @@ class Call
 	/**
 	 * debug mode
 	 */
-	private const DEBUG = false;
+	public const DEBUG = false;
 
 	/**
 	 * messages
@@ -115,6 +115,12 @@ class Call
 		$now = new Api\DateTime('now');
 		$start = new Api\DateTime($_start);
 		$end = new Api\DateTime($_end);
+
+		if (self::DEBUG)
+		{
+			error_log(__METHOD__."() room=".$_room." context=".array2string($_context)." start=".$start." end=".$end." extra=".array2string($_extra));
+		}
+
 		if ($now > $end)
 		{
 			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
