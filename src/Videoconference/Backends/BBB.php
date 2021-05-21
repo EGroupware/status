@@ -93,6 +93,11 @@ class BBB Implements Iface
 		$this->isUserModerator = self::isModerator($room, $_context['user']['account_id'].':'.$_context['user']['cal_id']);
 		$this->bbb = new BigBlueButton();
 
+		if (Call::DEBUG)
+		{
+			error_log(__METHOD__.__LINE__."() room=".$_room." context=".array2string($_context)." start=".$start." end=".$end."isModerator=".$this->isUserModerator);
+		}
+
 		// Meeting params
 		$this->meetingParams = new CreateMeetingParameters($room, $_context['user']['title']??lang('direct call from %1', $_context['user']['name']));
 		$this->meetingParams->setAttendeePassword(md5($room.$this->config['bbb_api_secret']));
@@ -124,6 +129,11 @@ class BBB Implements Iface
 			$this->meetingParams->setEndCallbackUrl(Api\Framework::getUrl($GLOBALS['egw_info']['server']['webserver_url'].'/status/endCallback.php?jwt='.$jwt));
 			try {
 				$response = $this->bbb->createMeeting($this->meetingParams);
+
+				if (Call::DEBUG)
+				{
+					error_log(__METHOD__.__LINE__."Meeting created=".array2string($this->meetingParams)." user=".array2string($_context['user']));
+				}
 			}catch(\Exception $e)
 			{
 				throw new Exception(lang('Communicating with server %1 failed because of %2',$this->config['bbb_domain'], $e->getMessage()));
@@ -149,6 +159,11 @@ class BBB Implements Iface
 				'end' => $end
 			];
 			if ($this->isUserModerator) $this->roomNotReady['preparation'] =  $this->config['bbb_call_preparation'] * 60;
+
+			if (Call::DEBUG)
+			{
+				error_log(__METHOD__.__LINE__."Room not ready=".array2string($this->roomNotReady)." user=".array2string($_context['user']));
+			}
 		}
 	}
 
