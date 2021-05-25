@@ -118,7 +118,7 @@ class Call
 
 		if (self::DEBUG)
 		{
-			error_log(__METHOD__."() room=".$_room." context=".array2string($_context)." start=".$start." end=".$end." extra=".array2string($_extra));
+			error_log(__METHOD__."() room=".$room." context=".array2string($context)." start=".json_encode($start)." end=".json_encode($end)." extra=".array2string($extra));
 		}
 
 		if ($now > $end)
