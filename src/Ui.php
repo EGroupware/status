@@ -120,7 +120,7 @@ class Ui {
 	public static function getContentStatus ()
 	{
 		$skeys = Hooks::getStatKeys();
-		$content = [];
+		$content = ['list' => [], 'fav' => []];
 		$onlines = []; // preserves online users for further proceessing in list
 		foreach (Hooks::statusItems() as $item)
 		{
@@ -207,7 +207,7 @@ class Ui {
 	 */
 	private static function _fetchId (array $item)
 	{
-		return strtolower(strpos($item['account_id'], self::ID_DELIMITER) !== false ? $item['account_id'] : $item['id']);
+		return strtolower((string)(strpos((string)$item['account_id'], self::ID_DELIMITER) !== false ? $item['account_id'] : $item['id']));
 	}
 
 	/**
