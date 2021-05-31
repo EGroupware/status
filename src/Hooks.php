@@ -289,11 +289,11 @@ class Hooks
 		$push = new Api\Json\Push();
 		$online = $push->online();
 
-		$ids = array_column($users, 'account_id');
+		$ids = array_column((array)$users, 'account_id');
 
 		foreach ((array)$GLOBALS['egw_info']['user']['preferences']['status']['fav'] as $fav)
 		{
-			if (is_numeric($fav) && !in_array($fav, $ids))
+			if (is_numeric($fav) && !in_array((array)$fav, $ids))
 			{
 				// add already favorite accounts which are not in the users
 				array_push ($users, [

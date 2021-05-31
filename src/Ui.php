@@ -34,12 +34,15 @@ class Ui {
 	/**
 	 * Id delimiter
 	 */
-	const ID_DELIMITER = ':';
+	public const ID_DELIMITER = ':';
 
-	/*
-	 *
+	/**
+	 * List Ui
+	 * @param ?array $content
+	 * @return Api\Etemplate\Request|string
+	 * @throws Api\Exception\AssertionFailed
 	 */
-	public function index($content=null)
+	public function index(?array $content=null)
 	{
 		$tpl = new Api\Etemplate('status.index');
 
@@ -55,20 +58,21 @@ class Ui {
 		if (is_array($actions = self::get_actions()) && !empty($actions))
 		{
 			// Add actions
-			$tpl->setElementAttribute('list', 'actions', $actions);
+			$tpl::setElementAttribute('list', 'actions', $actions);
 			$actions['unfavorite']['enabled'] = true;
-			$tpl->setElementAttribute('fav', 'actions', $actions);
+			$tpl::setElementAttribute('fav', 'actions', $actions);
 		}
 
 		return $tpl->exec('status.EGroupware\\Status\\Ui.index', $content,array(), array());
 	}
 
 	/**
-	 *
-	 * @param type $content
-	 * @return type
+	 * Room Ui
+	 * @param ?array $content
+	 * @return Api\Etemplate\Request|string
+	 * @throws Api\Exception\AssertionFailed
 	 */
-	public function room($content=null)
+	public function room(?array $content=null)
 	{
 		$tpl = new Api\Etemplate('status.room');
 		// now time in UTC
@@ -80,18 +84,18 @@ class Ui {
 				'room' => $_GET['meetingID'],
 				'error' => $now > $_GET['end'] ? lang(Call::MSG_MEETING_IN_THE_PAST) : $_GET['error'],
 				// Start and End time are in UTC
-				'start' => (int) $now > $_GET['end'] ? 0 :$_GET['start'],
+				'start' => (int) ($now > $_GET['end'] ? 0 :$_GET['start']),
 				'end' => $_GET['end'],
-				'countdown' => (int) $now > $_GET['end'] || $now > $_GET['start'] ? 0 : $_GET['start'] - $now,
+				'countdown' => (int) ($now > $_GET['end'] || $now > $_GET['start'] ? 0 : $_GET['start'] - $now),
 				'cal_id' => $_GET['cal_id'],
 				'preparation' => $_GET['preparation']
 			];
-			if (intval($_GET['preparation'])+$now >= $_GET['start']) $tpl->setElementAttribute('join', 'disabled', false);
+			if ((int)($_GET['preparation'])+$now >= $_GET['start']) $tpl::setElementAttribute('join', 'disabled', false);
 		}
 		else
 		{
-			$content['frame'] = $_GET['frame'] ? (is_array($_GET['frame']) ? $_GET['frame'][0] : $_GET['frame']) : '';
-			$content['room'] = $_GET['room'] ? $_GET['room'] : Videoconference\Call::fetchRoomFromUrl($content['frame']);
+			$content['frame'] = is_array($_GET['frame']) ?  $_GET['frame'][0] : $_GET['frame'];
+			$content['room'] = $_GET['room'] ?: Videoconference\Call::fetchRoomFromUrl($content['frame']);
 			$content['restrict'] = Api\Config::read('status')['videoconference']['backend'][0] == 'BBB';
 		}
 		return $tpl->exec('status.EGroupware\\Status\\Ui.room', $content,array(), array());
@@ -99,6 +103,8 @@ class Ui {
 
 	/**
 	 * Refresh with new content
+	 * @throws Api\Json\Exception
+	 * @noinspection PhpUnused
 	 */
 	public static function ajax_refresh ()
 	{
@@ -114,7 +120,7 @@ class Ui {
 	public static function getContentStatus ()
 	{
 		$skeys = Hooks::getStatKeys();
-		$content = [];
+		$content = ['list' => [], 'fav' => []];
 		$onlines = []; // preserves online users for further proceessing in list
 		foreach (Hooks::statusItems() as $item)
 		{
@@ -140,7 +146,7 @@ class Ui {
 					}
 				}
 			}
-			$isFav = in_array(self::_fetchId($item),	self::mapFavoritesIds2Names());
+			$isFav = in_array(self::_fetchId($item), self::mapFavoritesIds2Names(), true);
 			if (!$isFav && $item['stat']['status']['active'])
 			{
 				$onlines[] = array_merge([
@@ -151,7 +157,7 @@ class Ui {
 					'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
 					'link_to' => $item['link_to'],
 					'data' => $item['stat']
-				], (array)$stat);
+				], $stat);
 			}
 			else
 			{
@@ -163,7 +169,7 @@ class Ui {
 					'class' => ($item['stat']['status']['active'] ? 'egw_online' : 'egw_offline').' '.$item['class'],
 					'link_to' => $item['link_to'],
 					'data' => $item['stat']
-				], (array)$stat);
+				], $stat);
 			}
 		}
 		// push current online users in the list to the top position
@@ -196,24 +202,26 @@ class Ui {
 	/**
 	 * Fetch resolved Id
 	 *
-	 * @param type $item
+	 * @param array $item
 	 * @return string
 	 */
-	private static function _fetchId ($item)
+	private static function _fetchId (array $item)
 	{
-		return strtolower(strchr($item['account_id'], self::ID_DELIMITER) ? $item['account_id'] : $item['id']);
+		return strtolower((string)(strpos((string)$item['account_id'], self::ID_DELIMITER) !== false ? $item['account_id'] : $item['id']));
 	}
 
 	/**
 	 * handle drag and drop sorting
-	 *
+	 * @param string $exec_id
 	 * @param array $orders newly ordered list
+	 * @noinspection PhpUnusedParameterInspection
+	 * @noinspection PhpUnused
 	 */
-	public static function ajax_fav_sorting ($exec_id, $orders)
+	public static function ajax_fav_sorting (string $exec_id, array $orders)
 	{
 		// the first row belongs to an empty placeholder and it should not participate
 		// in sorting
-		if ($orders[0] && $orders[0]['id'] == 'emptyrow') unset($orders[0]);
+		if (is_array($orders[0]) && $orders[0]['id'] == 'emptyrow') unset($orders[0]);
 		$GLOBALS['egw']->preferences->add('status','fav', array_values(self::mapNames2Ids($orders)));
 		$GLOBALS['egw']->preferences->save_repository(false,'user',false);
 	}
@@ -221,7 +229,7 @@ class Ui {
 	/**
 	 * Get actions / context menu for index
 	 *
-	 * @return {array} returns defined actions as an array
+	 * @return array returns defined actions as an array
 	 */
 	private static function get_actions()
 	{
@@ -236,7 +244,7 @@ class Ui {
 		{
 			if ($action['default'])
 			{
-				uksort($actions, function($a) use ($key) {
+				uksort($actions, static function($a) use ($key) {
 					return $key != $a ? 1 : -1;
 				});
 				break;
@@ -249,9 +257,9 @@ class Ui {
 	 * Map favorites preference into names
 	 * @return array
 	 */
-	static function mapFavoritesIds2Names ()
+	private static function mapFavoritesIds2Names ()
 	{
-		return array_map(function ($_id)
+		return array_map(static function ($_id)
 		{
 			return (is_numeric($_id) ? strtolower(Api\Accounts::id2name($_id)) : $_id);
 		}, (array)$GLOBALS['egw_info']['user']['preferences']['status']['fav']);
@@ -262,10 +270,10 @@ class Ui {
 	 * @param array $_names
 	 * @return array
 	 */
-	static function mapNames2Ids ($_names)
+	private static function mapNames2Ids (array $_names)
 	{
-		return array_map(function ($name) {
-			if (strchr($name, self::ID_DELIMITER))
+		return array_map(static function ($name) {
+			if (strpos($name, self::ID_DELIMITER))
 			{
 				return $name;
 			}
@@ -276,22 +284,32 @@ class Ui {
 	/**
 	 * Get contact info from link
 	 *
-	 * @param type $app
-	 * @param type $id
+	 * @param string $app
+	 * @param string $id
+	 * @throws Api\Json\Exception
+	 * @noinspection PhpUnused
 	 */
-	static function ajax_getContactofLink($app, $id)
+	public static function ajax_getContactofLink(string $app, string $id)
 	{
 		$response = Api\Json\Response::get();
 		$links = array_values(Api\Link::get_links($app,$id));
-		if (is_array($links)) $result = $GLOBALS['egw']->contacts->search(array('contact_id'=>$links[0]['id']), array('email','email_home'),
-			'', '', '', false, 'OR', false);
+		$result = [];
+		if (is_array($links))
+		{
+			$result = $GLOBALS['egw']->contacts->search(
+				['contact_id' => $links[0]['id']],
+				['email', 'email_home'],
+				'', '', '', false, 'OR', false);
+		}
 		$response->data($result);
 	}
 
 	/**
-	 * @param null $content
+	 * @param ?array $content
+	 * @throws Api\Exception\AssertionFailed
+	 * @noinspection PhpUnused
 	 */
-	function vc_recordings($content=null)
+	public function vc_recordings(?array $content=null)
 	{
 		$tpl = new Api\Etemplate('status.vc_recordings');
 		$room = $_GET['room'];
@@ -323,10 +341,11 @@ class Ui {
 
 	/**
 	 * Delete recording action
-	 * @param $_params
+	 * @param array $_params
 	 * @throws Api\Json\Exception
+	 * @noinspection PhpUnused
 	 */
-	public static function ajax_vc_deleteRecording($_params)
+	public static function ajax_vc_deleteRecording(array $_params)
 	{
 		$response = Api\Json\Response::get();
 		$response->data(Call::delete_recording($_params['room'], $_params));
