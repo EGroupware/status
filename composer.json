@@ -19,6 +19,7 @@
         }
     ],
 	"require": {
-		"egroupware/egroupware": "self.version"
-	}
+		"egroupware/egroupware": "self.version",
+        "lcobucci/jwt": "^3.1"
+    }
 }
