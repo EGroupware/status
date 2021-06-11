@@ -1,4 +1,3 @@
-"use strict";
 /**
  * EGroupware - Status
  *
@@ -8,47 +7,31 @@
  * @copyright (c) 2019 by Hadi Nategh <hn-At-egroupware.org>
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
 /*egw:uses
     /api/js/jsapi/egw_app.js;
  */
-var egw_app_1 = require("../../api/js/jsapi/egw_app");
-var et2_widget_dialog_1 = require("../../api/js/etemplate/et2_widget_dialog");
-var et2_core_widget_1 = require("../../api/js/etemplate/et2_core_widget");
-var statusApp = /** @class */ (function (_super) {
-    __extends(statusApp, _super);
+import { EgwApp } from "../../api/js/jsapi/egw_app";
+import { et2_dialog } from "../../api/js/etemplate/et2_widget_dialog";
+import { et2_createWidget } from "../../api/js/etemplate/et2_core_widget";
+import { app, egw } from "../../api/js/jsapi/egw_global";
+class statusApp extends EgwApp {
     /**
      * Constructor
      *
      * @memberOf app.status
      */
-    function statusApp() {
-        var _this = 
+    constructor() {
         // call parent
-        _super.call(this, 'status') || this;
-        _this._ring = null;
-        return _this;
+        super('status');
+        this._ring = null;
     }
     /**
      * Destructor
      */
-    statusApp.prototype.destroy = function (_app) {
+    destroy(_app) {
         // call parent
-        _super.prototype.destroy.call(this, _app);
-    };
+        super.destroy(_app);
+    }
     /**
      * This function is called when the etemplate2 object is loaded
      * and ready.  If you must store a reference to the et2 object,
@@ -57,26 +40,26 @@ var statusApp = /** @class */ (function (_super) {
      * @param {etemplate2} _et2 newly ready object
      * @param {string} _name template name
      */
-    statusApp.prototype.et2_ready = function (_et2, _name) {
+    et2_ready(_et2, _name) {
         var _c;
         // call parent
-        _super.prototype.et2_ready.call(this, _et2, _name);
+        super.et2_ready(_et2, _name);
         switch (_name) {
             case 'status.index':
                 if (egw.preference('ringtone', 'status')) {
                     this._ring = new Audio('status/assets/ring.mp3');
-                    var self_1 = this;
+                    let self = this;
                     jQuery('body').one('click', function () {
-                        self_1._controllRingTone().initiate();
+                        self._controllRingTone().initiate();
                     });
                 }
                 break;
             case 'status.room':
-                var room = this.et2.getArrayMgr('content').getEntry('room');
-                var url = this.et2.getArrayMgr('content').getEntry('frame');
-                var end = this.et2.getDOMWidgetById('end');
-                var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
-                var recordings = this.et2.getDOMWidgetById('recordings');
+                let room = this.et2.getArrayMgr('content').getEntry('room');
+                let url = this.et2.getArrayMgr('content').getEntry('frame');
+                let end = this.et2.getDOMWidgetById('end');
+                let isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
+                let recordings = this.et2.getDOMWidgetById('recordings');
                 if (isModerator) {
                     end.set_disabled(false);
                     recordings.set_disabled(false);
@@ -91,7 +74,7 @@ var statusApp = /** @class */ (function (_super) {
                 }, false);
                 break;
         }
-    };
+    }
     /**
      * Handle a push notification about entry changes from the websocket
      *
@@ -107,13 +90,13 @@ var statusApp = /** @class */ (function (_super) {
      * @param {object|null} pushData.acl Extra data for determining relevance.  eg: owner or responsible to decide if update is necessary
      * @param {number} pushData.account_id User that caused the notification
      */
-    statusApp.prototype.push = function (pushData) {
+    push(pushData) {
         // EPL/calls does NOT care about other apps data
         if (pushData.app !== 'stylite' || pushData.type === 'delete' || typeof pushData.acl === 'undefined')
             return;
-        var self = this;
+        let self = this;
         egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid', null, function (account) {
-            var content = [{
+            let content = [{
                     id: account[pushData.acl.account_id],
                     class3: pushData.acl.account_id && pushData.acl.busy ? 'on-phone' : '',
                     title3: pushData.acl.account_id && pushData.acl.busy ? account[pushData.acl.account_id] + ' ' + egw.lang('is busy on the phone') : '',
@@ -126,24 +109,24 @@ var statusApp = /** @class */ (function (_super) {
             }
             self.mergeContent(content);
         }, egw);
-    };
+    }
     /**
      * Handle executed action on selected row and refresh the list
      *
      * @param {type} _action
      * @param {type} _selected
      */
-    statusApp.prototype.handle_actions = function (_action, _selected) {
-        var data = _selected[0]['data'];
-        var fav = egw.preference('fav', 'status') || {};
-        var favorites = Object.keys(fav).map(function (key) { return fav[key]; });
+    handle_actions(_action, _selected) {
+        let data = _selected[0]['data'];
+        let fav = egw.preference('fav', 'status') || {};
+        let favorites = Object.keys(fav).map(key => fav[key]);
         switch (_action.id) {
             case 'fav':
                 favorites.push(data.account_id);
                 egw.set_preference('status', 'fav', favorites);
                 break;
             case 'unfavorite':
-                for (var i in favorites) {
+                for (let i in favorites) {
                     if (favorites[i] == data.account_id)
                         favorites.splice(i, 1);
                 }
@@ -183,19 +166,19 @@ var statusApp = /** @class */ (function (_super) {
                     }], egw.getSessionItem('status', 'videoconference-session'));
         }
         this.refresh();
-    };
+    }
     /**
      * Dialog for selecting users and add them to the favorites
      */
-    statusApp.prototype.add_to_fav = function () {
-        var list = this.et2.getArrayMgr('content').getEntry('list');
-        var self = this;
-        et2_core_widget_1.et2_createWidget("dialog", {
+    add_to_fav() {
+        let list = this.et2.getArrayMgr('content').getEntry('list');
+        let self = this;
+        et2_createWidget("dialog", {
             callback: function (_button_id, _value) {
                 if (_button_id == 'add' && _value) {
-                    for (var i in _value.accounts) {
-                        var added = false;
-                        for (var j in list) {
+                    for (let i in _value.accounts) {
+                        let added = false;
+                        for (let j in list) {
                             if (list[j] && list[j]['account_id'] == _value.accounts[i]) {
                                 added = true;
                                 self.handle_actions({ id: 'fav' }, [{ data: list[j] }]);
@@ -221,33 +204,33 @@ var statusApp = /** @class */ (function (_super) {
             template: egw.webserverUrl + '/status/templates/default/search_list.xet',
             resizable: false,
             width: 400,
-        }, et2_widget_dialog_1.et2_dialog._create_parent('status'));
-    };
+        }, et2_dialog._create_parent('status'));
+    }
     /**
      * Refresh the list
      */
-    statusApp.prototype.refresh = function () {
-        var self = this;
+    refresh() {
+        let self = this;
         // give it a delay to make sure the preferences data is updated before refreshing
         window.setTimeout(function () {
             egw.json('EGroupware\\Status\\Ui::ajax_refresh', [], function (_data) {
                 self.updateContent(_data.fav, _data.list);
             }).sendRequest();
         }, 200);
-    };
+    }
     /**
      * Update content of fav and list girds
      * @param {array} _fav
      * @param {array} _list
      */
-    statusApp.prototype.updateContent = function (_fav, _list) {
-        var fav = this.et2.getWidgetById('fav');
-        var content = this.et2.getArrayMgr('content');
-        var list = this.et2.getWidgetById('list');
-        var isEqual = function (_a, _b) {
+    updateContent(_fav, _list) {
+        let fav = this.et2.getWidgetById('fav');
+        let content = this.et2.getArrayMgr('content');
+        let list = this.et2.getWidgetById('list');
+        let isEqual = function (_a, _b) {
             if (_a.length != _b.length)
                 return false;
-            for (var i in _a) {
+            for (let i in _a) {
                 if (JSON.stringify(_a[i]) != JSON.stringify(_b[i]))
                     return false;
             }
@@ -262,23 +245,23 @@ var statusApp = /** @class */ (function (_super) {
             content.data['list'] = _list;
         }
         this.et2.setArrayMgr('content', content);
-    };
+    }
     /**
      * Merge given content with existing ones and updates the lists
      *
      * @param {array} _content
      * @param {boolean} _topList if true it pushes the content to top of the list
      */
-    statusApp.prototype.mergeContent = function (_content, _topList) {
-        var fav = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('fav')));
-        var list = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('list')));
-        for (var i in _content) {
-            for (var f in fav) {
+    mergeContent(_content, _topList) {
+        let fav = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('fav')));
+        let list = JSON.parse(JSON.stringify(this.et2.getArrayMgr('content').getEntry('list')));
+        for (let i in _content) {
+            for (let f in fav) {
                 if (fav[f] && fav[f]['id'] && _content[i]['id'] == fav[f]['id']) {
                     jQuery.extend(true, fav[f], _content[i]);
                 }
             }
-            for (var l in list) {
+            for (let l in list) {
                 if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id']) {
                     jQuery.extend(true, list[l], _content[i]);
                     if (_topList || _content[i]['stat1'] > 0)
@@ -287,36 +270,36 @@ var statusApp = /** @class */ (function (_super) {
             }
         }
         this.updateContent(fav, list);
-    };
-    statusApp.prototype.getEntireList = function () {
-        var fav = this.et2.getArrayMgr('content').getEntry('fav');
-        var list = this.et2.getArrayMgr('content').getEntry('list');
-        var result = [];
-        for (var f in fav) {
+    }
+    getEntireList() {
+        let fav = this.et2.getArrayMgr('content').getEntry('fav');
+        let list = this.et2.getArrayMgr('content').getEntry('list');
+        let result = [];
+        for (let f in fav) {
             if (fav[f] && fav[f]['id'])
                 result.push(fav[f]);
         }
-        for (var l in list) {
+        for (let l in list) {
             if (list[l] && list[l]['id'])
                 result.push(list[l]);
         }
         return result;
-    };
-    statusApp.prototype.isOnline = function (_action, _selected) {
+    }
+    isOnline(_action, _selected) {
         var _c, _d, _e;
         return !(((_c = _selected[0].data.data.rocketchat) === null || _c === void 0 ? void 0 : _c.type) == 'c') && (((_d = _selected[0].data.data.status) === null || _d === void 0 ? void 0 : _d.active) || ((_e = app.rocketchat) === null || _e === void 0 ? void 0 : _e.isRCActive(_action, _selected)));
-    };
+    }
     /**
      * Initiate call via action
      * @param data
      */
-    statusApp.prototype.makeCall = function (data) {
-        var callCancelled = false;
-        var self = this;
-        var button = [{ "button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel' }];
-        var dialog = et2_core_widget_1.et2_createWidget("dialog", {
+    makeCall(data) {
+        let callCancelled = false;
+        let self = this;
+        let button = [{ "button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel' }];
+        let dialog = et2_createWidget("dialog", {
             callback: function (_btn) {
-                if (_btn == et2_widget_dialog_1.et2_dialog.CANCEL_BUTTON) {
+                if (_btn == et2_dialog.CANCEL_BUTTON) {
                     callCancelled = true;
                 }
             },
@@ -329,7 +312,7 @@ var statusApp = /** @class */ (function (_super) {
                 content: { list: data }
             },
             template: egw.webserverUrl + '/status/templates/default/call.xet'
-        }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
+        }, et2_dialog._create_parent(this.appname));
         setTimeout(function () {
             if (!callCancelled) {
                 dialog.destroy();
@@ -356,13 +339,13 @@ var statusApp = /** @class */ (function (_super) {
                 }).sendRequest();
             }
         }, 3000);
-    };
+    }
     /**
      * Open call url with respecting opencallin preference
      * @param _url call url
      */
-    statusApp.prototype.openCall = function (_url) {
-        var link = egw.link('/index.php', {
+    openCall(_url) {
+        let link = egw.link('/index.php', {
             menuaction: 'status.\\EGroupware\\Status\\Ui.room',
             frame: _url
         });
@@ -372,19 +355,19 @@ var statusApp = /** @class */ (function (_super) {
         else {
             egw.openPopup(link, 800, 600, '', 'status');
         }
-    };
-    statusApp.prototype.scheduled_receivedCall = function (_content, _notify) {
-        var buttons = [
+    }
+    scheduled_receivedCall(_content, _notify) {
+        let buttons = [
             { "button_id": 1, "text": egw.lang('Join'), id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": egw.lang('Close'), id: '0', image: 'close' }
         ];
-        var notify = _notify || true;
-        var content = _content || {};
-        var self = this;
+        let notify = _notify || true;
+        let content = _content || {};
+        let self = this;
         this._controllRingTone().start();
-        et2_core_widget_1.et2_createWidget("dialog", {
+        et2_createWidget("dialog", {
             callback: function (_btn, value) {
-                if (_btn == et2_widget_dialog_1.et2_dialog.OK_BUTTON) {
+                if (_btn == et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
                 }
             },
@@ -399,7 +382,7 @@ var statusApp = /** @class */ (function (_super) {
             },
             resizable: false,
             template: egw.webserverUrl + '/status/templates/default/scheduled_call.xet'
-        }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
+        }, et2_dialog._create_parent(this.appname));
         if (notify) {
             egw.notification(this.egw.lang('Status'), {
                 body: this.egw.lang('You have a video conference meeting in %1 minutes, initiated by %2', (content['alarm-offset'] / 60), content.owner),
@@ -410,7 +393,7 @@ var statusApp = /** @class */ (function (_super) {
                 requireInteraction: true
             });
         }
-    };
+    }
     /**
      * gets called after receiving pushed call
      * @param _data
@@ -419,16 +402,16 @@ var statusApp = /** @class */ (function (_super) {
      * @param _message_top
      * @param _message_bottom
      */
-    statusApp.prototype.receivedCall = function (_data, _notify, _buttons, _message_top, _message_bottom) {
-        var buttons = _buttons || [
+    receivedCall(_data, _notify, _buttons, _message_top, _message_bottom) {
+        let buttons = _buttons || [
             { "button_id": 1, "text": egw.lang('Accept'), id: '1', image: 'accept_call', default: true },
             { "button_id": 0, "text": egw.lang('Reject'), id: '0', image: 'hangup' }
         ];
-        var notify = _notify !== null && _notify !== void 0 ? _notify : true;
-        var message_bottom = _message_bottom || '';
-        var message_top = _message_top || '';
-        var self = this;
-        var isCallAnswered = false;
+        let notify = _notify !== null && _notify !== void 0 ? _notify : true;
+        let message_bottom = _message_bottom || '';
+        let message_top = _message_top || '';
+        let self = this;
+        let isCallAnswered = false;
         window.setTimeout(function () {
             if (!isCallAnswered) {
                 egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function () { }).sendRequest();
@@ -442,9 +425,9 @@ var statusApp = /** @class */ (function (_super) {
             }
         }, statusApp.MISSED_CALL_TIMEOUT);
         this._controllRingTone().start(true);
-        var dialog = et2_core_widget_1.et2_createWidget("dialog", {
+        var dialog = et2_createWidget("dialog", {
             callback: function (_btn, value) {
-                if (_btn == et2_widget_dialog_1.et2_dialog.OK_BUTTON) {
+                if (_btn == et2_dialog.OK_BUTTON) {
                     self.openCall(value.url);
                     isCallAnswered = true;
                 }
@@ -472,7 +455,7 @@ var statusApp = /** @class */ (function (_super) {
             resizable: false,
             template: egw.webserverUrl + '/status/templates/default/call.xet',
             dialogClass: "recievedCall"
-        }, et2_widget_dialog_1.et2_dialog._create_parent(this.appname));
+        }, et2_dialog._create_parent(this.appname));
         if (notify) {
             egw.notification(this.egw.lang('Status'), {
                 body: this.egw.lang('You have a call from %1', _data.caller.name),
@@ -483,9 +466,9 @@ var statusApp = /** @class */ (function (_super) {
                 requireInteraction: true
             });
         }
-    };
-    statusApp.prototype._controllRingTone = function () {
-        var self = this;
+    }
+    _controllRingTone() {
+        let self = this;
         return {
             start: function (_loop) {
                 if (!self._ring)
@@ -514,37 +497,37 @@ var statusApp = /** @class */ (function (_super) {
                 this.stop();
             }
         };
-    };
-    statusApp.prototype.didNotPickUp = function (_data) {
-        var self = this;
-        et2_widget_dialog_1.et2_dialog.show_dialog(function (_btn) {
-            if (et2_widget_dialog_1.et2_dialog.YES_BUTTON == _btn) {
+    }
+    didNotPickUp(_data) {
+        let self = this;
+        et2_dialog.show_dialog(function (_btn) {
+            if (et2_dialog.YES_BUTTON == _btn) {
                 self.makeCall([_data]);
             }
         }, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
-    };
+    }
     /**
      * Missed callback dialog
      * @param _from
      * @param _url
      */
-    statusApp.prototype._phoneMissedCallback = function (_from, _url) {
-        var self = this;
-        return et2_widget_dialog_1.et2_dialog.show_dialog(function (_btn) {
-            if (_btn == et2_widget_dialog_1.et2_dialog.YES_BUTTON) {
+    _phoneMissedCallback(_from, _url) {
+        let self = this;
+        return et2_dialog.show_dialog(function (_btn) {
+            if (_btn == et2_dialog.YES_BUTTON) {
                 egw.message(egw.lang("Calling back %1 ...", _from));
-                var url = et2_core_widget_1.et2_createWidget('url-phone', { id: 'temp_url_phone', readonly: true }, self.et2);
+                let url = et2_createWidget('url-phone', { id: 'temp_url_phone', readonly: true }, self.et2);
                 url.set_value(_url);
                 url.span.click();
                 url.destroy();
             }
             self.mergeContent([{ id: _from, class2: '', action2: '' }]);
-        }, "Would you like to callback?", "Missed call", et2_widget_dialog_1.et2_dialog.BUTTONS_YES_NO);
-    };
-    statusApp.prototype.phoneCall = function (_action, _selected) {
+        }, "Would you like to callback?", "Missed call", null, et2_dialog.BUTTONS_YES_NO);
+    }
+    phoneCall(_action, _selected) {
         var _c, _d, _e, _f;
-        var data = _selected[0]['data'];
-        var target = '';
+        let data = _selected[0]['data'];
+        let target = '';
         switch (_action.id) {
             case 'addressbook_tel_work':
                 target = (_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_work;
@@ -560,15 +543,15 @@ var statusApp = /** @class */ (function (_super) {
                 break;
         }
         if (target) {
-            var url = et2_core_widget_1.et2_createWidget('url-phone', { id: 'temp_url_phone', readonly: true }, this.et2);
+            let url = et2_createWidget('url-phone', { id: 'temp_url_phone', readonly: true }, this.et2);
             url.set_value(target);
             url.span.click();
             url.destroy();
         }
-    };
-    statusApp.prototype.phoneIsAvailable = function (_action, _selected) {
+    }
+    phoneIsAvailable(_action, _selected) {
         var _c, _d, _e, _f;
-        var data = _selected[0]['data'];
+        let data = _selected[0]['data'];
         switch (_action.id) {
             case 'addressbook_tel_work':
                 if ((_c = data.data.status) === null || _c === void 0 ? void 0 : _c.tel_work)
@@ -588,14 +571,14 @@ var statusApp = /** @class */ (function (_super) {
                 break;
         }
         return false;
-    };
-    statusApp.prototype.videoconference_invite = function () {
-        var url = this.et2.getArrayMgr('content').getEntry('frame');
-        et2_core_widget_1.et2_createWidget("dialog", {
+    }
+    videoconference_invite() {
+        let url = this.et2.getArrayMgr('content').getEntry('frame');
+        et2_createWidget("dialog", {
             callback: function (_button_id, _value) {
                 if (_button_id == 'add' && _value) {
-                    var data = [];
-                    for (var i in _value.accounts) {
+                    let data = [];
+                    for (let i in _value.accounts) {
                         data.push({
                             id: _value.accounts[i],
                             name: '',
@@ -621,19 +604,19 @@ var statusApp = /** @class */ (function (_super) {
             template: egw.webserverUrl + '/status/templates/default/search_list.xet',
             resizable: false,
             width: 400,
-        }, et2_widget_dialog_1.et2_dialog._create_parent('status'));
-    };
+        }, et2_dialog._create_parent('status'));
+    }
     /**
      * end session
      * @private
      */
-    statusApp.prototype.videoconference_endMeeting = function () {
+    videoconference_endMeeting() {
         var _c;
-        var room = this.et2.getArrayMgr('content').getEntry('room');
-        var url = this.et2.getArrayMgr('content').getEntry('frame');
-        var isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
+        let room = this.et2.getArrayMgr('content').getEntry('room');
+        let url = this.et2.getArrayMgr('content').getEntry('frame');
+        let isModerator = (_c = url.match(/isModerator\=(1|true)/i)) !== null && _c !== void 0 ? _c : false;
         if (isModerator) {
-            et2_widget_dialog_1.et2_dialog.show_dialog(function (_b) {
+            et2_dialog.show_dialog(function (_b) {
                 if (_b == 1) {
                     egw(window).loading_prompt(room, true, egw.lang('Ending the session ...'));
                     egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url], function () {
@@ -641,41 +624,41 @@ var statusApp = /** @class */ (function (_super) {
                     }).sendRequest();
                     return true;
                 }
-            }, "This window will end the session for everyone, are you sure want this?", "End Meeting", {}, et2_widget_dialog_1.et2_dialog.BUTTONS_OK_CANCEL, et2_widget_dialog_1.et2_dialog.WARNING_MESSAGE);
+            }, "This window will end the session for everyone, are you sure want this?", "End Meeting", {}, et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
         }
-    };
+    }
     /**
      * @param _room
      */
-    statusApp.prototype.videoconference_getRecordings = function (_room, _params) {
+    videoconference_getRecordings(_room, _params) {
         egw.openPopup(egw.link('/index.php', {
             menuaction: 'status.\\EGroupware\\Status\\Ui.vc_recordings',
             room: _room,
             cal_id: _params['cal_id'],
             title: _params['title']
         }), 800, 450, 'recordings', 'status');
-    };
-    statusApp.videoconference_fetchRoomFromUrl = function (_url) {
+    }
+    static videoconference_fetchRoomFromUrl(_url) {
         if (_url) {
             return _url.split(/\?jwt/)[0].split('/').pop();
         }
         return null;
-    };
-    statusApp.prototype.isThereAnyCall = function (_action, _selected) {
+    }
+    isThereAnyCall(_action, _selected) {
         return this.isOnline(_action, _selected) && egw.getSessionItem('status', 'videoconference-session');
-    };
-    statusApp.prototype.inviteToCall = function (_data, _room) {
+    }
+    inviteToCall(_data, _room) {
         egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call", [_data, _room, true, true], function (_data) {
             if (_data && _data.msg)
                 egw(window).message(_data.msg.message, _data.msg.type);
         }).sendRequest();
-    };
-    statusApp.prototype.videoconference_countdown_finished = function () {
-        var join = this.et2.getWidgetById('join');
+    }
+    videoconference_countdown_finished() {
+        let join = this.et2.getWidgetById('join');
         join.set_disabled(false);
-    };
-    statusApp.prototype.videoconference_countdown_join = function () {
-        var content = this.et2.getArrayMgr('content');
+    }
+    videoconference_countdown_join() {
+        let content = this.et2.getArrayMgr('content');
         egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl", [content.getEntry('room'),
             {
                 name: egw.user('account_fullname'),
@@ -691,10 +674,10 @@ var statusApp = /** @class */ (function (_super) {
             }
         }).sendRequest();
         window.parent.close();
-    };
-    statusApp.prototype.vc_deleteRecording = function (_event, _widget) {
-        var recordings = this.et2.getArrayMgr('content').getEntry('recordings');
-        var id = _widget.id.replace('delete', '');
+    }
+    vc_deleteRecording(_event, _widget) {
+        let recordings = this.et2.getArrayMgr('content').getEntry('recordings');
+        let id = _widget.id.replace('delete', '');
         recordings[id]['cal_id'] = this.et2.getArrayMgr('content').getEntry('cal_id');
         egw.json('EGroupware\\Status\\Ui::ajax_vc_deleteRecording', recordings[id], function (_data) {
             if (_data['success']) {
@@ -704,11 +687,10 @@ var statusApp = /** @class */ (function (_super) {
                 egw.message(_data['error'], 'error');
             }
         }.bind(this)).sendRequest();
-    };
-    statusApp.appname = 'status';
-    statusApp.MISSED_CALL_TIMEOUT = egw.preference('ringingtimeout', 'status') ?
-        parseInt(egw.preference('ringingtimeout', 'status')) * 1000 : 15000;
-    return statusApp;
-}(egw_app_1.EgwApp));
+    }
+}
+statusApp.appname = 'status';
+statusApp.MISSED_CALL_TIMEOUT = egw.preference('ringingtimeout', 'status') ?
+    parseInt(egw.preference('ringingtimeout', 'status')) * 1000 : 15000;
 app.classes.status = statusApp;
 //# sourceMappingURL=app.js.map

@@ -18,7 +18,7 @@ import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import {et2_url_ro} from "../../api/js/etemplate/et2_widget_url";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
-import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
+import {app, egw} from "../../api/js/jsapi/egw_global";
 
 class statusApp extends EgwApp
 {
@@ -604,7 +604,7 @@ class statusApp extends EgwApp
 				url.destroy();
 			}
 			self.mergeContent([{id: _from, class2:'', action2:''}])
-		}, "Would you like to callback?", "Missed call", et2_dialog.BUTTONS_YES_NO);
+		}, "Would you like to callback?", "Missed call", null, et2_dialog.BUTTONS_YES_NO);
 	}
 
 	public phoneCall(_action, _selected)
