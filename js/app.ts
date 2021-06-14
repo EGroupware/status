@@ -18,7 +18,7 @@ import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import {et2_url_ro} from "../../api/js/etemplate/et2_widget_url";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
-import {app, egw} from "../../api/js/jsapi/egw_global";
+import {egw} from "../../api/js/jsapi/egw_global";
 
 class statusApp extends EgwApp
 {

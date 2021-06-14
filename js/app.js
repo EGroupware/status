@@ -13,7 +13,7 @@
 import { EgwApp } from "../../api/js/jsapi/egw_app";
 import { et2_dialog } from "../../api/js/etemplate/et2_widget_dialog";
 import { et2_createWidget } from "../../api/js/etemplate/et2_core_widget";
-import { app, egw } from "../../api/js/jsapi/egw_global";
+import { egw } from "../../api/js/jsapi/egw_global";
 class statusApp extends EgwApp {
     /**
      * Constructor
