@@ -13,30 +13,26 @@ namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
-use Gettext\Extractors\Json;
+use phpDocumentor\Reflection\Types\Mixed_;
 
 class Call
 {
 	/**
 	 * Backend modules class name
 	 */
-	const BACKENDS = ['Jitsi', 'BBB'];
+	public const BACKENDS = ['Jitsi', 'BBB'];
 
 	/**
 	 * debug mode
 	 */
-<<<<<<< HEAD
-	const DEBUG = false;
-=======
 	public const DEBUG = false;
->>>>>>> 9389545... Add some logging
 
 	/**
 	 * messages
 	 */
-	const MSG_MEETING_IN_THE_PAST = 'This meeting is no longer valid because it is in the past!';
-	const MSG_ROOM_IS_NOT_READY = 'Room is not yet ready!';
-	const MSG_ROOM_NOT_CREATED = 'Unable to join this room because it is not yet created by its moderator. Please try later.';
+	public const MSG_MEETING_IN_THE_PAST = 'This meeting is no longer valid because it is in the past!';
+	public const MSG_ROOM_IS_NOT_READY = 'Room is not yet ready!';
+	public const MSG_ROOM_NOT_CREATED = 'Unable to join this room because it is not yet created by its moderator. Please try later.';
 	/**
 	 * Call function
 	 * @param array $_data
@@ -104,39 +100,35 @@ class Call
 
 	/**
 	 * Sends full working meeting Url to client
-	 * @param string $room room id
-	 * @param array $context user data
-	 * @param ?int $start
-	 * @param ?int $end
-	 * @param array $extra extra parameteres
+	 * @param string $_room room id
+	 * @param array $_context user data
+	 * @param string|int $_start
+	 * @param string|int $_end
+	 * @param array $_extra extra parameteres
 	 * @return void;
 	 * @throws Api\Json\Exception|Api\Exception
+	 * @noinspection PhpUnused
 	 */
-	public static function ajax_genMeetingUrl(string $room, array $context=[], $start=null, $end=null, array $extra=[])
+	public static function ajax_genMeetingUrl(string $_room, array $_context=[], $_start=null, $_end=null, array $_extra=[])
 	{
 		$respose = Api\Json\Response::get();
 		$now = new Api\DateTime('now');
-<<<<<<< HEAD
-		$start = new Api\DateTime($start);
-		$end = new Api\DateTime($end);
-=======
 		$start = new Api\DateTime($_start);
 		$end = new Api\DateTime($_end);
 
 		if (self::DEBUG)
 		{
-			error_log(__METHOD__."() room=".$_room." context=".array2string($_context)." start=".$start." end=".$end." extra=".array2string($_extra));
+			error_log(__METHOD__."() room=".$room." context=".array2string($context)." start=".json_encode($start)." end=".json_encode($end)." extra=".array2string($extra));
 		}
 
->>>>>>> 9389545... Add some logging
 		if ($now > $end)
 		{
 			$respose->data(['err'=>self::MSG_MEETING_IN_THE_PAST]);
 			return;
 		}
-		if (empty($context['avatar'])) $context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $context['account_id'], true));
-		$context['position'] = self::isModerator($room, $context['account_id'].":".$context['cal_id']) ? 'caller' : 'callee';
-		$respose->data(['url' => self::genMeetingUrl($room, $context, $extra, $start, $end)]);
+		if (empty($_context['avatar'])) $_context['avatar'] = (string)(new Api\Contacts\Photo('account:' . $_context['account_id'], true));
+		$_context['position'] = self::isModerator($_room, $_context['account_id'].":".$_context['cal_id']) ? 'caller' : 'callee';
+		$respose->data(['url' => self::genMeetingUrl($_room, $_context, $_extra, $start, $end)]);
 	}
 
 	/**
@@ -220,7 +212,7 @@ class Call
 		$backend = self::_getBackendInstance(0, []);
 		if (method_exists($backend, 'isModerator'))
 		{
-			return $backend->isModerator($room, $id);
+			return $backend::isModerator($room, $id);
 		}
 		return false;
 	}
@@ -234,6 +226,7 @@ class Call
 	 * @param int|DateTime|null $end expriation time, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
 	 * @return mixed
+	 * @throws Api\Exception
 	 */
 	public static function genMeetingUrl (string $room, array $context=[], $extra = [], $start=null, $end=null)
 	{
@@ -274,7 +267,7 @@ class Call
 	{
 		$config = Api\Config::read('status');
 		$backend = 	$config['videoconference']['backend'] ? $config['videoconference']['backend'][0] : 'Jitsi';
-		if (!in_array($backend, self::BACKENDS) || $config['videoconference']['disable'] === true) return false;
+		if ($config['videoconference']['disable'] === true || !in_array($backend, self::BACKENDS)) return false;
 		$instance = '\\EGroupware\\Status\\Videoconference\\Backends\\'.$backend;
 
 		return new $instance($room, $context, $start, $end);
@@ -332,6 +325,7 @@ class Call
 	 * Ajax function to call a room to end
 	 * @param $room
 	 * @param $url
+	 * @throws Api\Json\Exception
 	 */
 	public static function ajax_deleteRoom($room, $url)
 	{
@@ -362,7 +356,7 @@ class Call
 		$event = $cal->read($params['cal_id']);
 
 		// ATM only participants should be allowed to get the recordings
-		if (!$event || !in_array($GLOBALS['egw_info']['user']['account_id'], array_keys($event['participants'])))
+		if (!$event || !array_key_exists($GLOBALS['egw_info']['user']['account_id'], $event['participants']))
 		{
 			$res['error'] = lang('Access denied!');
 			return $res;
@@ -385,6 +379,7 @@ class Call
 	 */
 	public static function delete_recording($_room, $_params)
 	{
+		$res = [];
 		if (!$_room || !$_params['cal_id'])
 		{
 			$res['error'] = lang('No valid room found!');
