@@ -252,7 +252,11 @@ class Hooks
 	public static function getUsers()
 	{
 		$users = [];
-		$pref_groups = explode(',', $GLOBALS['egw_info']['user']['preferences']['status']['groups']);
+		$pref_groups = $GLOBALS['egw_info']['user']['preferences']['status']['groups'] ?? [];
+		if (!is_array($pref_groups))
+		{
+			$pref_groups = $pref_groups ? explode(',', $pref_groups) : [];
+		}
 		$filter = [];
 		if (empty($pref_groups) || in_array('_A',$pref_groups))
 		{
