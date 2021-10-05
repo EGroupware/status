@@ -603,9 +603,9 @@ class Hooks
 				'caption' => lang('Callback'),
 				'icon' => 'accept_call',
 				'onExecute' => 'app.status.makeCall([{'.
-					'id:"'.$params['data']['caller'].'",'.
-					'name:"'.Api\Accounts::id2name($params['data']['caller'], 'account_fullname').'",'.
-					'avatar:"'. 'account:'.$params['data']['caller'].'"}])'
+					'id:"'.($params['data']['caller'] ?? '').'",'.
+					'name:"'.Api\Accounts::id2name($params['data']['caller'] ?? '', 'account_fullname').'",'.
+					'avatar:"'. 'account:'.($params['data']['caller'] ?? '').'"}])'
 			]
 		];
 	}
