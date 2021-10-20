@@ -119,6 +119,9 @@ class Ui {
 	 */
 	public static function getContentStatus ()
 	{
+		// close session now, to not block other user actions
+		$GLOBALS['egw']->session->commit_session();
+
 		$skeys = Hooks::getStatKeys();
 		$content = ['list' => [], 'fav' => []];
 		$onlines = []; // preserves online users for further proceessing in list
