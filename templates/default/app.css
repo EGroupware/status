@@ -269,17 +269,27 @@ tr.row span.on-phone {
 	border:2px solid #f0f7fe;
 }
 tr span.on-phone:before {
-	content: ' ';
-	background-image: url(../../../pixelegg/images/phone.svg);
-	background-repeat: no-repeat;
-	background-size: 10px;
-	height: 100%;
-	width: 100%;
-	display: inline-block;
-	filter: brightness(0) invert(0);
-	opacity: 1;
-	transform: rotate(
-			80deg
-	);
-	background-position: center;
+    content: ' ';
+    background-image: url(../../../pixelegg/images/phone.svg);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    filter: brightness(0) invert(0);
+    opacity: 1;
+    transform: rotate(
+            80deg
+    );
+    background-position: center;
+}
+
+#status_call, #scheduled_call {
+    min-width: 300px;
+    minHeight: 200px;
+}
+
+#call {
+    min-width: 200px;
+    minHeight: 200px;
 }

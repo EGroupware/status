@@ -12,13 +12,12 @@
 	/api/js/jsapi/egw_app.js;
  */
 import {EgwApp} from "../../api/js/jsapi/egw_app";
-import {et2_dialog} from "../../api/js/etemplate/et2_widget_dialog";
+import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {et2_createWidget} from "../../api/js/etemplate/et2_core_widget";
 import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import {et2_url_ro} from "../../api/js/etemplate/et2_widget_url";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
-import {et2_nextmatch} from "../../api/js/etemplate/et2_extension_nextmatch";
 
 class statusApp extends EgwApp
 {
@@ -212,42 +211,49 @@ class statusApp extends EgwApp
 	{
 		let list = this.et2.getArrayMgr('content').getEntry('list');
 		let self = this;
-		et2_createWidget("dialog",
+		let dialog = new Et2Dialog(this.egw);
+		dialog.transformAttributes({
+			callback: function(_button_id, _value)
 			{
-				callback: function(_button_id, _value)
+				if(_button_id == 'add' && _value)
 				{
-					if (_button_id == 'add' && _value)
+					for(let i in _value.accounts)
 					{
-						for (let i in _value.accounts)
+						let added = false;
+						for(let j in list)
 						{
-							let added = false;
-							for (let j in list)
+							if(list[j] && list[j]['account_id'] == _value.accounts[i])
 							{
-								if (list[j] && list[j]['account_id'] == _value.accounts[i])
-								{
-									added = true;
-									self.handle_actions({id: 'fav'}, [{data: list[j]}]);
-								}
+								added = true;
+								self.handle_actions({id: 'fav'}, [{data: list[j]}]);
 							}
-							if (!added) self.handle_actions({id: 'fav'}, [{data:{
-								account_id:_value.accounts[i]
-							}}]);
+						}
+						if(!added)
+						{
+							self.handle_actions({id: 'fav'}, [{
+								data: {
+									account_id: _value.accounts[i]
+								}
+							}]);
 						}
 					}
-				},
-				title: this.egw.lang('Add to favorites'),
-				buttons: [
-					{text: this.egw.lang("Add"), id: "add", class: "ui-priority-primary", default: true},
-					{text: this.egw.lang("Cancel"), id:"cancel"}
-				],
-				value:{
-					content:{
-						value: '',
-					}},
-				template: egw.webserverUrl+'/status/templates/default/search_list.xet',
-				resizable: false,
-				width: 400,
-			}, et2_dialog._create_parent('status'));
+				}
+			},
+			title: this.egw.lang('Add to favorites'),
+			buttons: [
+				{label: this.egw.lang("Add"), id: "add", class: "ui-priority-primary", default: true, image: "add"},
+				{label: this.egw.lang("Cancel"), id: "cancel", image: "cancel"}
+			],
+			value: {
+				content: {
+					value: '',
+				}
+			},
+			template: egw.webserverUrl + '/status/templates/default/search_list.xet',
+			resizable: false,
+			width: 400,
+		});
+		document.body.appendChild(<HTMLElement><unknown>dialog);
 	}
 
 	/**
@@ -357,38 +363,47 @@ class statusApp extends EgwApp
 	{
 		let callCancelled = false;
 		let self = this;
-		let button = [{"button_id": 0, "text": egw.lang('Cancel'), id: '0', image: 'cancel'}];
-		let dialog = et2_createWidget("dialog",{
-			callback: function(_btn){
-				if (_btn == et2_dialog.CANCEL_BUTTON)
+		let button = [{"button_id": 0, "label": egw.lang('Cancel'), id: '0', image: 'cancel'}];
+		let dialog = new Et2Dialog(this.egw);
+		dialog.transformAttributes({
+			callback: function(_btn)
+			{
+				if(_btn == Et2Dialog.CANCEL_BUTTON)
 				{
 					callCancelled = true;
 				}
 			},
-			title: this.egw.lang('Initiating call to'),
+			title: 'Initiating call to',
 			buttons: button,
-			minWidth: 300,
-			minHeight: 200,
 			resizable: false,
 			value: {
-				content: {list:data}
+				content: {list: data}
 			},
-			template: egw.webserverUrl+'/status/templates/default/call.xet'
-		}, et2_dialog._create_parent(this.appname));
-		setTimeout(function(){
-			if (!callCancelled)
+			template: egw.webserverUrl + '/status/templates/default/call.xet'
+		});
+		document.body.appendChild(<HTMLElement><unknown>dialog);
+		setTimeout(function()
+		{
+			if(!callCancelled)
 			{
 				dialog.destroy();
 				egw.json(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
-					[data, data[0]['room']], function(_url){
-						if (_url && _url.msg) egw.message(_url.msg.message, _url.msg.type);
-						if (_url.caller) self.openCall(_url.caller);
-						if (app.rocketchat?.isRCActive(null, [{data:data[0].data}]))
+					[data, data[0]['room']], function(_url)
+					{
+						if(_url && _url.msg)
+						{
+							egw.message(_url.msg.message, _url.msg.type);
+						}
+						if(_url.caller)
+						{
+							self.openCall(_url.caller);
+						}
+						if(app.rocketchat?.isRCActive(null, [{data: data[0].data}]))
 						{
 							app.rocketchat.restapi_call('chat_PostMessage', {
-								roomId:data[0].data.data.rocketchat._id,
-								attachments:[
+								roomId: data[0].data.data.rocketchat._id,
+								attachments: [
 									{
 										"collapsed": false,
 										"color": "#009966",
@@ -396,7 +411,8 @@ class statusApp extends EgwApp
 										"title_link": _url.callee,
 										"thumb_url": "https://raw.githubusercontent.com/EGroupware/status/master/templates/pixelegg/images/videoconference_call.svg",
 									}
-								]})
+								]
+							})
 						}
 					}).sendRequest();
 			}
@@ -426,38 +442,40 @@ class statusApp extends EgwApp
 	scheduled_receivedCall(_content, _notify)
 	{
 		let buttons = [
-			{"button_id": 1, "text": egw.lang('Join'), id: '1', image: 'accept_call', default: true},
-			{"button_id": 0, "text": egw.lang('Close'), id: '0', image: 'close'}
+			{"button_id": 1, "label": egw.lang('Join'), id: '1', image: 'accept_call', default: true},
+			{"button_id": 0, "label": egw.lang('Close'), id: '0', image: 'close'}
 		];
 		let notify = _notify || true;
 		let content = _content || {};
 		let self = this;
 		this._controllRingTone().start();
-		et2_createWidget("dialog",{
-			callback: function(_btn, value){
-				if (_btn == et2_dialog.OK_BUTTON)
+		let dialog = new Et2Dialog(this.egw);
+		dialog.transformAttributes({
+			callback: function(_btn, value)
+			{
+				if(_btn == Et2Dialog.OK_BUTTON)
 				{
 					self.openCall(value.url);
 				}
 			},
 			title: '',
 			buttons: buttons,
-			minWidth: 200,
-			minHeight: 300,
 			modal: false,
-			position:"right bottom,right-100 bottom-10",
+			position: "right bottom,right-100 bottom-10",
 			value: {
 				content: content
 			},
 			resizable: false,
-			template: egw.webserverUrl+'/status/templates/default/scheduled_call.xet'
-		}, et2_dialog._create_parent(this.appname));
-		if (notify)
+			template: egw.webserverUrl + '/status/templates/default/scheduled_call.xet'
+		});
+		document.body.appendChild(<HTMLElement><unknown>dialog);
+		if(notify)
 		{
 			egw.notification(this.egw.lang('Status'), {
-				body: this.egw.lang('You have a video conference meeting in %1 minutes, initiated by %2', (content['alarm-offset']/60), content.owner),
-				icon: egw.webserverUrl+'/api/avatar.php?account_id='+ content.account_id,
-				onclick: function () {
+				body: this.egw.lang('You have a video conference meeting in %1 minutes, initiated by %2', (content['alarm-offset'] / 60), content.owner),
+				icon: egw.webserverUrl + '/api/avatar.php?account_id=' + content.account_id,
+				onclick: function()
+				{
 					window.focus();
 				},
 				requireInteraction: true
@@ -488,7 +506,8 @@ class statusApp extends EgwApp
 			if (!isCallAnswered)
 			{
 				egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function(){}).sendRequest();
-				egw.accountData(_data.caller.account_id, 'account_lid',null,function(account){
+				egw.accountData(_data.caller.account_id, 'account_lid', null, function(account)
+				{
 					self.mergeContent([{
 						id: account[_data.caller.account_id],
 						class1: 'missed-call',
@@ -498,28 +517,29 @@ class statusApp extends EgwApp
 			}
 		}, statusApp.MISSED_CALL_TIMEOUT);
 		this._controllRingTone().start(true);
-		var dialog = et2_createWidget("dialog",{
-			callback: function(_btn, value){
-				if (_btn == et2_dialog.OK_BUTTON)
+		let dialog = new Et2Dialog(this.egw);
+		dialog.transformAttributes({
+			callback: function(_btn, value)
+			{
+				if(_btn == Et2Dialog.OK_BUTTON)
 				{
 					self.openCall(value.url);
 					isCallAnswered = true;
 				}
 			},
-			beforeClose: function(){
+			beforeClose: function()
+			{
 				self._controllRingTone().stop();
 			},
 			title: 'Call from',
 			buttons: buttons,
-			minWidth: 200,
-			minHeight: 200,
 			modal: false,
 			position:"right bottom, right bottom",
 			value: {
 				content: {
 					list:[{
 						"name":_data.caller.name,
-						"avatar": "account:"+_data.caller.account_id,
+						"avatar": "account:" + _data.caller.account_id,
 					}],
 					"message_buttom": egw.lang(message_bottom),
 					"message_top": egw.lang(message_top),
@@ -527,15 +547,17 @@ class statusApp extends EgwApp
 				}
 			},
 			resizable: false,
-			template: egw.webserverUrl+'/status/templates/default/call.xet',
-			dialogClass:"recievedCall"
-		}, et2_dialog._create_parent(this.appname));
-		if (notify)
+			template: egw.webserverUrl + '/status/templates/default/call.xet',
+			dialogClass: "recievedCall"
+		});
+		document.body.appendChild(<HTMLElement><unknown>dialog);
+		if(notify)
 		{
 			egw.notification(this.egw.lang('Status'), {
 				body: this.egw.lang('You have a call from %1', _data.caller.name),
-				icon: egw.webserverUrl+'/api/avatar.php?account_id='+ _data.caller.account_id,
-				onclick: function () {
+				icon: egw.webserverUrl + '/api/avatar.php?account_id=' + _data.caller.account_id,
+				onclick: function()
+				{
 					window.focus();
 				},
 				requireInteraction: true
@@ -578,8 +600,9 @@ class statusApp extends EgwApp
 	public didNotPickUp(_data)
 	{
 		let self = this;
-		et2_dialog.show_dialog(function(_btn){
-			if (et2_dialog.YES_BUTTON == _btn)
+		Et2Dialog.show_dialog(function(_btn)
+		{
+			if(Et2Dialog.YES_BUTTON == _btn)
 			{
 				self.makeCall([_data]);
 			}
@@ -594,17 +617,18 @@ class statusApp extends EgwApp
 	public _phoneMissedCallback (_from, _url)
 	{
 		let self = this;
-		return et2_dialog.show_dialog(function(_btn){
-			if (_btn == et2_dialog.YES_BUTTON)
+		return Et2Dialog.show_dialog(function(_btn)
+		{
+			if(_btn == Et2Dialog.YES_BUTTON)
 			{
 				egw.message(egw.lang("Calling back %1 ...", _from));
-				let url = <et2_url_ro> et2_createWidget('url-phone', {id:'temp_url_phone', readonly: true}, self.et2);
+				let url = <et2_url_ro>et2_createWidget('url-phone', {id: 'temp_url_phone', readonly: true}, self.et2);
 				url.set_value(_url);
 				url.span.click();
 				url.destroy();
 			}
-			self.mergeContent([{id: _from, class2:'', action2:''}])
-		}, "Would you like to callback?", "Missed call", null, et2_dialog.BUTTONS_YES_NO);
+			self.mergeContent([{id: _from, class2: '', action2: ''}])
+		}, "Would you like to callback?", "Missed call", null, Et2Dialog.BUTTONS_YES_NO);
 	}
 
 	public phoneCall(_action, _selected)
@@ -662,18 +686,18 @@ class statusApp extends EgwApp
 	{
 		let url = this.et2.getArrayMgr('content').getEntry('frame');
 
-		et2_createWidget("dialog",
+		let dialog = new Et2Dialog(this.egw);
+		dialog.transformAttributes({
+			callback: function(_button_id, _value)
 			{
-				callback: function(_button_id, _value)
+				if(_button_id == 'add' && _value)
 				{
-					if (_button_id == 'add' && _value)
+					let data = [];
+					for(let i in _value.accounts)
 					{
-						let data = [];
-						for (let i in _value.accounts)
-						{
-							data.push({
-								id: _value.accounts[i],
-								name: '',
+						data.push({
+							id: _value.accounts[i],
+							name: '',
 								avatar: "account:"+_value.accounts[i]
 							})
 						}
@@ -686,17 +710,19 @@ class statusApp extends EgwApp
 				},
 				title: this.egw.lang('Invite to this meeting'),
 				buttons: [
-					{text: this.egw.lang("Invite"), id: "add", class: "ui-priority-primary", default: true},
-					{text: this.egw.lang("Cancel"), id:"cancel"}
+					{label: this.egw.lang("Invite"), id: "add", class: "ui-priority-primary", default: true},
+					{label: this.egw.lang("Cancel"), id: "cancel"}
 				],
-				value:{
-					content:{
-						value: '',
-					}},
-				template: egw.webserverUrl+'/status/templates/default/search_list.xet',
-				resizable: false,
-				width: 400,
-			}, et2_dialog._create_parent('status'));
+			value: {
+				content: {
+					value: '',
+				}
+			},
+			template: egw.webserverUrl + '/status/templates/default/search_list.xet',
+			resizable: false,
+			width: 400,
+		});
+		document.body.appendChild(<HTMLElement><unknown>dialog);
 	}
 
 	/**
@@ -710,18 +736,20 @@ class statusApp extends EgwApp
 		let isModerator = url.match(/isModerator\=(1|true)/i)??false;
 		if (isModerator)
 		{
-			et2_dialog.show_dialog(function(_b){
-				if (_b == 1)
+			Et2Dialog.show_dialog(function(_b)
 				{
-					egw(window).loading_prompt(room, true, egw.lang('Ending the session ...'));
-					egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url],
-						function(){
-							egw(window).loading_prompt(room, false);
-						}).sendRequest();
-					return true;
-				}
-			}, "This window will end the session for everyone, are you sure want this?",
-				"End Meeting",{},et2_dialog.BUTTONS_OK_CANCEL, et2_dialog.WARNING_MESSAGE);
+					if(_b == 1)
+					{
+						egw(window).loading_prompt(room, true, egw.lang('Ending the session ...'));
+						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url],
+							function()
+							{
+								egw(window).loading_prompt(room, false);
+							}).sendRequest();
+						return true;
+					}
+				}, "This window will end the session for everyone, are you sure want this?",
+				"End Meeting", {}, Et2Dialog.BUTTONS_OK_CANCEL, Et2Dialog.WARNING_MESSAGE);
 		}
 	}
 
