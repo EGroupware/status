@@ -474,7 +474,7 @@ class Hooks
 				$client->setIdentifier($config['backend']);
 				$client->setSecret(Api\Auth::randomstring(24));
 				$client->setName(lang('BigBlueButton token'));
-				$client->setScopes(['8']);
+				$client->setScopes(['videoconference']);
 				$client->setRefreshTokenTTL('P0S');	// no refresh token
 				$client->setRedirectUri($GLOBALS['egw_info']['server']['webserver_url'].'/');
 				$clients->persistNewClient($client);
