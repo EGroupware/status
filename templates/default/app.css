@@ -20,7 +20,7 @@ div#egw_fw_sidebar_r {
 	position: relative;
 }
 #egw_fw_sidebar_r tr.row td .et2_hbox.et2_box_widget.avatar {margin: 2px;}
-tr span.stat0 {
+tr .stat0 {
 	width: 14px;
     height: 14px;
     position: absolute;
@@ -31,7 +31,7 @@ tr span.stat0 {
     background-repeat: no-repeat;
 }
 
-tr span.stat1 {
+tr .stat1 {
 	width: 14px;
     height: 14px;
     position: absolute;
@@ -48,7 +48,7 @@ tr span.stat1 {
 	line-height: 14px;
 }
 
-tr span.stat2 {
+tr .stat2 {
 	width: 14px;
     height: 14px;
     position: absolute;
@@ -60,7 +60,7 @@ tr span.stat2 {
     background-repeat: no-repeat;
 }
 
-tr span.stat3 {
+tr .stat3 {
 	width: 14px;
     height: 14px;
     position: absolute;
@@ -83,11 +83,11 @@ tr.egw_online {
 	border-bottom: 4px solid #b4b4b4;
 }
 
-#status-index_fav img.iphoto.et2_clickable:hover{
+#status-index_fav .iphoto.et2_clickable:hover{
 	filter: invert(1);
 }
-#status-index_status-index-list tr.row div.et2_hbox,
-#status-index_status-index-fav tr.row div.et2_hbox{
+#status-index_status-index-list tr.row .et2_hbox,
+#status-index_status-index-fav tr.row .et2_hbox{
 	display: inline-block;
 }
 #status-index_status-index-fav tr.row .avatar,
@@ -269,17 +269,17 @@ tr.row span.on-phone {
 	border:2px solid #f0f7fe;
 }
 tr span.on-phone:before {
-	content: ' ';
-	background-image: url(../../../pixelegg/images/phone.svg);
-	background-repeat: no-repeat;
-	background-size: 10px;
-	height: 100%;
-	width: 100%;
-	display: inline-block;
-	filter: brightness(0) invert(0);
-	opacity: 1;
-	transform: rotate(
-			80deg
-	);
-	background-position: center;
+    content: ' ';
+    background-image: url(../../../pixelegg/images/phone.svg);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    filter: brightness(0) invert(0);
+    opacity: 1;
+    transform: rotate(
+            80deg
+    );
+    background-position: center;
 }
