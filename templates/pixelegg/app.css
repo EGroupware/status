@@ -272,7 +272,7 @@ tr.row span.on-phone {
 }
 tr span.on-phone:before {
   content: ' ';
-  background-image: url(../../../pixelegg/images/phone.svg);
+  background-image: url(../../../api/templates/default/images/phone.svg);
   background-repeat: no-repeat;
   background-size: 10px;
   height: 100%;
