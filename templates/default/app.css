@@ -168,7 +168,7 @@ tr.egw_online {
 td.taglist_readonly .et2_taglist > div.ms-ctn{border:none}
 
 .missed-call {
-	background-image: url(../../../pixelegg/images/hangup.svg);
+	background-image: url(../../../api/templates/default/images/hangup.svg);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: black;
