@@ -116,7 +116,7 @@ tr.egw_online {
 }
 
 #emptyrow {display: none;}
-#status-index_fav et2-image.iphoto.et2_clickable img {width: 100%;height: 25px;margin: 5px;}
+#status-index_fav et2-image.iphoto.et2_clickable img {width: 100%;height: 25px;margin: 5px;margin-left: 0px;}
 
 #status-index_status-index-fav tr.row .online,
 #status-index_status-index-fav tr.row .busy,
