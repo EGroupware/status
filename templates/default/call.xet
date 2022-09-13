@@ -14,7 +14,7 @@
                         <rows>
                             <row class="tile">
                                 <vbox>
-                                    <avatar class="avatar" contact_id="$row_cont[avatar]"/>
+                                    <avatar class="avatar" contactId="$row_cont[avatar]"/>
                                     <label id="${row}[name]"/>
                                 </vbox>
                             </row>
