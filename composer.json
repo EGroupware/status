@@ -18,8 +18,7 @@
             "email": "ng@egroupware.org"
         }
     ],
-	"require": {
-		"egroupware/egroupware": "self.version",
+    "require": {
         "lcobucci/jwt": "^3.1"
     }
 }
