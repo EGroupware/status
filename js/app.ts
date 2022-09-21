@@ -519,11 +519,11 @@ class statusApp extends EgwApp
 		this._controllRingTone().start(true);
 		let dialog = new Et2Dialog(this.egw);
 		dialog.transformAttributes({
-			callback: function(_btn, value)
+			callback: function(_btn)
 			{
 				if(_btn == Et2Dialog.OK_BUTTON)
 				{
-					self.openCall(value.url);
+					self.openCall(_data.call);
 					isCallAnswered = true;
 				}
 			},
