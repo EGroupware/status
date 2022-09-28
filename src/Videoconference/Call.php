@@ -210,7 +210,7 @@ class Call
 	public static function isModerator(string $room, $id)
 	{
 		$backend = self::_getBackendInstance(0, []);
-		if (method_exists($backend, 'isModerator'))
+		if ($backend && method_exists($backend, 'isModerator'))
 		{
 			return $backend::isModerator($room, $id);
 		}
