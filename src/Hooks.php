@@ -492,7 +492,7 @@ class Hooks
 	{
 		$error = '';
 
-		if (in_array('BBB', $data['videoconference']['backend']))
+		if (in_array('BBB', (array)$data['videoconference']['backend']))
 		{
 			if (!$GLOBALS['egw_info']['user']['apps']['resources']) $error = "\n-".lang("Resources app is missing!");
 			if (!$data['videoconference']['bbb']['bbb_domain']) $error .= "\n-".lang("bbb domain is missing!");
