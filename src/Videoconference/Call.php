@@ -236,7 +236,7 @@ class Call
 		], (new Api\DateTime($start))->getTimestamp(),
 			(new Api\DateTime($end))->getTimestamp());
 
-		if (method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
+		if ($backend && method_exists($backend, 'setStartAudioOnly')) $backend->setStartAudioOnly($extra['audioonly']);
 
 		return $backend->getMeetingUrl($context);
 	}
