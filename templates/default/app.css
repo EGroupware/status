@@ -1,5 +1,8 @@
 @media all {
-	html[data-darkmode='1']	.stat0, .stat1, .stat2, .stat3
+	html[data-darkmode='1'] #egw_fw_sidebar_r .stat0,
+	html[data-darkmode='1'] #egw_fw_sidebar_r .stat1,
+	html[data-darkmode='1'] #egw_fw_sidebar_r .stat2,
+	html[data-darkmode='1'] #egw_fw_sidebar_r .stat3
 	{
 		filter: invert(1) hue-rotate(180deg) !important;
 	}
