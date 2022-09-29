@@ -1,3 +1,10 @@
+@media all {
+	html[data-darkmode='1']	.stat0, .stat1, .stat2, .stat3
+	{
+		filter: invert(1) hue-rotate(180deg) !important;
+	}
+}
+
 @media print {
 	div#egw_fw_sidebar_r {display: none;}
 }
