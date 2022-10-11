@@ -309,7 +309,7 @@ class Hooks
 
 		foreach($users as &$user)
 		{
-			if (in_array($user['account_id'], $online)) $user['online'] = true;
+			if (in_array($user['account_id'], (array)$online)) $user['online'] = true;
 		}
 		return $users;
 	}
