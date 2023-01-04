@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="status.room" template="" lang="" group="0" version="20.1" >
 		<grid width="100%" height="100%" resize_ratio="0" disabled="$cont[error]">
@@ -13,15 +12,15 @@
 			</columns>
 			<rows>
 				<row class="dialogHeader">
-					<description value="Room id" label="%s:"/>
-					<textbox readonly="true" id="room"/>
-					<buttononly label="Invite" id="add" background="add" onclick="app.status.videoconference_invite" disabled="!$cont[frame]"/>
-                    <buttononly label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting"/>
+					<et2-description  value="Room id" label="%s:"></et2-description>
+					<et2-textbox  readonly="true" id="room"></et2-textbox>
+					<et2-button  label="Invite" id="add" background="add" onclick="app.status.videoconference_invite" disabled="!$cont[frame]" noSubmit="true"></et2-button>
+                    <et2-button  label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting" noSubmit="true"></et2-button>
 				</row>
 				<row>
-					<hbox class="frame_parent">
+					<et2-hbox  class="frame_parent">
 						<iframe id="frame" width="100%" height="100%" allow="camera *; microphone *;display-capture *;" fullscreen="true"/>
-					</hbox>
+					</et2-hbox>
 				</row>
 			</rows>
 		</grid>
@@ -33,18 +32,18 @@
             </columns>
             <rows>
                 <row class="row error_msg" height="30px">
-                    <label/>
-                    <description class="et2_fullWidth" value="@error"/>
-                    <label/>
+                    <et2-label></et2-label>
+                    <et2-description  value="@error"></et2-description>
+                    <et2-label></et2-label>
                 </row>
                 <row class="row">
-                    <label/>
-                    <vbox class="timer">
-                        <description class="et2_fullWidth" value="This meeting will start in" disabled="!@countdown"/>
+                    <et2-label></et2-label>
+                    <et2-vbox  class="timer">
+                        <et2-description  value="This meeting will start in" disabled="!@countdown"></et2-description>
                         <countdown class="et2_fullWidth" value="@countdown" onFinish="app.status.videoconference_countdown_finished" alarm="@preparation" onAlarm="app.status.videoconference_countdown_finished"/>
-                        <buttononly label="Join" id="join" disabled="true" background_image="1" image="videoconference_join" onclick="app.status.videoconference_countdown_join"/>
-                    </vbox>
-                    <label/>
+                        <et2-button  label="Join" id="join" disabled="true" image="videoconference_join" onclick="app.status.videoconference_countdown_join" noSubmit="true"></et2-button>
+                    </et2-vbox>
+                    <et2-label></et2-label>
                 </row>
             </rows>
 		</grid>

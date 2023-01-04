@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="status.call" template="" lang="" group="0" version="1.9.001">
-        <hbox class="et2_prompt">
-            <vbox class="ui-dialog-content">
-                <description id="message_top"/>
-                <hbox>
+        <et2-hbox  class="et2_prompt">
+            <et2-vbox  class="ui-dialog-content">
+                <et2-description  id="message_top"></et2-description>
+                <et2-hbox>
                     <grid id="list" width="200">
                         <columns>
                             <column />
                         </columns>
                         <rows>
                             <row class="tile">
-                                <vbox>
-                                    <avatar class="avatar" contactId="$row_cont[avatar]"/>
-                                    <label id="${row}[name]"/>
-                                </vbox>
+                                <et2-vbox>
+                                    <et2-avatar  class="avatar" contactId="$row_cont[avatar]"></et2-avatar>
+                                    <et2-label  id="${row}[name]"></et2-label>
+                                </et2-vbox>
                             </row>
                         </rows>
                     </grid>
-                    <image id="stat_icon"/>
-                </hbox>
-                <description id="message_buttom"/>
-                <textbox id="url" disabled="true"/>
-            </vbox>
-        </hbox>
+                    <et2-image  id="stat_icon"></et2-image>
+                </et2-hbox>
+                <et2-description  id="message_buttom"></et2-description>
+                <et2-textbox  id="url" disabled="true"></et2-textbox>
+            </et2-vbox>
+        </et2-hbox>
     </template>
 </overlay>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="status.config.videoconference" template="" lang="" group="0" version="19.1">
 		<grid width="100%" class="admin-config egwGridView_grid">
@@ -10,21 +9,21 @@
 			</columns>
 			<rows>
 			    <row valign="middle" height="40">
-                    <description value="Video conference" label="%s:"/>
-                    <select id="newsettings[videoconference][disable]" value="">
+                    <et2-description  value="Video conference" label="%s:"></et2-description>
+                    <et2-select  id="newsettings[videoconference][disable]" value="">
                         <option value="">enable</option>
                         <option value="true">disable</option>
-                    </select>
+                    </et2-select>
                 </row>
                 <row valign="middle" height="40">
-               	    <vbox>
-                        <description value="Video conference backends" label="%s:"/>
-                        <description value="example: Jitsi"/>
-                    </vbox>
-                    <taglist id="newsettings[videoconference][backend]" width="300px" maxSelection="1" allowFreeEntries="false" autocomplete_url="">
+               	    <et2-vbox>
+                        <et2-description  value="Video conference backends" label="%s:"></et2-description>
+                        <et2-description  value="example: Jitsi"></et2-description>
+                    </et2-vbox>
+                    <et2-select  id="newsettings[videoconference][backend]" width="300px" allowFreeEntries="false" searchUrl="">
                         <option value="Jitsi">Jitsi Server</option>
                         <option value="BBB">BigBlueButton Server</option>
-                    </taglist>
+                    </et2-select>
 			    </row>
 				<row valign="middle" height="40">
 				    <groupbox>
@@ -36,22 +35,22 @@
                             </columns>
                             <rows>
                                 <row>
-                                    <vbox>
-                                        <description value="Jitsi Domain" label="%s:"/>
-                                        <description value="example: jitsi.egroupware.org"/>
-                                    </vbox>
-                                    <textbox id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"/>
+                                    <et2-vbox>
+                                        <et2-description  value="Jitsi Domain" label="%s:"></et2-description>
+                                        <et2-description  value="example: jitsi.egroupware.org"></et2-description>
+                                    </et2-vbox>
+                                    <et2-textbox  id="newsettings[videoconference][jitsi][jitsi_domain]" width="300px"></et2-textbox>
                                 </row>
                                 <row height="30px" valign="bottom">
-                                    <description value="Use JWT authentication" label="%s:" span="all"/>
+                                    <et2-description  value="Use JWT authentication" label="%s:" span="all"></et2-description>
                                 </row>
                                 <row>
-                                    <description value="Jitsi Application ID" label="%s:"/>
-                                    <textbox id="newsettings[videoconference][jitsi][jitsi_application_id]" width="300px"/>
+                                    <et2-description  value="Jitsi Application ID" label="%s:"></et2-description>
+                                    <et2-textbox  id="newsettings[videoconference][jitsi][jitsi_application_id]" width="300px"></et2-textbox>
                                 </row>
                                 <row>
-                                    <description value="Jitsi Application Secret" label="%s:"/>
-                                    <passwd id="newsettings[videoconference][jitsi][jitsi_application_secret]" width="300px"/>
+                                    <et2-description  value="Jitsi Application Secret" label="%s:"></et2-description>
+                                    <et2-password  id="newsettings[videoconference][jitsi][jitsi_application_secret]" width="300px"></et2-password>
                                 </row>
                             </rows>
                         </grid>
@@ -67,49 +66,49 @@
                             </columns>
                             <rows>
                                 <row>
-                                    <description value='*Important: BigBlueButton backend uses category Locations in order to access to resource of "Meeting Room BigBlueButton" therefore it is recommended to set proper user read permissions for Locations category.'/>
+                                    <et2-description  value="*Important: BigBlueButton backend uses category Locations in order to access to resource of &quot;Meeting Room BigBlueButton&quot; therefore it is recommended to set proper user read permissions for Locations category."></et2-description>
                                 </row>
                                 <row>
-                                    <vbox>
-                                        <description value="BBB Api url" label="%s:"/>
-                                        <description value="example: https://app.bbbserver.de/de/bbb-integration/"/>
-                                    </vbox>
-                                    <textbox id="newsettings[videoconference][bbb][bbb_domain]" width="300px"/>
+                                    <et2-vbox>
+                                        <et2-description  value="BBB Api url" label="%s:"></et2-description>
+                                        <et2-description  value="example: https://app.bbbserver.de/de/bbb-integration/"></et2-description>
+                                    </et2-vbox>
+                                    <et2-textbox  id="newsettings[videoconference][bbb][bbb_domain]" width="300px"></et2-textbox>
                                 </row>
                                 <row>
-                                    <vbox>
-                                        <description value="BBB server wildcard domain" label="%s:"/>
-                                        <description value="example: *.bbbserver.de"/>
-                                    </vbox>
-                                    <textbox id="newsettings[videoconference][bbb][bbb_csp]" width="300px"/>
+                                    <et2-vbox>
+                                        <et2-description  value="BBB server wildcard domain" label="%s:"></et2-description>
+                                        <et2-description  value="example: *.bbbserver.de"></et2-description>
+                                    </et2-vbox>
+                                    <et2-textbox  id="newsettings[videoconference][bbb][bbb_csp]" width="300px"></et2-textbox>
                                 </row>
                                 <row>
-                                    <description value="BBB Api secret" label="%s:"/>
-                                    <textbox id="newsettings[videoconference][bbb][bbb_api_secret]" width="300px"/>
+                                    <et2-description  value="BBB Api secret" label="%s:"></et2-description>
+                                    <et2-textbox  id="newsettings[videoconference][bbb][bbb_api_secret]" width="300px"></et2-textbox>
                                 </row>
                                 <row>
-                                    <description value="Number of seats" label="%s:"/>
-                                    <int id="newsettings[videoconference][bbb][bbb_seats]" width="300px" min="0"/>
+                                    <et2-description  value="Number of seats" label="%s:"></et2-description>
+                                    <et2-number  id="newsettings[videoconference][bbb][bbb_seats]" width="300px" min="0" precision="0"></et2-number>
                                 </row>
                                 <row>
-                                    <description value="Estimated call session duration, default is 30 minutes" label="%s:"/>
-                                    <int id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="30" min="0" max="1440" value="30"/>
+                                    <et2-description  value="Estimated call session duration, default is 30 minutes" label="%s:"></et2-description>
+                                    <et2-number  id="newsettings[videoconference][bbb][bbb_call_duration]" width="300px" placeholder="30" min="0" max="1440" value="30" precision="0"></et2-number>
                                 </row>
                                 <row>
-                                    <description value="Fixed duration for session, session will be ended after duration is over" label="%s:"/>
-                                    <checkbox id="newsettings[videoconference][bbb][bbb_call_fixed_duration]"/>
+                                    <et2-description  value="Fixed duration for session, session will be ended after duration is over" label="%s:"></et2-description>
+                                    <et2-checkbox  id="newsettings[videoconference][bbb][bbb_call_fixed_duration]"></et2-checkbox>
                                 </row>
                                 <row>
-                                    <description value="Set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes" label="%s:"/>
-                                    <int id="newsettings[videoconference][bbb][bbb_call_preparation]" min="0" max="30" placeholder="5" value="5"/>
+                                    <et2-description  value="Set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes" label="%s:"></et2-description>
+                                    <et2-number  id="newsettings[videoconference][bbb][bbb_call_preparation]" min="0" max="30" placeholder="5" value="5" precision="0"></et2-number>
                                 </row>
                                 <row>
-                                    <description value="Extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxParticipants value of the call."/>
-                                    <int id="newsettings[videoconference][bbb][bbb_call_extra_invites]" min="0" placeholder="2" value="2"/>
+                                    <et2-description  value="Extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxParticipants value of the call."></et2-description>
+                                    <et2-number  id="newsettings[videoconference][bbb][bbb_call_extra_invites]" min="0" placeholder="2" value="2" precision="0"></et2-number>
                                 </row>
                                 <row>
-                                    <description value="Disable recording" label="%s:"/>
-                                    <checkbox id="newsettings[videoconference][bbb][bbb_disable_recordings]"/>
+                                    <et2-description  value="Disable recording" label="%s:"></et2-description>
+                                    <et2-checkbox  id="newsettings[videoconference][bbb][bbb_disable_recordings]"></et2-checkbox>
                                 </row>
                             </rows>
                         </grid>
@@ -119,13 +118,13 @@
 		</grid>
 	</template>
 	<template id="status.config" template="" lang="" group="0" version="18.1">
-    		<tabbox id="tabs" width="100%">
+    		<et2-tabbox  id="tabs" width="100%">
     			<tabs>
     				<tab id="Videoconference" label="Video Conference"/>
     			</tabs>
     			<tabpanels>
     				<template id="status.config.videoconference"/>
     			</tabpanels>
-    		</tabbox>
+    		</et2-tabbox>
     	</template>
 </overlay>

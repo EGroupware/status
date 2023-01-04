@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2//EN" "http://www.egroupware.org/etemplate2.dtd">
-<!-- $Id$ -->
+<!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="search_list" template="" lang="" group="0" version="19.1" >
 		<grid width="350" height="100%" resize_ratio="0">
@@ -9,7 +8,7 @@
 			</columns>
 			<rows>
 				<row>
-					<taglist id="accounts" allowFreeEntries="false" autocomplete_url="EGroupware\Status\Hooks::ajax_search"/>
+					<et2-select  id="accounts" allowFreeEntries="false" multiple="true" searchUrl="EGroupware\Status\Hooks::ajax_search"></et2-select>
 				</row>
 			</rows>
 		</grid>
