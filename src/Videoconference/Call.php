@@ -313,7 +313,7 @@ class Call
 		$regex = 'https://.*(\r?\n)*';
 		$backend = self::_getBackendInstance(0,[]);
 
-		if (method_exists($backend, 'getRegex'))
+		if(is_object($backend) && method_exists($backend, 'getRegex'))
 		{
 			$regex = $backend->getRegex();
 		}
