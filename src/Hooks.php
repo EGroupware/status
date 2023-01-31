@@ -231,8 +231,12 @@ class Hooks
 	{
 		$account_state = Api\Cache::getSession(self::APPNAME, 'account_state');
 		$current_state = md5(json_encode(self::getUsers()));
+		$isPushServer = Api\Cache::getInstance('notifications', 'isPushServer', function ()
+		{
+			return !Api\Json\Push::onlyFallback();
+		}, [], 900);
 		$response = Api\Json\Response::get();
-		if ($account_state != $current_state) {
+		if ($account_state != $current_state && !$isPushServer) {
 			// update the status list
 			$response->call('app.status.refresh');
 		}
