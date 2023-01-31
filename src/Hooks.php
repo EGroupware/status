@@ -106,35 +106,51 @@ class Hooks
 
 		Api\Cache::setSession(self::APPNAME, 'account_state', md5(json_encode($users = self::getUsers(), JSON_THROW_ON_ERROR)));
 
-		foreach ($users as $user) {
-			if (in_array($user['account_lid'], ['anonymous', $GLOBALS['egw_info']['user']['account_lid']])) {
+		// query contact-data of all users with one query
+		$contacts = [];
+		foreach($contact_obj->search('', false, '', '', '', false, 'AND', false, [
+			'account_id' => array_column($users, 'account_id'),
+		]) as $contact)
+		{
+			$contacts[$contact['account_id']] = $contact;
+		}
+
+		foreach ($users as $user)
+		{
+			if (in_array($user['account_lid'], ['anonymous', $GLOBALS['egw_info']['user']['account_lid']]))
+			{
 				continue;
 			}
-			$contact = $contact_obj->read('account:' . $user['account_id'], true);
+			$contact = $contacts[$user['account_id']];
 			$id = self::getUserName($user['account_lid']);
-			if ($id) {
+			if ($id && !isset($stat[$id]))  // seems favorites are multiple times in the array, but with minimal account-data only, so we prefer the first
+			{
 				$stat [$id] = [
 					'id' => $id,
 					'account_id' => $user['account_id'],
-					'icon' => $contact['photo'],
-					'hint' => $contact['n_given'] . ' ' . $contact['n_family'],
+					'icon' => $user['account_has_photo'] ? $contact['photo'] : null,
+					'lname' => $user['account_lastname'],
+					'fname' => $user['account_firstname'],
+					'hint' => $user['account_fullname'],
 					'stat' => [
 						'status' => [
 							'active' => $user['online'],
-							'lname' => $contact['n_family'],
-							'fname' => $contact['n_given'],
-							'tel_prefer' => $contact[$contact['tel_prefer']],
+							'lname' => $user['account_lastname'],
+							'fname' => $user['account_firstname'],
+							'tel_prefer' => $contact['tel_prefer'],
 							'tel_work' => $contact['tel_work'],
 							'tel_cell' => $contact['tel_cell'],
-							'tell_home' => $contact['tel_home'],
-						]
+							'tel_home' => $contact['tel_home'],
+						],
 					],
 					'lastlogin' => $user['account_lastlogin'],
 				];
 			}
 		}
-		uasort($stat, static function ($a, $b) {
-			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active']) {
+		uasort($stat, static function ($a, $b)
+		{
+			if ($a['stat']['egw']['active'] == $b['stat']['egw']['active'])
+			{
 				return $b['lastlogin'] - $a['lastlogin'];
 			}
 			return ($a['stat']['egw']['active'] < $b['stat']['egw']['active']) ? 1 : -1;
