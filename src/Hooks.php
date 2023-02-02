@@ -126,21 +126,21 @@ class Hooks
 			if ($id && !isset($stat[$id]))  // seems favorites are multiple times in the array, but with minimal account-data only, so we prefer the first
 			{
 				$stat [$id] = [
-					'id' => $id,
+					'id'         => $id,
 					'account_id' => $user['account_id'],
-					'icon' => $user['account_has_photo'] ? $contact['photo'] : null,
-					'lname' => $user['account_lastname'],
-					'fname' => $user['account_firstname'],
-					'hint' => $user['account_fullname'],
-					'stat' => [
+					'icon'       => $user['account_has_photo'] ? $contact['photo'] : null,
+					'lname'      => $user['account_lastname'] ?? $contact['n_family'],
+					'fname'      => $user['account_firstname'] ?? $contact['n_given'],
+					'hint'       => $user['account_fullname'] ?? $contact['n_fn'],
+					'stat'       => [
 						'status' => [
-							'active' => $user['online'],
-							'lname' => $user['account_lastname'],
-							'fname' => $user['account_firstname'],
+							'active'     => $user['online'],
+							'lname'      => $user['account_lastname'] ?? $contact['n_family'],
+							'fname'      => $user['account_firstname'] ?? $contact['n_given'],
 							'tel_prefer' => $contact['tel_prefer'],
-							'tel_work' => $contact['tel_work'],
-							'tel_cell' => $contact['tel_cell'],
-							'tel_home' => $contact['tel_home'],
+							'tel_work'   => $contact['tel_work'],
+							'tel_cell'   => $contact['tel_cell'],
+							'tel_home'   => $contact['tel_home'],
 						],
 					],
 					'lastlogin' => $user['account_lastlogin'],
