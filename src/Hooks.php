@@ -109,6 +109,7 @@ class Hooks
 		// query contact-data of all users with one query
 		$contacts = [];
 		foreach($contact_obj->search('', false, '', '', '', false, 'AND', false, [
+			'owner' => 0,
 			'account_id' => array_column($users, 'account_id'),
 		]) as $contact)
 		{
