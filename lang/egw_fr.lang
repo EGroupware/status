@@ -1,5 +1,6 @@
 %1 did not pickup your call, would you like to try again?	status	fr	%1 n'a pas répondu à votre appel, essayer à nouveau ?
 accept	common	fr	Accepter
+access denied!	status	fr	Accès refusé !
 add to favorites	status	fr	Ajouter au favoris
 audio call	status	fr	Appel audio
 bbb api secret	status	fr	BBB Api secrète
@@ -11,13 +12,16 @@ bbb server wildcard domain	status	fr	BBB wildcard de domaine
 bigbluebutton server	status	fr	Serveur BigBlueButton
 bigbluebutton token	status	fr	Jeton BigBlueButton
 callback	status	fr	Rappel
+calling back %1 ...	status	fr	Rappel %1 ...
 click to join!	status	fr	Cliquer pour joindre !
 direct call from %1	status	fr	appeil direct de %1
 disable	status	fr	désactiver
+disable recording	status	fr	Désactiver l'enregistrement
 enable	status	fr	activer
 enable ring tone	status	fr	Permttre la tonalité
 enable ring tone while receiving a call	status	fr	Permttre la tonalité à la réception d'un appel
 end meeting	status	fr	Terminer la réunion
+ending the session ...	status	fr	Terminer la session ...
 estimated call session duration, default is 30 minutes	status	fr	Durée estimée de la session, par défaut 30 minutes
 estimated call session duration, default is 30 minutes:	status	fr	Durée estimée de la session, par défaut 30 minutes :
 event owner	status	fr	Propriétaire de l'événement
@@ -29,6 +33,7 @@ initiating call to	status	fr	Initier l'appel vers
 invite	status	fr	Invité
 invite to current call	common	fr	Inviter à l'appel en cours
 invite to this meeting	status	fr	Inviter à cette réunion
+is busy on the phone	status	fr	est occupé au téléphone
 is calling	status	fr	est en train d'appeler
 jitsi application id	status	fr	ID Jitsi
 jitsi application secret	status	fr	Mot de passe Jitsi
@@ -48,12 +53,14 @@ remove from favorites	status	fr	Retirer des favoris
 room id	status	fr	ID de salon
 room is not yet ready!	status	fr	Le salon n'est pas encore disponible :
 schedule a call	status	fr	Planifier un appel
+seconds	status	fr	secondes
 status	status	fr	Statut
 there is no free seats left to make/join this call!	status	fr	Il n'y a pas de siège disponible pour préparer/joindre cet appel !
 this meeting is no longer valid because it is in the past!	status	fr	Cette réunion n'est plus valide car dans le passée !
 this meeting will start in	status	fr	Cette réunion débute dans
 title	status	fr	Titre
 use jwt authentication	status	fr	Utiliser l'authentification JWT
+users of selected groups will be listed.	status	fr	Les utilisateurs des groupes sélectionnés selon listés.
 video call	common	fr	Appel vidéo
 video conference	common	fr	Visio-conférence
 video conference backends	status	fr	Backend de visio-conférence

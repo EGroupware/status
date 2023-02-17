@@ -1,0 +1,67 @@
+%1 did not pickup your call, would you like to try again?	status	km	%1 មិនបានទទួលការហៅទូរសព្ទរបស់អ្នកទេ តើអ្នកចង់ព្យាយាមម្តងទៀតទេ?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	km	*សំខាន់៖ ផ្នែកខាងក្រោយ BigBlueButton ប្រើទីតាំងប្រភេទ ដើម្បីចូលប្រើធនធាននៃ "បន្ទប់ប្រជុំ BigBlueButton" ដូច្នេះវាត្រូវបានផ្ដល់អនុសាសន៍ឱ្យកំណត់ការអនុញ្ញាតអានរបស់អ្នកប្រើប្រាស់ត្រឹមត្រូវសម្រាប់ប្រភេទទីតាំង។
+accept	common	km	ទទួលយក
+add to favorites	status	km	បន្ថែមទៅចំណូលចិត្ត
+audio call	status	km	ការហៅជាសំឡេង
+bbb api secret	status	km	អាថ៌កំបាំង BBB Api
+bbb api secret is missing!	status	km	bbb Api secret បាត់!
+bbb api url	status	km	BBB Api url
+bbb csp wild card domain is missing!	status	km	bbb CSP wild card domain បាត់!
+bbb domain is missing!	status	km	bbb domain បាត់!
+bbb server settings	status	km	ការកំណត់ម៉ាស៊ីនមេ BBB
+bbb server wildcard domain	status	km	BBB server ដែនជំនួស
+bigbluebutton server	status	km	ម៉ាស៊ីនមេ BigBlueButton
+callback	status	km	ហៅ​មកវិញ
+click to join!	status	km	ចុចដើម្បីចូលរួម!
+communicating with server %1 failed because of %2	status	km	ការប្រាស្រ័យទាក់ទងជាមួយម៉ាស៊ីនមេ%1 បានបរាជ័យដោយសារតែ %2
+disable	status	km	បិទ
+disable recording	status	km	បិទការថត
+enable	status	km	បើក
+enable ring tone	status	km	បើកសំឡេងរោទ៍
+enable ring tone while receiving a call	status	km	បើកសំឡេងរោទ៍ពេលទទួលការហៅទូរសព្ទ
+end meeting	status	km	បញ្ចប់ការប្រជុំ
+estimated call session duration, default is 30 minutes:	status	km	រយៈពេលនៃវគ្គហៅទូរសព្ទប៉ាន់ស្មាន លំនាំដើមគឺ 30 នាទី៖
+event owner	status	km	ម្ចាស់ព្រឹត្តិការណ៍
+example: jitsi	status	km	ឧទាហរណ៍៖ Jitsi
+example: jitsi.egroupware.org	status	km	ឧទាហរណ៍៖ jitsi.egroupware.org
+fixed duration for session, session will be ended after duration is over:	status	km	រយៈពេលថេរសម្រាប់វគ្គ វគ្គនឹងត្រូវបានបញ្ចប់បន្ទាប់ពីរយៈពេលបានបញ្ចប់៖
+initiating call to	status	km	ចាប់ផ្តើមការហៅទៅកាន់
+invite to current call	common	km	អញ្ជើញទៅការហៅទូរសព្ទបច្ចុប្បន្ន
+invite to this meeting	status	km	អញ្ជើញចូលរួមកិច្ចប្រជុំនេះ។
+is calling	status	km	កំពុងហៅ
+jitsi application id	status	km	លេខសម្គាល់កម្មវិធី Jitsi
+jitsi application secret	status	km	អាថ៌កំបាំងកម្មវិធី Jitsi
+jitsi domain	status	km	ដែន Jitsi
+jitsi server	status	km	ម៉ាស៊ីនបម្រើ Jitsi
+jitsi server settings	status	km	ការកំណត់ម៉ាស៊ីនមេ Jitsi
+join	common	km	ចូលរួម
+link to contact	status	km	តំណភ្ជាប់ទៅទំនាក់ទំនង
+message	status	km	សារ
+missed call from %1	status	km	ខកខានទទួលពី%1
+new window	status	km	បង្អួចថ្មី។
+open call in	status	km	បើកការហៅចូល
+open call in new window/popup	status	km	បើកការហៅចូលក្នុងបង្អួច/ផ្ទាំងលេចឡើងថ្មី។
+phone call	status	km	ការហៅទូរស័ព្ទ
+predefined group of users to be listed	status	km	ក្រុមអ្នកប្រើប្រាស់ដែលបានកំណត់ជាមុនដែលត្រូវរាយបញ្ជី
+remove from favorites	status	km	យកចេញពីចំណូលចិត្ត
+resources app is missing!	status	km	កម្មវិធីធនធានបាត់!
+ringing timeout	status	km	សំឡេងរោទ៍អស់ពេល
+room id	status	km	លេខសម្គាល់បន្ទប់
+room is not yet ready!	status	km	បន្ទប់មិនទាន់រួចរាល់!
+schedule a call	status	km	កំណត់ពេលហៅទូរសព្ទ
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	km	កំណត់ពេលវេលារៀបចំបន្ទប់សម្រាប់ការហៅទូរសព្ទតាមកាលវិភាគ អ្នកសម្របសម្រួលអាចចាប់ផ្តើមការប្រជុំមុនម៉ោងចាប់ផ្តើមពិតប្រាកដរបស់វា លំនាំដើមគឺ 5 នាទី៖
+status	status	km	ស្ថានភាព / សន្និសីទវីដេអូ
+this meeting is no longer valid because it is in the past!	status	km	ការប្រជុំនេះលែងមានសុពលភាពទៀតហើយ ព្រោះវាជាអតីតកាល!
+this meeting will start in	status	km	ការប្រជុំនេះនឹងចាប់ផ្តើមនៅក្នុង
+timeout for the ring tone for incoming calls.	status	km	អស់ពេលសម្រាប់សំឡេងរោទ៍សម្រាប់ការហៅចូល។
+title	status	km	ចំណងជើង
+use jwt authentication	status	km	ប្រើការផ្ទៀងផ្ទាត់ JWT
+users of selected groups will be listed.	status	km	អ្នកប្រើប្រាស់ក្រុមដែលបានជ្រើសរើសនឹងត្រូវបានរាយបញ្ជី។
+video call	common	km	ការហៅជាវីដេអូ
+video conference	common	km	ស​ន្និ​សិ​ទ​វីដេអូ
+video conference backends	status	km	កម្មវិធីខាងក្រោយសន្និសីទវីដេអូ
+video conference enable	status	km	បើកដំណើរការសន្និសីទវីដេអូ
+video conference meeting	status	km	ការប្រជុំតាមវីដេអូ
+you have a call from %1	status	km	អ្នកមានការហៅទូរសព្ទពី%1
+you have a missed call from %1	status	km	អ្នកមានការខកខានទទួលពី%1
+you have a video conference meeting in %1 minutes, initiated by %2	status	km	អ្នកមានការប្រជុំតាមវីដេអូនៅក្នុង %1 នាទី ដែលផ្តួចផ្តើមដោយ %2
