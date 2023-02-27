@@ -259,14 +259,15 @@ class Call
 	 * @param string $room room-id
 	 * @param array $context values for keys 'name', 'email', 'avatar', 'account_id'
 	 * @param int|DateTime|null $start start timestamp, default now (gracetime of self::NBF_GRACETIME=1h is applied)
-	 * @param int|DateTime|null $end expriation timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
+	 * @param int|DateTime|null $end expiration timestamp, default now plus gracetime of self::EXP_GRACETIME=1h
 	 *
 	 * @return bool|Backends\Jitsi|Backends\Iface
 	 */
 	private static function _getBackendInstance(string $room, array $context=[], $start=null, $end=null)
 	{
 		$config = Api\Config::read('status');
-		$backend = 	$config['videoconference']['backend'] ? $config['videoconference']['backend'][0] : 'Jitsi';
+		$backend = 	$config['videoconference']['backend'] ?? 'Jitsi';
+		if (is_array($backend)) $backend = array_unshift($backend);
 		if ($config['videoconference']['disable'] === true || !in_array($backend, self::BACKENDS)) return false;
 		$instance = '\\EGroupware\\Status\\Videoconference\\Backends\\'.$backend;
 
