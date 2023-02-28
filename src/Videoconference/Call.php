@@ -267,7 +267,7 @@ class Call
 	{
 		$config = Api\Config::read('status');
 		$backend = 	$config['videoconference']['backend'] ?? 'Jitsi';
-		if (is_array($backend)) $backend = array_unshift($backend);
+		if (is_array($backend)) $backend = array_shift($backend);
 		if ($config['videoconference']['disable'] === true || !in_array($backend, self::BACKENDS)) return false;
 		$instance = '\\EGroupware\\Status\\Videoconference\\Backends\\'.$backend;
 
