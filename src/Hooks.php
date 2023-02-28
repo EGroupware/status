@@ -126,10 +126,10 @@ class Hooks
 			$id = self::getUserName($user['account_lid']);
 			if ($id && !isset($stat[$id]))  // seems favorites are multiple times in the array, but with minimal account-data only, so we prefer the first
 			{
-				$stat [$id] = [
+				$stat[$id] = [
 					'id'         => $id,
 					'account_id' => $user['account_id'],
-					'icon'       => $user['account_has_photo'] ? $contact['photo'] : null,
+					'icon'       => $user['account_has_photo'] ?? Api\Contacts::hasPhoto($contact) ? $contact['photo'] : null,
 					'lname'      => $user['account_lastname'] ?? $contact['n_family'],
 					'fname'      => $user['account_firstname'] ?? $contact['n_given'],
 					'hint'       => $user['account_fullname'] ?? $contact['n_fn'],
@@ -273,43 +273,29 @@ class Hooks
 	public static function getUsers()
 	{
 		$users = [];
-		$pref_groups = $GLOBALS['egw_info']['user']['preferences']['status']['groups'] ?? [];
-		if (!is_array($pref_groups))
-		{
-			$pref_groups = $pref_groups ? explode(',', $pref_groups) : [];
-		}
-		$filter = [];
-		if (empty($pref_groups) || in_array('_A',$pref_groups))
-		{
-			$filter = 'accounts';
-		}
-		else
-		{
-			foreach ($pref_groups as $g)
-			{
-				switch ($g)
-				{
-					case "_A":
-						// Skip to the next group
-						continue 2;
-					case "_P":
-						$filter[] = $GLOBALS['egw_info']['user']['account_primary_group'];
-						break;
-					default :
-						$filter[] = $g;
-				}
-			}
-			$filter = implode(',', $filter);
-		}
-		// get list of users
-		\admin_ui::get_users([
-			'filter' => $filter,
+		$params = [
+			'filter' => 'accounts',
 			'order' => 'account_lastlogin',
 			'sort' => 'DESC',
 			'active' => true,
 			'filter2' => 'enabled',
 			'num_rows' => 50 //fetch max 50 users
-		], $users);
+		];
+		$pref_groups = $GLOBALS['egw_info']['user']['preferences']['status']['groups'] ?? [];
+		if (!is_array($pref_groups))
+		{
+			$pref_groups = $pref_groups ? explode(',', $pref_groups) : [];
+		}
+		if (!empty($pref_groups) && !in_array('_A', $pref_groups))
+		{
+			foreach ($pref_groups as $g)
+			{
+				$params['account_id'] = array_unique(array_merge($params['account_id'] ?? [],
+					Api\Accounts::getInstance()->members($g === '_P' ? $GLOBALS['egw_info']['user']['account_primary_group'] : $g, true)));
+			}
+		}
+		// get list of users
+		\admin_ui::get_users($params, $users);
 
 		$push = new Api\Json\Push();
 		$online = $push::online();
