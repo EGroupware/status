@@ -15,7 +15,7 @@ import {EgwApp} from "../../api/js/jsapi/egw_app";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {et2_createWidget} from "../../api/js/etemplate/et2_core_widget";
 import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
-import {et2_url_ro} from "../../api/js/etemplate/et2_widget_url";
+import type {Et2UrlPhoneReadonly} from "../../api/js/etemplate/Et2Url/Et2UrlPhoneReadonly";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
 
@@ -622,9 +622,9 @@ class statusApp extends EgwApp
 			if(_btn == Et2Dialog.YES_BUTTON)
 			{
 				egw.message(egw.lang("Calling back %1 ...", _from));
-				let url = <et2_url_ro>et2_createWidget('url-phone', {id: 'temp_url_phone', readonly: true}, self.et2);
+				let url = <Et2UrlPhoneReadonly>et2_createWidget('url-phone', {id: 'temp_url_phone', readonly: true}, self.et2);
 				url.set_value(_url);
-				url.span.click();
+				url.click();
 				url.destroy();
 			}
 			self.mergeContent([{id: _from, class2: '', action2: ''}])
@@ -653,9 +653,9 @@ class statusApp extends EgwApp
 		}
 		if (target)
 		{
-			let url = <et2_url_ro> et2_createWidget('url-phone', {id:'temp_url_phone', readonly: true}, this.et2);
+			let url = <Et2UrlPhoneReadonly>et2_createWidget('url-phone', {id:'temp_url_phone', readonly: true}, this.et2);
 			url.set_value(target);
-			url.span.click();
+			url.click();
 			url.destroy();
 		}
 	}
