@@ -122,7 +122,7 @@ class Hooks
 			{
 				continue;
 			}
-			$contact = $contacts[$user['account_id']];
+			$contact = $contacts[$user['account_id']] ?? [];    // avoid fatal error in hasPhoto, if user is not found in contacts
 			$id = self::getUserName($user['account_lid']);
 			if ($id && !isset($stat[$id]))  // seems favorites are multiple times in the array, but with minimal account-data only, so we prefer the first
 			{
