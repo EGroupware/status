@@ -527,10 +527,6 @@ class statusApp extends EgwApp
 					isCallAnswered = true;
 				}
 			},
-			beforeClose: function()
-			{
-				self._controllRingTone().stop();
-			},
 			title: 'Call from',
 			buttons: buttons,
 			modal: false,
@@ -550,6 +546,7 @@ class statusApp extends EgwApp
 			template: egw.webserverUrl + '/status/templates/default/call.xet',
 			dialogClass: "recievedCall"
 		});
+		dialog.addEventListener('close', _=>self._controllRingTone().stop());
 		document.body.appendChild(<HTMLElement><unknown>dialog);
 		if(notify)
 		{
