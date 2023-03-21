@@ -77,11 +77,9 @@ class statusApp extends EgwApp
 				let url = this.et2.getArrayMgr('content').getEntry('frame');
 				let end = this.et2.getDOMWidgetById('end');
 				let isModerator = url.match(/isModerator\=(1|true)/i)??false;
-				let recordings = this.et2.getDOMWidgetById('recordings');
 				if (isModerator)
 				{
 					end.set_disabled(false);
-					recordings.set_disabled(false);
 				}
 				if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict')))
 				{

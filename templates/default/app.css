@@ -198,7 +198,7 @@ iframe#status-room_frame {
     top: 0px;
 }
 
-.et2_hbox.et2_box_widget.frame_parent {
+et2-hbox.frame_parent {
 	width: 100%;
 	height: 100%;
 	position: relative;
