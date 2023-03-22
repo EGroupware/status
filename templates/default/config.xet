@@ -110,6 +110,10 @@
                                     <et2-description  value="Disable recording" label="%s:"></et2-description>
                                     <et2-checkbox  id="newsettings[videoconference][bbb][bbb_disable_recordings]"></et2-checkbox>
                                 </row>
+                                <row>
+                                    <et2-description value="Open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies)." label="%s:"></et2-description>
+                                    <et2-checkbox id="newsettings[videoconference][bbb][bbb_call_no_iframe]"></et2-checkbox>
+                                </row>
                             </rows>
                         </grid>
                     </groupbox>

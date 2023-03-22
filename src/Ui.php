@@ -96,7 +96,19 @@ class Ui {
 		{
 			$content['frame'] = is_array($_GET['frame']) ?  $_GET['frame'][0] : $_GET['frame'];
 			$content['room'] = $_GET['room'] ?: Videoconference\Call::fetchRoomFromUrl($content['frame']);
-			$content['restrict'] = Api\Config::read('status')['videoconference']['backend'][0] == 'BBB';
+			$content['restrict'] = Api\Config::read('status')['videoconference']['backend'] == 'BBB';
+
+			if ($content['restrict'] && !preg_match('/error\=/',$content['frame']))
+			{
+				/**
+				 * call no iframe is added in config in order to deal with browsers SameSite cookie policy restriction which is
+				 * not being set correctly in some bbb server installations therefore the bbb client can't be open in an iframe.
+				 * There's already some reports about it https://github.com/bigbluebutton/bigbluebutton/issues/9998.
+				 * When the no iframe setting's on we will show a clickable link in the room dialog in order to open the
+				 * call url directly in new window.
+				 */
+				$content['noIframe'] =  Api\Config::read('status')['videoconference']['bbb']['bbb_call_no_iframe'];
+			}
 		}
 		return $tpl->exec('status.EGroupware\\Status\\Ui.room', $content,array(), array());
 	}
