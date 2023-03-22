@@ -18,8 +18,12 @@
                     <et2-button  label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting" noSubmit="true"></et2-button>
 				</row>
 				<row>
-					<et2-hbox  class="frame_parent">
-						<iframe id="frame" width="100%" height="100%" allow="camera *; microphone *;display-capture *;" fullscreen="true"/>
+					<et2-hbox  class="frame_parent" >
+						<iframe id="frame" width="100%"  disabled="$cont[noIframe]" height="100%" allow="camera *; microphone *;display-capture *;" fullscreen="true"/>
+						<et2-vbox disabled="!$cont[noIframe]" class="noIframeBox">
+							<et2-description value="Please click on the link below to open the call"></et2-description>
+							<et2-description href="$cont[frame]" value="$cont[frame]"></et2-description>
+						</et2-vbox>
 					</et2-hbox>
 				</row>
 			</rows>
