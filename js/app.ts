@@ -407,7 +407,7 @@ class statusApp extends EgwApp
 										"color": "#009966",
 										"title": egw.lang("Click to Join!"),
 										"title_link": _url.callee,
-										"thumb_url": "https://raw.githubusercontent.com/EGroupware/status/master/templates/pixelegg/images/videoconference_call.svg",
+										"thumb_url": "https://raw.githubusercontent.com/EGroupware/status/master/templates/default/images/videoconference_call.svg",
 									}
 								]
 							})
