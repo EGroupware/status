@@ -1,4 +1,61 @@
+%1 did not pickup your call, would you like to try again?	status	sk	%1 neprijal/a Váš hovor, skúsiť znovu?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	sk	*Dôležité: VeľkéModréTlačítko používa kategóriu Umiestnenie na prístup k zdroju "Konferenčná Miestnosť VeľkéModréTlačítko", preto sa odporúča, nastaviť používateľom správne prístupové oprávnenia na čítanie pre kategóriu Umiestnenia.
+accept	common	sk	Prijať
 add to favorites	status	sk	Pridať medzi obľúbené
+audio call	status	sk	Zvukový hovor
+bbb api secret	status	sk	BBB API tajomstvo
+bbb api secret is missing!	status	sk	BBB API tajomstvo chýba!
+bbb api url	status	sk	BBB API URL
+bbb csp wild card domain is missing!	status	sk	BBB CSP hviezdičková doména chýba!
+bbb domain is missing!	status	sk	BBB doména chýba!
+bbb server settings	status	sk	Nastavenie servera BBB
+bbb server wildcard domain	status	sk	Hviezdičková doména BBB servera
+bigbluebutton server	status	sk	Server VeľkéModréTlačítko
+callback	status	sk	Spätné volanie
+click to join!	status	sk	Kliknutím sa pripojíte!
+communicating with server %1 failed because of %2	status	sk	Komunikácia so serverom %1 zlyhala z dôvodu %2
+end meeting	status	sk	Ukončiť konferenciu
+estimated call session duration, default is 30 minutes:	status	sk	Odhadované trvanie hovoru, predvolené je 30 minút:
+event owner	status	sk	Vlastník udalosti
+example: jitsi	status	sk	príklad: Jitsi
+example: jitsi.egroupware.org	status	sk	príklad: jitsi.egroupware.org
+fixed duration for session, session will be ended after duration is over:	status	sk	Pevné trvanie relácie; po vypršaní času sa relácia ukončí:
+initiating call to	status	sk	Vytáčam
+invite to current call	common	sk	Prizvať k tomuto hovoru
+invite to this meeting	status	sk	Prizvať k tejto konferencii
+is calling	status	sk	volá
+jitsi application id	status	sk	ID aplikácie Jitsi
+jitsi application secret	status	sk	Tajomstvo aplikácie Jitsi
+jitsi domain	status	sk	Doména Jitsi
+jitsi server	status	sk	Server Jitsi
+jitsi server settings	status	sk	Nastavenia servera Jitsi
+join	common	sk	Pripojiť
+link to contact	status	sk	Odkaz na kontakt
 message	status	sk	Správa
+missed call from %1	status	sk	Zmeškaný hovor od %1
+new window	status	sk	nové okno
+open call in	status	sk	Otvoriť hovor v
+open call in new window/popup	status	sk	Otvoriť hovor v novom okne/vyskakovacom
+phone call	status	sk	Telefonický hovor
+predefined group of users to be listed	status	sk	Predefinovaná skupina používateľov, ktorých zaradiť
 remove from favorites	status	sk	Odstrániť z obľúbených
-status	common	sk	Stav
+resources app is missing!	status	sk	Aplikácia zdrojov chýba!
+ringing timeout	status	sk	vypršanie zvonenia
+room id	status	sk	ID miestnosti
+room is not yet ready!	status	sk	Miestnosť nie je pripravená!
+schedule a call	status	sk	Naplánovať hovor
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	sk	Nastaviť čas prípravy miestnosti pre plánované hovory, moderátor môže začať konferenciu aj pred jej skutočným začiatkom, predvolené je 5 minút:
+status	status	sk	Stav/Videokonferencia
+this meeting is no longer valid because it is in the past!	status	sk	Táto konferencia je neplatná pretože je z minulosti!
+this meeting will start in	status	sk	Táto konferencia začne o
+timeout for the ring tone for incoming calls.	status	sk	Vypršanie zvonenia pre prichádzajúce hovory
+title	status	sk	Titulok
+use jwt authentication	status	sk	Použiť overovanie JWT
+users of selected groups will be listed.	status	sk	Používatelia vybraných skupín budú zaradení.
+video call	common	sk	Video hovor
+video conference	common	sk	Video konferencia
+video conference enable	status	sk	Video konferenciu Zapnúť
+video conference meeting	status	sk	Video konferencia
+you have a call from %1	status	sk	Máte hovor od %1
+you have a missed call from %1	status	sk	Máte zmeškaný hovor od %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	sk	O %1 minút Vám začína video konferencia, ktorú zvoláva %2
