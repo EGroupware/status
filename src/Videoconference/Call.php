@@ -12,6 +12,7 @@
 namespace EGroupware\Status\Videoconference;
 
 use EGroupware\Api;
+use EGroupware\Status\Hooks;
 use EGroupware\Status\Videoconference\Exception\NoResourceAvailable;
 use phpDocumentor\Reflection\Types\Mixed_;
 
@@ -266,8 +267,7 @@ class Call
 	private static function _getBackendInstance(string $room, array $context=[], $start=null, $end=null)
 	{
 		$config = Api\Config::read('status');
-		$backend = 	$config['videoconference']['backend'] ?? 'Jitsi';
-		if (is_array($backend)) $backend = array_shift($backend);
+		$backend = 	Hooks::_extractBackendFromConfig($config);
 		if ($config['videoconference']['disable'] === true || !in_array($backend, self::BACKENDS)) return false;
 		$instance = '\\EGroupware\\Status\\Videoconference\\Backends\\'.$backend;
 
