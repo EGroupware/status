@@ -632,7 +632,7 @@ class Hooks
 	{
 		$config = self::config(Api\Config::read('status'));
 		$srcs = [];
-		$backend = strtolower(is_array($config['videoconference']['backend'])?$config['videoconference']['backend'][0]:$config['videoconference']['backend']);
+		$backend = strtolower(self::_extractBackendFromConfig($config));
 		if (!empty($config['videoconference'][$backend][$backend.'_domain']))
 		{
 			$srcs[] = preg_replace('#^(https?://[^/]+)(/.*)?#', '$1', $config['videoconference'][$backend][$backend.'_domain']);
@@ -643,5 +643,26 @@ class Hooks
 		}
 		if (!empty($config['videoconference'][$backend][$backend.'_csp'])) $srcs[] = $config['videoconference'][$backend][$backend.'_csp'];
 		return $srcs;
+	}
+
+	/**
+	 * get backend value from configs with old-taglist fix into consideration
+	 *
+	 * @param array $_config config
+	 * @return string returns videoconference backend name, and returns the default backend="Jitsi" if fails
+	 */
+	public static function _extractBackendFromConfig(array $_config = [])
+	{
+		try
+		{
+			$config = $_config ?? self::config(Api\Config::read('status'));
+			$backend = $config['videoconference']['backend'];
+			if (is_array($backend)) $backend = array_shift($backend);
+			return $backend ?? self::DEFAULT_VIDEOCONFERENCE_BACKEND;
+		}
+		catch(Api\Exception\WrongParameter $e)
+		{
+			return self::DEFAULT_VIDEOCONFERENCE_BACKEND;
+		}
 	}
 }
