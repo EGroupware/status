@@ -198,7 +198,7 @@ iframe#status-room_frame {
     top: 0px;
 }
 
-et2-hbox.frame_parent {
+.frame_parent {
 	width: 100%;
 	height: 100%;
 	position: relative;
