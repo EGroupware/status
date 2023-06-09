@@ -551,7 +551,7 @@ class Hooks
 		{
 			$riningTimeouts[$i] = $i.' '.lang('seconds');
 		}
-		return [
+		$settings = [
 			'1.section' => [
 				'type' => 'section',
 				'title' => lang('Video Conference'),
@@ -596,6 +596,37 @@ class Hooks
 				'default' => '_A'
 			]
 		];
+
+		$settings[] = array(
+			'type'  => 'section',
+			'title' => lang('Data exchange settings'),
+			'no_lang'=> true,
+			'xmlrpc' => False,
+			'admin'  => False
+		);
+
+		if ($GLOBALS['egw_info']['user']['apps']['rocketchat'])
+		{
+			$rcgroups = [];
+			foreach(\EGroupware\Rocketchat\Hooks::getStatus(['app'=>'rocketchat']) as $status)
+			{
+				if ($status && $status['stat']['rocketchat'] && $status['stat']['rocketchat']['type'] === 'c')
+				{
+					$rcgroups[$status['id']] = $status['id'];
+				}
+			}
+			$settings += [
+				'rcgroups' => [
+					'type' => 'multiselect',
+					'label' => 'Predefined rocket.chat groups to be listed',
+					'name'=> 'rcgroups',
+					'values' => $rcgroups,
+					'help' => 'Selected rocket.chat groups will be listed.',
+					'default' => ''
+				]
+			];
+		}
+		return $settings;
 	}
 
 	/**
