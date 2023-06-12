@@ -608,7 +608,7 @@ class Hooks
 		if ($GLOBALS['egw_info']['user']['apps']['rocketchat'])
 		{
 			$rcgroups = [];
-			foreach(\EGroupware\Rocketchat\Hooks::getStatus(['app'=>'rocketchat']) as $status)
+			foreach(\EGroupware\Rocketchat\Hooks::getStatus(['app'=>'rocketchat', 'allgroups' => true]) as $status)
 			{
 				if ($status && $status['stat']['rocketchat'] && $status['stat']['rocketchat']['type'] === 'c')
 				{
