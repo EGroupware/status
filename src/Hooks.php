@@ -610,7 +610,7 @@ class Hooks
 			$rcgroups = [];
 			foreach(\EGroupware\Rocketchat\Hooks::getStatus(['app'=>'rocketchat', 'allgroups' => true]) as $status)
 			{
-				if ($status && $status['stat']['rocketchat'] && $status['stat']['rocketchat']['type'] === 'c')
+				if ($status && $status['stat']['rocketchat'] && in_array($status['stat']['rocketchat']['type'],['c', 'p']))
 				{
 					$rcgroups[$status['id']] = $status['id'];
 				}
