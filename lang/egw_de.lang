@@ -1,5 +1,5 @@
 %1 did not pickup your call, would you like to try again?	status	de	%1 hat Ihren Anruf nicht angenommen. Wollen Sie es noch einmal versuchen?
-*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	de	*Wichtig: Das BigBlueButton-Backend verwendet die Kategorie Räume, um auf die Ressource "Meeting Room BigBlueButton" zuzugreifen, daher wird empfohlen, entsprechende Benutzerleserechte für die Kategorie Räume zu setzen.
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	de	*Wichtig: Das BigBlueButton-Backend verwendet die Kategorie Räume, um auf die Ressource "Meeting Room BigBlueButton" zuzugreifen. Daher wird empfohlen, entsprechende Benutzerleserechte für die Kategorie Räume zu setzen.
 accept	common	de	Annehmen
 add to favorites	status	de	Zu Favoriten hinzufügen
 audio call	status	de	Audioanruf
@@ -20,10 +20,15 @@ enable	status	de	Aktivieren
 enable ring tone	status	de	Klingelton
 enable ring tone while receiving a call	status	de	Klingelton beim Empfang eines Anrufs aktivieren
 end meeting	status	de	Konferenz beenden
-estimated call session duration, default is 30 minutes:	status	de	Geschätzte Dauer der Anrufsitzung, Standard ist 30 Minuten:
+estimated call session duration, default is 30 minutes	status	de	Voraussichtliche Dauer der Gesprächssitzung, Standardwert ist 30 Minuten
+estimated call session duration, default is 30 minutes:	status	de	Voraussichtliche Dauer der Gesprächssitzung, Standardwert ist 30 Minuten
 event owner	status	de	Organisator Videokonferenz
+example: *.bbbserver.de	status	de	Beispiel: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	de	Beispiel: https://app.bbbserver.de/de/bbb-integration/
 example: jitsi	status	de	Beispiel: Jitsi
 example: jitsi.egroupware.org	status	de	Beispiel: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	de	Zusätzliche Einladungen werden zu der Gesamtzahl der ursprünglich eingeladenen Teilnehmer hinzugefügt. Als Ergebnis wird die Gesamtzahl als Wert für maxParticipants des Anrufs festgelegt.
+fixed duration for session, session will be ended after duration is over	status	de	Feste Dauer für die Sitzung, die Sitzung wird nach Ablauf der Dauer beendet
 fixed duration for session, session will be ended after duration is over:	status	de	Feste Sitzungsdauer, die Sitzung wird nach Ablauf der Dauer beendet:
 initiating call to	status	de	Einleiten eines Anrufs an
 invite to current call	common	de	Zum aktuellen Anruf einladen
@@ -39,8 +44,10 @@ link to contact	status	de	Kontakt verknüpfen
 message	status	de	Nachricht
 missed call from %1	status	de	Versäumter Anruf von %1
 new window	status	de	Neues Fenster
+number of seats	status	de	Anzahl der Plätze
 open call in	status	de	Öffne Videokonferenz als
 open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Pop-up öffnen
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	de	Öffnen der Aufruf-Url in einem separaten Fenster außerhalb des Iframe (z. B. bei Browsern mit eingeschränkten Richtlinien)
 phone call	status	de	Telefonanruf
 predefined group of users to be listed	status	de	Zeige in der Status-Leiste nur die Benutzer der ausgewählten Gruppen an
 remove from favorites	status	de	Aus Favoriten entfernen
@@ -49,11 +56,11 @@ ringing timeout	status	de	Timeout für den Klingelton
 room id	status	de	Raumnummer
 room is not yet ready!	status	de	Der Konferenzraum ist noch nicht verfügbar!
 schedule a call	status	de	Als Termin planen
-set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	de	Legen Sie die Raumvorbereitungszeit für geplante Anrufe fest, der Moderator kann die Besprechung vor ihrer eigentlichen Startzeit beginnen, die Standardeinstellung ist 5 Minuten:
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	de	Legen Sie die Raumvorbereitungszeit für geplante Anrufe fest. Der Moderator kann die Besprechung vor ihrer eigentlichen Startzeit beginnen, die Standardeinstellung ist 5 Minuten:
 status	status	de	Status/Videokonferenz
 this meeting is no longer valid because it is in the past!	status	de	Diese Konferenz ist nicht mehr gültig, weil sie in der Vergangenheit liegt!
 this meeting will start in	status	de	Diese Videokonferenz beginnt in
-timeout for the ring tone for incoming calls.	status	de	Timeout für den Klingelton bei eingehenden Anrufen.
+timeout for the ring tone for incoming calls.	status	de	Länge des Klingelton bei eingehenden Anrufen.
 title	status	de	Titel
 use jwt authentication	status	de	Benutze JWT Authentifizierung
 users of selected groups will be listed.	status	de	Die Benutzer der ausgewählten Gruppen werden angezeigt.
