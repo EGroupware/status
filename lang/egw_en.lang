@@ -20,10 +20,15 @@ enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
 enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
 end meeting	status	en	End meeting
+estimated call session duration, default is 30 minutes	status	en	Estimated call session duration, default is 30 minutes
 estimated call session duration, default is 30 minutes:	status	en	Estimated call session duration, default is 30 minutes:
 event owner	status	en	Event owner
+example: *.bbbserver.de	status	en	example: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	en	example: https://app.bbbserver.de/de/bbb-integration/
 example: jitsi	status	en	example: Jitsi
 example: jitsi.egroupware.org	status	en	example: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	en	Extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxParticipants value of the call.
+fixed duration for session, session will be ended after duration is over	status	en	Fixed duration for session, session will be ended after duration is over
 fixed duration for session, session will be ended after duration is over:	status	en	Fixed duration for session, session will be ended after duration is over:
 initiating call to	status	en	Initiating call to
 invite to current call	common	en	Invite to current call
@@ -39,8 +44,10 @@ link to contact	status	en	Link to contact
 message	status	en	Message
 missed call from %1	status	en	Missed call from %1
 new window	status	en	new window
+number of seats	status	en	Number of seats
 open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	en	Open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).
 phone call	status	en	Phone call
 predefined group of users to be listed	status	en	Predefined group of users to be listed
 remove from favorites	status	en	Remove from favorites
