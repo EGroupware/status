@@ -458,7 +458,7 @@ class statusApp extends EgwApp
 			},
 			title: '',
 			buttons: buttons,
-			modal: false,
+			isModal: false,
 			position: "right bottom,right-100 bottom-10",
 			value: {
 				content: content
@@ -527,7 +527,7 @@ class statusApp extends EgwApp
 			},
 			title: 'Call from',
 			buttons: buttons,
-			modal: false,
+			isModal: false,
 			position:"right bottom, right bottom",
 			value: {
 				content: {
