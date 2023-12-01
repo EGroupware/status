@@ -1,27 +1,25 @@
 %1 did not pickup your call, would you like to try again?	status	fr	%1 n'a pas répondu à votre appel, essayer à nouveau ?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	fr	*Important: le backend BigBlueButton utiliser la catégorie Lieux pour accéder au ressources du "Meeting Room BigBlueButton" c'est pourquoi il est recommandé de paramétrer correctement les permissions en lecture des utilisateurs pour la catégorie Lieux.
 accept	common	fr	Accepter
-access denied!	status	fr	Accès refusé !
 add to favorites	status	fr	Ajouter au favoris
 audio call	status	fr	Appel audio
 bbb api secret	status	fr	BBB Api secrète
 bbb api secret is missing!	status	fr	BBB Api secrète manquante !
 bbb api url	status	fr	BBB Api url
+bbb csp wild card domain is missing!	status	fr	bbb CSP wild card domain est manquant!
 bbb domain is missing!	status	fr	Domaine BBB manquant !
 bbb server settings	status	fr	Paramètre Serveur BBB
 bbb server wildcard domain	status	fr	BBB wildcard de domaine
 bigbluebutton server	status	fr	Serveur BigBlueButton
-bigbluebutton token	status	fr	Jeton BigBlueButton
 callback	status	fr	Rappel
-calling back %1 ...	status	fr	Rappel %1 ...
 click to join!	status	fr	Cliquer pour joindre !
-direct call from %1	status	fr	appeil direct de %1
+communicating with server %1 failed because of %2	status	fr	La communication avec le serveur %1 a échouée parce que %2
 disable	status	fr	désactiver
 disable recording	status	fr	Désactiver l'enregistrement
 enable	status	fr	activer
 enable ring tone	status	fr	Permttre la tonalité
 enable ring tone while receiving a call	status	fr	Permttre la tonalité à la réception d'un appel
 end meeting	status	fr	Terminer la réunion
-ending the session ...	status	fr	Terminer la session ...
 estimated call session duration, default is 30 minutes	status	fr	Durée estimée de la session, par défaut 30 minutes
 estimated call session duration, default is 30 minutes:	status	fr	Durée estimée de la session, par défaut 30 minutes :
 event owner	status	fr	Propriétaire de l'événement
@@ -29,11 +27,12 @@ example: *.bbbserver.de	status	fr	exemple: *.bbbserver.de
 example: https://app.bbbserver.de/de/bbb-integration/	status	fr	exemple: https://app.bbbserver.de/de/bbb-integration/
 example: jitsi	status	fr	exemple : Jitsi
 example: jitsi.egroupware.org	status	fr	exemple: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	fr	Les invitations supplémentaires seront ajoutées en plus du nombre total de participants initialement invités, ainsi le paramètre le nombre total sera utilisé comme valeur de maxParticipants de l'appel.
+fixed duration for session, session will be ended after duration is over	status	fr	Durée fixe de la session, la session sera terminée lorsque la durée aura été atteinte
+fixed duration for session, session will be ended after duration is over:	status	fr	Durée fixe de la session, la session sera terminée lorsque la durée aura été atteinte:
 initiating call to	status	fr	Initier l'appel vers
-invite	status	fr	Invité
 invite to current call	common	fr	Inviter à l'appel en cours
 invite to this meeting	status	fr	Inviter à cette réunion
-is busy on the phone	status	fr	est occupé au téléphone
 is calling	status	fr	est en train d'appeler
 jitsi application id	status	fr	ID Jitsi
 jitsi application secret	status	fr	Mot de passe Jitsi
@@ -48,16 +47,20 @@ new window	status	fr	nouvelle fenêtre
 number of seats	status	fr	Nombre de sièges
 open call in	status	fr	Ouvrir l'appel dans
 open call in new window/popup	status	fr	Ouvrir l'appel dans une nouvelle fenêtre/popup
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	fr	Ouvrir l'URL de l'appel dans une fenêtre séparée en dehors de l'iframe (par exemple sur les navigateurs avec des restrictions).
 phone call	status	fr	Appel téléphonique
+predefined group of users to be listed	status	fr	Groupe prédéfini des utilisateurs à lister
 remove from favorites	status	fr	Retirer des favoris
+resources app is missing!	status	fr	L'application Ressources est manquante!
+ringing timeout	status	fr	délai de sonnerie
 room id	status	fr	ID de salon
 room is not yet ready!	status	fr	Le salon n'est pas encore disponible :
 schedule a call	status	fr	Planifier un appel
-seconds	status	fr	secondes
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	fr	Temps de préparation de la salle pour les appels planifiés, le modérateur peut démarrer le meeting avant sa réelle heure de démarrage, 5 minutes par défaut:
 status	status	fr	Statut
-there is no free seats left to make/join this call!	status	fr	Il n'y a pas de siège disponible pour préparer/joindre cet appel !
 this meeting is no longer valid because it is in the past!	status	fr	Cette réunion n'est plus valide car dans le passée !
 this meeting will start in	status	fr	Cette réunion débute dans
+timeout for the ring tone for incoming calls.	status	fr	Délai de sonnerie pour les appels entrants.
 title	status	fr	Titre
 use jwt authentication	status	fr	Utiliser l'authentification JWT
 users of selected groups will be listed.	status	fr	Les utilisateurs des groupes sélectionnés selon listés.
