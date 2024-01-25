@@ -1,0 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	it	%1 non ha risposto alla sua chiamata, vuole riprovare?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	it	*Importante: il backend di BigBlueButton utilizza la categoria Locations per accedere alla risorsa "Meeting Room BigBlueButton", pertanto si raccomanda di impostare i permessi di lettura dell'utente per la categoria Locations.
+accept	common	it	Accettare
+add to favorites	status	it	Aggiungi ai preferiti
+audio call	status	it	Chiamata audio
+callback	status	it	Richiamo
+click to join!	status	it	Clicca per partecipare!
+communicating with server %1 failed because of %2	status	it	La comunicazione con il server %1 è fallita a causa di %2

@@ -6,7 +6,7 @@ audio call	status	fr	Appel audio
 bbb api secret	status	fr	BBB Api secrète
 bbb api secret is missing!	status	fr	BBB Api secrète manquante !
 bbb api url	status	fr	BBB Api url
-bbb csp wild card domain is missing!	status	fr	bbb CSP wild card domain est manquant!
+bbb csp wild card domain is missing!	status	fr	BBB CSP wild card domain est manquant!
 bbb domain is missing!	status	fr	Domaine BBB manquant !
 bbb server settings	status	fr	Paramètre Serveur BBB
 bbb server wildcard domain	status	fr	BBB wildcard de domaine
@@ -51,7 +51,7 @@ open the call url in a separate window outside of iframe (e.g. browsers with ris
 phone call	status	fr	Appel téléphonique
 predefined group of users to be listed	status	fr	Groupe prédéfini des utilisateurs à lister
 remove from favorites	status	fr	Retirer des favoris
-resources app is missing!	status	fr	L'application Ressources est manquante!
+resources app is missing!	status	fr	L'application Ressources est manquante !
 ringing timeout	status	fr	délai de sonnerie
 room id	status	fr	ID de salon
 room is not yet ready!	status	fr	Le salon n'est pas encore disponible :

@@ -14,11 +14,21 @@ bigbluebutton server	status	sk	Server VeľkéModréTlačítko
 callback	status	sk	Spätné volanie
 click to join!	status	sk	Kliknutím sa pripojíte!
 communicating with server %1 failed because of %2	status	sk	Komunikácia so serverom %1 zlyhala z dôvodu %2
+disable	status	sk	zakázať
+disable recording	status	sk	Zakázať nahrávanie
+enable	status	sk	povoliť
+enable ring tone	status	sk	Povoliť zvonenie
+enable ring tone while receiving a call	status	sk	Povoliť zvonenie pri prichádzajúcom hovore.
 end meeting	status	sk	Ukončiť konferenciu
+estimated call session duration, default is 30 minutes	status	sk	Odhadované trvanie hovoru, predvolené je 30 minút
 estimated call session duration, default is 30 minutes:	status	sk	Odhadované trvanie hovoru, predvolené je 30 minút:
 event owner	status	sk	Vlastník udalosti
+example: *.bbbserver.de	status	sk	príklad: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	sk	príklad: https://app.bbbserver.de/de/bbb-integration/
 example: jitsi	status	sk	príklad: Jitsi
 example: jitsi.egroupware.org	status	sk	príklad: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	sk	Dodatočné pozvania budú pridané k celkovému počtu pôvodne pozvaných účastníkov hovoru, potom ako výsledok bude celkový počet nastavený ako hodnota hovoru maxÚčastníkov.
+fixed duration for session, session will be ended after duration is over	status	sk	Pevné trvanie relácie, relácia bude automaticky ukončená po uplynutí stanoveného času
 fixed duration for session, session will be ended after duration is over:	status	sk	Pevné trvanie relácie; po vypršaní času sa relácia ukončí:
 initiating call to	status	sk	Vytáčam
 invite to current call	common	sk	Prizvať k tomuto hovoru
@@ -34,8 +44,10 @@ link to contact	status	sk	Odkaz na kontakt
 message	status	sk	Správa
 missed call from %1	status	sk	Zmeškaný hovor od %1
 new window	status	sk	nové okno
+number of seats	status	sk	Počet sedadiel
 open call in	status	sk	Otvoriť hovor v
 open call in new window/popup	status	sk	Otvoriť hovor v novom okne/vyskakovacom
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	sk	Otvoriť volaciu URL v samostatnom okne mimo iframe (napr. pri prehliadačoch s prísnou politikou).
 phone call	status	sk	Telefonický hovor
 predefined group of users to be listed	status	sk	Predefinovaná skupina používateľov, ktorých zaradiť
 remove from favorites	status	sk	Odstrániť z obľúbených
