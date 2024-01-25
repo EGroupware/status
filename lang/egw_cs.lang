@@ -1,0 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	cs	%1 nepřijal váš hovor, chcete to zkusit znovu?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	cs	*Důležité: Backend BigBlueButton používá kategorii Locations pro přístup k prostředku "Meeting Room BigBlueButton", proto doporučujeme nastavit správná uživatelská práva pro čtení kategorie Locations.
+accept	common	cs	Přijmout
+add to favorites	status	cs	Přidat k oblíbeným
+audio call	status	cs	Zvukové volání
+callback	status	cs	Zpětné volání
+click to join!	status	cs	Kliknutím se připojíte!
+communicating with server %1 failed because of %2	status	cs	Komunikace se serverem %1 se nezdařila z důvodu %2

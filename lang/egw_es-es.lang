@@ -1,5 +1,11 @@
+%1 did not pickup your call, would you like to try again?	status	es-es	%1 no ha cogido su llamada, ¿quiere intentarlo de nuevo?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	es-es	*Importante: El backend de BigBlueButton utiliza la categoría Ubicaciones para acceder al recurso "Sala de reuniones BigBlueButton", por lo que se recomienda establecer los permisos de lectura adecuados para la categoría Ubicaciones.
 accept	common	es-es	Aceptar
 add to favorites	status	es-es	Añadir a los favoritos
+audio call	status	es-es	Llamada de audio
+callback	status	es-es	Devolución de llamada
+click to join!	status	es-es	Haga clic para unirse
+communicating with server %1 failed because of %2	status	es-es	La comunicación con el servidor %1 ha fallado debido a %2
 disable	status	es-es	inhabilitar
 enable	status	es-es	habilitar
 event owner	status	es-es	Dueño del evento
@@ -10,15 +16,15 @@ jitsi domain	status	es-es	Dominio Jitsi
 jitsi server	status	es-es	Servidor Jitsi
 join	common	es-es	Unirse
 message	status	es-es	Mensaje
-new window	status	es-es	nueva ventana
+new window	status	es-es	Nueva ventana
 open call in	status	es-es	Abrir llamada en
 open call in new window/popup	status	es-es	Abrir llamada en una nueva ventana/ventana emergente
 remove from favorites	status	es-es	Remover de favoritos
 schedule a call	status	es-es	Programar una llamada
-status	common	es-es	Estado
-title	status	es-es	título
+status	status	es-es	Estado
+title	status	es-es	Título
 video call	common	es-es	Videollamada
-video conference	common	es-es	videoconferencia
+video conference	common	es-es	Videoconferencia
 video conference backends	status	es-es	Videoconferencia en plano-trasero
 video conference enable	status	es-es	Habilitar videoconferencia
 video conference meeting	status	es-es	Reunión de videoconferencia

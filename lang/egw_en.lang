@@ -4,21 +4,21 @@ accept	common	en	Accept
 add to favorites	status	en	Add to favorites
 audio call	status	en	Audio Call
 bbb api secret	status	en	BBB Api secret
-bbb api secret is missing!	status	en	bbb Api secret is missing!
+bbb api secret is missing!	status	en	BBB Api secret is missing!
 bbb api url	status	en	BBB Api url
-bbb csp wild card domain is missing!	status	en	bbb CSP wild card domain is missing!
-bbb domain is missing!	status	en	bbb domain is missing!
+bbb csp wild card domain is missing!	status	en	BBB CSP wild card domain is missing!
+bbb domain is missing!	status	en	BBB domain is missing!
 bbb server settings	status	en	BBB Server Settings
 bbb server wildcard domain	status	en	BBB server wildcard domain
 bigbluebutton server	status	en	BigBlueButton Server
 callback	status	en	Callback
-click to join!	status	en	Click to Join!
+click to join!	status	en	Click to join!
 communicating with server %1 failed because of %2	status	en	Communicating with server %1 failed because of %2
 disable	status	en	disable
 disable recording	status	en	Disable recording
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
-enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call
+enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call.
 end meeting	status	en	End meeting
 estimated call session duration, default is 30 minutes	status	en	Estimated call session duration, default is 30 minutes
 estimated call session duration, default is 30 minutes:	status	en	Estimated call session duration, default is 30 minutes:
@@ -43,16 +43,16 @@ join	common	en	Join
 link to contact	status	en	Link to contact
 message	status	en	Message
 missed call from %1	status	en	Missed call from %1
-new window	status	en	new window
+new window	status	en	New window
 number of seats	status	en	Number of seats
 open call in	status	en	Open call in
-open call in new window/popup	status	en	Open call in new window/popup
+open call in new window/popup	status	en	Open call in new window/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	en	Open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).
 phone call	status	en	Phone call
 predefined group of users to be listed	status	en	Predefined group of users to be listed
 remove from favorites	status	en	Remove from favorites
 resources app is missing!	status	en	Resources app is missing!
-ringing timeout	status	en	ringing timeout
+ringing timeout	status	en	Ringing timeout
 room id	status	en	Room ID
 room is not yet ready!	status	en	Room is not yet ready!
 schedule a call	status	en	Schedule a call
