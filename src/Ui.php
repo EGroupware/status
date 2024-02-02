@@ -95,7 +95,7 @@ class Ui {
 		else
 		{
 			$content['frame'] = is_array($_GET['frame']) ?  $_GET['frame'][0] : $_GET['frame'];
-			$content['room'] = $_GET['room'] ?: Videoconference\Call::fetchRoomFromUrl($content['frame']);
+			$content['room'] = $_GET['room'] ?: ($content['frame'] ? Videoconference\Call::fetchRoomFromUrl($content['frame']) : null);
 			$content['restrict'] = Api\Config::read('status')['videoconference']['backend'] == 'BBB';
 
 			if ($content['restrict'] && !preg_match('/error\=/',$content['frame']))
