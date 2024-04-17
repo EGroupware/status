@@ -160,7 +160,7 @@ class Call
 			'caller'=>$data['caller']['account_id'],
 			'app' => 'status',
 			'onSeenAction' => 'app.status.refresh()'
-		]);
+		], $data['caller']['account_id']);
 		$n->set_message(Api\DateTime::to().": ".lang("You have a missed call from %1", $data['caller']['name']));
 
 		try {
