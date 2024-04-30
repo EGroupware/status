@@ -43,7 +43,7 @@ join	common	sk	Pripojiť
 link to contact	status	sk	Odkaz na kontakt
 message	status	sk	Správa
 missed call from %1	status	sk	Zmeškaný hovor od %1
-new window	status	sk	nové okno
+new window	status	sk	Nové okno
 number of seats	status	sk	Počet sedadiel
 open call in	status	sk	Otvoriť hovor v
 open call in new window/popup	status	sk	Otvoriť hovor v novom okne/vyskakovacom
@@ -52,7 +52,7 @@ phone call	status	sk	Telefonický hovor
 predefined group of users to be listed	status	sk	Predefinovaná skupina používateľov, ktorých zaradiť
 remove from favorites	status	sk	Odstrániť z obľúbených
 resources app is missing!	status	sk	Aplikácia zdrojov chýba!
-ringing timeout	status	sk	vypršanie zvonenia
+ringing timeout	status	sk	Vypršanie zvonenia
 room id	status	sk	ID miestnosti
 room is not yet ready!	status	sk	Miestnosť nie je pripravená!
 schedule a call	status	sk	Naplánovať hovor
@@ -66,6 +66,7 @@ use jwt authentication	status	sk	Použiť overovanie JWT
 users of selected groups will be listed.	status	sk	Používatelia vybraných skupín budú zaradení.
 video call	common	sk	Video hovor
 video conference	common	sk	Video konferencia
+video conference backends	status	sk	Videokonferenčné backendy
 video conference enable	status	sk	Video konferenciu Zapnúť
 video conference meeting	status	sk	Video konferencia
 you have a call from %1	status	sk	Máte hovor od %1

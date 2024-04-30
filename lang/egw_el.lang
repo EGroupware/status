@@ -1,0 +1,69 @@
+bbb api secret	status	el	Μυστικό API BBB
+bbb api secret is missing!	status	el	Το μυστικό API της BBB λείπει!
+bbb api url	status	el	ΔΙΕΎΘΥΝΣΗ URL API BBB
+bbb csp wild card domain is missing!	status	el	Ο τομέας wildcard του BBB CSP λείπει!
+bbb domain is missing!	status	el	Ο τομέας BBB λείπει!
+bbb server settings	status	el	Ρυθμίσεις διακομιστή BBB
+bbb server wildcard domain	status	el	Τομέας wildcard διακομιστή BBB
+bigbluebutton server	status	el	Διακομιστής BigBlueButton
+callback	status	el	Ανάκληση
+click to join!	status	el	Κάντε κλικ για να συμμετάσχετε!
+communicating with server %1 failed because of %2	status	el	Η επικοινωνία με το διακομιστή %1 απέτυχε λόγω %2
+disable	status	el	απενεργοποίηση
+disable recording	status	el	Απενεργοποίηση εγγραφής
+enable	status	el	Ενεργοποίηση
+enable ring tone	status	el	Ενεργοποίηση ήχου κλήσης
+enable ring tone while receiving a call	status	el	Ενεργοποίηση του ήχου κλήσης κατά τη λήψη μιας κλήσης.
+end meeting	status	el	Τερματισμός συνάντησης
+estimated call session duration, default is 30 minutes	status	el	Εκτιμώμενη διάρκεια συνόδου κλήσης, η προεπιλογή είναι 30 λεπτά
+estimated call session duration, default is 30 minutes:	status	el	Εκτιμώμενη διάρκεια συνόδου κλήσης, η προεπιλογή είναι 30 λεπτά:
+event owner	status	el	Ιδιοκτήτης συμβάντος
+example: *.bbbserver.de	status	el	παράδειγμα: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	el	παράδειγμα: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	el	παράδειγμα: Jitsi
+example: jitsi.egroupware.org	status	el	παράδειγμα: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	el	Οι πρόσθετες προσκλήσεις θα προστεθούν στον συνολικό αριθμό των συμμετεχόντων που προσκλήθηκαν αρχικά στην κλήση και, ως αποτέλεσμα, ο συνολικός αριθμός θα οριστεί ως η τιμή maxParticipants της κλήσης.
+fixed duration for session, session will be ended after duration is over	status	el	Σταθερή διάρκεια για τη συνεδρία, η συνεδρία θα τερματιστεί μετά τη λήξη της διάρκειας.
+fixed duration for session, session will be ended after duration is over:	status	el	Σταθερή διάρκεια για τη συνεδρία, η συνεδρία θα τερματιστεί μετά το πέρας της διάρκειας:
+initiating call to	status	el	Έναρξη κλήσης προς
+invite to current call	common	el	Πρόσκληση στην τρέχουσα κλήση
+invite to this meeting	status	el	Πρόσκληση σε αυτή τη συνάντηση
+is calling	status	el	καλεί
+jitsi application id	status	el	Αναγνωριστικό εφαρμογής Jitsi
+jitsi application secret	status	el	Μυστικό εφαρμογής Jitsi
+jitsi domain	status	el	Τομέας Jitsi
+jitsi server	status	el	Διακομιστής Jitsi
+jitsi server settings	status	el	Ρυθμίσεις διακομιστή Jitsi
+join	common	el	Συμμετοχή στο
+link to contact	status	el	Σύνδεση με την επαφή
+message	status	el	Μήνυμα
+missed call from %1	status	el	Αναπάντητη κλήση από %1
+new window	status	el	Νέο παράθυρο
+number of seats	status	el	Αριθμός θέσεων
+open call in	status	el	Άνοιγμα κλήσης σε
+open call in new window/popup	status	el	Άνοιγμα κλήσης σε νέο παράθυρο/αναδυόμενο παράθυρο.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	el	Ανοίξτε τη διεύθυνση URL της κλήσης σε ξεχωριστό παράθυρο εκτός iframe (π.χ. προγράμματα περιήγησης με περιορισμένες πολιτικές).
+phone call	status	el	Τηλεφωνική κλήση
+predefined group of users to be listed	status	el	Προκαθορισμένη ομάδα χρηστών που θα καταχωρηθεί
+remove from favorites	status	el	Αφαίρεση από τα αγαπημένα
+resources app is missing!	status	el	Η εφαρμογή Resources λείπει!
+ringing timeout	status	el	Χρονικό όριο κλήσης
+room id	status	el	Αναγνώριση δωματίου
+room is not yet ready!	status	el	Το δωμάτιο δεν είναι ακόμα έτοιμο!
+schedule a call	status	el	Προγραμματίστε μια κλήση
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	el	Ορίστε το χρόνο προετοιμασίας της αίθουσας για προγραμματισμένες κλήσεις, ο συντονιστής μπορεί να ξεκινήσει τη συνάντηση πριν από την πραγματική ώρα έναρξής της, η προεπιλογή είναι 5 λεπτά:
+status	status	el	Κατάσταση/Βιντεοδιάσκεψη
+this meeting is no longer valid because it is in the past!	status	el	Αυτή η συνάντηση δεν ισχύει πλέον, διότι ανήκει στο παρελθόν!
+this meeting will start in	status	el	Αυτή η συνάντηση θα ξεκινήσει σε
+timeout for the ring tone for incoming calls.	status	el	Χρονικό όριο για τον ήχο κλήσης για τις εισερχόμενες κλήσεις.
+title	status	el	Τίτλος
+use jwt authentication	status	el	Χρήση ελέγχου ταυτότητας JWT
+users of selected groups will be listed.	status	el	Θα εμφανίζονται οι χρήστες των επιλεγμένων ομάδων.
+video call	common	el	Βιντεοκλήση
+video conference	common	el	Διάσκεψη βίντεο
+video conference backends	status	el	Βιντεοδιάσκεψη backends
+video conference enable	status	el	Ενεργοποίηση τηλεδιάσκεψης
+video conference meeting	status	el	Συνάντηση διάσκεψης βίντεο
+you have a call from %1	status	el	Έχετε κλήση από %1
+you have a missed call from %1	status	el	Έχετε μια αναπάντητη κλήση από το %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	el	Έχετε μια συνάντηση βιντεοδιάσκεψης σε %1 λεπτά, με πρωτοβουλία του %2

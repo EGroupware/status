@@ -3,10 +3,10 @@
 accept	common	en	Accept
 add to favorites	status	en	Add to favorites
 audio call	status	en	Audio Call
-bbb api secret	status	en	BBB Api secret
-bbb api secret is missing!	status	en	BBB Api secret is missing!
-bbb api url	status	en	BBB Api url
-bbb csp wild card domain is missing!	status	en	BBB CSP wild card domain is missing!
+bbb api secret	status	en	BBB API secret
+bbb api secret is missing!	status	en	BBB API secret is missing!
+bbb api url	status	en	BBB API URL
+bbb csp wild card domain is missing!	status	en	BBB CSP wildcard domain is missing!
 bbb domain is missing!	status	en	BBB domain is missing!
 bbb server settings	status	en	BBB Server Settings
 bbb server wildcard domain	status	en	BBB server wildcard domain
@@ -34,11 +34,11 @@ initiating call to	status	en	Initiating call to
 invite to current call	common	en	Invite to current call
 invite to this meeting	status	en	Invite to this meeting
 is calling	status	en	is calling
-jitsi application id	status	en	Jitsi Application ID
-jitsi application secret	status	en	Jitsi Application Secret
+jitsi application id	status	en	Jitsi application ID
+jitsi application secret	status	en	Jitsi application secret
 jitsi domain	status	en	Jitsi Domain
-jitsi server	status	en	Jitsi Server
-jitsi server settings	status	en	Jitsi Server Settings
+jitsi server	status	en	Jitsi server
+jitsi server settings	status	en	Jitsi server settings
 join	common	en	Join
 link to contact	status	en	Link to contact
 message	status	en	Message
@@ -47,7 +47,7 @@ new window	status	en	New window
 number of seats	status	en	Number of seats
 open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup.
-open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	en	Open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	en	Open the call URL in a separate window outside of iframe (e.g. browsers with ristricted policies).
 phone call	status	en	Phone call
 predefined group of users to be listed	status	en	Predefined group of users to be listed
 remove from favorites	status	en	Remove from favorites
@@ -67,7 +67,7 @@ users of selected groups will be listed.	status	en	Users of selected groups will
 video call	common	en	Video Call
 video conference	common	en	Video Conference
 video conference backends	status	en	Video conference backends
-video conference enable	status	en	Video conference Enable
+video conference enable	status	en	Video conference enable
 video conference meeting	status	en	Video conference meeting
 you have a call from %1	status	en	You have a call from %1
 you have a missed call from %1	status	en	You have a missed call from %1

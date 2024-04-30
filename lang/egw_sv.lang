@@ -1,0 +1,59 @@
+bbb api secret	status	sv	BBB API-hemlighet
+bbb api secret is missing!	status	sv	BBB API-hemlighet saknas!
+bbb api url	status	sv	BBB API URL
+bbb csp wild card domain is missing!	status	sv	BBB CSP wildcard-domän saknas!
+bbb domain is missing!	status	sv	BBB-domän saknas!
+bbb server settings	status	sv	Inställningar för BBB-server
+bbb server wildcard domain	status	sv	BBB-serverns wildcard-domän
+bigbluebutton server	status	sv	BigBlueButton-server
+disable	status	sv	Inaktivera
+disable recording	status	sv	Inaktivera inspelning
+enable	status	sv	Aktivera
+enable ring tone	status	sv	Aktivera ringsignal
+enable ring tone while receiving a call	status	sv	Aktivera ringsignal när du tar emot ett samtal.
+end meeting	status	sv	Avsluta möte
+estimated call session duration, default is 30 minutes	status	sv	Uppskattad varaktighet för samtalssession, standard är 30 minuter
+estimated call session duration, default is 30 minutes:	status	sv	Uppskattad varaktighet för samtalssession, standard är 30 minuter:
+event owner	status	sv	Händelse ägare
+initiating call to	status	sv	Starta samtal till
+invite to current call	common	sv	Bjud in till aktuellt samtal
+invite to this meeting	status	sv	Bjud in till detta möte
+is calling	status	sv	ringer
+jitsi application id	status	sv	ID för Jitsi-applikation
+jitsi application secret	status	sv	Jitsi-applikationens hemlighet
+jitsi domain	status	sv	Jitsi-domän
+jitsi server	status	sv	Jitsi-server
+jitsi server settings	status	sv	Inställningar för Jitsi-server
+join	common	sv	Gå med
+link to contact	status	sv	Länk till kontakt
+message	status	sv	Meddelande
+missed call from %1	status	sv	Missat samtal från %1
+new window	status	sv	Nytt fönster
+number of seats	status	sv	Antal platser
+open call in	status	sv	Öppna samtal i
+open call in new window/popup	status	sv	Öppna samtal i nytt fönster/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	sv	Öppna samtalets URL i ett separat fönster utanför iframe (t.ex. webbläsare med begränsad policy).
+phone call	status	sv	Telefonsamtal
+predefined group of users to be listed	status	sv	Fördefinierad grupp av användare som ska listas
+remove from favorites	status	sv	Ta bort från favoriter
+resources app is missing!	status	sv	Resursapp saknas!
+ringing timeout	status	sv	Tidsgräns för ringning
+room id	status	sv	Rum-ID
+room is not yet ready!	status	sv	Rummet är ännu inte klart!
+schedule a call	status	sv	Schemalägg ett samtal
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	sv	Ställ in rummets förberedelsetid för schemalagda samtal, så att moderatorn kan starta mötet före den faktiska starttiden, standard är 5 minuter:
+status	status	sv	Status/Videokonferens
+this meeting is no longer valid because it is in the past!	status	sv	Detta möte är inte längre giltigt eftersom det ligger i det förflutna!
+this meeting will start in	status	sv	Detta möte kommer att starta i
+timeout for the ring tone for incoming calls.	status	sv	Timeout för ringsignalen för inkommande samtal.
+title	status	sv	Titel
+use jwt authentication	status	sv	Använd JWT-autentisering
+users of selected groups will be listed.	status	sv	Användare av valda grupper kommer att listas.
+video call	common	sv	Videosamtal
+video conference	common	sv	Videokonferens
+video conference backends	status	sv	Backends för videokonferens
+video conference enable	status	sv	Aktivera videokonferens
+video conference meeting	status	sv	Videokonferens möte
+you have a call from %1	status	sv	Du har ett samtal från %1
+you have a missed call from %1	status	sv	Du har ett missat samtal från %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	sv	Du har ett videokonferensmöte om %1 minuter, initierat av %2

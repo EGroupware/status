@@ -1,0 +1,59 @@
+bbb api secret	status	ru	Секрет API BBB
+bbb api secret is missing!	status	ru	Секрет API BBB отсутствует!
+bbb api url	status	ru	URL-АДРЕС API BBB
+bbb csp wild card domain is missing!	status	ru	Домен BBB CSP с подстановочным знаком отсутствует!
+bbb domain is missing!	status	ru	Домен BBB отсутствует!
+bbb server settings	status	ru	Настройки сервера BBB
+bbb server wildcard domain	status	ru	Домен с символом подстановки сервера BBB
+bigbluebutton server	status	ru	Сервер BigBlueButton
+disable	status	ru	отключить
+disable recording	status	ru	Отключить запись
+enable	status	ru	включить
+enable ring tone	status	ru	Включить сигнал вызова
+enable ring tone while receiving a call	status	ru	Включение сигнала вызова при приеме вызова.
+end meeting	status	ru	Завершение встречи
+estimated call session duration, default is 30 minutes	status	ru	Предполагаемая продолжительность сеанса связи, по умолчанию 30 минут
+estimated call session duration, default is 30 minutes:	status	ru	Предполагаемая продолжительность сеанса связи, по умолчанию 30 минут:
+event owner	status	ru	Владелец события
+initiating call to	status	ru	Инициирование вызова
+invite to current call	common	ru	Приглашение к текущему вызову
+invite to this meeting	status	ru	Приглашение на эту встречу
+is calling	status	ru	звонит
+jitsi application id	status	ru	Идентификатор приложения Jitsi
+jitsi application secret	status	ru	Секрет приложения Jitsi
+jitsi domain	status	ru	Домен Jitsi
+jitsi server	status	ru	Сервер Jitsi
+jitsi server settings	status	ru	Настройки сервера Jitsi
+join	common	ru	Присоединиться к
+link to contact	status	ru	Ссылка на контакт
+message	status	ru	Сообщение
+missed call from %1	status	ru	Пропущенный звонок от %1
+new window	status	ru	Новое окно
+number of seats	status	ru	Количество мест
+open call in	status	ru	Открыть звонок в
+open call in new window/popup	status	ru	Открыть звонок в новом окне/всплывающем окне.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ru	Открыть URL-адрес звонка в отдельном окне вне iframe (например, в браузерах с ристриктивными политиками).
+phone call	status	ru	Телефонный звонок
+predefined group of users to be listed	status	ru	Предопределенная группа пользователей для включения в список
+remove from favorites	status	ru	Удалить из избранного
+resources app is missing!	status	ru	Приложение "Ресурсы" отсутствует!
+ringing timeout	status	ru	Таймаут звонка
+room id	status	ru	Идентификатор комнаты
+room is not yet ready!	status	ru	Комната еще не готова!
+schedule a call	status	ru	Запланировать звонок
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ru	Установите время подготовки комнаты для запланированных звонков, модератор может начать встречу до ее фактического времени начала, по умолчанию - 5 минут:
+status	status	ru	Статус/Видеоконференция
+this meeting is no longer valid because it is in the past!	status	ru	Эта встреча больше не действительна, потому что она уже в прошлом!
+this meeting will start in	status	ru	Это собрание начнется через
+timeout for the ring tone for incoming calls.	status	ru	Время ожидания сигнала вызова для входящих вызовов.
+title	status	ru	Название
+use jwt authentication	status	ru	Использовать аутентификацию JWT
+users of selected groups will be listed.	status	ru	Пользователи выбранных групп будут отображаться в списке.
+video call	common	ru	Видеозвонок
+video conference	common	ru	Видеоконференция
+video conference backends	status	ru	Бэкенды видеоконференций
+video conference enable	status	ru	Разрешение видеоконференции
+video conference meeting	status	ru	Видеоконференция встреча
+you have a call from %1	status	ru	Вам звонят из %1
+you have a missed call from %1	status	ru	У вас есть пропущенный звонок от %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	ru	Через %1 минут у вас будет видеоконференция, инициированная %2

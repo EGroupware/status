@@ -1,0 +1,59 @@
+bbb api secret	status	lt	BBB API paslaptis
+bbb api secret is missing!	status	lt	Nėra BBB API paslapties!
+bbb api url	status	lt	BBB API URL
+bbb csp wild card domain is missing!	status	lt	Nėra BBB CSP pakaitinio simbolio domeno!
+bbb domain is missing!	status	lt	Nėra BBB domeno!
+bbb server settings	status	lt	BBB serverio nustatymai
+bbb server wildcard domain	status	lt	BBB serverio pakaitinis domenas
+bigbluebutton server	status	lt	BigBlueButton serveris
+disable	status	lt	išjungti
+disable recording	status	lt	Išjungti įrašymą
+enable	status	lt	įjungti
+enable ring tone	status	lt	Įjungti skambėjimo signalą
+enable ring tone while receiving a call	status	lt	Įjunkite skambėjimo signalą priimant skambutį.
+end meeting	status	lt	Baigti susitikimą
+estimated call session duration, default is 30 minutes	status	lt	Numatoma skambučio seanso trukmė, pagal nutylėjimą - 30 minučių
+estimated call session duration, default is 30 minutes:	status	lt	Numatoma skambučio seanso trukmė, pagal nutylėjimą - 30 minučių:
+event owner	status	lt	Įvykio savininkas
+initiating call to	status	lt	Skambučio inicijavimas
+invite to current call	common	lt	Pakviesti į dabartinį skambutį
+invite to this meeting	status	lt	Kvietimas į šį susitikimą
+is calling	status	lt	kviečia
+jitsi application id	status	lt	Jitsi programos ID
+jitsi application secret	status	lt	Jitsi programos paslaptis
+jitsi domain	status	lt	Jitsi domenas
+jitsi server	status	lt	Jitsi serveris
+jitsi server settings	status	lt	Jitsi serverio nustatymai
+join	common	lt	Prisijungti prie
+link to contact	status	lt	Nuoroda į kontaktą
+message	status	lt	Žinutė
+missed call from %1	status	lt	Praleistas skambutis iš %1
+new window	status	lt	Naujas langas
+number of seats	status	lt	Vietų skaičius
+open call in	status	lt	Atidaryti skambutį
+open call in new window/popup	status	lt	Atidarykite skambutį naujame lange / atsidariusiame lange.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	lt	Atidarykite skambučio URL adresą atskirame lange ne iframe (pvz., naršyklėse, kuriose taikoma ribota politika).
+phone call	status	lt	Skambutis telefonu
+predefined group of users to be listed	status	lt	Iš anksto nustatyta naudotojų grupė, kuri turi būti įtraukta į sąrašą
+remove from favorites	status	lt	Pašalinti iš mėgstamiausių
+resources app is missing!	status	lt	Trūksta išteklių programos!
+ringing timeout	status	lt	Skambinimo laiko limitas
+room id	status	lt	Kambario ID
+room is not yet ready!	status	lt	Kambarys dar neparuoštas!
+schedule a call	status	lt	Suplanuokite skambutį
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	lt	Nustatykite patalpos paruošimo laiką suplanuotiems skambučiams, moderatorius gali pradėti susitikimą anksčiau, nei faktinis jo pradžios laikas, pagal nutylėjimą - 5 minutės:
+status	status	lt	Būsena/Video konferencija
+this meeting is no longer valid because it is in the past!	status	lt	Šis susitikimas nebegalioja, nes jis jau praeityje!
+this meeting will start in	status	lt	Šis susitikimas prasidės
+timeout for the ring tone for incoming calls.	status	lt	Įeinančių skambučių skambėjimo signalo laikas.
+title	status	lt	Pavadinimas
+use jwt authentication	status	lt	Naudoti JWT autentifikavimą
+users of selected groups will be listed.	status	lt	Bus rodomi pasirinktų grupių naudotojai.
+video call	common	lt	Vaizdo skambutis
+video conference	common	lt	Vaizdo konferencija
+video conference backends	status	lt	Vaizdo konferencijų galinės stotys
+video conference enable	status	lt	Vaizdo konferencijos įjungimas
+video conference meeting	status	lt	Vaizdo konferencijos susitikimas
+you have a call from %1	status	lt	Jums skambina %1
+you have a missed call from %1	status	lt	Jūs turite praleistą skambutį iš %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	lt	Po %1 minučių vyks vaizdo konferencijos susitikimas, kurį inicijavo %2

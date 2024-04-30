@@ -3,6 +3,72 @@
 accept	common	cs	Přijmout
 add to favorites	status	cs	Přidat k oblíbeným
 audio call	status	cs	Zvukové volání
+bbb api secret	status	cs	Tajemství API BBB
+bbb api secret is missing!	status	cs	Chybí tajemství API BBB!
+bbb api url	status	cs	URL API BBB
+bbb csp wild card domain is missing!	status	cs	Chybí doména BBB CSP se zástupným znakem!
+bbb domain is missing!	status	cs	Chybí doména BBB!
+bbb server settings	status	cs	Nastavení serveru BBB
+bbb server wildcard domain	status	cs	Doména se zástupným znakem serveru BBB
+bigbluebutton server	status	cs	BigBlueButton Server
 callback	status	cs	Zpětné volání
 click to join!	status	cs	Kliknutím se připojíte!
 communicating with server %1 failed because of %2	status	cs	Komunikace se serverem %1 se nezdařila z důvodu %2
+disable	status	cs	zakázat
+disable recording	status	cs	Zakázat nahrávání
+enable	status	cs	povolit
+enable ring tone	status	cs	Povolit vyzváněcí tón
+enable ring tone while receiving a call	status	cs	Povolení vyzváněcího tónu při příjmu hovoru.
+end meeting	status	cs	Ukončit schůzku
+estimated call session duration, default is 30 minutes	status	cs	Odhadovaná délka relace volání, výchozí hodnota je 30 minut
+estimated call session duration, default is 30 minutes:	status	cs	Odhadovaná délka relace volání, výchozí hodnota je 30 minut:
+event owner	status	cs	Vlastník události
+example: *.bbbserver.de	status	cs	příklad: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	cs	příklad: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	cs	příklad: Jitsi
+example: jitsi.egroupware.org	status	cs	příklad: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	cs	K celkovému počtu účastníků původně pozvaných na výzvu budou přidány dodatečné pozvánky, ve výsledku pak bude celkový počet nastaven jako hodnota maxParticipants dané výzvy.
+fixed duration for session, session will be ended after duration is over	status	cs	Pevně stanovená doba trvání relace, relace bude ukončena po uplynutí doby trvání.
+fixed duration for session, session will be ended after duration is over:	status	cs	Pevná doba trvání relace, relace bude ukončena po uplynutí doby trvání:
+initiating call to	status	cs	Zahájení hovoru na
+invite to current call	common	cs	Pozvání k aktuálnímu hovoru
+invite to this meeting	status	cs	Pozvánka na toto setkání
+is calling	status	cs	volá
+jitsi application id	status	cs	ID aplikace Jitsi
+jitsi application secret	status	cs	Tajemství aplikace Jitsi
+jitsi domain	status	cs	Doména Jitsi
+jitsi server	status	cs	Jitsi server
+jitsi server settings	status	cs	Nastavení serveru Jitsi
+join	common	cs	Připojit se k
+link to contact	status	cs	Odkaz na kontakt
+message	status	cs	Zpráva
+missed call from %1	status	cs	Zmeškaný hovor od %1
+new window	status	cs	Nové okno
+number of seats	status	cs	Počet míst
+open call in	status	cs	Otevřít hovor v
+open call in new window/popup	status	cs	Otevřít hovor v novém okně/okně.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	cs	Otevřete adresu URL volání v samostatném okně mimo iframe (např. prohlížeče s omezenými zásadami).
+phone call	status	cs	Telefonní hovor
+predefined group of users to be listed	status	cs	Předdefinovaná skupina uživatelů, kteří mají být uvedeni v seznamu
+remove from favorites	status	cs	Odstranit z oblíbených položek
+resources app is missing!	status	cs	Chybí aplikace Zdroje!
+ringing timeout	status	cs	Časový limit vyzvánění
+room id	status	cs	ID místnosti
+room is not yet ready!	status	cs	Místnost ještě není připravena!
+schedule a call	status	cs	Naplánujte volání
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	cs	Nastavte čas přípravy místnosti pro plánované hovory, moderátor může zahájit schůzku před jejím skutečným začátkem, výchozí hodnota je 5 minut:
+status	status	cs	Stav/Videokonference
+this meeting is no longer valid because it is in the past!	status	cs	Toto setkání již není platné, protože je minulostí!
+this meeting will start in	status	cs	Toto setkání bude zahájeno v
+timeout for the ring tone for incoming calls.	status	cs	Časový limit pro vyzvánění příchozích hovorů.
+title	status	cs	Název
+use jwt authentication	status	cs	Použít ověřování JWT
+users of selected groups will be listed.	status	cs	Zobrazí se seznam uživatelů vybraných skupin.
+video call	common	cs	Videohovor
+video conference	common	cs	Videokonference
+video conference backends	status	cs	Videokonference backendy
+video conference enable	status	cs	Povolení videokonference
+video conference meeting	status	cs	Videokonferenční schůzka
+you have a call from %1	status	cs	Máte hovor z %1
+you have a missed call from %1	status	cs	Máte zmeškaný hovor od %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	cs	Za %1 minut máte videokonferenční schůzku, kterou inicioval %2

@@ -1,0 +1,59 @@
+bbb api secret	status	uk	Секрет BBB API
+bbb api secret is missing!	status	uk	Секрет BBB API відсутній!
+bbb api url	status	uk	URL-АДРЕСА BBB API
+bbb csp wild card domain is missing!	status	uk	Домен підстановки BBB CSP відсутній!
+bbb domain is missing!	status	uk	Домен BBB відсутній!
+bbb server settings	status	uk	Налаштування сервера BBB
+bbb server wildcard domain	status	uk	Домен підстановки сервера BBB
+bigbluebutton server	status	uk	Сервер BigBlueButton
+disable	status	uk	вимкнути
+disable recording	status	uk	Вимкнути запис
+enable	status	uk	увімкнути
+enable ring tone	status	uk	Увімкнути мелодію дзвінка
+enable ring tone while receiving a call	status	uk	Увімкнути мелодію дзвінка під час отримання виклику.
+end meeting	status	uk	Завершити зустріч
+estimated call session duration, default is 30 minutes	status	uk	Орієнтовна тривалість сесії дзвінка, за замовчуванням 30 хвилин
+estimated call session duration, default is 30 minutes:	status	uk	Орієнтовна тривалість сесії дзвінка, за замовчуванням 30 хвилин:
+event owner	status	uk	Власник події
+initiating call to	status	uk	Ініціювання дзвінка на
+invite to current call	common	uk	Запрошення до поточного дзвінка
+invite to this meeting	status	uk	Запрошуємо на цю зустріч
+is calling	status	uk	дзвонить
+jitsi application id	status	uk	Ідентифікатор додатку Jitsi
+jitsi application secret	status	uk	Секрет програми Jitsi
+jitsi domain	status	uk	Домен Jitsi
+jitsi server	status	uk	Сервер Jitsi
+jitsi server settings	status	uk	Налаштування сервера Jitsi
+join	common	uk	Приєднатися
+link to contact	status	uk	Посилання на контакт
+message	status	uk	Повідомлення
+missed call from %1	status	uk	Пропущений дзвінок від %1
+new window	status	uk	Нове вікно
+number of seats	status	uk	Кількість місць
+open call in	status	uk	Відкрити виклик
+open call in new window/popup	status	uk	Відкрити дзвінок у новому вікні/спливаючому вікні.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	uk	Відкрийте URL-адресу виклику в окремому вікні за межами iframe (наприклад, у браузерах з обмеженими політиками).
+phone call	status	uk	Телефонний дзвінок
+predefined group of users to be listed	status	uk	Заздалегідь визначена група користувачів для списку
+remove from favorites	status	uk	Видалити з обраного
+resources app is missing!	status	uk	Додаток Ресурси відсутній!
+ringing timeout	status	uk	Тайм-аут дзвінка
+room id	status	uk	Ідентифікатор кімнати
+room is not yet ready!	status	uk	Кімната ще не готова!
+schedule a call	status	uk	Запланувати дзвінок
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	uk	Встановіть час підготовки кімнати для запланованих дзвінків, модератор може почати зустріч до її фактичного початку, за замовчуванням - 5 хвилин:
+status	status	uk	Статус/Відеоконференція
+this meeting is no longer valid because it is in the past!	status	uk	Ця зустріч більше не дійсна, тому що вона в минулому!
+this meeting will start in	status	uk	Ця зустріч розпочнеться о
+timeout for the ring tone for incoming calls.	status	uk	Тайм-аут для мелодії вхідних дзвінків.
+title	status	uk	Назва
+use jwt authentication	status	uk	Використовувати автентифікацію JWT
+users of selected groups will be listed.	status	uk	Будуть перераховані користувачі вибраних груп.
+video call	common	uk	Відеодзвінок
+video conference	common	uk	Відеоконференція
+video conference backends	status	uk	Бекенди відеоконференцій
+video conference enable	status	uk	Увімкнути відеоконференцію
+video conference meeting	status	uk	Нарада у форматі відеоконференції
+you have a call from %1	status	uk	Вам дзвонить %1
+you have a missed call from %1	status	uk	У вас пропущений дзвінок від %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	uk	Ви маєте нараду відеоконференції через %1 хвилин, ініційовану %2

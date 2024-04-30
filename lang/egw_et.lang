@@ -1,0 +1,69 @@
+bbb api secret	status	et	BBB API saladus
+bbb api secret is missing!	status	et	BBB API saladus on kadunud!
+bbb api url	status	et	BBB API URL
+bbb csp wild card domain is missing!	status	et	BBB CSP wildcard domeen puudub!
+bbb domain is missing!	status	et	BBB domeen puudub!
+bbb server settings	status	et	BBB serveri seaded
+bbb server wildcard domain	status	et	BBB serveri metsik domeen
+bigbluebutton server	status	et	BigBlueButton server
+callback	status	et	Tagasikutsumine
+click to join!	status	et	Klõpsake liitumiseks!
+communicating with server %1 failed because of %2	status	et	Suhtlemine serveriga %1 failed, sest %2
+disable	status	et	keelata
+disable recording	status	et	Salvestamise keelamine
+enable	status	et	enable
+enable ring tone	status	et	Helisignaali sisselülitamine
+enable ring tone while receiving a call	status	et	Helisignaali sisselülitamine kõne vastuvõtmisel.
+end meeting	status	et	Koosoleku lõpetamine
+estimated call session duration, default is 30 minutes	status	et	Hinnanguline kõnesessiooni kestus, vaikimisi 30 minutit
+estimated call session duration, default is 30 minutes:	status	et	Hinnanguline kõnesessiooni kestus, vaikimisi 30 minutit:
+event owner	status	et	Sündmuse omanik
+example: *.bbbserver.de	status	et	näide: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	et	näide: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	et	näide: Jitsi
+example: jitsi.egroupware.org	status	et	Näiteks: jitsi.egroup.org.
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	et	Lisakutsed lisatakse esialgu kutsutud osalejate koguarvule, mille tulemusena määratakse kõne maxParticipants väärtuseks.
+fixed duration for session, session will be ended after duration is over	status	et	Fikseeritud kestus istungil, istungil on lõppenud pärast kestus on üle.
+fixed duration for session, session will be ended after duration is over:	status	et	Fikseeritud kestus istungi jaoks, istung on lõppenud pärast kestus on üle:
+initiating call to	status	et	Kõne algatamine
+invite to current call	common	et	Kutsuda praegusele kõnele
+invite to this meeting	status	et	Kutsu sellele kohtumisele
+is calling	status	et	kutsub
+jitsi application id	status	et	Jitsi rakenduse ID
+jitsi application secret	status	et	Jitsi rakenduse saladus
+jitsi domain	status	et	Jitsi domeen
+jitsi server	status	et	Jitsi server
+jitsi server settings	status	et	Jitsi serveri seaded
+join	common	et	Liitumine
+link to contact	status	et	Link kontaktile
+message	status	et	Sõnum
+missed call from %1	status	et	Vastamata kõne %1
+new window	status	et	Uus aken
+number of seats	status	et	Kohtade arv
+open call in	status	et	Avatud kõne
+open call in new window/popup	status	et	Avage kõne uues aknas/popupis.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	et	Avage kõne URL eraldi aknas väljaspool iframe'i (nt ristricted policy'ga brauserid).
+phone call	status	et	Telefonikõne
+predefined group of users to be listed	status	et	Eelnevalt määratud kasutajate grupp, mis tuleb loetleda
+remove from favorites	status	et	Eemaldage lemmikutest
+resources app is missing!	status	et	Ressursside rakendus on puudu!
+ringing timeout	status	et	Helistamise aegumistähtaeg
+room id	status	et	Ruumi ID
+room is not yet ready!	status	et	Ruum ei ole veel valmis!
+schedule a call	status	et	Plaanige kõne
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	et	Määrake ruumi ettevalmistusaeg planeeritud kõnede jaoks, moderaator võib alustada koosolekut enne selle tegelikku algusaega, vaikimisi on 5 minutit:
+status	status	et	Staatus/Videokonverents
+this meeting is no longer valid because it is in the past!	status	et	See kohtumine ei ole enam kehtiv, sest see on minevikus!
+this meeting will start in	status	et	See koosolek algab
+timeout for the ring tone for incoming calls.	status	et	Sissetulevate kõnede helisignaali aegumine.
+title	status	et	Pealkiri
+use jwt authentication	status	et	Kasutage JWT autentimist
+users of selected groups will be listed.	status	et	Valitud rühmade kasutajad on loetletud.
+video call	common	et	Videokõne
+video conference	common	et	Videokonverents
+video conference backends	status	et	Videokonverentsi tagaküljed
+video conference enable	status	et	Videokonverentsi võimaldamine
+video conference meeting	status	et	Videokonverentsi koosolek
+you have a call from %1	status	et	Teil on kõne %1-lt
+you have a missed call from %1	status	et	Teil on vastamata kõne %1-lt
+you have a video conference meeting in %1 minutes, initiated by %2	status	et	Teil on videokonverentsi koosolek %1 minuti pärast, mille algatas %2

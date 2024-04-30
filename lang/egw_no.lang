@@ -1,0 +1,59 @@
+bbb api secret	status	no	BBB API-hemmelighet
+bbb api secret is missing!	status	no	BBB API-hemmeligheten mangler!
+bbb api url	status	no	BBB API-URL
+bbb csp wild card domain is missing!	status	no	BBB CSP-jokertegndomene mangler!
+bbb domain is missing!	status	no	BBB-domenet mangler!
+bbb server settings	status	no	BBB-serverinnstillinger
+bbb server wildcard domain	status	no	BBB-serverens jokertegn-domene
+bigbluebutton server	status	no	BigBlueButton-server
+disable	status	no	deaktivere
+disable recording	status	no	Deaktiver opptak
+enable	status	no	aktivere
+enable ring tone	status	no	Aktiver ringetone
+enable ring tone while receiving a call	status	no	Aktiver ringetone når du mottar et anrop.
+end meeting	status	no	Avslutte møte
+estimated call session duration, default is 30 minutes	status	no	Estimert varighet av anropsøkt, standard er 30 minutter
+estimated call session duration, default is 30 minutes:	status	no	Estimert varighet av anropsøkt, standard er 30 minutter:
+event owner	status	no	Eier av hendelse
+initiating call to	status	no	Starter anrop til
+invite to current call	common	no	Invitere til pågående samtale
+invite to this meeting	status	no	Inviter til dette møtet
+is calling	status	no	ringer
+jitsi application id	status	no	ID for Jitsi-applikasjon
+jitsi application secret	status	no	Jitsi-applikasjonens hemmelighet
+jitsi domain	status	no	Jitsi-domene
+jitsi server	status	no	Jitsi-server
+jitsi server settings	status	no	Innstillinger for Jitsi-server
+join	common	no	Bli med
+link to contact	status	no	Lenke til kontakt
+message	status	no	Melding
+missed call from %1	status	no	Ubesvart anrop fra %1
+new window	status	no	Nytt vindu
+number of seats	status	no	Antall plasser
+open call in	status	no	Åpne samtale i
+open call in new window/popup	status	no	Åpne samtale i nytt vindu/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	no	Åpne URL-adressen til samtalen i et eget vindu utenfor iframe (f.eks. nettlesere med restriksjoner).
+phone call	status	no	Telefonsamtale
+predefined group of users to be listed	status	no	Forhåndsdefinert gruppe av brukere som skal vises
+remove from favorites	status	no	Fjern fra favoritter
+resources app is missing!	status	no	Ressurs-appen mangler!
+ringing timeout	status	no	Tidsavbrudd for ringing
+room id	status	no	Rom-ID
+room is not yet ready!	status	no	Rommet er ikke klart ennå!
+schedule a call	status	no	Planlegg en samtale
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	no	Angi forberedelsestid for planlagte samtaler, slik at møteleder kan starte møtet før den faktiske starttiden, standard er 5 minutter:
+status	status	no	Status/Videokonferanse
+this meeting is no longer valid because it is in the past!	status	no	Dette møtet er ikke lenger gyldig fordi det er i fortiden!
+this meeting will start in	status	no	Dette møtet starter om
+timeout for the ring tone for incoming calls.	status	no	Tidsavbrudd for ringetonen for innkommende anrop.
+title	status	no	Tittel
+use jwt authentication	status	no	Bruk JWT-godkjenning
+users of selected groups will be listed.	status	no	Brukere av valgte grupper vises på listen.
+video call	common	no	Videoanrop
+video conference	common	no	Videokonferanse
+video conference backends	status	no	Backends for videokonferanser
+video conference enable	status	no	Aktiver videokonferanse
+video conference meeting	status	no	Videokonferansemøte
+you have a call from %1	status	no	Du har et anrop fra %1
+you have a missed call from %1	status	no	Du har et ubesvart anrop fra %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	no	Du har et videokonferansemøte om %1 minutter, initiert av %2.

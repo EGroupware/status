@@ -1,0 +1,69 @@
+bbb api secret	status	ja	BBB API シークレット
+bbb api secret is missing!	status	ja	BBB APIシークレットがありません！
+bbb api url	status	ja	BBB API URL
+bbb csp wild card domain is missing!	status	ja	BBB CSP ワイルドカード・ドメインがありません！
+bbb domain is missing!	status	ja	BBBドメインがありません
+bbb server settings	status	ja	BBBサーバ設定
+bbb server wildcard domain	status	ja	BBBサーバのワイルドカードドメイン
+bigbluebutton server	status	ja	BigBlueButtonサーバー
+callback	status	ja	コールバック
+click to join!	status	ja	クリックして参加してください！
+communicating with server %1 failed because of %2	status	ja	%2 が原因で、サーバ %1 との通信に失敗しました。
+disable	status	ja	無効化
+disable recording	status	ja	録画を無効にする
+enable	status	ja	有効にする
+enable ring tone	status	ja	着信音を有効にする
+enable ring tone while receiving a call	status	ja	着信時に着信音を鳴らす
+end meeting	status	ja	会議終了
+estimated call session duration, default is 30 minutes	status	ja	推定通話セッション時間、デフォルトは30分
+estimated call session duration, default is 30 minutes:	status	ja	推定通話セッション時間、デフォルトは30分：
+event owner	status	ja	イベントオーナー
+example: *.bbbserver.de	status	ja	の例です： *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	ja	例: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	ja	例 Jitsi
+example: jitsi.egroupware.org	status	ja	例: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	ja	追加招待は、最初に招待された参加者の総数に追加され、その結果、総数が呼のmaxParticipants値として設定される。
+fixed duration for session, session will be ended after duration is over	status	ja	セッションの固定時間、時間が過ぎるとセッションは終了します。
+fixed duration for session, session will be ended after duration is over:	status	ja	セッションの時間は固定で、時間が過ぎるとセッションは終了します：
+initiating call to	status	ja	通話開始先
+invite to current call	common	ja	現在の通話に招待する
+invite to this meeting	status	ja	このミーティングへの招待
+is calling	status	ja	通話中
+jitsi application id	status	ja	JitsiアプリケーションID
+jitsi application secret	status	ja	Jitsiアプリケーションシークレット
+jitsi domain	status	ja	Jitsiドメイン
+jitsi server	status	ja	Jitsiサーバー
+jitsi server settings	status	ja	Jitsiサーバーの設定
+join	common	ja	参加
+link to contact	status	ja	連絡先へのリンク
+message	status	ja	メッセージ
+missed call from %1	status	ja	%1からの不在着信
+new window	status	ja	新しいウィンドウ
+number of seats	status	ja	席数
+open call in	status	ja	で通話を開く
+open call in new window/popup	status	ja	新しいウィンドウ/ポップアップで通話を開きます。
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ja	通話URLをiframe以外の別ウィンドウで開く（ポリシーが制限されているブラウザなど）。
+phone call	status	ja	電話
+predefined group of users to be listed	status	ja	事前に定義されたユーザーグループを表示する
+remove from favorites	status	ja	お気に入りから削除
+resources app is missing!	status	ja	リソースアプリがありません！
+ringing timeout	status	ja	呼び出し音タイムアウト
+room id	status	ja	ルームID
+room is not yet ready!	status	ja	部屋はまだ準備されていません！
+schedule a call	status	ja	スケジュール通話
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ja	会議準備時間を設定することで、司会者が実際の会議開始時間より前に会議を開始することができます：
+status	status	ja	ステータス/ビデオ会議
+this meeting is no longer valid because it is in the past!	status	ja	このミーティングは過去のものなので、もう無効です！
+this meeting will start in	status	ja	この会議の開始は
+timeout for the ring tone for incoming calls.	status	ja	着信音のタイムアウト。
+title	status	ja	タイトル
+use jwt authentication	status	ja	JWT認証を使用する
+users of selected groups will be listed.	status	ja	選択したグループのユーザーが表示されます。
+video call	common	ja	ビデオ通話
+video conference	common	ja	ビデオ会議
+video conference backends	status	ja	ビデオ会議バックエンド
+video conference enable	status	ja	ビデオ会議有効
+video conference meeting	status	ja	ビデオ会議ミーティング
+you have a call from %1	status	ja	%1 から着信があります。
+you have a missed call from %1	status	ja	%1 からの不在着信があります。
+you have a video conference meeting in %1 minutes, initiated by %2	status	ja	%2 が開始したビデオ会議が %1 分後にあります。

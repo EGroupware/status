@@ -1,0 +1,59 @@
+bbb api secret	status	sl	Skrivnost API BBB
+bbb api secret is missing!	status	sl	Manjka skrivnost API BBB!
+bbb api url	status	sl	URL API BBB
+bbb csp wild card domain is missing!	status	sl	Manjka domena BBB CSP z nadomestnim znakom!
+bbb domain is missing!	status	sl	Manjka domena BBB!
+bbb server settings	status	sl	Nastavitve strežnika BBB
+bbb server wildcard domain	status	sl	Domena nadomestnega znaka strežnika BBB
+bigbluebutton server	status	sl	BigBlueButton Server
+disable	status	sl	onemogočiti
+disable recording	status	sl	Onemogočite snemanje
+enable	status	sl	omogoči
+enable ring tone	status	sl	Omogoči zvonjenje
+enable ring tone while receiving a call	status	sl	Omogočite zvonjenje med sprejemanjem klica.
+end meeting	status	sl	Konec sestanka
+estimated call session duration, default is 30 minutes	status	sl	Predvideno trajanje seje klica, privzeto je 30 minut
+estimated call session duration, default is 30 minutes:	status	sl	Predvideno trajanje seje klica, privzeto je 30 minut:
+event owner	status	sl	Lastnik dogodka
+initiating call to	status	sl	Začetek klica na
+invite to current call	common	sl	Povabilo v trenutni klic
+invite to this meeting	status	sl	Povabilo na to srečanje
+is calling	status	sl	kliče
+jitsi application id	status	sl	ID aplikacije Jitsi
+jitsi application secret	status	sl	Skrivnost aplikacije Jitsi
+jitsi domain	status	sl	Domena Jitsi
+jitsi server	status	sl	Strežnik Jitsi
+jitsi server settings	status	sl	Nastavitve strežnika Jitsi
+join	common	sl	Pridružite se
+link to contact	status	sl	Povezava do stika
+message	status	sl	Sporočilo
+missed call from %1	status	sl	Zamujeni klic iz %1
+new window	status	sl	Novo okno
+number of seats	status	sl	Število sedežev
+open call in	status	sl	Odprite klic v
+open call in new window/popup	status	sl	Odprite klic v novem oknu.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	sl	Odprite naslov URL klica v ločenem oknu zunaj okvira iframe (npr. brskalniki z omejenimi politikami).
+phone call	status	sl	Telefonski klic
+predefined group of users to be listed	status	sl	Vnaprej določena skupina uporabnikov, ki se izpiše
+remove from favorites	status	sl	Odstranitev iz priljubljenih
+resources app is missing!	status	sl	Manjka aplikacija Viri!
+ringing timeout	status	sl	Časovna omejitev zvonjenja
+room id	status	sl	ID sobe
+room is not yet ready!	status	sl	Soba še ni pripravljena!
+schedule a call	status	sl	Načrtujte klic
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	sl	Nastavite čas priprave sobe za načrtovane klice, moderator lahko začne sestanek pred dejanskim časom začetka, privzeto je 5 minut:
+status	status	sl	Status/Videokonferenca
+this meeting is no longer valid because it is in the past!	status	sl	To srečanje ni več veljavno, ker je v preteklosti!
+this meeting will start in	status	sl	To srečanje se bo začelo v
+timeout for the ring tone for incoming calls.	status	sl	Časovni interval za zvonjenje za dohodne klice.
+title	status	sl	Naslov
+use jwt authentication	status	sl	Uporaba avtentikacije JWT
+users of selected groups will be listed.	status	sl	Na seznamu bodo navedeni uporabniki izbranih skupin.
+video call	common	sl	Video klic
+video conference	common	sl	Videokonferenca
+video conference backends	status	sl	Vmesni strežniki za videokonference
+video conference enable	status	sl	Omogočanje videokonferenc
+video conference meeting	status	sl	Sestanek videokonference
+you have a call from %1	status	sl	Imate klic iz %1
+you have a missed call from %1	status	sl	Imate neodgovorjeni klic iz %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	sl	V %1 minutah imate videokonferenčni sestanek, ki ga je sprožil %2

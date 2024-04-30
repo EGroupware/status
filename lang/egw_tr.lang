@@ -1,0 +1,59 @@
+bbb api secret	status	tr	BBB API sırrı
+bbb api secret is missing!	status	tr	BBB API sırrı eksik!
+bbb api url	status	tr	BBB API URL'SI
+bbb csp wild card domain is missing!	status	tr	BBB CSP joker alan adı eksik!
+bbb domain is missing!	status	tr	BBB etki alanı eksik!
+bbb server settings	status	tr	BBB Sunucu Ayarları
+bbb server wildcard domain	status	tr	BBB sunucusu joker alan adı
+bigbluebutton server	status	tr	BigBlueButton Sunucu
+disable	status	tr	devre dışı bırak
+disable recording	status	tr	Kaydı devre dışı bırak
+enable	status	tr	etkinleştir
+enable ring tone	status	tr	Zil sesini etkinleştir
+enable ring tone while receiving a call	status	tr	Bir çağrı alırken zil sesini etkinleştirin.
+end meeting	status	tr	Toplantıyı sonlandır
+estimated call session duration, default is 30 minutes	status	tr	Tahmini çağrı oturumu süresi, varsayılan 30 dakikadır
+estimated call session duration, default is 30 minutes:	status	tr	Tahmini çağrı oturumu süresi, varsayılan 30 dakikadır:
+event owner	status	tr	Etkinlik sahibi
+initiating call to	status	tr	Çağrı başlatılıyor
+invite to current call	common	tr	Geçerli çağrıya davet et
+invite to this meeting	status	tr	Bu toplantıya davet edin
+is calling	status	tr	arıyor
+jitsi application id	status	tr	Jitsi uygulama kimliği
+jitsi application secret	status	tr	Jitsi uygulama sırrı
+jitsi domain	status	tr	Jitsi Etki Alanı
+jitsi server	status	tr	Jitsi sunucusu
+jitsi server settings	status	tr	Jitsi sunucu ayarları
+join	common	tr	Katılın
+link to contact	status	tr	İletişim bağlantısı
+message	status	tr	Mesaj
+missed call from %1	status	tr	%1'den cevapsız çağrı
+new window	status	tr	Yeni pencere
+number of seats	status	tr	Koltuk sayısı
+open call in	status	tr	Açık çağrı
+open call in new window/popup	status	tr	Aramayı yeni pencerede/açılır pencerede aç.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	tr	Çağrı URL'sini iframe dışında ayrı bir pencerede açın (örn. kısıtlı politikalara sahip tarayıcılar).
+phone call	status	tr	Telefon görüşmesi
+predefined group of users to be listed	status	tr	Listelenecek önceden tanımlanmış kullanıcı grubu
+remove from favorites	status	tr	Sık kullanılanlardan kaldır
+resources app is missing!	status	tr	Kaynaklar uygulaması eksik!
+ringing timeout	status	tr	Zil zaman aşımı
+room id	status	tr	Oda Kimliği
+room is not yet ready!	status	tr	Oda henüz hazır değil!
+schedule a call	status	tr	Bir arama planlayın
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	tr	Zamanlanmış aramalar için oda hazırlama süresini ayarlayın, moderatör toplantıyı gerçek başlangıç zamanından önce başlatabilir, varsayılan süre 5 dakikadır:
+status	status	tr	Durum/Videokonferans
+this meeting is no longer valid because it is in the past!	status	tr	Bu toplantı artık geçerli değildir çünkü geçmişte kalmıştır!
+this meeting will start in	status	tr	Bu toplantı şu tarihte başlayacaktır
+timeout for the ring tone for incoming calls.	status	tr	Gelen aramalar için zil sesi zaman aşımı.
+title	status	tr	Başlık
+use jwt authentication	status	tr	JWT kimlik doğrulamasını kullanma
+users of selected groups will be listed.	status	tr	Seçilen grupların kullanıcıları listelenecektir.
+video call	common	tr	Görüntülü Arama
+video conference	common	tr	Video Konferans
+video conference backends	status	tr	Video konferans arka uçları
+video conference enable	status	tr	Video konferans etkinleştirme
+video conference meeting	status	tr	Video konferans toplantısı
+you have a call from %1	status	tr	%1'den bir aramanız var
+you have a missed call from %1	status	tr	%1'den cevapsız bir aramanız var
+you have a video conference meeting in %1 minutes, initiated by %2	status	tr	%1 dakika içinde %2 tarafından başlatılan bir video konferans toplantınız var

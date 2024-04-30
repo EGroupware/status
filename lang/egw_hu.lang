@@ -1,0 +1,59 @@
+bbb api secret	status	hu	BBB API titok
+bbb api secret is missing!	status	hu	BBB API titok hiányzik!
+bbb api url	status	hu	BBB API URL CÍME
+bbb csp wild card domain is missing!	status	hu	BBB CSP vadkártyás domain hiányzik!
+bbb domain is missing!	status	hu	BBB domain hiányzik!
+bbb server settings	status	hu	BBB-kiszolgáló beállításai
+bbb server wildcard domain	status	hu	BBB szerver vadkártyás tartomány
+bigbluebutton server	status	hu	BigBlueButton szerver
+disable	status	hu	tiltsa le a
+disable recording	status	hu	A felvétel letiltása
+enable	status	hu	enable
+enable ring tone	status	hu	Csengőhang engedélyezése
+enable ring tone while receiving a call	status	hu	Csengőhang engedélyezése hívásfogadáskor.
+end meeting	status	hu	Értekezlet befejezése
+estimated call session duration, default is 30 minutes	status	hu	Hívás munkamenet becsült időtartama, alapértelmezett 30 perc
+estimated call session duration, default is 30 minutes:	status	hu	Hívás munkamenet becsült időtartama, alapértelmezett 30 perc:
+event owner	status	hu	Esemény tulajdonosa
+initiating call to	status	hu	Hívás kezdeményezése
+invite to current call	common	hu	Meghívás az aktuális hívásra
+invite to this meeting	status	hu	Meghívás erre a találkozóra
+is calling	status	hu	hívja
+jitsi application id	status	hu	Jitsi alkalmazás azonosítója
+jitsi application secret	status	hu	Jitsi alkalmazás titka
+jitsi domain	status	hu	Jitsi tartomány
+jitsi server	status	hu	Jitsi kiszolgáló
+jitsi server settings	status	hu	Jitsi szerver beállításai
+join	common	hu	Csatlakozás
+link to contact	status	hu	Kapcsolat a kapcsolattartóhoz
+message	status	hu	Üzenet
+missed call from %1	status	hu	Nem fogadott hívás %1-től
+new window	status	hu	Új ablak
+number of seats	status	hu	Helyek száma
+open call in	status	hu	Hívás megnyitása
+open call in new window/popup	status	hu	Hívás megnyitása új ablakban/felugró ablakban.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	hu	A hívás URL-címének megnyitása külön ablakban, az iframe-en kívül (pl. korlátozott irányelvekkel rendelkező böngészők).
+phone call	status	hu	Telefonhívás
+predefined group of users to be listed	status	hu	A felhasználók előre meghatározott csoportja, akiket fel kell sorolni
+remove from favorites	status	hu	Eltávolítás a kedvencek közül
+resources app is missing!	status	hu	Az erőforrások alkalmazás hiányzik!
+ringing timeout	status	hu	Csengetési időkorlát
+room id	status	hu	Szoba azonosító
+room is not yet ready!	status	hu	A szoba még nem készült el!
+schedule a call	status	hu	Hívás ütemezése
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	hu	Állítsa be a terem előkészítési idejét az ütemezett hívásokhoz, a moderátor már a tényleges kezdési idő előtt elkezdheti a megbeszélést, alapértelmezett érték 5 perc:
+status	status	hu	Státusz/Videokonferencia
+this meeting is no longer valid because it is in the past!	status	hu	Ez a találkozó már nem érvényes, mert a múltban van!
+this meeting will start in	status	hu	Ez a találkozó a következő időpontban kezdődik
+timeout for the ring tone for incoming calls.	status	hu	A bejövő hívások csengőhangjának időkorlátja.
+title	status	hu	Cím
+use jwt authentication	status	hu	JWT-hitelesítés használata
+users of selected groups will be listed.	status	hu	A kiválasztott csoportok felhasználói listázásra kerülnek.
+video call	common	hu	Videohívás
+video conference	common	hu	Videokonferencia
+video conference backends	status	hu	Videokonferencia háttérprogramok
+video conference enable	status	hu	Videokonferencia engedélyezése
+video conference meeting	status	hu	Videokonferencia találkozó
+you have a call from %1	status	hu	Hívása van %1-től
+you have a missed call from %1	status	hu	Nem fogadott hívása van %1-től
+you have a video conference meeting in %1 minutes, initiated by %2	status	hu	%1 perc múlva videokonferencia megbeszélése lesz, amelyet %2 kezdeményezett.

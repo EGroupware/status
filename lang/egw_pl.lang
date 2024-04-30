@@ -1,0 +1,59 @@
+bbb api secret	status	pl	BBB API secret
+bbb api secret is missing!	status	pl	Brak sekretu BBB API!
+bbb api url	status	pl	BBB API URL
+bbb csp wild card domain is missing!	status	pl	Brak domeny BBB CSP z symbolem wieloznacznym!
+bbb domain is missing!	status	pl	Brak domeny BBB!
+bbb server settings	status	pl	Ustawienia serwera BBB
+bbb server wildcard domain	status	pl	Domena wieloznaczna serwera BBB
+bigbluebutton server	status	pl	Serwer BigBlueButton
+disable	status	pl	wyłączenie
+disable recording	status	pl	Wyłącz nagrywanie
+enable	status	pl	enable
+enable ring tone	status	pl	Włącz dzwonek
+enable ring tone while receiving a call	status	pl	Włączenie dzwonka podczas odbierania połączenia.
+end meeting	status	pl	Zakończ spotkanie
+estimated call session duration, default is 30 minutes	status	pl	Szacowany czas trwania sesji połączenia, domyślnie 30 minut
+estimated call session duration, default is 30 minutes:	status	pl	Szacowany czas trwania sesji połączenia, domyślnie 30 minut:
+event owner	status	pl	Właściciel zdarzenia
+initiating call to	status	pl	Inicjowanie połączenia do
+invite to current call	common	pl	Zaproś do bieżącego połączenia
+invite to this meeting	status	pl	Zaproszenie na to spotkanie
+is calling	status	pl	dzwoni
+jitsi application id	status	pl	Identyfikator aplikacji Jitsi
+jitsi application secret	status	pl	Sekret aplikacji Jitsi
+jitsi domain	status	pl	Domena Jitsi
+jitsi server	status	pl	Serwer Jitsi
+jitsi server settings	status	pl	Ustawienia serwera Jitsi
+join	common	pl	Dołącz
+link to contact	status	pl	Link do kontaktu
+message	status	pl	Wiadomość
+missed call from %1	status	pl	Nieodebrane połączenie od %1
+new window	status	pl	Nowe okno
+number of seats	status	pl	Liczba miejsc
+open call in	status	pl	Otwórz połączenie w
+open call in new window/popup	status	pl	Otwórz połączenie w nowym oknie.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	pl	Otwórz adres URL połączenia w osobnym oknie poza ramką iframe (np. przeglądarki z ograniczonymi zasadami).
+phone call	status	pl	Połączenie telefoniczne
+predefined group of users to be listed	status	pl	Predefiniowana grupa użytkowników do wyświetlenia na liście
+remove from favorites	status	pl	Usuń z ulubionych
+resources app is missing!	status	pl	Brakuje aplikacji zasobów!
+ringing timeout	status	pl	Limit czasu dzwonienia
+room id	status	pl	Identyfikator pokoju
+room is not yet ready!	status	pl	Pokój nie jest jeszcze gotowy!
+schedule a call	status	pl	Zaplanuj połączenie
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	pl	Ustaw czas przygotowania pokoju dla zaplanowanych połączeń, moderator może rozpocząć spotkanie przed faktycznym czasem rozpoczęcia, domyślnie 5 minut:
+status	status	pl	Status/Wideokonferencja
+this meeting is no longer valid because it is in the past!	status	pl	To spotkanie jest już nieważne, ponieważ należy do przeszłości!
+this meeting will start in	status	pl	To spotkanie rozpocznie się w
+timeout for the ring tone for incoming calls.	status	pl	Limit czasu dzwonka dla połączeń przychodzących.
+title	status	pl	Tytuł
+use jwt authentication	status	pl	Użyj uwierzytelniania JWT
+users of selected groups will be listed.	status	pl	Użytkownicy wybranych grup zostaną wyświetleni na liście.
+video call	common	pl	Połączenie wideo
+video conference	common	pl	Konferencja wideo
+video conference backends	status	pl	Backendy wideokonferencji
+video conference enable	status	pl	Włączanie wideokonferencji
+video conference meeting	status	pl	Spotkanie wideokonferencyjne
+you have a call from %1	status	pl	Masz połączenie od %1
+you have a missed call from %1	status	pl	Masz nieodebrane połączenie od %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	pl	Masz spotkanie wideokonferencyjne za %1 minut, zainicjowane przez %2

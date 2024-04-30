@@ -1,0 +1,68 @@
+bbb api secret	status	ro	Secretul BBB API
+bbb api secret is missing!	status	ro	Secretul BBB API lipsește!
+bbb api url	status	ro	URL BBB API
+bbb csp wild card domain is missing!	status	ro	Domeniul wildcard BBB CSP lipsește!
+bbb domain is missing!	status	ro	Domeniul BBB lipsește!
+bbb server settings	status	ro	Setări server BBB
+bbb server wildcard domain	status	ro	Domeniul wildcard al serverului BBB
+bigbluebutton server	status	ro	Server BigBlueButton
+callback	status	ro	Rechemare
+click to join!	status	ro	Faceți clic pentru a participa!
+communicating with server %1 failed because of %2	status	ro	Comunicarea cu serverul %1 a eșuat din cauza lui %2
+disable	status	ro	dezactivați
+disable recording	status	ro	Dezactivarea înregistrării
+enable	status	ro	enable
+enable ring tone	status	ro	Activați tonul de apel
+enable ring tone while receiving a call	status	ro	Activați tonul de apel la primirea unui apel.
+end meeting	status	ro	Terminare ședință
+estimated call session duration, default is 30 minutes	status	ro	Durata estimată a sesiunii de apel, valoarea implicită este de 30 de minute
+estimated call session duration, default is 30 minutes:	status	ro	Durata estimată a sesiunii de apel, valoarea implicită este de 30 de minute:
+event owner	status	ro	Proprietarul evenimentului
+example: *.bbbserver.de	status	ro	exemplu: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	ro	exemplu: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	ro	exemplu: Jitsi
+example: jitsi.egroupware.org	status	ro	exemplu: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	ro	Invitațiile suplimentare vor fi adăugate la numărul total de participanți invitați inițial la apel, iar ca rezultat, suma totală va fi stabilită ca valoare maxParticipants a apelului.
+fixed duration for session, session will be ended after duration is over	status	ro	Durata fixă a sesiunii, iar sesiunea se va încheia la sfârșitul duratei.
+fixed duration for session, session will be ended after duration is over:	status	ro	Durata fixă a sesiunii, sesiunea se va încheia la sfârșitul duratei:
+initiating call to	status	ro	Inițierea apelului către
+invite to current call	common	ro	Invitați la apelul curent
+invite to this meeting	status	ro	Invitați la această întâlnire
+is calling	status	ro	vă cheamă
+jitsi application id	status	ro	ID-ul aplicației Jitsi
+jitsi application secret	status	ro	Secretul aplicației Jitsi
+jitsi domain	status	ro	Domeniul Jitsi
+jitsi server	status	ro	Server Jitsi
+jitsi server settings	status	ro	Setări server Jitsi
+link to contact	status	ro	Legătura cu persoana de contact
+message	status	ro	Alăturați-vă
+missed call from %1	status	ro	Apel ratat de la %1
+new window	status	ro	Fereastră nouă
+number of seats	status	ro	Număr de locuri
+open call in	status	ro	Deschideți apelul în
+open call in new window/popup	status	ro	Deschideți apelul în fereastră nouă/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ro	Deschideți URL-ul apelului într-o fereastră separată în afara iframe-ului (de exemplu, browsere cu politici ristricted).
+phone call	status	ro	Apel telefonic
+predefined group of users to be listed	status	ro	Grup predefinit de utilizatori care urmează să fie listat
+remove from favorites	status	ro	Eliminarea din favorite
+resources app is missing!	status	ro	Lipsește aplicația Resurse!
+ringing timeout	status	ro	Timpul de așteptare a apelului
+room id	status	ro	ID cameră
+room is not yet ready!	status	ro	Camera nu este încă pregătită!
+schedule a call	status	ro	Programați un apel
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ro	Setați timpul de pregătire a sălii pentru apelurile programate, moderatorul poate începe ședința înainte de ora efectivă de începere a acesteia, valoarea implicită este de 5 minute:
+status	status	ro	Stare/Videoconferință
+this meeting is no longer valid because it is in the past!	status	ro	Această întâlnire nu mai este valabilă pentru că este în trecut!
+this meeting will start in	status	ro	Această întâlnire va începe în
+timeout for the ring tone for incoming calls.	status	ro	Timeout pentru tonul de apel pentru apelurile primite.
+title	status	ro	Titlu
+use jwt authentication	status	ro	Utilizați autentificarea JWT
+users of selected groups will be listed.	status	ro	Utilizatorii din grupurile selectate vor fi listați.
+video call	common	ro	Apel video
+video conference	common	ro	Conferință video
+video conference backends	status	ro	Backend-uri de conferință video
+video conference enable	status	ro	Activare conferință video
+video conference meeting	status	ro	Reuniune de conferință video
+you have a call from %1	status	ro	Aveți un apel de la %1
+you have a missed call from %1	status	ro	Aveți un apel pierdut de la %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	ro	Aveți o ședință de videoconferință în %1 minute, inițiată de %2
