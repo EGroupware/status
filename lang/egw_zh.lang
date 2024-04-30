@@ -1,0 +1,69 @@
+bbb api secret	status	zh	BBB API 秘密
+bbb api secret is missing!	status	zh	BBB API 保密信息丢失！
+bbb api url	status	zh	BBB API URL
+bbb csp wild card domain is missing!	status	zh	BBB CSP 通配符域丢失！
+bbb domain is missing!	status	zh	BBB 域丢失！
+bbb server settings	status	zh	BBB 服务器设置
+bbb server wildcard domain	status	zh	BBB 服务器通配符域
+bigbluebutton server	status	zh	BigBlueButton 服务器
+callback	status	zh	回调
+click to join!	status	zh	点击加入！
+communicating with server %1 failed because of %2	status	zh	由于 %2 的原因，与服务器 %1 通信失败
+disable	status	zh	禁用
+disable recording	status	zh	禁用录音
+enable	status	zh	启用
+enable ring tone	status	zh	启用铃声
+enable ring tone while receiving a call	status	zh	接听电话时启用铃声。
+end meeting	status	zh	结束会议
+estimated call session duration, default is 30 minutes	status	zh	估计呼叫会话持续时间，默认为 30 分钟
+estimated call session duration, default is 30 minutes:	status	zh	估计呼叫会话持续时间，默认为 30 分钟：
+event owner	status	zh	事件所有者
+example: *.bbbserver.de	status	zh	例如 *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	zh	示例： https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	zh	例子 Jitsi
+example: jitsi.egroupware.org	status	zh	例如：jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	zh	额外邀请将在最初邀请参加通话的总人数基础上增加，因此总人数将设置为通话的最大与会者人数。
+fixed duration for session, session will be ended after duration is over	status	zh	会话持续时间固定，持续时间结束后会话将结束
+fixed duration for session, session will be ended after duration is over:	status	zh	会话持续时间固定，持续时间结束后会话将结束：
+initiating call to	status	zh	发起呼叫
+invite to current call	common	zh	邀请当前通话
+invite to this meeting	status	zh	邀请参加本次会议
+is calling	status	zh	正在通话
+jitsi application id	status	zh	Jitsi 应用程序 ID
+jitsi application secret	status	zh	Jitsi 应用秘密
+jitsi domain	status	zh	Jitsi 域
+jitsi server	status	zh	Jitsi 服务器
+jitsi server settings	status	zh	Jitsi 服务器设置
+join	common	zh	加入
+link to contact	status	zh	链接到联系人
+message	status	zh	信息
+missed call from %1	status	zh	来自 %1 的未接来电
+new window	status	zh	新窗口
+number of seats	status	zh	席位数
+open call in	status	zh	在
+open call in new window/popup	status	zh	在新窗口/弹出窗口中打开通话。
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	zh	在 iframe 之外的单独窗口中打开呼叫 URL（例如有限制策略的浏览器）。
+phone call	status	zh	电话
+predefined group of users to be listed	status	zh	要列出的预定义用户组
+remove from favorites	status	zh	从收藏夹中删除
+resources app is missing!	status	zh	资源应用程序丢失！
+ringing timeout	status	zh	铃声超时
+room id	status	zh	房间 ID
+room is not yet ready!	status	zh	房间尚未准备就绪！
+schedule a call	status	zh	安排通话
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	zh	为预定通话设置会议室准备时间，主持人可在实际开始时间之前开始会议，默认为 5 分钟：
+status	status	zh	状态/视频会议
+this meeting is no longer valid because it is in the past!	status	zh	本次会议已不再有效，因为它已成为过去！
+this meeting will start in	status	zh	会议将于
+timeout for the ring tone for incoming calls.	status	zh	来电铃声超时。
+title	status	zh	标题
+use jwt authentication	status	zh	使用 JWT 身份验证
+users of selected groups will be listed.	status	zh	将列出所选组的用户。
+video call	common	zh	视频通话
+video conference	common	zh	视频会议
+video conference backends	status	zh	视频会议后端
+video conference enable	status	zh	启用视频会议
+video conference meeting	status	zh	视频会议
+you have a call from %1	status	zh	您有来自 %1 的来电
+you have a missed call from %1	status	zh	您有来自 %1 的未接来电
+you have a video conference meeting in %1 minutes, initiated by %2	status	zh	您在 %1 分钟后有一个视频会议，由 %2 发起

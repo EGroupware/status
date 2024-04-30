@@ -3,30 +3,72 @@
 accept	common	es-es	Aceptar
 add to favorites	status	es-es	Añadir a los favoritos
 audio call	status	es-es	Llamada de audio
+bbb api secret	status	es-es	Secreto de la API de BBB
+bbb api secret is missing!	status	es-es	Falta el secreto de la API de BBB
+bbb api url	status	es-es	URL de la API de BBB
+bbb csp wild card domain is missing!	status	es-es	¡Falta el dominio comodín BBB CSP!
+bbb domain is missing!	status	es-es	Falta el dominio BBB
+bbb server settings	status	es-es	Configuración del servidor BBB
+bbb server wildcard domain	status	es-es	Dominio comodín del servidor BBB
+bigbluebutton server	status	es-es	Servidor BigBlueButton
 callback	status	es-es	Devolución de llamada
 click to join!	status	es-es	Haga clic para unirse
 communicating with server %1 failed because of %2	status	es-es	La comunicación con el servidor %1 ha fallado debido a %2
 disable	status	es-es	inhabilitar
+disable recording	status	es-es	Desactivar grabación
 enable	status	es-es	habilitar
+enable ring tone	status	es-es	Activar tono de llamada
+enable ring tone while receiving a call	status	es-es	Activar el tono de llamada al recibir una llamada.
+end meeting	status	es-es	Finalizar reunión
+estimated call session duration, default is 30 minutes	status	es-es	Duración estimada de la sesión de llamada, por defecto 30 minutos
+estimated call session duration, default is 30 minutes:	status	es-es	Duración estimada de la sesión de llamada, por defecto 30 minutos:
 event owner	status	es-es	Dueño del evento
+example: *.bbbserver.de	status	es-es	ejemplo: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	es-es	ejemplo: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	es-es	ejemplo: Jitsi
 example: jitsi.egroupware.org	status	es-es	ejemplo: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	es-es	Las invitaciones adicionales se añadirán al número total de participantes invitados inicialmente a la convocatoria y, como resultado, la cantidad total se establecerá como el valor de maxParticipants de la convocatoria.
+fixed duration for session, session will be ended after duration is over	status	es-es	Duración fija de la sesión, la sesión finalizará cuando se agote su duración.
+fixed duration for session, session will be ended after duration is over:	status	es-es	Duración fija de la sesión, la sesión finalizará cuando se agote su duración:
 initiating call to	status	es-es	Iniciando llamada a
+invite to current call	common	es-es	Invitar a la llamada actual
+invite to this meeting	status	es-es	Invitar a esta reunión
+is calling	status	es-es	está llamando
+jitsi application id	status	es-es	ID de la aplicación Jitsi
 jitsi application secret	status	es-es	Secreto de la aplicación Jitsi
 jitsi domain	status	es-es	Dominio Jitsi
 jitsi server	status	es-es	Servidor Jitsi
+jitsi server settings	status	es-es	Configuración del servidor Jitsi
 join	common	es-es	Unirse
+link to contact	status	es-es	Enlace al contacto
 message	status	es-es	Mensaje
+missed call from %1	status	es-es	Llamada perdida de %1
 new window	status	es-es	Nueva ventana
+number of seats	status	es-es	Número de plazas
 open call in	status	es-es	Abrir llamada en
 open call in new window/popup	status	es-es	Abrir llamada en una nueva ventana/ventana emergente
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	es-es	Abra la URL de la llamada en una ventana independiente fuera de iframe (por ejemplo, navegadores con políticas ristricted).
+phone call	status	es-es	Llamada telefónica
+predefined group of users to be listed	status	es-es	Grupo predefinido de usuarios a listar
 remove from favorites	status	es-es	Remover de favoritos
+resources app is missing!	status	es-es	Falta la aplicación Recursos
+ringing timeout	status	es-es	Tiempo de espera de llamada
+room id	status	es-es	ID de sala
+room is not yet ready!	status	es-es	La sala aún no está lista
 schedule a call	status	es-es	Programar una llamada
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	es-es	Establezca el tiempo de preparación de la sala para las llamadas programadas, el moderador puede iniciar la reunión antes de su hora de inicio real, por defecto es de 5 minutos:
 status	status	es-es	Estado
+this meeting is no longer valid because it is in the past!	status	es-es	Esta reunión ya no es válida porque pertenece al pasado.
+this meeting will start in	status	es-es	Esta reunión comenzará en
+timeout for the ring tone for incoming calls.	status	es-es	Tiempo de espera del tono de llamada para las llamadas entrantes.
 title	status	es-es	Título
+use jwt authentication	status	es-es	Usar autenticación JWT
+users of selected groups will be listed.	status	es-es	Aparecerán los usuarios de los grupos seleccionados.
 video call	common	es-es	Videollamada
 video conference	common	es-es	Videoconferencia
 video conference backends	status	es-es	Videoconferencia en plano-trasero
 video conference enable	status	es-es	Habilitar videoconferencia
 video conference meeting	status	es-es	Reunión de videoconferencia
 you have a call from %1	status	es-es	Tienes una llamada de %1
+you have a missed call from %1	status	es-es	Tiene una llamada perdida de %1
 you have a video conference meeting in %1 minutes, initiated by %2	status	es-es	Tiene una reunión de videoconferencia en %1 minutos, iniciada por %2

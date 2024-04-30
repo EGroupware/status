@@ -1,0 +1,61 @@
+bbb api secret	status	fi	BBB API-salaisuus
+bbb api secret is missing!	status	fi	BBB API-salaisuus puuttuu!
+bbb api url	status	fi	BBB API URL-OSOITE
+bbb csp wild card domain is missing!	status	fi	BBB CSP:n jokerimerkkialue puuttuu!
+bbb domain is missing!	status	fi	BBB-verkkotunnus puuttuu!
+bbb server settings	status	fi	BBB-palvelimen asetukset
+bbb server wildcard domain	status	fi	BBB-palvelimen villi kortti -toimialue
+bigbluebutton server	status	fi	BigBlueButton-palvelin
+callback	status	fi	Palauta
+click to join!	status	fi	Klikkaa liittyäksesi!
+communicating with server %1 failed because of %2	status	fi	Yhteydenotto palvelimen %1 kanssa epäonnistui %2:n vuoksi.
+disable	status	fi	disable
+disable recording	status	fi	Poista tallennus käytöstä
+enable	status	fi	enable
+enable ring tone	status	fi	Ota soittoääni käyttöön
+enable ring tone while receiving a call	status	fi	Ota soittoääni käyttöön puhelua vastaanotettaessa.
+end meeting	status	fi	Kokouksen päättäminen
+estimated call session duration, default is 30 minutes	status	fi	Puheluistunnon arvioitu kesto, oletusarvo on 30 minuuttia.
+estimated call session duration, default is 30 minutes:	status	fi	Puheluistunnon arvioitu kesto, oletusarvo on 30 minuuttia:
+event owner	status	fi	Tapahtuman omistaja
+example: *.bbbserver.de	status	fi	esimerkki: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	fi	esimerkki: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	fi	esimerkki: Jitsi
+example: jitsi.egroupware.org	status	fi	esimerkki: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	fi	Lisäkutsut lisätään puheluun alun perin kutsuttujen osallistujien kokonaismäärän päälle, minkä seurauksena kokonaismäärä asetetaan puhelun maxParticipants-arvoksi.
+fixed duration for session, session will be ended after duration is over	status	fi	Istunnon kiinteä kesto, istunto päättyy keston päätyttyä.
+fixed duration for session, session will be ended after duration is over:	status	fi	Istunnon kiinteä kesto, istunto päättyy keston päätyttyä:
+initiating call to	status	fi	Puhelun aloittaminen osoitteeseen
+invite to current call	common	fi	Kutsu nykyiseen puheluun
+invite to this meeting	status	fi	Kutsu tähän kokoukseen
+is calling	status	fi	kutsuu
+jitsi application id	status	fi	Jitsi-sovelluksen tunnus
+jitsi application secret	status	fi	Jitsi-sovelluksen salaisuus
+jitsi domain	status	fi	Jitsi-toimialue
+jitsi server	status	fi	Jitsi-palvelin
+jitsi server settings	status	fi	Jitsi-palvelimen asetukset
+join	common	fi	Liity
+link to contact	status	fi	Linkki yhteystietoon
+message	status	fi	Viesti
+missed call from %1	status	fi	Vastaamaton puhelu %1:ltä
+new window	status	fi	Uusi ikkuna
+number of seats	status	fi	Paikkojen määrä
+open call in	status	fi	Avaa puhelu
+open call in new window/popup	status	fi	Avaa puhelu uudessa ikkunassa/ponnahdusikkunassa.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	fi	Avaa puhelun URL-osoite erillisessä ikkunassa iframen ulkopuolella (esim. selaimet, joissa on rajoitetut käytännöt).
+phone call	status	fi	Puhelu
+status	status	fi	Tila/Videokonferenssi
+this meeting is no longer valid because it is in the past!	status	fi	Tämä kokous ei ole enää voimassa, koska se on menneisyyttä!
+this meeting will start in	status	fi	Tämä kokous alkaa
+timeout for the ring tone for incoming calls.	status	fi	Saapuvien puhelujen soittoäänen aikakatkaisu.
+title	status	fi	Otsikko
+use jwt authentication	status	fi	Käytä JWT-todennusta
+users of selected groups will be listed.	status	fi	Valittujen ryhmien käyttäjät luetellaan.
+video call	common	fi	Videopuhelu
+video conference	common	fi	Videokonferenssi
+video conference backends	status	fi	Videokonferenssin taustajärjestelmät
+video conference enable	status	fi	Videokonferenssin käyttöönotto
+video conference meeting	status	fi	Videokonferenssin kokous
+you have a call from %1	status	fi	Sinulle on puhelu %1:ltä
+you have a missed call from %1	status	fi	Sinulle on vastaamaton puhelu %1:ltä
+you have a video conference meeting in %1 minutes, initiated by %2	status	fi	Sinulla on videoneuvottelukokous %1 minuutin kuluttua, jonka on aloittanut %2.

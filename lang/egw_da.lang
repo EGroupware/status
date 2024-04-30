@@ -1,0 +1,69 @@
+bbb api secret	status	da	BBB API-hemmelighed
+bbb api secret is missing!	status	da	BBB API-hemmelighed mangler!
+bbb api url	status	da	BBB API URL
+bbb csp wild card domain is missing!	status	da	BBB CSP wildcard-domæne mangler!
+bbb domain is missing!	status	da	BBB-domæne mangler!
+bbb server settings	status	da	BBB-serverindstillinger
+bbb server wildcard domain	status	da	BBB-serverens wildcard-domæne
+bigbluebutton server	status	da	BigBlueButton-server
+callback	status	da	Tilbagekald
+click to join!	status	da	Klik for at deltage!
+communicating with server %1 failed because of %2	status	da	Kommunikationen med server %1 mislykkedes på grund af %2
+disable	status	da	Deaktivere
+disable recording	status	da	Deaktiver optagelse
+enable	status	da	Aktiver
+enable ring tone	status	da	Aktivér ringetone
+enable ring tone while receiving a call	status	da	Aktiver ringetone, når du modtager et opkald.
+end meeting	status	da	Afslut møde
+estimated call session duration, default is 30 minutes	status	da	Anslået varighed af opkaldssession, standard er 30 minutter
+estimated call session duration, default is 30 minutes:	status	da	Anslået varighed af opkaldssession, standard er 30 minutter:
+event owner	status	da	Begivenhedsejer
+example: *.bbbserver.de	status	da	eksempel: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	da	eksempel: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	da	eksempel: Jitsi
+example: jitsi.egroupware.org	status	da	eksempel: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	da	Ekstra invitationer lægges oven i det samlede antal deltagere, der oprindeligt blev inviteret til opkaldet, og som resultat indstilles det samlede antal som maxParticipants-værdien for opkaldet.
+fixed duration for session, session will be ended after duration is over	status	da	Fast varighed for session, sessionen afsluttes, når varigheden er overstået
+fixed duration for session, session will be ended after duration is over:	status	da	Fast varighed for sessionen, sessionen afsluttes, når varigheden er overstået:
+initiating call to	status	da	Indleder opkald til
+invite to current call	common	da	Inviter til aktuelt opkald
+invite to this meeting	status	da	Inviter til dette møde
+is calling	status	da	ringer
+jitsi application id	status	da	Jitsi-applikationens ID
+jitsi application secret	status	da	Jitsi-applikationens hemmelighed
+jitsi domain	status	da	Jitsi-domæne
+jitsi server	status	da	Jitsi-server
+jitsi server settings	status	da	Indstillinger for Jitsi-server
+join	common	da	Deltag
+link to contact	status	da	Link til kontaktperson
+message	status	da	Besked
+missed call from %1	status	da	Ubesvaret opkald fra %1
+new window	status	da	Nyt vindue
+number of seats	status	da	Åbn opkalds-URL'en i et separat vindue uden for iframe (f.eks. browsere med begrænsede politikker).
+open call in	status	da	Åbn opkald i
+open call in new window/popup	status	da	Åbn opkald i nyt vindue/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	da	Åbn opkalds-URL'en i et separat vindue uden for iframe (f.eks. browsere med begrænsede politikker).
+phone call	status	da	Telefonopkald
+predefined group of users to be listed	status	da	Foruddefineret gruppe af brugere, der skal vises på listen
+remove from favorites	status	da	Fjern fra favoritter
+resources app is missing!	status	da	Ressource-app mangler!
+ringing timeout	status	da	Timeout for ringning
+room id	status	da	Værelse ID
+room is not yet ready!	status	da	Rummet er endnu ikke klar!
+schedule a call	status	da	Planlæg et opkald
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	da	Indstil forberedelsestid for planlagte opkald, så ordstyreren kan starte mødet før den faktiske starttid, standard er 5 minutter:
+status	status	da	Status/Videokonference
+this meeting is no longer valid because it is in the past!	status	da	Dette møde er ikke længere gyldigt, fordi det er fortid!
+this meeting will start in	status	da	Dette møde starter om
+timeout for the ring tone for incoming calls.	status	da	Timeout for ringetonen for indgående opkald.
+title	status	da	Titel
+use jwt authentication	status	da	Brug JWT-godkendelse
+users of selected groups will be listed.	status	da	Brugere af valgte grupper vises på listen.
+video call	common	da	Videoopkald
+video conference	common	da	Videokonference
+video conference backends	status	da	Backends til videokonference
+video conference enable	status	da	Aktiver videokonference
+video conference meeting	status	da	Videokonference møde
+you have a call from %1	status	da	Du har et opkald fra %1
+you have a missed call from %1	status	da	Du har et ubesvaret opkald fra %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	da	Du har et videokonferencemøde om %1 minutter, initieret af %2

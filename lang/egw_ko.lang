@@ -1,0 +1,69 @@
+bbb api secret	status	ko	BBB API 비밀
+bbb api secret is missing!	status	ko	BBB API 비밀이 없습니다!
+bbb api url	status	ko	BBB API URL
+bbb csp wild card domain is missing!	status	ko	BBB CSP 와일드카드 도메인이 누락되었습니다!
+bbb domain is missing!	status	ko	BBB 도메인이 없습니다!
+bbb server settings	status	ko	BBB 서버 설정
+bbb server wildcard domain	status	ko	BBB 서버 와일드카드 도메인
+bigbluebutton server	status	ko	빅블루버튼 서버
+callback	status	ko	콜백
+click to join!	status	ko	클릭하여 참여하세요!
+communicating with server %1 failed because of %2	status	ko	%2 때문에 %1 서버와 통신하지 못했습니다.
+disable	status	ko	비활성화
+disable recording	status	ko	녹화 비활성화
+enable	status	ko	활성화
+enable ring tone	status	ko	벨소리 활성화
+enable ring tone while receiving a call	status	ko	전화를 받는 동안 벨소리를 사용 설정합니다.
+end meeting	status	ko	회의 종료
+estimated call session duration, default is 30 minutes	status	ko	예상 통화 세션 시간, 기본값은 30분입니다.
+estimated call session duration, default is 30 minutes:	status	ko	예상 통화 세션 시간, 기본값은 30분입니다:
+event owner	status	ko	이벤트 소유자
+example: *.bbbserver.de	status	ko	예시 *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	ko	예: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	ko	예 Jitsi
+example: jitsi.egroupware.org	status	ko	예: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	ko	추가 초대는 처음에 통화에 초대된 총 참가자 수에 추가되며, 그 결과 총 인원이 통화의 최대 참가자 수 값으로 설정됩니다.
+fixed duration for session, session will be ended after duration is over	status	ko	세션에 대한 고정 기간, 기간이 끝나면 세션이 종료됩니다.
+fixed duration for session, session will be ended after duration is over:	status	ko	세션에 대한 고정 기간, 기간이 끝나면 세션이 종료됩니다:
+initiating call to	status	ko	대상 통화 시작
+invite to current call	common	ko	현재 통화에 초대
+invite to this meeting	status	ko	이 모임에 초대
+is calling	status	ko	가 전화 중입니다.
+jitsi application id	status	ko	Jitsi 애플리케이션 ID
+jitsi application secret	status	ko	Jitsi 애플리케이션 비밀
+jitsi domain	status	ko	Jitsi 도메인
+jitsi server	status	ko	Jitsi 도메인
+jitsi server settings	status	ko	Jitsi 서버 설정
+join	common	ko	가입
+link to contact	status	ko	연락처 링크
+message	status	ko	메시지
+missed call from %1	status	ko	%1의 전화를 받지 못했습니다.
+new window	status	ko	새 창
+number of seats	status	ko	좌석 수
+open call in	status	ko	통화 열기
+open call in new window/popup	status	ko	새 창/팝업에서 통화를 엽니다.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ko	iframe 외부의 별도 창에서 통화 URL을 엽니다(예: 제한된 정책이 있는 브라우저).
+phone call	status	ko	전화 통화
+predefined group of users to be listed	status	ko	나열할 미리 정의된 사용자 그룹
+remove from favorites	status	ko	즐겨찾기에서 제거
+resources app is missing!	status	ko	리소스 앱이 없습니다!
+ringing timeout	status	ko	벨 울림 시간 초과
+room id	status	ko	룸 ID
+room is not yet ready!	status	ko	회의실이 아직 준비되지 않았습니다!
+schedule a call	status	ko	통화 예약
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ko	예약된 통화를 위한 회의실 준비 시간을 설정하면 진행자가 실제 시작 시간 전에 회의를 시작할 수 있으며, 기본값은 5분입니다:
+status	status	ko	상태/화상 회의
+this meeting is no longer valid because it is in the past!	status	ko	이 회의는 과거에 진행되었기 때문에 더 이상 유효하지 않습니다!
+this meeting will start in	status	ko	이 미팅은 다음에 시작됩니다.
+timeout for the ring tone for incoming calls.	status	ko	수신 전화의 벨소리 시간 초과입니다.
+title	status	ko	제목
+use jwt authentication	status	ko	JWT 인증 사용
+users of selected groups will be listed.	status	ko	선택한 그룹의 사용자가 나열됩니다.
+video call	common	ko	영상 통화
+video conference	common	ko	화상 회의
+video conference backends	status	ko	화상 회의 백엔드
+video conference enable	status	ko	화상 회의 활성화
+video conference meeting	status	ko	화상 회의 회의
+you have a call from %1	status	ko	%1로부터 부재중 전화가 있습니다.
+you have a missed call from %1	status	ko	%1로부터 부재중 전화가 있습니다.
+you have a video conference meeting in %1 minutes, initiated by %2	status	ko	%2가 시작한 화상 회의 회의가 %1분 후에 있습니다.

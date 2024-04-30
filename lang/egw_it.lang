@@ -3,6 +3,72 @@
 accept	common	it	Accettare
 add to favorites	status	it	Aggiungi ai preferiti
 audio call	status	it	Chiamata audio
+bbb api secret	status	it	Segreto API BBB
+bbb api secret is missing!	status	it	Manca il dominio wildcard del CSP BBB!
+bbb api url	status	it	URL API BBB
+bbb csp wild card domain is missing!	status	it	Manca il dominio jolly del CSP BBB!
+bbb domain is missing!	status	it	Manca il dominio BBB!
+bbb server settings	status	it	Impostazioni del server BBB
+bbb server wildcard domain	status	it	Dominio jolly del server BBB
+bigbluebutton server	status	it	Server BigBlueButton
 callback	status	it	Richiamo
 click to join!	status	it	Clicca per partecipare!
 communicating with server %1 failed because of %2	status	it	La comunicazione con il server %1 è fallita a causa di %2
+disable	status	it	disabilitare
+disable recording	status	it	Disabilita la registrazione
+enable	status	it	Abilitare
+enable ring tone	status	it	Attiva suoneria
+enable ring tone while receiving a call	status	it	Abilita la suoneria durante la ricezione di una chiamata.
+end meeting	status	it	Fine riunione
+estimated call session duration, default is 30 minutes	status	it	Durata stimata della sessione di chiamata, l'impostazione predefinita è 30 minuti
+estimated call session duration, default is 30 minutes:	status	it	Durata stimata della sessione di chiamata, l'impostazione predefinita è 30 minuti:
+event owner	status	it	Proprietario dell'evento
+example: *.bbbserver.de	status	it	esempio: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	it	esempio: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	it	esempio: Jitsi
+example: jitsi.egroupware.org	status	it	esempio: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	it	Gli inviti extra verranno aggiunti al numero totale di partecipanti inizialmente invitati alla chiamata, quindi il totale verrà impostato come valore di maxPartecipanti della chiamata.
+fixed duration for session, session will be ended after duration is over	status	it	Durata fissa per la sessione, la sessione verrà terminata al termine della stessa
+fixed duration for session, session will be ended after duration is over:	status	it	Durata fissa per la sessione, la sessione verrà terminata al termine della durata:
+initiating call to	status	it	Chiamata iniziale a
+invite to current call	common	it	Invito alla chiamata in corso
+invite to this meeting	status	it	Invito a questa riunione
+is calling	status	it	sta chiamando
+jitsi application id	status	it	ID applicazione Jitsi
+jitsi application secret	status	it	Segreto dell'applicazione Jitsi
+jitsi domain	status	it	Dominio Jitsi
+jitsi server	status	it	Server Jitsi
+jitsi server settings	status	it	Impostazioni del server Jitsi
+join	common	it	Partecipazione
+link to contact	status	it	Link al contatto
+message	status	it	Messaggio
+missed call from %1	status	it	Chiamata persa da %1
+new window	status	it	Nuova finestra
+number of seats	status	it	Numero di posti
+open call in	status	it	Aprire la chiamata in
+open call in new window/popup	status	it	Aprire la chiamata in una nuova finestra/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	it	Aprire l'URL della chiamata in una finestra separata al di fuori dell'iframe (ad esempio, browser con criteri ristretti).
+phone call	status	it	Chiamata telefonica
+predefined group of users to be listed	status	it	Gruppo predefinito di utenti da elencare
+remove from favorites	status	it	Rimuovi dai preferiti
+resources app is missing!	status	it	Manca l'app Risorse!
+ringing timeout	status	it	Timeout della suoneria
+room id	status	it	ID stanza
+room is not yet ready!	status	it	La stanza non è ancora pronta!
+schedule a call	status	it	Pianificare una chiamata
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	it	Impostare il tempo di preparazione della sala per le chiamate programmate, in modo che il moderatore possa avviare la riunione prima dell'orario di inizio effettivo; l'impostazione predefinita è di 5 minuti:
+status	status	it	Stato/Videoconferenza
+this meeting is no longer valid because it is in the past!	status	it	Questo incontro non è più valido perché appartiene al passato!
+this meeting will start in	status	it	Questa riunione inizierà tra
+timeout for the ring tone for incoming calls.	status	it	Timeout per la suoneria delle chiamate in entrata.
+title	status	it	Titolo
+use jwt authentication	status	it	Usa l'autenticazione JWT
+users of selected groups will be listed.	status	it	Gli utenti dei gruppi selezionati saranno elencati.
+video call	common	it	Videochiamata
+video conference	common	it	Conferenza video
+video conference backends	status	it	Backend della videoconferenza
+video conference enable	status	it	Abilitazione alla videoconferenza
+video conference meeting	status	it	Videokonferencia megbeszélés
+you have a call from %1	status	it	C'è una chiamata da %1
+you have a missed call from %1	status	it	C'è una chiamata persa da %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	it	C'è una riunione di videoconferenza tra %1 minuti, iniziata da %2

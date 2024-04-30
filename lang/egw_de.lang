@@ -47,7 +47,7 @@ new window	status	de	Neues Fenster
 number of seats	status	de	Anzahl der Plätze
 open call in	status	de	Öffne Videokonferenz als
 open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Pop-up öffnen
-open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	de	Öffnen der Aufruf-Url in einem separaten Fenster außerhalb des Iframe (z. B. bei Browsern mit eingeschränkten Richtlinien)
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	de	Öffnen der Aufruf-URL in einem separaten Fenster außerhalb des Iframe (z. B. bei Browsern mit eingeschränkten Richtlinien)
 phone call	status	de	Telefonanruf
 predefined group of users to be listed	status	de	Zeige in der Status-Leiste nur die Benutzer der ausgewählten Gruppen an
 remove from favorites	status	de	Aus Favoriten entfernen

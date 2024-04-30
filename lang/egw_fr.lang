@@ -3,10 +3,10 @@
 accept	common	fr	Accepter
 add to favorites	status	fr	Ajouter au favoris
 audio call	status	fr	Appel audio
-bbb api secret	status	fr	BBB Api secrète
-bbb api secret is missing!	status	fr	BBB Api secrète manquante !
-bbb api url	status	fr	BBB Api url
-bbb csp wild card domain is missing!	status	fr	BBB CSP wild card domain est manquant!
+bbb api secret	status	fr	BBB API secrète
+bbb api secret is missing!	status	fr	BBB API secrète manquante !
+bbb api url	status	fr	BBB API URL
+bbb csp wild card domain is missing!	status	fr	BBB CSP wildcard domain est manquant !
 bbb domain is missing!	status	fr	Domaine BBB manquant !
 bbb server settings	status	fr	Paramètre Serveur BBB
 bbb server wildcard domain	status	fr	BBB wildcard de domaine

@@ -1,0 +1,69 @@
+bbb api secret	status	bg	Тайната на API на BBB
+bbb api secret is missing!	status	bg	Липсва тайната на BBB API!
+bbb api url	status	bg	Адрес на API на BBB
+bbb csp wild card domain is missing!	status	bg	Липсва домейнът на BBB CSP wildcard!
+bbb domain is missing!	status	bg	BBB домейнът липсва!
+bbb server settings	status	bg	Настройки на сървъра BBB
+bbb server wildcard domain	status	bg	Домейнът на BBB сървъра с wildcard
+bigbluebutton server	status	bg	BigBlueButton Server
+callback	status	bg	Обратно извикване
+click to join!	status	bg	Кликнете, за да се присъедините!
+communicating with server %1 failed because of %2	status	bg	Комуникацията със сървъра %1 се провали поради %2
+disable	status	bg	деактивиране на
+disable recording	status	bg	Деактивиране на записването
+enable	status	bg	Разрешаване на
+enable ring tone	status	bg	Активиране на тона на звънене
+enable ring tone while receiving a call	status	bg	Разрешаване на мелодията на звънене при получаване на повикване.
+end meeting	status	bg	Край на срещата
+estimated call session duration, default is 30 minutes	status	bg	Очаквана продължителност на сесията за повикване, по подразбиране е 30 минути
+estimated call session duration, default is 30 minutes:	status	bg	Очаквана продължителност на сесията за повикване, по подразбиране е 30 минути:
+event owner	status	bg	Собственик на събитието
+example: *.bbbserver.de	status	bg	пример: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	bg	пример: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	bg	пример: Jitsi
+example: jitsi.egroupware.org	status	bg	пример: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	bg	Допълнителните покани ще бъдат добавени към общия брой участници, които първоначално са били поканени в поканата, след което в резултат на това общият брой ще бъде зададен като стойност maxParticipants на поканата.
+fixed duration for session, session will be ended after duration is over	status	bg	Фиксирана продължителност на сесията, сесията ще бъде прекратена след изтичане на продължителността
+fixed duration for session, session will be ended after duration is over:	status	bg	Фиксирана продължителност на сесията, сесията ще бъде прекратена след изтичането ѝ:
+initiating call to	status	bg	Иницииране на повикване към
+invite to current call	common	bg	Покана за текущо повикване
+invite to this meeting	status	bg	Покана за тази среща
+is calling	status	bg	се обажда
+jitsi application id	status	bg	Идентификатор на приложението Jitsi
+jitsi application secret	status	bg	Секрет на приложението Jitsi
+jitsi domain	status	bg	Домейн на Jitsi
+jitsi server	status	bg	Сървър на Jitsi
+jitsi server settings	status	bg	Настройки на сървъра Jitsi
+join	common	bg	Присъединяване към
+link to contact	status	bg	Връзка към контакт
+message	status	bg	Съобщение
+missed call from %1	status	bg	Пропуснато обаждане от %1
+new window	status	bg	Нов прозорец
+number of seats	status	bg	Брой места
+open call in	status	bg	Отваряне на повикване в
+open call in new window/popup	status	bg	Отворете обаждането в нов прозорец/прозорец с прозорци.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	bg	Отворете URL адреса на повикването в отделен прозорец извън iframe (напр. браузъри с ограничени политики).
+phone call	status	bg	Телефонно обаждане
+predefined group of users to be listed	status	bg	Предварително определена група от потребители, които да бъдат изброени
+remove from favorites	status	bg	Премахване от любими
+resources app is missing!	status	bg	Липсва приложение за ресурси!
+ringing timeout	status	bg	Време за звънене
+room id	status	bg	Идентификатор на стая
+room is not yet ready!	status	bg	Стаята все още не е готова!
+schedule a call	status	bg	Насрочете повикване
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	bg	Задайте време за подготовка на стаята за планирани повиквания, модераторът може да започне срещата преди действителното ѝ време за започване, по подразбиране е 5 минути:
+status	status	bg	Статус/видеоконференция
+this meeting is no longer valid because it is in the past!	status	bg	Тази среща вече не е валидна, защото е в миналото!
+this meeting will start in	status	bg	Тази среща ще започне в
+timeout for the ring tone for incoming calls.	status	bg	Време за мелодията на звънене за входящи повиквания.
+title	status	bg	Заглавие
+use jwt authentication	status	bg	Използване на JWT удостоверяване
+users of selected groups will be listed.	status	bg	Потребителите на избраните групи ще бъдат изброени.
+video call	common	bg	Видеоразговор
+video conference	common	bg	Видеоконференция
+video conference backends	status	bg	Възможности за видеоконференция
+video conference enable	status	bg	Разрешаване на видеоконференция
+video conference meeting	status	bg	Среща за видеоконференция
+you have a call from %1	status	bg	Имате обаждане от %1
+you have a missed call from %1	status	bg	Имате пропуснато повикване от %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	bg	Имате видеоконферентна среща след %1 минути, инициирана от %2

@@ -1,0 +1,69 @@
+bbb api secret	status	pt-br	Segredo da API do BBB
+bbb api secret is missing!	status	pt-br	O segredo da API do BBB está faltando!
+bbb api url	status	pt-br	URL DA API BBB
+bbb csp wild card domain is missing!	status	pt-br	O domínio curinga do BBB CSP está ausente!
+bbb domain is missing!	status	pt-br	O domínio BBB está faltando!
+bbb server settings	status	pt-br	Configurações do servidor BBB
+bbb server wildcard domain	status	pt-br	Domínio curinga do servidor BBB
+bigbluebutton server	status	pt-br	Servidor BigBlueButton
+callback	status	pt-br	Retorno de chamada
+click to join!	status	pt-br	Clique para participar!
+communicating with server %1 failed because of %2	status	pt-br	A comunicação com o servidor %1 falhou devido a %2
+disable	status	pt-br	desativar
+disable recording	status	pt-br	Desativar a gravação
+enable	status	pt-br	ativar
+enable ring tone	status	pt-br	Ativar tom de toque
+enable ring tone while receiving a call	status	pt-br	Ative o tom de toque ao receber uma chamada.
+end meeting	status	pt-br	Encerrar reunião
+estimated call session duration, default is 30 minutes	status	pt-br	Duração estimada da sessão de chamada, o padrão é 30 minutos
+estimated call session duration, default is 30 minutes:	status	pt-br	Duração estimada da sessão de chamada, o padrão é 30 minutos:
+event owner	status	pt-br	Proprietário do evento
+example: *.bbbserver.de	status	pt-br	exemplo: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	pt-br	exemplo: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	pt-br	exemplo: Jitsi
+example: jitsi.egroupware.org	status	pt-br	exemplo: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	pt-br	Convites extras serão adicionados ao número total de participantes inicialmente convidados para a chamada e, como resultado, o valor total será definido como o valor maxParticipants da chamada.
+fixed duration for session, session will be ended after duration is over	status	pt-br	Duração fixa para a sessão, a sessão será encerrada após o término da duração
+fixed duration for session, session will be ended after duration is over:	status	pt-br	Duração fixa para a sessão, a sessão será encerrada após o término da duração:
+initiating call to	status	pt-br	Iniciar chamada para
+invite to current call	common	pt-br	Convidar para a chamada atual
+invite to this meeting	status	pt-br	Convite para esta reunião
+is calling	status	pt-br	está ligando
+jitsi application id	status	pt-br	ID do aplicativo Jitsi
+jitsi application secret	status	pt-br	Segredo do aplicativo Jitsi
+jitsi domain	status	pt-br	Domínio Jitsi
+jitsi server	status	pt-br	Servidor Jitsi
+jitsi server settings	status	pt-br	Configurações do servidor Jitsi
+join	common	pt-br	Aderir
+link to contact	status	pt-br	Link para contato
+message	status	pt-br	Mensagem
+missed call from %1	status	pt-br	Chamada perdida de %1
+new window	status	pt-br	Nova janela
+number of seats	status	pt-br	Número de assentos
+open call in	status	pt-br	Abrir chamada em
+open call in new window/popup	status	pt-br	Abrir chamada em uma nova janela/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	pt-br	Abra o URL da chamada em uma janela separada fora do iframe (por exemplo, navegadores com políticas restritas).
+phone call	status	pt-br	Chamada telefônica
+predefined group of users to be listed	status	pt-br	Grupo predefinido de usuários a serem listados
+remove from favorites	status	pt-br	Remover dos favoritos
+resources app is missing!	status	pt-br	O aplicativo de recursos está faltando!
+ringing timeout	status	pt-br	Tempo limite de toque
+room id	status	pt-br	ID da sala
+room is not yet ready!	status	pt-br	A sala ainda não está pronta!
+schedule a call	status	pt-br	Agendar uma chamada
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	pt-br	Defina o tempo de preparação da sala para chamadas agendadas; o moderador pode iniciar a reunião antes do horário de início real; o padrão é 5 minutos:
+status	status	pt-br	Status/Videoconferência
+this meeting is no longer valid because it is in the past!	status	pt-br	Esta reunião não é mais válida porque já pertence ao passado!
+this meeting will start in	status	pt-br	Esta reunião começará em
+timeout for the ring tone for incoming calls.	status	pt-br	Tempo limite para o toque das chamadas recebidas.
+title	status	pt-br	Título
+use jwt authentication	status	pt-br	Usar autenticação JWT
+users of selected groups will be listed.	status	pt-br	Os usuários dos grupos selecionados serão listados.
+video call	common	pt-br	Chamada de vídeo
+video conference	common	pt-br	Conferência de vídeo
+video conference backends	status	pt-br	Back-ends de videoconferência
+video conference enable	status	pt-br	Ativação de videoconferência
+video conference meeting	status	pt-br	Reunião de videoconferência
+you have a call from %1	status	pt-br	Você tem uma chamada de %1
+you have a missed call from %1	status	pt-br	Você tem uma chamada perdida de %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	pt-br	Você tem uma reunião de videoconferência em %1 minutos, iniciada por %2

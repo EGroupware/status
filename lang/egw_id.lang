@@ -1,0 +1,69 @@
+bbb api secret	status	id	Rahasia API BBB
+bbb api secret is missing!	status	id	Rahasia API BBB hilang!
+bbb api url	status	id	URL API BBB
+bbb csp wild card domain is missing!	status	id	Domain wildcard BBB CSP tidak ada!
+bbb domain is missing!	status	id	Domain BBB tidak ada!
+bbb server settings	status	id	Pengaturan Server BBB
+bbb server wildcard domain	status	id	Domain wildcard server BBB
+bigbluebutton server	status	id	Server BigBlueButton
+callback	status	id	Panggilan balik
+click to join!	status	id	Klik untuk bergabung!
+communicating with server %1 failed because of %2	status	id	Berkomunikasi dengan server %1 gagal karena %2
+disable	status	id	menonaktifkan
+disable recording	status	id	Menonaktifkan perekaman
+enable	status	id	aktifkan
+enable ring tone	status	id	Mengaktifkan nada dering
+enable ring tone while receiving a call	status	id	Mengaktifkan nada dering saat menerima panggilan.
+end meeting	status	id	Akhiri rapat
+estimated call session duration, default is 30 minutes	status	id	Perkiraan durasi sesi panggilan, standarnya adalah 30 menit
+estimated call session duration, default is 30 minutes:	status	id	Perkiraan durasi sesi panggilan, standarnya adalah 30 menit:
+event owner	status	id	Pemilik acara
+example: *.bbbserver.de	status	id	contoh: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	id	contoh: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	id	contoh Jitsi
+example: jitsi.egroupware.org	status	id	contoh: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	id	Undangan tambahan akan ditambahkan di atas jumlah total peserta yang diundang pada awalnya ke panggilan tersebut, sehingga jumlah total akan ditetapkan sebagai nilai maxParticipants dari panggilan tersebut.
+fixed duration for session, session will be ended after duration is over	status	id	Durasi tetap untuk sesi, sesi akan diakhiri setelah durasi selesai
+fixed duration for session, session will be ended after duration is over:	status	id	Durasi tetap untuk sesi, sesi akan diakhiri setelah durasi selesai:
+initiating call to	status	id	Memulai panggilan ke
+invite to current call	common	id	Mengundang ke panggilan saat ini
+invite to this meeting	status	id	Mengundang ke pertemuan ini
+is calling	status	id	menelepon
+jitsi application id	status	id	ID aplikasi Jitsi
+jitsi application secret	status	id	Rahasia aplikasi Jitsi
+jitsi domain	status	id	Domain Jitsi
+jitsi server	status	id	Server Jitsi
+jitsi server settings	status	id	Pengaturan server Jitsi
+join	common	id	Bergabung
+link to contact	status	id	Tautan ke kontak
+message	status	id	Pesan
+missed call from %1	status	id	Panggilan tak terjawab dari %1
+new window	status	id	Jendela baru
+number of seats	status	id	Jumlah kursi
+open call in	status	id	Panggilan terbuka di
+open call in new window/popup	status	id	Buka panggilan di jendela/munculan baru.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	id	Buka URL panggilan di jendela terpisah di luar iframe (misal, browser dengan kebijakan yang dibatasi).
+phone call	status	id	Panggilan telepon
+predefined group of users to be listed	status	id	Kelompok pengguna yang telah ditentukan sebelumnya untuk dicantumkan
+remove from favorites	status	id	Hapus dari favorit
+resources app is missing!	status	id	Aplikasi sumber daya tidak ada!
+ringing timeout	status	id	Batas waktu dering
+room id	status	id	ID kamar
+room is not yet ready!	status	id	Kamar belum siap!
+schedule a call	status	id	Jadwalkan panggilan
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	id	Mengatur waktu persiapan ruangan untuk panggilan terjadwal, moderator dapat memulai rapat sebelum waktu mulai yang sebenarnya, standarnya adalah 5 menit:
+status	status	id	Status/Konferensi video
+this meeting is no longer valid because it is in the past!	status	id	Pertemuan ini sudah tidak berlaku lagi karena sudah lewat!
+this meeting will start in	status	id	Pertemuan ini akan dimulai pada
+timeout for the ring tone for incoming calls.	status	id	Batas waktu untuk nada dering panggilan masuk.
+title	status	id	Judul
+use jwt authentication	status	id	Gunakan autentikasi JWT
+users of selected groups will be listed.	status	id	Pengguna dari grup yang dipilih akan dicantumkan.
+video call	common	id	Panggilan Video
+video conference	common	id	Konferensi Video
+video conference backends	status	id	Backend konferensi video
+video conference enable	status	id	Mengaktifkan konferensi video
+video conference meeting	status	id	Rapat konferensi video
+you have a call from %1	status	id	Anda memiliki panggilan dari %1
+you have a missed call from %1	status	id	Anda memiliki panggilan tak terjawab dari %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	id	Anda memiliki rapat konferensi video dalam %1 menit, yang dimulai oleh %2

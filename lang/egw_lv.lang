@@ -1,0 +1,69 @@
+bbb api secret	status	lv	BBB API noslēpums
+bbb api secret is missing!	status	lv	BBB API noslēpums ir pazudis!
+bbb api url	status	lv	BBB API URL
+bbb csp wild card domain is missing!	status	lv	Trūkst BBB CSP wildcard domēna!
+bbb domain is missing!	status	lv	BBB domēna nav!
+bbb server settings	status	lv	BBB servera iestatījumi
+bbb server wildcard domain	status	lv	BBB servera wildcard domēns
+bigbluebutton server	status	lv	BigBlueButton Serveris
+callback	status	lv	Atgriezeniskais zvans
+click to join!	status	lv	Noklikšķiniet, lai pievienotos!
+communicating with server %1 failed because of %2	status	lv	Saziņa ar serveri %1 neizdevās, jo %2
+disable	status	lv	atslēgt
+disable recording	status	lv	Atslēgt ierakstīšanu
+enable	status	lv	iespējot
+enable ring tone	status	lv	Ieslēgt zvana signālu
+enable ring tone while receiving a call	status	lv	Ieslēgt zvana signālu, saņemot zvanu.
+end meeting	status	lv	Noslēgt sanāksmi
+estimated call session duration, default is 30 minutes	status	lv	Paredzamais zvana sesijas ilgums, noklusējuma iestatījums ir 30 minūtes
+estimated call session duration, default is 30 minutes:	status	lv	Paredzamais zvana sesijas ilgums, noklusējuma iestatījums ir 30 minūtes:
+event owner	status	lv	Notikuma īpašnieks
+example: *.bbbserver.de	status	lv	piemērs: *.bbbserver.de
+example: https://app.bbbserver.de/de/bbb-integration/	status	lv	piemērs: https://app.bbbserver.de/de/bbb-integration/
+example: jitsi	status	lv	piemērs: Jitsi
+example: jitsi.egroupware.org	status	lv	piemērs: jitsi.egroupware.org
+extra invites will be added on top of total number of participants initially invited to the call then as result the total amount will be set as the maxparticipants value of the call.	status	lv	Papildu ielūgumi tiks pieskaitīti pie kopējā sākotnēji uzaicināto dalībnieku skaita, un rezultātā kopējais skaits tiks noteikts kā izsaukuma maxParticipants vērtība.
+fixed duration for session, session will be ended after duration is over	status	lv	Fiksēts sesijas ilgums, sesija tiks izbeigta pēc tās beigām.
+fixed duration for session, session will be ended after duration is over:	status	lv	Fiksēts sesijas ilgums, sesija tiks pabeigta pēc tās beigām:
+initiating call to	status	lv	Uzsākt zvanu
+invite to current call	common	lv	Uzaicināt uz pašreizējo zvanu
+invite to this meeting	status	lv	Uzaiciniet uz šo sanāksmi
+is calling	status	lv	aicina
+jitsi application id	status	lv	Jitsi lietojumprogrammas ID
+jitsi application secret	status	lv	Jitsi lietojumprogrammas noslēpums
+jitsi domain	status	lv	Jitsi domēns
+jitsi server	status	lv	Jitsi serveris
+jitsi server settings	status	lv	Jitsi servera iestatījumi
+join	common	lv	Pievienoties
+link to contact	status	lv	Saite uz kontaktu
+message	status	lv	Ziņa
+missed call from %1	status	lv	Nokavēts zvans no %1
+new window	status	lv	Jauns logs
+number of seats	status	lv	Vietu skaits
+open call in	status	lv	Atvērt zvanu
+open call in new window/popup	status	lv	Atvērt zvanu jaunā logā/iznirstošajā logā.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	lv	Atveriet zvana URL atsevišķā logā ārpus iframe (piemēram, pārlūkprogrammās ar ierobežotām politikām).
+phone call	status	lv	Telefona zvans
+predefined group of users to be listed	status	lv	Iepriekš noteikta uzskaitāmo lietotāju grupa
+remove from favorites	status	lv	Noņemt no izlases
+resources app is missing!	status	lv	Trūkst resursu lietotnes!
+ringing timeout	status	lv	Zvanīšanas laika ierobežojums
+room id	status	lv	Telpas ID
+room is not yet ready!	status	lv	Telpa vēl nav gatava!
+schedule a call	status	lv	Plānojiet zvanu
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	lv	Iestatiet telpas sagatavošanas laiku plānotajiem zvaniem, moderators var sākt sanāksmi pirms tās faktiskā sākuma laika, noklusējuma iestatījums ir 5 minūtes:
+status	status	lv	Statuss/Videokonference
+this meeting is no longer valid because it is in the past!	status	lv	Šī tikšanās vairs nav spēkā, jo tā ir pagātne!
+this meeting will start in	status	lv	Šī sanāksme sāksies
+timeout for the ring tone for incoming calls.	status	lv	Ienākošo zvanu zvana signāla laiks.
+title	status	lv	Nosaukums
+use jwt authentication	status	lv	Izmantojiet JWT autentifikāciju
+users of selected groups will be listed.	status	lv	Tiks uzskaitīti izvēlēto grupu lietotāji.
+video call	common	lv	Video zvans
+video conference	common	lv	Videokonference
+video conference backends	status	lv	Videokonferences backends
+video conference enable	status	lv	Videokonferences iespējot
+video conference meeting	status	lv	Videokonferences sanāksme
+you have a call from %1	status	lv	Jums ir zvans no %1
+you have a missed call from %1	status	lv	Jums ir nokavēts zvans no %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	lv	Jums pēc %1 minūtēm ir paredzēta videokonferences sanāksme, ko ierosināja %2

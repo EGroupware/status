@@ -1,0 +1,50 @@
+bbb api secret	status	nl	BBB API geheim
+bbb api secret is missing!	status	nl	BBB API geheim ontbreekt!
+bbb api url	status	nl	BBB API URL
+bbb csp wild card domain is missing!	status	nl	BBB CSP wildcard domein ontbreekt!
+bbb domain is missing!	status	nl	BBB domein ontbreekt!
+bbb server settings	status	nl	BBB server instellingen
+bbb server wildcard domain	status	nl	BBB server wildcard domein
+bigbluebutton server	status	nl	BigBlueButton server
+estimated call session duration, default is 30 minutes	status	nl	Geschatte duur belsessie, standaard is 30 minuten
+estimated call session duration, default is 30 minutes:	status	nl	Geschatte duur belsessie, standaard is 30 minuten:
+invite to this meeting	status	nl	Uitnodigen voor deze bijeenkomst
+is calling	status	nl	is aan het bellen
+jitsi application id	status	nl	Jitsi toepassing ID
+jitsi application secret	status	nl	Jitsi-toepassing geheim
+jitsi domain	status	nl	Jitsi-domein
+jitsi server	status	nl	Jitsi server
+jitsi server settings	status	nl	Jitsi server instellingen
+join	common	nl	Word lid van
+link to contact	status	nl	Link naar contact
+message	status	nl	Bericht
+missed call from %1	status	nl	Gemiste oproep van %1
+new window	status	nl	Nieuw venster
+number of seats	status	nl	Aantal plaatsen
+open call in	status	nl	Open gesprek in
+open call in new window/popup	status	nl	Open gesprek in nieuw venster/popup.
+open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	nl	Open de URL van het gesprek in een apart venster buiten een iframe (bijv. browsers met een beperkt beleid).
+phone call	status	nl	Telefoongesprek
+predefined group of users to be listed	status	nl	Voorgedefinieerde groep gebruikers die moet worden weergegeven
+remove from favorites	status	nl	Verwijderen uit favorieten
+resources app is missing!	status	nl	Hulpmiddelen-app ontbreekt!
+ringing timeout	status	nl	Time-out belsignaal
+room id	status	nl	Kamer-ID
+room is not yet ready!	status	nl	Kamer is nog niet klaar!
+schedule a call	status	nl	Plan een gesprek
+set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	nl	Stel de voorbereidingstijd van de ruimte in voor geplande gesprekken, moderator kan de vergadering starten voor de eigenlijke starttijd, standaard is dit 5 minuten:
+status	status	nl	Status/Videoconferentie
+this meeting is no longer valid because it is in the past!	status	nl	Deze bijeenkomst is niet langer geldig omdat deze in het verleden ligt!
+this meeting will start in	status	nl	Deze vergadering start over
+timeout for the ring tone for incoming calls.	status	nl	Time-out voor de beltoon voor inkomende gesprekken.
+title	status	nl	Titel
+use jwt authentication	status	nl	JWT-authenticatie gebruiken
+users of selected groups will be listed.	status	nl	Gebruikers van geselecteerde groepen worden weergegeven.
+video call	common	nl	Video-oproep
+video conference	common	nl	Videoconferentie
+video conference backends	status	nl	Backends videoconferentie
+video conference enable	status	nl	Video conferentie inschakelen
+video conference meeting	status	nl	Vergadering videoconferentie
+you have a call from %1	status	nl	U bent gebeld door %1
+you have a missed call from %1	status	nl	U hebt een gemiste oproep van %1
+you have a video conference meeting in %1 minutes, initiated by %2	status	nl	U hebt een video-conferentievergadering over %1 minuten, geïnitieerd door %2
