@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	nl	%1 heeft uw oproep niet aangenomen, wilt u het opnieuw proberen?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	nl	*Belangrijk: De backend van BigBlueButton gebruikt de categorie Locaties om toegang te krijgen tot de bron “Vergaderruimte BigBlueButton”. Daarom wordt aanbevolen om de juiste leesrechten in te stellen voor de categorie Locaties.
+accept	common	nl	Accepteer
+add to favorites	status	nl	Toevoegen aan favorieten
+audio call	status	nl	Audio oproep
 bbb api secret	status	nl	BBB API geheim
 bbb api secret is missing!	status	nl	BBB API geheim ontbreekt!
 bbb api url	status	nl	BBB API URL
@@ -6,8 +11,12 @@ bbb domain is missing!	status	nl	BBB domein ontbreekt!
 bbb server settings	status	nl	BBB server instellingen
 bbb server wildcard domain	status	nl	BBB server wildcard domein
 bigbluebutton server	status	nl	BigBlueButton server
+callback	status	nl	Terugbellen
+click to join!	status	nl	Klik om mee te doen!
 estimated call session duration, default is 30 minutes	status	nl	Geschatte duur belsessie, standaard is 30 minuten
 estimated call session duration, default is 30 minutes:	status	nl	Geschatte duur belsessie, standaard is 30 minuten:
+initiating call to	status	nl	Gesprek starten met
+invite to current call	common	nl	Uitnodigen voor huidig gesprek
 invite to this meeting	status	nl	Uitnodigen voor deze bijeenkomst
 is calling	status	nl	is aan het bellen
 jitsi application id	status	nl	Jitsi toepassing ID

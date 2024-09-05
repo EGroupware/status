@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	sl	%1 ni sprejel vašega klica, želite poskusiti znova?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	sl	*Pomembno: za dostop do vira „Meeting Room BigBlueButton“ zaledje BigBlueButton uporablja kategorijo Locations, zato je priporočljivo, da uporabnik nastavi ustrezna dovoljenja za branje za kategorijo Locations.
+accept	common	sl	Sprejmite
+add to favorites	status	sl	Dodaj med priljubljene
+audio call	status	sl	Zvočni klic
 bbb api secret	status	sl	Skrivnost API BBB
 bbb api secret is missing!	status	sl	Manjka skrivnost API BBB!
 bbb api url	status	sl	URL API BBB
@@ -6,6 +11,8 @@ bbb domain is missing!	status	sl	Manjka domena BBB!
 bbb server settings	status	sl	Nastavitve strežnika BBB
 bbb server wildcard domain	status	sl	Domena nadomestnega znaka strežnika BBB
 bigbluebutton server	status	sl	BigBlueButton Server
+callback	status	sl	Povratni klic
+click to join!	status	sl	Kliknite, da se pridružite!
 disable	status	sl	onemogočiti
 disable recording	status	sl	Onemogočite snemanje
 enable	status	sl	omogoči
