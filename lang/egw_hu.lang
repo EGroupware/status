@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	hu	%1 nem vette fel a hívását, szeretné újra megpróbálni?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	hu	*Fontos: A BigBlueButton backend a Helyek kategóriát használja a „Meeting Room BigBlueButton” erőforrás eléréséhez, ezért ajánlott a Helyek kategóriához megfelelő felhasználói olvasási engedélyeket beállítani.
+accept	common	hu	Elfogadom
+add to favorites	status	hu	Hozzáadás a kedvencekhez
+audio call	status	hu	Hanghívás
 bbb api secret	status	hu	BBB API titok
 bbb api secret is missing!	status	hu	BBB API titok hiányzik!
 bbb api url	status	hu	BBB API URL CÍME
@@ -6,6 +11,8 @@ bbb domain is missing!	status	hu	BBB domain hiányzik!
 bbb server settings	status	hu	BBB-kiszolgáló beállításai
 bbb server wildcard domain	status	hu	BBB szerver vadkártyás tartomány
 bigbluebutton server	status	hu	BigBlueButton szerver
+callback	status	hu	Visszahívás
+click to join!	status	hu	Kattintson a csatlakozáshoz!
 disable	status	hu	tiltsa le a
 disable recording	status	hu	A felvétel letiltása
 enable	status	hu	enable

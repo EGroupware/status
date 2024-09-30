@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	no	%1 tok ikke samtalen din, vil du prøve igjen?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	no	*Viktig: BigBlueButton-backend bruker kategorien Steder for å få tilgang til ressursen «Møterom BigBlueButton», og det anbefales derfor å angi riktige lesetillatelser for kategorien Steder.
+accept	common	no	Godta
+add to favorites	status	no	Legg til i favoritter
+audio call	status	no	Lydanrop
 bbb api secret	status	no	BBB API-hemmelighet
 bbb api secret is missing!	status	no	BBB API-hemmeligheten mangler!
 bbb api url	status	no	BBB API-URL
@@ -6,6 +11,8 @@ bbb domain is missing!	status	no	BBB-domenet mangler!
 bbb server settings	status	no	BBB-serverinnstillinger
 bbb server wildcard domain	status	no	BBB-serverens jokertegn-domene
 bigbluebutton server	status	no	BigBlueButton-server
+callback	status	no	Tilbakekalling
+click to join!	status	no	Klikk for å bli med!
 disable	status	no	deaktivere
 disable recording	status	no	Deaktiver opptak
 enable	status	no	aktivere

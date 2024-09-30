@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	uk	%1 не відповів на ваш дзвінок, бажаєте спробувати ще раз?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	uk	*Важливо: Бекенд BigBlueButton використовує категорію Локації для доступу до ресурсу «Конференц-зал BigBlueButton», тому рекомендується встановити відповідні права на читання для категорії Локації.
+accept	common	uk	Прийняти
+add to favorites	status	uk	Додати в обране
+audio call	status	uk	Аудіодзвінок
 bbb api secret	status	uk	Секрет BBB API
 bbb api secret is missing!	status	uk	Секрет BBB API відсутній!
 bbb api url	status	uk	URL-АДРЕСА BBB API
@@ -6,6 +11,8 @@ bbb domain is missing!	status	uk	Домен BBB відсутній!
 bbb server settings	status	uk	Налаштування сервера BBB
 bbb server wildcard domain	status	uk	Домен підстановки сервера BBB
 bigbluebutton server	status	uk	Сервер BigBlueButton
+callback	status	uk	Зворотній дзвінок
+click to join!	status	uk	Натисніть, щоб приєднатися!
 disable	status	uk	вимкнути
 disable recording	status	uk	Вимкнути запис
 enable	status	uk	увімкнути

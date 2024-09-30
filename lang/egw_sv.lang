@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	sv	%1 tog inte emot ditt samtal, vill du försöka igen?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	sv	*Viktigt: BigBlueButton backend använder kategorin Platser för att få tillgång till resursen ”Mötesrum BigBlueButton”, därför rekommenderas det att du ställer in korrekta läsbehörigheter för användare för kategorin Platser.
+accept	common	sv	Acceptera
+add to favorites	status	sv	Lägg till i favoriter
+audio call	status	sv	Ljud samtal
 bbb api secret	status	sv	BBB API-hemlighet
 bbb api secret is missing!	status	sv	BBB API-hemlighet saknas!
 bbb api url	status	sv	BBB API URL
@@ -6,6 +11,8 @@ bbb domain is missing!	status	sv	BBB-domän saknas!
 bbb server settings	status	sv	Inställningar för BBB-server
 bbb server wildcard domain	status	sv	BBB-serverns wildcard-domän
 bigbluebutton server	status	sv	BigBlueButton-server
+callback	status	sv	Återuppringning
+click to join!	status	sv	Klicka för att ansluta!
 disable	status	sv	Inaktivera
 disable recording	status	sv	Inaktivera inspelning
 enable	status	sv	Aktivera
