@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	lt	%1 neatsiliepė į jūsų skambutį, gal norite pabandyti dar kartą?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	lt	*Svarbu: BigBlueButton backend naudoja kategoriją Locations, kad galėtų pasiekti „Meeting Room BigBlueButton“ išteklių, todėl rekomenduojama nustatyti tinkamas vartotojo skaitymo teises kategorijai Locations.
+accept	common	lt	Priimti
+add to favorites	status	lt	Pridėti prie mėgstamiausių
+audio call	status	lt	Garso skambutis
 bbb api secret	status	lt	BBB API paslaptis
 bbb api secret is missing!	status	lt	Nėra BBB API paslapties!
 bbb api url	status	lt	BBB API URL
@@ -6,6 +11,8 @@ bbb domain is missing!	status	lt	Nėra BBB domeno!
 bbb server settings	status	lt	BBB serverio nustatymai
 bbb server wildcard domain	status	lt	BBB serverio pakaitinis domenas
 bigbluebutton server	status	lt	BigBlueButton serveris
+callback	status	lt	Atgalinis skambutis
+click to join!	status	lt	Spustelėkite, kad prisijungtumėte!
 disable	status	lt	išjungti
 disable recording	status	lt	Išjungti įrašymą
 enable	status	lt	įjungti

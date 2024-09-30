@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	pl	%1 nie odebrał połączenia, czy chcesz spróbować ponownie?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	pl	*Ważne: Backend BigBlueButton używa kategorii Lokalizacje w celu uzyskania dostępu do zasobu „Meeting Room BigBlueButton”, dlatego zaleca się ustawienie odpowiednich uprawnień użytkownika do odczytu dla kategorii Lokalizacje.
+accept	common	pl	Akceptuj
+add to favorites	status	pl	Dodaj do ulubionych
+audio call	status	pl	Połączenie audio
 bbb api secret	status	pl	BBB API secret
 bbb api secret is missing!	status	pl	Brak sekretu BBB API!
 bbb api url	status	pl	BBB API URL
@@ -6,6 +11,8 @@ bbb domain is missing!	status	pl	Brak domeny BBB!
 bbb server settings	status	pl	Ustawienia serwera BBB
 bbb server wildcard domain	status	pl	Domena wieloznaczna serwera BBB
 bigbluebutton server	status	pl	Serwer BigBlueButton
+callback	status	pl	Oddzwanianie
+click to join!	status	pl	Kliknij, aby dołączyć!
 disable	status	pl	wyłączenie
 disable recording	status	pl	Wyłącz nagrywanie
 enable	status	pl	enable

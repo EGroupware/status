@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	tr	%1 çağrınızı almadı, tekrar denemek ister misiniz
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	tr	*Önemli: BigBlueButton arka ucu, “Toplantı Odası BigBlueButton” kaynağına erişmek için Konumlar kategorisini kullanır, bu nedenle Konumlar kategorisi için uygun kullanıcı okuma izinlerinin ayarlanması önerilir.
+accept	common	tr	Kabul Et
+add to favorites	status	tr	Favorilere ekle
+audio call	status	tr	Sesli Çağrı
 bbb api secret	status	tr	BBB API sırrı
 bbb api secret is missing!	status	tr	BBB API sırrı eksik!
 bbb api url	status	tr	BBB API URL'SI
@@ -6,6 +11,8 @@ bbb domain is missing!	status	tr	BBB etki alanı eksik!
 bbb server settings	status	tr	BBB Sunucu Ayarları
 bbb server wildcard domain	status	tr	BBB sunucusu joker alan adı
 bigbluebutton server	status	tr	BigBlueButton Sunucu
+callback	status	tr	Geri arama
+click to join!	status	tr	Katılmak için tıklayın!
 disable	status	tr	devre dışı bırak
 disable recording	status	tr	Kaydı devre dışı bırak
 enable	status	tr	etkinleştir

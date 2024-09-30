@@ -1,3 +1,8 @@
+%1 did not pickup your call, would you like to try again?	status	ru	%1 не ответил на ваш звонок, вы хотите повторить попытку?
+*important: bigbluebutton backend uses category locations in order to access to resource of "meeting room bigbluebutton" therefore it is recommended to set proper user read permissions for locations category.	status	ru	*Важно: Бэкэнд BigBlueButton использует категорию Locations для доступа к ресурсу «Meeting Room BigBlueButton», поэтому рекомендуется установить соответствующие права на чтение для категории Locations.
+accept	common	ru	Принять
+add to favorites	status	ru	Добавить в избранное
+audio call	status	ru	Аудиозвонок
 bbb api secret	status	ru	Секрет API BBB
 bbb api secret is missing!	status	ru	Секрет API BBB отсутствует!
 bbb api url	status	ru	URL-АДРЕС API BBB
@@ -6,6 +11,8 @@ bbb domain is missing!	status	ru	Домен BBB отсутствует!
 bbb server settings	status	ru	Настройки сервера BBB
 bbb server wildcard domain	status	ru	Домен с символом подстановки сервера BBB
 bigbluebutton server	status	ru	Сервер BigBlueButton
+callback	status	ru	Обратный звонок
+click to join!	status	ru	Нажмите, чтобы присоединиться!
 disable	status	ru	отключить
 disable recording	status	ru	Отключить запись
 enable	status	ru	включить
