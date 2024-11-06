@@ -350,7 +350,7 @@ class statusApp extends EgwApp
 
 	isOnline(_action, _selected)
 	{
-		return !(_selected[0].data.data.rocketchat?.type == 'c') && (_selected[0].data.data.status?.active || app.rocketchat?.isRCActive(_action, _selected));
+		return !(_selected[0].data.data?.rocketchat?.type == 'c') && (_selected[0].data.data?.status?.active || app.rocketchat?.isRCActive(_action, _selected));
 	}
 
 	/**
@@ -658,6 +658,8 @@ class statusApp extends EgwApp
 	public phoneIsAvailable(_action, _selected)
 	{
 		let data : any = _selected[0]['data'];
+
+		if (!data.data?.status) return false;
 
 		switch(_action.id)
 		{
