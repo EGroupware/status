@@ -6,16 +6,19 @@
 			<columns>
 				<column width="100px"/>
 				<column/>
-				<column width="50px"/>
-				<column width="50px"/>
-				<column width="50px"/>
+				<column/>
+				<column/>
 			</columns>
 			<rows>
 				<row class="dialogHeader">
-					<et2-description  value="Room id" label="%s:"></et2-description>
-					<et2-textbox  readonly="true" id="room"></et2-textbox>
-					<et2-button  label="Invite" id="add" background="add" onclick="app.status.videoconference_invite" disabled="!$cont[frame]" noSubmit="true"></et2-button>
-                    <et2-button  label="End meeting" id="end" disabled="true" background="close" onclick="app.status.videoconference_endMeeting" noSubmit="true"></et2-button>
+					<et2-hbox style="::part(base):">
+						<et2-description value="Room id" label="%s:" style="align-self: center;"/>
+						<et2-textbox readonly="true" id="room" style="align-self: center;"/>
+						<et2-button label="Invite" id="add" background="add" onclick="app.status.videoconference_invite"
+									disabled="!$cont[frame]" noSubmit="true" align="right"/>
+						<et2-button label="End meeting" id="end" disabled="true" background="close"
+									onclick="app.status.videoconference_endMeeting" noSubmit="true" align="right" style="margin: 0"/>
+					</et2-hbox>
 				</row>
 				<row class="frame_parent">
 					<iframe id="frame" width="100%"  disabled="$cont[noIframe]" height="100%" allow="camera *; microphone *;display-capture *;" fullscreen="true"/>
