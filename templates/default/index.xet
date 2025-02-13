@@ -8,7 +8,7 @@
 			</columns>
 			<rows>
 				<row class="th" height="40">
-					<et2-image  class="iphoto" src="fav_filter" onclick="app.status.add_to_fav" statustext="Add to favorites" style="font-size: 29px; padding-left: 8px"></et2-image>
+					<et2-image  class="iphoto" src="fav_filter" onclick="app.status.add_to_fav" statustext="Add to favorites"></et2-image>
 				</row>
 				<row class="row $row_cont[class]" id="$row_cont[id]">
 					<et2-hbox>
