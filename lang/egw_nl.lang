@@ -13,6 +13,7 @@ bbb server wildcard domain	status	nl	BBB server wildcard domein
 bigbluebutton server	status	nl	BigBlueButton server
 callback	status	nl	Terugbellen
 click to join!	status	nl	Klik om mee te doen!
+disable recording	status	nl	Opname uitschakelen
 estimated call session duration, default is 30 minutes	status	nl	Geschatte duur belsessie, standaard is 30 minuten
 estimated call session duration, default is 30 minutes:	status	nl	Geschatte duur belsessie, standaard is 30 minuten:
 initiating call to	status	nl	Gesprek starten met

@@ -15,7 +15,7 @@ callback	status	de	Rückruf
 click to join!	status	de	Anklicken zum Teilnehmen!
 communicating with server %1 failed because of %2	status	de	Die Kommunikation mit Server %1 ist aufgrund von %2 fehlgeschlagen
 disable	status	de	Deaktivieren
-disable recording	status	de	Aufnahme deaktivieren:
+disable recording	status	de	Aufnahme deaktivieren
 enable	status	de	Aktivieren
 enable ring tone	status	de	Klingelton
 enable ring tone while receiving a call	status	de	Klingelton beim Empfang eines Anrufs aktivieren
