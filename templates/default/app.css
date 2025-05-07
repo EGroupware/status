@@ -92,9 +92,6 @@ tr.egw_online {
 	border-bottom: 4px solid #b4b4b4;
 }
 
-#status-index_fav .iphoto.et2_clickable:hover{
-	filter: invert(1);
-}
 #status-index_status-index-list tr.row .et2_hbox,
 #status-index_status-index-fav tr.row .et2_hbox{
 	display: inline-block;
