@@ -2,7 +2,7 @@
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="status.index.fav" template="" lang="" group="0" version="19.1" >
-		<grid id="fav" width="100%" height="100%" class="egwGridView_grid" sortable_placeholder="fav_placeholder"  sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_fav_sorting" resize_ratio="0">
+		<grid id="fav" width="100%" height="100%" class="egwGridView_grid" sortable_placeholder="fav_placeholder"  sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_fav_sorting" resize_ratio="0" role="presentation">
 			<columns>
 				<column width="40"/>
 			</columns>
@@ -25,7 +25,7 @@
 		</grid>
 	</template>
 	<template id="status.index.list" template="" lang="" group="0" version="19.1" >
-		<grid id="list" width="100%" height="100%" class="egwGridView_grid" resize_ratio="0">
+		<grid id="list" width="100%" height="100%" class="egwGridView_grid" resize_ratio="0" role="presentation">
 			<columns>
 				<column/>
 			</columns>
