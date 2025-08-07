@@ -18,6 +18,7 @@ import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import type {Et2UrlPhoneReadonly} from "../../api/js/etemplate/Et2Url/Et2UrlPhoneReadonly";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
 import {etemplate2} from "../../api/js/etemplate/etemplate2";
+import {egw} from "../../api/js/jsapi/egw_global";
 
 class statusApp extends EgwApp
 {
@@ -163,18 +164,21 @@ class statusApp extends EgwApp
 					egw.json(
 						"EGroupware\\Status\\Ui::ajax_getContactofLink",
 						["rocketchat", data.account_id],
-						function(contact){
+						(contact) =>
+					{
 							if (contact)
 							{
-								egw.open('', 'mail', 'add',{'preset[mailto]': +contact[0]['email']});
+								this.mailto(contact[0]['email']);
 							}
 						}
 					).sendRequest()
 				}
 				else
 				{
-					egw.accountData(data.account_id, 'account_email',null, function(_data){
-						egw.open('', 'mail', 'add', {'preset[mailto]':_data[data.account_id]});
+					egw.accountData(data.account_id, 'account_email',null,
+						(_data) =>
+					{
+						this.mailto(_data[data.account_id]);
 					}, this);
 				}
 
@@ -200,6 +204,24 @@ class statusApp extends EgwApp
 				}], egw.getSessionItem('status', 'videoconference-session'));
 		}
 		this.refresh();
+	}
+
+	/**
+	 * Write mail to, taking force_mailto preference into account
+	 *
+	 * @param string value email-address
+	 * @private
+	 */
+	private mailto(value)
+	{
+		if (value && egw.user('apps').mail && egw.preference('force_mailto','addressbook') != '1' )
+		{
+			this.egw.open_link('mailto:'+value);
+		}
+		else
+		{
+			window.open("mailto:" + value);
+		}
 	}
 
 	/**
