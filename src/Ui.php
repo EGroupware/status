@@ -248,7 +248,15 @@ class Ui {
 	 */
 	private static function get_actions()
 	{
-		$actions = [];
+		$actions = [
+			'mail' => [
+				'caption' => 'Mail',
+				'icon' => 'mail/navbar',
+				'allowOnMultiple' => false,
+				'group' => 1,
+				'onExecute' => 'javaScript:app.status.handle_actions',
+			]
+		];
 		$hooks = Api\Hooks::implemented('status-get_actions');
 		foreach ($hooks as $app)
 		{
