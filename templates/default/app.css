@@ -26,10 +26,10 @@ div#egw_fw_sidebar_r {
 #egw_fw_main {
 	margin-right: 53px;
 }
-#egw_fw_sidebar_r tr.row td {
+
+#status-index_status-index tr.row td > et2-hbox {
 	position: relative;
 }
-#egw_fw_sidebar_r tr.row td et2-hbox.avatar {margin: 2px;}
 tr .stat0 {
 	width: 14px;
     height: 14px;
