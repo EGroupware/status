@@ -298,3 +298,14 @@ tr span.on-phone:before {
     min-width: 200px;
     minHeight: 200px;
 }
+
+/**
+ * Kdots:
+ */
+egw-app#status::part(app-header) {
+	display: none;
+}
+
+egw-app#status et2-lavatar {
+	--size: var(--icon-size, 40px);
+}

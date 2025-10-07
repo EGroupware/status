@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="status.index.fav" template="" lang="" group="0" version="19.1" >
-		<grid id="fav" width="100%" height="100%" class="egwGridView_grid" sortable_placeholder="fav_placeholder"  sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_fav_sorting" resize_ratio="0" role="presentation">
-			<columns>
-				<column width="40"/>
-			</columns>
-			<rows>
-				<row class="th" height="40">
-					<et2-image  class="iphoto" src="fav_filter" onclick="app.status.add_to_fav" statustext="Add to favorites"></et2-image>
-				</row>
-				<row class="row $row_cont[class]" id="$row_cont[id]">
-					<et2-hbox>
-						<et2-hbox  statustext="$row_cont[hint]">
-							<et2-lavatar contactId="account:$row_cont[account_id]" src="$row_cont[icon]" fname="$row_cont[data][status][fname]" lname="$row_cont[data][status][lname]"></et2-lavatar>
-						</et2-hbox>
-						<et2-description  id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]" statustext="$row_cont[title0]" onclick="$row_cont[action0]"></et2-description>
-						<et2-description  id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]" statustext="$row_cont[title1]" onclick="$row_cont[action1]"></et2-description>
-						<et2-description  id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]" statustext="$row_cont[title2]" onclick="$row_cont[action2]"></et2-description>
-						<et2-description  id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]" statustext="$row_cont[title3]" onclick="$row_cont[action3]"></et2-description>
-					</et2-hbox>
-				</row>
-			</rows>
-		</grid>
-	</template>
-	<template id="status.index.list" template="" lang="" group="0" version="19.1" >
-		<grid id="list" width="100%" height="100%" class="egwGridView_grid" resize_ratio="0" role="presentation">
-			<columns>
-				<column/>
-			</columns>
-			<rows>
-				<row class="th"></row>
-				<row class="row $row_cont[class]">
-					<et2-hbox>
-						<et2-hbox  statustext="$row_cont[hint]">
+    <template id="status.index.fav" template="" lang="" group="0" version="19.1">
+        <grid id="fav" width="100%" height="100%" class="egwGridView_grid" sortable_placeholder="fav_placeholder" sortable_connectWith=".ui-sortable" sortable_containment="#status-index_fav" sortable="EGroupware\Status\Ui::ajax_fav_sorting" resize_ratio="0" role="presentation">
+            <columns>
+                <column width="40"/>
+            </columns>
+            <rows>
+                <row class="th" height="40">
+                    <et2-image class="iphoto" src="fav_filter" onclick="app.status.add_to_fav" statustext="Add to favorites"></et2-image>
+                </row>
+                <row class="row $row_cont[class]" id="$row_cont[id]">
+                    <et2-hbox>
+                        <et2-hbox statustext="$row_cont[hint]">
+                            <et2-lavatar contactId="account:$row_cont[account_id]" src="$row_cont[icon]" fname="$row_cont[data][status][fname]" lname="$row_cont[data][status][lname]"></et2-lavatar>
+                        </et2-hbox>
+                        <et2-description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]" statustext="$row_cont[title0]" onclick="$row_cont[action0]"></et2-description>
+                        <et2-description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]" statustext="$row_cont[title1]" onclick="$row_cont[action1]"></et2-description>
+                        <et2-description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]" statustext="$row_cont[title2]" onclick="$row_cont[action2]"></et2-description>
+                        <et2-description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]" statustext="$row_cont[title3]" onclick="$row_cont[action3]"></et2-description>
+                    </et2-hbox>
+                </row>
+            </rows>
+        </grid>
+    </template>
+    <template id="status.index.list" template="" lang="" group="0" version="19.1">
+        <grid id="list" width="100%" height="100%" class="egwGridView_grid" resize_ratio="0" role="presentation">
+            <columns>
+                <column/>
+            </columns>
+            <rows>
+                <row class="th"></row>
+                <row class="row $row_cont[class]">
+                    <et2-hbox>
+                        <et2-hbox statustext="$row_cont[hint]">
                             <et2-lavatar src="$row_cont[icon]" fname="$row_cont[data][status][fname]" lname="$row_cont[data][status][lname]" contactId="account:$row_cont[account_id]"></et2-lavatar>
-						</et2-hbox>
-						<et2-description  id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]" statustext="$row_cont[title0]" onclick="$row_cont[action0]"></et2-description>
-						<et2-description  id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]" statustext="$row_cont[title1]" onclick="$row_cont[action1]"></et2-description>
-						<et2-description  id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]" statustext="$row_cont[title2]" onclick="$row_cont[action2]"></et2-description>
-						<et2-description  id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]" statustext="$row_cont[title3]" onclick="$row_cont[action3]"></et2-description>
-					</et2-hbox>
-				</row>
-			</rows>
-		</grid>
-	</template>
-	<template id="status.index" template="" lang="" group="0" version="19.1" >
-		<grid parent_node="egw_fw_sidebar_r">
-			<columns>
-				<column/>
-			</columns>
-			<rows>
-				<row>
-					<template id="status.index.fav"/>
-				</row>
-				<row>
-					<template id="status.index.list"/>
-				</row>
-			</rows>
-		</grid>
-	</template>
+                        </et2-hbox>
+                        <et2-description id="${row}[stat0]" class="stat0 $row_cont[class0]" background="$row_cont[bg0]" statustext="$row_cont[title0]" onclick="$row_cont[action0]"></et2-description>
+                        <et2-description id="${row}[stat1]" class="stat1 $row_cont[class1]" background="$row_cont[bg1]" statustext="$row_cont[title1]" onclick="$row_cont[action1]"></et2-description>
+                        <et2-description id="${row}[stat2]" class="stat2 $row_cont[class2]" background="$row_cont[bg2]" statustext="$row_cont[title2]" onclick="$row_cont[action2]"></et2-description>
+                        <et2-description id="${row}[stat3]" class="stat3 $row_cont[class3]" background="$row_cont[bg3]" statustext="$row_cont[title3]" onclick="$row_cont[action3]"></et2-description>
+                    </et2-hbox>
+                </row>
+            </rows>
+        </grid>
+    </template>
+    <template id="status.index" template="" lang="" group="0" version="19.1">
+        <grid>
+            <columns>
+                <column/>
+            </columns>
+            <rows>
+                <row>
+                    <template id="status.index.fav"/>
+                </row>
+                <row>
+                    <template id="status.index.list"/>
+                </row>
+            </rows>
+        </grid>
+    </template>
 </overlay>
