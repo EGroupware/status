@@ -11,7 +11,7 @@
                     <et2-image class="iphoto" src="fav_filter" onclick="app.status.add_to_fav" statustext="Add to favorites"></et2-image>
                 </row>
                 <row class="row $row_cont[class]" id="$row_cont[id]">
-                    <et2-hbox>
+                    <et2-hbox class="bi">
                         <et2-hbox statustext="$row_cont[hint]">
                             <et2-lavatar contactId="account:$row_cont[account_id]" src="$row_cont[icon]" fname="$row_cont[data][status][fname]" lname="$row_cont[data][status][lname]"></et2-lavatar>
                         </et2-hbox>

@@ -1,0 +1,264 @@
+// General and Default Styles
+
+egw-app#status {
+  &::-webkit-scrollbar {
+	width: 1px;
+  }
+
+  // Firefox scrollbar width
+  scrollbar-width: none;
+
+  @media print {
+	display: none;
+  }
+
+
+  // Status indicators
+  #status-index_status-index tr.row td > et2-hbox {
+	position: relative;
+  }
+
+  // Status styles
+  tr {
+	[class*="stat"] {
+	  width: 14px;
+	  height: 14px;
+	  position: absolute;
+	  border-radius: 50%;
+	  z-index: 10;
+	  background-repeat: no-repeat;
+
+	  &.stat0 {
+		left: 0px;
+		background-size: 13px;
+	  }
+
+	  &.stat1 {
+		left: 0px;
+		bottom: 0px;
+		background-size: 14px;
+		color: var(--sl-color-neutral-950);
+		font-weight: bold;
+		text-align: center;
+		font-size: 10px;
+		line-height: 14px;
+	  }
+
+	  &.stat2 {
+		right: 0px;
+		top: 0px;
+		z-index: 100000;
+		background-size: 13px;
+	  }
+
+	  &.stat3 {
+		right: 0px;
+		bottom: 0px;
+		z-index: 100000;
+		background-size: 15px;
+	  }
+	}
+	.egw_offline {
+	  opacity: 0.3;
+	}
+	.egw_online {
+	  opacity: 1;
+	}
+  }
+
+  // User Status styles
+  #status-index_fav {
+	border-bottom: 4px solid var(--sl-color-gray-400);
+  }
+
+  // User Status Elements
+  #status-index_status-index-fav tr.row {
+	.online {
+	  background-color: var(--sl-color-emerald-400);
+	  color: black;
+	}
+
+	.away {
+	  background-color: var(--sl-color-yellow-400);
+	  color: black;
+	}
+
+	.busy {
+	  background-color: var(--sl-color-red-400);
+	  color: white;
+	}
+
+	.offline {
+	  background-color: var(--sl-color-gray-300);
+	  color: black;
+	}
+
+	.room {
+	  background-color: var(--sl-color-gray-900);
+	  color: white;
+	}
+
+	.online, .away, .busy, .offline, .room {
+	  border: 2px solid var(--sl-color-sky-100);
+	}
+  }
+
+  // Avatar styles
+  #status-index_status-index-fav tr.row .avatar,
+  #status-index_status-index-list tr.row .avatar,
+  #_list .avatar {
+	width: 40px;
+	height: 40px;
+
+	img {
+	  width: 40px;
+	  height: auto;
+	}
+  }
+
+  #_list .avatar {
+	display: inline-block;
+  }
+
+  // On-phone indicator styles
+  .on-phone {
+	background: var(--sl-color-red-400);
+	border: 2px solid var(--sl-color-sky-100);
+
+	&:before {
+	  content: ' ';
+	  background-image: url(../../../node_modules/bootstrap-icons/icons/telephone.svg);
+	  background-repeat: no-repeat;
+	  background-size: 10px;
+	  background-position: center;
+	  display: inline-block;
+	  height: 100%;
+	  width: 100%;
+	  opacity: 1;
+	  transform: rotate(80deg);
+	  filter: brightness(0) invert(0);
+	}
+  }
+
+  // Call and Room Styles
+  #call,
+  #status_call,
+  #scheduled_call {
+	min-width: 200px;
+	min-height: 200px;
+  }
+
+  // App Header Styling
+  &::part(app-header) {
+	display: none;
+  }
+
+  et2-lavatar {
+	--size: var(--icon-size, 40px);
+  }
+}
+
+// Countdown dialog styling
+#status-room .countdown-dialog {
+  td {
+	&.timer {
+	  height: 100%;
+
+	  .et2_label {
+		line-height: 50px;
+		font-size: 11pt;
+		text-align: center;
+	  }
+
+	  .et2_countdown {
+		font-size: 50pt;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	  }
+
+	  #status-room_join {
+		background-position: 45% center;
+		height: 40px;
+		width: calc(100% - 6px);
+		margin-left: 10px;
+	  }
+	}
+  }
+
+  tr.error_msg .et2_label {
+	background: var(--sl-color-red-50);
+	line-height: 50px;
+	font-size: 11pt;
+	display: inline-block;
+	text-align: center;
+  }
+}
+
+// Received Call Styles
+div.recievedCall {
+  .ui-widget-content {
+	display: block !important;
+	width: auto !important;
+	min-height: 0 !important;
+	height: auto !important;
+	padding: 0;
+
+	.et2_grid {
+	  width: 100% !important;
+	  margin: 0;
+	}
+
+	.avatar {
+	  border-color: white;
+	  width: 80px !important;
+	  height: 80px !important;
+	  margin-right: 10px;
+	  display: inline;
+	  vertical-align: middle;
+	}
+
+	.tile .et2_label {
+	  vertical-align: middle;
+	  font-size: 150%;
+	  display: inline;
+	}
+  }
+
+  .ui-dialog-buttonset {
+	padding-left: 0.8em !important;
+  }
+
+  .et2_vbox.et2_box_widget.ui-dialog-content {
+	padding-left: 0.5em;
+  }
+}
+
+// Miscellaneous Styles
+.fav_placeholder {
+  height: 40px;
+  background: silver;
+}
+
+#emptyrow {
+  display: none;
+}
+
+td.taglist_readonly .et2_taglist > div.ms-ctn {
+  border: none;
+}
+
+.missed-call {
+  background-image: url(../../../api/templates/default/images/hangup.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: black;
+  font-size: 0;
+  border: 2px solid #f0f7fe;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: 100000;
+  background-size: 14px;
+}
