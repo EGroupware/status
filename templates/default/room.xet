@@ -2,16 +2,9 @@
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
 	<template id="status.room" template="" lang="" group="0" version="20.1" >
-		<grid width="100%" height="100%" resize_ratio="0" disabled="$cont[error]">
-			<columns>
-				<column width="100px"/>
-				<column/>
-				<column/>
-				<column/>
-			</columns>
-			<rows>
-				<row class="dialogHeader">
-					<et2-hbox style="::part(base):">
+        <et2-vbox width="100%" height="100%" resize_ratio="0" disabled="$cont[error]">
+
+            <et2-hbox class="dialogHeader">
 						<et2-description value="Room id" label="%s:" style="align-self: center;"/>
 						<et2-textbox readonly="true" id="room" style="align-self: center;"/>
 						<et2-button label="Invite" id="add" background="add" onclick="app.status.videoconference_invite"
@@ -19,16 +12,14 @@
 						<et2-button label="End meeting" id="end" disabled="true" background="close"
 									onclick="app.status.videoconference_endMeeting" noSubmit="true" align="right" style="margin: 0"/>
 					</et2-hbox>
-				</row>
-				<row class="frame_parent">
-					<iframe id="frame" width="100%"  disabled="$cont[noIframe]" height="100%" allow="camera *; microphone *;display-capture *;" fullscreen="true"/>
+            <et2-hbox class="frame_parent">
+                <iframe id="frame" width="100%" hidden="$cont[noIframe]" disabled="$cont[noIframe]" height="100%" allow="camera *; microphone *;display-capture *;" fullscreen="true"/>
 					<et2-vbox disabled="!$cont[noIframe]" class="noIframeBox">
 						<et2-description value="Please click on the link below to open the call"></et2-description>
 						<et2-description href="$cont[frame]" value="$cont[frame]"></et2-description>
 					</et2-vbox>
-				</row>
-			</rows>
-		</grid>
+            </et2-hbox>
+        </et2-vbox>
 		<grid class="countdown-dialog" width="100%" height="100%" disabled="!$cont[error]">
 		    <columns>
 		        <column width="10%"/>

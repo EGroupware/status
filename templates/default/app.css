@@ -126,6 +126,12 @@ egw-app#status::part(app-header) {
 egw-app#status et2-lavatar {
   --size: var(--icon-size, 40px);
 }
+#status-room .dialogHeader::part(base) {
+  align-items: center;
+}
+#status-room .frame_parent {
+  flex: 1 1 auto;
+}
 #status-room .countdown-dialog td.timer {
   height: 100%;
 }
@@ -146,7 +152,7 @@ egw-app#status et2-lavatar {
   width: calc(100% - 6px);
   margin-left: 10px;
 }
-#status-room .countdown-dialog tr.error_msg .et2_label {
+#status-room tr.error_msg .et2_label {
   background: var(--sl-color-red-50);
   line-height: 50px;
   font-size: 11pt;

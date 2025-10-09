@@ -159,29 +159,39 @@ egw-app#status {
 }
 
 // Countdown dialog styling
-#status-room .countdown-dialog {
-  td {
-	&.timer {
-	  height: 100%;
+#status-room {
+  .dialogHeader::part(base) {
+	align-items: center;
+  }
 
-	  .et2_label {
-		line-height: 50px;
-		font-size: 11pt;
-		text-align: center;
-	  }
+  .frame_parent {
+	flex: 1 1 auto;
+  }
 
-	  .et2_countdown {
-		font-size: 50pt;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	  }
+  .countdown-dialog {
+	td {
+	  &.timer {
+		height: 100%;
 
-	  #status-room_join {
-		background-position: 45% center;
-		height: 40px;
-		width: calc(100% - 6px);
-		margin-left: 10px;
+		.et2_label {
+		  line-height: 50px;
+		  font-size: 11pt;
+		  text-align: center;
+		}
+
+		.et2_countdown {
+		  font-size: 50pt;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		}
+
+		#status-room_join {
+		  background-position: 45% center;
+		  height: 40px;
+		  width: calc(100% - 6px);
+		  margin-left: 10px;
+		}
 	  }
 	}
   }
