@@ -4,7 +4,7 @@
 	<template id="status.config.videoconference" template="" lang="" group="0" version="19.1">
 		<grid width="100%" class="admin-config egwGridView_grid">
 			<columns>
-				<column width="215px"/>
+                <column width="50%"/>
 				<column/>
 			</columns>
 			<rows>
@@ -30,7 +30,7 @@
                         <caption label="Jitsi Server Settings"/>
 				        <grid width="100%">
                             <columns>
-                                <column width="200px"/>
+                                <column width="50%"/>
                                 <column/>
                             </columns>
                             <rows>
@@ -61,7 +61,7 @@
                         <caption label="BBB Server Settings"/>
                         <grid width="100%">
                             <columns>
-                                <column width="200px"/>
+                                <column width="50%"/>
                                 <column/>
                             </columns>
                             <rows>
@@ -122,7 +122,7 @@
 		</grid>
 	</template>
 	<template id="status.config" template="" lang="" group="0" version="18.1">
-    		<et2-tabbox  id="tabs" width="100%">
+        <et2-tabbox id="tabs" width="100%" tabHeight="auto">
     			<tabs>
     				<tab id="Videoconference" label="Video Conference"/>
     			</tabs>
