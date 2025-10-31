@@ -8,19 +8,15 @@
  * @license http://opensource.org/licenses/gpl-license.php GPL - GNU General Public License
  */
 
-/*egw:uses
-	/api/js/jsapi/egw_app.js;
- */
 import {EgwApp} from "../../api/js/jsapi/egw_app";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {et2_createWidget} from "../../api/js/etemplate/et2_core_widget";
 import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import type {Et2UrlPhoneReadonly} from "../../api/js/etemplate/Et2Url/Et2UrlPhoneReadonly";
 import {et2_button} from "../../api/js/etemplate/et2_widget_button";
-import {etemplate2} from "../../api/js/etemplate/etemplate2";
 import {egw} from "../../api/js/jsapi/egw_global";
 
-class statusApp extends EgwApp
+export class statusApp extends EgwApp
 {
 	static readonly appname = 'status';
 
