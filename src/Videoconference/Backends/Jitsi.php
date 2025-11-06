@@ -107,11 +107,11 @@ class Jitsi implements Iface
 				// Configure the domain (sub claim)
 				->relatedTo($this->payload['sub'])
 				// Configures the time that the token was issue (iat claim)
-				->issuedAt($iat)
+				->issuedAt(new \DateTimeImmutable('@'.$iat))
 				// Configures the time that the token can be used (nbf claim)
-				->canOnlyBeUsedAfter($nbf)
+				->canOnlyBeUsedAfter(new \DateTimeImmutable('@'.$nbf))
 				// Configures the expiration time of the token (exp claim)
-				->expiresAt($exp)
+				->expiresAt(new \DateTimeImmutable('@'.$exp))
 				// Configure room
 				->withClaim('room', $this->payload['room'])
 				// Set context
