@@ -109,7 +109,10 @@ class BBB Implements Iface
 		$this->meetingParams->setAllowStartStopRecording(!$this->config['disable_recordings']);
 
 
-		if (!empty($_context['extra']['participants'])) $this->meetingParams->setMaxParticipants(count($_context['extra']['participants'])+($this->config['bbb_call_extra_invites']??self::EXTRA_INVITES_DEFAULT));
+		if(!empty($_context['extra']['participants']))
+		{
+			$this->meetingParams->setMaxParticipants(count($_context['extra']['participants']) + ((int)$this->config['bbb_call_extra_invites'] ?? self::EXTRA_INVITES_DEFAULT));
+		}
 		if ($start <= $now && $now <= $end && ($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
 		{
 			if ($this->isUserModerator)
