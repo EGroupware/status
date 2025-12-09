@@ -5,6 +5,13 @@ egw-app#status {
 	width: 1px;
   }
 
+  /* Status is usually so small, shrink the spinner */
+
+  &::part(spinner) {
+	font-size: 3rem;
+	--track-width: 0.5rem;
+  }
+
   // Firefox scrollbar width
   scrollbar-width: none;
 
@@ -12,6 +19,10 @@ egw-app#status {
 	display: none;
   }
 
+  // Remove gap between favourites & others
+  #status-index_status-index > et2-vbox::part(base) {
+	gap: 0px;
+  }
 
   // Status indicators
   #status-index_status-index tr.row td > et2-hbox {
@@ -58,10 +69,12 @@ egw-app#status {
 		background-size: 15px;
 	  }
 	}
-	.egw_offline {
+
+	&.egw_offline {
 	  opacity: 0.3;
 	}
-	.egw_online {
+
+	&.egw_online {
 	  opacity: 1;
 	}
   }

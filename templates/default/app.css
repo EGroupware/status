@@ -1,13 +1,21 @@
 egw-app#status {
+  /* Status is usually so small, shrink the spinner */
   scrollbar-width: none;
 }
 egw-app#status::-webkit-scrollbar {
   width: 1px;
 }
+egw-app#status::part(spinner) {
+  font-size: 3rem;
+  --track-width: 0.5rem;
+}
 @media print {
   egw-app#status {
     display: none;
   }
+}
+egw-app#status #status-index_status-index > et2-vbox::part(base) {
+  gap: 0px;
 }
 egw-app#status #status-index_status-index tr.row td > et2-hbox {
   position: relative;
@@ -46,10 +54,10 @@ egw-app#status tr [class*="stat"].stat3 {
   z-index: 100000;
   background-size: 15px;
 }
-egw-app#status tr .egw_offline {
+egw-app#status tr.egw_offline {
   opacity: 0.3;
 }
-egw-app#status tr .egw_online {
+egw-app#status tr.egw_online {
   opacity: 1;
 }
 egw-app#status #status-index_fav {

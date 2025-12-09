@@ -55,18 +55,9 @@
         </grid>
     </template>
     <template id="status.index" template="" lang="" group="0" version="19.1">
-        <grid>
-            <columns>
-                <column/>
-            </columns>
-            <rows>
-                <row>
-                    <template id="status.index.fav"/>
-                </row>
-                <row>
-                    <template id="status.index.list"/>
-                </row>
-            </rows>
-        </grid>
+        <et2-vbox>
+            <template id="status.index.fav"/>
+            <template id="status.index.list"/>
+        </et2-vbox>
     </template>
 </overlay>
