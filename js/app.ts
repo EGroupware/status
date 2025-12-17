@@ -62,7 +62,7 @@ export class statusApp extends EgwApp
 			case 'status.index':
 				if (egw.preference('ringtone', 'status'))
 				{
-					this._ring = new Audio('status/assets/ring.mp3');
+					this._ring = new Audio(this.egw.webserverUrl + '/status/assets/ring.mp3');
 					let self = this;
 					jQuery('body').one('click', function(){
 						self._controllRingTone().initiate();
