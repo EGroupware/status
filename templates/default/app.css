@@ -9,6 +9,9 @@ egw-app#status::part(spinner) {
   font-size: 3rem;
   --track-width: 0.5rem;
 }
+egw-app#status #status-index_status-index {
+  right: 0.1px;
+}
 @media print {
   egw-app#status {
     display: none;
@@ -60,43 +63,26 @@ egw-app#status tr.egw_offline {
 egw-app#status tr.egw_online {
   opacity: 1;
 }
-egw-app#status #status-index_fav {
-  border-bottom: 4px solid var(--sl-color-gray-400);
+egw-app#status #status-index_status-index-fav .favicon_container {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
 }
-egw-app#status #status-index_status-index-fav tr.row .online {
-  background-color: var(--sl-color-emerald-400);
-  color: black;
+egw-app#status #status-index_status-index-fav .favicon_container et2-image.iphoto {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
 }
-egw-app#status #status-index_status-index-fav tr.row .away {
-  background-color: var(--sl-color-yellow-400);
-  color: black;
+egw-app#status #status-index_status-index-list et2-lavatar {
+  display: flex;
+  justify-content: center;
 }
-egw-app#status #status-index_status-index-fav tr.row .busy {
-  background-color: var(--sl-color-red-400);
-  color: white;
-}
-egw-app#status #status-index_status-index-fav tr.row .offline {
-  background-color: var(--sl-color-gray-300);
-  color: black;
-}
-egw-app#status #status-index_status-index-fav tr.row .room {
-  background-color: var(--sl-color-gray-900);
-  color: white;
-}
-egw-app#status #status-index_status-index-fav tr.row .online,
-egw-app#status #status-index_status-index-fav tr.row .away,
-egw-app#status #status-index_status-index-fav tr.row .busy,
-egw-app#status #status-index_status-index-fav tr.row .offline,
-egw-app#status #status-index_status-index-fav tr.row .room {
-  border: 2px solid var(--sl-color-sky-100);
-}
-egw-app#status #status-index_status-index-fav tr.row .avatar,
 egw-app#status #status-index_status-index-list tr.row .avatar,
 egw-app#status #_list .avatar {
   width: 40px;
   height: 40px;
 }
-egw-app#status #status-index_status-index-fav tr.row .avatar img,
 egw-app#status #status-index_status-index-list tr.row .avatar img,
 egw-app#status #_list .avatar img {
   width: 40px;
@@ -221,3 +207,4 @@ td.taglist_readonly .et2_taglist > div.ms-ctn {
   z-index: 100000;
   background-size: 14px;
 }
+/*# sourceMappingURL=app.css.map */

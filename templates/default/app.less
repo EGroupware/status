@@ -11,7 +11,10 @@ egw-app#status {
 	font-size: 3rem;
 	--track-width: 0.5rem;
   }
-
+//Alignment issue on browser border
+  #status-index_status-index {
+	right: .1px;
+  }
   // Firefox scrollbar width
   scrollbar-width: none;
 
@@ -78,46 +81,25 @@ egw-app#status {
 	  opacity: 1;
 	}
   }
-
-  // User Status styles
-  #status-index_fav {
-	border-bottom: 4px solid var(--sl-color-gray-400);
-  }
-
-  // User Status Elements
-  #status-index_status-index-fav tr.row {
-	.online {
-	  background-color: var(--sl-color-emerald-400);
-	  color: black;
-	}
-
-	.away {
-	  background-color: var(--sl-color-yellow-400);
-	  color: black;
-	}
-
-	.busy {
-	  background-color: var(--sl-color-red-400);
-	  color: white;
-	}
-
-	.offline {
-	  background-color: var(--sl-color-gray-300);
-	  color: black;
-	}
-
-	.room {
-	  background-color: var(--sl-color-gray-900);
-	  color: white;
-	}
-
-	.online, .away, .busy, .offline, .room {
-	  border: 2px solid var(--sl-color-sky-100);
+  //"Add to favorites" template
+  #status-index_status-index-fav {
+	.favicon_container{
+	  width: 100%;
+	  height: 40px;
+	  display: flex;
+	  justify-content: center;
+	  et2-image.iphoto{
+		display: flex;
+		align-items: center;
+		font-size: 28px;
+	  }
 	}
   }
-
+  #status-index_status-index-list et2-lavatar{
+	display:flex;
+	justify-content: center;
+  }
   // Avatar styles
-  #status-index_status-index-fav tr.row .avatar,
   #status-index_status-index-list tr.row .avatar,
   #_list .avatar {
 	width: 40px;
