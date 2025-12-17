@@ -210,7 +210,8 @@ class Ui {
 		}
 		// first row of grid is dedicated to its header
 		array_unshift($content['list'], [''=>'']);
-		array_unshift($content['fav'], [''=>'']);
+		// first row of fav grid is no longer a header
+//		array_unshift($content['fav'], [''=>'']);
 		return $content;
 	}
 
