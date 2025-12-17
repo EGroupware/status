@@ -14,6 +14,7 @@ namespace EGroupware\Status\Videoconference\Backends;
 
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
+use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use EGroupware\Api\Config;
 use BigBlueButton\BigBlueButton;
@@ -113,11 +114,11 @@ class BBB Implements Iface
 		{
 			$this->meetingParams->setMaxParticipants(count($_context['extra']['participants']) + ((int)$this->config['bbb_call_extra_invites'] ?? self::EXTRA_INVITES_DEFAULT));
 		}
-		if ($start <= $now && $now <= $end && ($meeting = $this->bbb->getMeetingInfo($this->meetingParams)) && $meeting->success())
+		if($start <= $now && $now <= $end && ($meeting = $this->bbb->createMeeting($this->meetingParams)) && $meeting->success())
 		{
 			if ($this->isUserModerator)
 			{
-				$this->moderatorPW = $meeting->getMeeting()->getModeratorPassword();
+				$this->moderatorPW = $meeting->getModeratorPassword();
 			}
 			return;
 		}
