@@ -81,6 +81,12 @@ egw-app#status {
 	  opacity: 1;
 	}
   }
+
+  // User Status styles
+  #status-index_status-index-fav {
+	border-bottom: 4px solid var(--sl-color-gray-400);
+  }
+
   //"Add to favorites" template
   #status-index_status-index-fav {
 	.favicon_container{
@@ -95,11 +101,47 @@ egw-app#status {
 	  }
 	}
   }
-  #status-index_status-index-list et2-lavatar{
+
+  #status-index_status-index-list, #status-index_status-index-fav {
+	et2-lavatar {
 	display:flex;
 	justify-content: center;
+	}
+	// User Status Elements
+	tr.row{
+	  .online {
+		background-color: var(--sl-color-emerald-400);
+		color: black;
+	  }
+
+	  .away {
+		background-color: var(--sl-color-yellow-400);
+		color: black;
+	  }
+
+	  .busy {
+		background-color: var(--sl-color-red-400);
+		color: white;
+	  }
+
+	  .offline {
+		background-color: var(--sl-color-gray-300);
+		color: black;
+	  }
+
+	  .room {
+		background-color: var(--sl-color-gray-900);
+		color: white;
+	  }
+
+	  .online, .away, .busy, .offline, .room {
+		border: 2px solid var(--sl-color-sky-100);
+	  }
+	}
   }
+
   // Avatar styles
+  #status-index_status-index-fav tr.row .avatar,
   #status-index_status-index-list tr.row .avatar,
   #_list .avatar {
 	width: 40px;
