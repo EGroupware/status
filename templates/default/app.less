@@ -34,13 +34,19 @@ egw-app#status {
 
   // Status styles
   tr {
-	[class*="stat"] {
+	et2-description[class*="stat"] {
+	  justify-content: center;
 	  width: 14px;
 	  height: 14px;
 	  position: absolute;
 	  border-radius: 50%;
 	  z-index: 10;
 	  background-repeat: no-repeat;
+	  //visually more centered than actual center because uneven pixel count
+	  span[part="content"]{
+		position: relative;
+		top:1px
+	  }
 
 	  &.stat0 {
 		left: 0px;
