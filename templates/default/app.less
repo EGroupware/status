@@ -1,22 +1,25 @@
 // General and Default Styles
 
 egw-app#status {
-  &::-webkit-scrollbar {
-	width: 1px;
-  }
-
   /* Status is usually so small, shrink the spinner */
 
   &::part(spinner) {
 	font-size: 3rem;
 	--track-width: 0.5rem;
   }
-//Alignment issue on browser border
   #status-index_status-index {
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	&::-webkit-scrollbar {
+	  width: 1px;
+	}
+
+	// Firefox scrollbar width
+	scrollbar-width: none;
+	//Alignment issue on browser border
 	right: .1px;
   }
-  // Firefox scrollbar width
-  scrollbar-width: none;
 
   @media print {
 	display: none;
