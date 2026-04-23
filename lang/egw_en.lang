@@ -16,6 +16,7 @@ click to join!	status	en	Click to join!
 communicating with server %1 failed because of %2	status	en	Communicating with server %1 failed because of %2
 disable	status	en	disable
 disable recording	status	en	Disable recording
+download link	common	en	download link
 enable	status	en	enable
 enable ring tone	status	en	Enable ring tone
 enable ring tone while receiving a call	status	en	Enable ring tone while receiving a call.
@@ -44,10 +45,12 @@ link to contact	status	en	Link to contact
 message	status	en	Message
 missed call from %1	status	en	Missed call from %1
 new window	status	en	New window
+no matches found.	common	en	no matches found.
 number of seats	status	en	Number of seats
 open call in	status	en	Open call in
 open call in new window/popup	status	en	Open call in new window/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	en	Open the call URL in a separate window outside of iframe (e.g. browsers with ristricted policies).
+overwrite	common	en	overwrite
 phone call	status	en	Phone call
 predefined group of users to be listed	status	en	Predefined group of users to be listed
 remove from favorites	status	en	Remove from favorites

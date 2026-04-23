@@ -16,6 +16,7 @@ click to join!	status	fr	Cliquer pour joindre !
 communicating with server %1 failed because of %2	status	fr	La communication avec le serveur %1 a échouée parce que %2
 disable	status	fr	désactiver
 disable recording	status	fr	Désactiver l'enregistrement
+download link	common	fr	lien de téléchargement
 enable	status	fr	activer
 enable ring tone	status	fr	Permttre la tonalité
 enable ring tone while receiving a call	status	fr	Permttre la tonalité à la réception d'un appel
@@ -44,10 +45,12 @@ link to contact	status	fr	Lien vers le contact
 message	status	fr	Message
 missed call from %1	status	fr	Appel manqué de %1
 new window	status	fr	nouvelle fenêtre
+no matches found.	common	fr	Rien à afficher
 number of seats	status	fr	Nombre de sièges
 open call in	status	fr	Ouvrir l'appel dans
 open call in new window/popup	status	fr	Ouvrir l'appel dans une nouvelle fenêtre/popup
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	fr	Ouvrir l'URL de l'appel dans une fenêtre séparée en dehors de l'iframe (par exemple sur les navigateurs avec des restrictions).
+overwrite	common	fr	écraser
 phone call	status	fr	Appel téléphonique
 predefined group of users to be listed	status	fr	Groupe prédéfini des utilisateurs à lister
 remove from favorites	status	fr	Retirer des favoris
