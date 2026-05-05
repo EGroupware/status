@@ -55,11 +55,13 @@ egw-app#status tr et2-description[class*="stat"].stat1 {
 egw-app#status tr et2-description[class*="stat"].stat2 {
   right: 0px;
   top: 0px;
+  z-index: 100000;
   background-size: 13px;
 }
 egw-app#status tr et2-description[class*="stat"].stat3 {
   right: 0px;
   bottom: 0px;
+  z-index: 100000;
   background-size: 15px;
 }
 egw-app#status tr.egw_offline {
