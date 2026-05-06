@@ -18,8 +18,8 @@ disable	status	fr	désactiver
 disable recording	status	fr	Désactiver l'enregistrement
 download link	common	fr	lien de téléchargement
 enable	status	fr	activer
-enable ring tone	status	fr	Permttre la tonalité
-enable ring tone while receiving a call	status	fr	Permttre la tonalité à la réception d'un appel
+enable ring tone	status	fr	Activer la sonnerie
+enable ring tone while receiving a call	status	fr	Activer la sonnerie à la réception d'un appel
 end meeting	status	fr	Terminer la réunion
 estimated call session duration, default is 30 minutes	status	fr	Durée estimée de la session, par défaut 30 minutes
 estimated call session duration, default is 30 minutes:	status	fr	Durée estimée de la session, par défaut 30 minutes :
