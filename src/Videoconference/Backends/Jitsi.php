@@ -121,8 +121,11 @@ class Jitsi implements Iface
 				// Get token
 				->getToken($signer, InMemory::plainText($this->payload['secret']));
 		}
-		catch (\Exception $e)
+		catch (\Throwable $e)
 		{
+			// lcobucci/jwt 5.x's InMemory::plainText() is typed `string` (no longer permissive
+			// like 3.x's Signer\Key), so a misconfigured/empty jitsi_application_secret now
+			// throws a TypeError, which \Exception alone does not catch.
 			error_log(__METHOD__."() failed to generate token:".$e->getMessage());
 		}
 	}
