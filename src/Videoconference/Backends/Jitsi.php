@@ -12,8 +12,10 @@
 namespace EGroupware\Status\Videoconference\Backends;
 
 use EGroupware\Api;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Encoding\ChainedFormatter;
+use Lcobucci\JWT\Encoding\JoseEncoder;
+use Lcobucci\JWT\Token\Builder;
+use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use EGroupware\Api\Config;
 
@@ -96,7 +98,7 @@ class Jitsi implements Iface
 		unset($context['user']['cal_id'], $context['user']['title']);
 
 		try {
-			$this->token = (new Builder())
+			$this->token = (new Builder(new JoseEncoder(), ChainedFormatter::withUnixTimestampDates()))
 				// Configures the issuer (iss claim)
 				->issuedBy($this->payload['iss'])
 				// Configure headers
@@ -117,7 +119,7 @@ class Jitsi implements Iface
 				// Set context
 				->withClaim('context', $context)
 				// Get token
-				->getToken($signer, new Key ($this->payload['secret']));
+				->getToken($signer, InMemory::plainText($this->payload['secret']));
 		}
 		catch (\Exception $e)
 		{
@@ -130,7 +132,7 @@ class Jitsi implements Iface
 	 */
 	private function _isTokenExpired ()
 	{
-		return $this->token->isExpired();
+		return $this->token->isExpired(new \DateTimeImmutable());
 	}
 
 	/**
