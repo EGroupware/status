@@ -81,7 +81,12 @@ class Jitsi implements Iface
 		$iat = time();
 		$nbf = max(($_start ?: $iat) - self::NBF_GRACETIME, $iat);
 		$exp = ($_end ?: $iat) + self::EXP_GRACETIME;
-		$signer = new Sha256();
+		// lcobucci/jwt 5.x refuses to sign with a secret shorter than 256 bits (32 bytes).
+		// Fall back to a lenient signer for already configured, shorter legacy secrets, so
+		// existing installs keep working. New/changed secrets are validated to be long enough
+		// by Hooks::validate(), so this is only relevant for pre-existing configuration.
+		$secret = $this->config['jitsi_application_secret'];
+		$signer = !empty($secret) && strlen($secret) < 32 ? new LenientHmacSha256() : new Sha256();
 
 		$this->payload = [
 			'iss' => $this->config['jitsi_application_id'] ?: 'egroupware',
@@ -126,7 +131,11 @@ class Jitsi implements Iface
 			// lcobucci/jwt 5.x's InMemory::plainText() is typed `string` (no longer permissive
 			// like 3.x's Signer\Key), so a misconfigured/empty jitsi_application_secret now
 			// throws a TypeError, which \Exception alone does not catch.
-			error_log(__METHOD__."() failed to generate token:".$e->getMessage());
+			if (!empty($this->config['jitsi_application_secret']))
+			{
+				throw $e;
+			}
+			error_log(__METHOD__."() failed to generate token: ".$e->getMessage());
 		}
 	}
 
@@ -140,11 +149,11 @@ class Jitsi implements Iface
 
 	/**
 	 * Get Jitsi Meet JWT Token
-	 * @return string \Lcobucci\JWT\Token
+	 * @return ?string \Lcobucci\JWT\Token
 	 */
-	private function _getToken ()
+	private function _getToken()
 	{
-		return $this->token->toString();
+		return $this->token ? $this->token->toString() : null;
 	}
 
 	/**
@@ -153,7 +162,8 @@ class Jitsi implements Iface
 	 */
 	public function getMeetingUrl (?array $_context=null)
 	{
-		$jwt = !empty($this->config['jitsi_application_id']) ? "?jwt=".$this->_getToken() : '';
+		$jwt = !empty($this->config['jitsi_application_id']) && !empty($this->config['jitsi_application_secret']) ? "?jwt=".$this->_getToken() : '';
+
 		return 'https://'.$this->payload['sub'].'/'.$this->payload['room'].$jwt.'#'.$this->_getExtraParams();
 	}
 

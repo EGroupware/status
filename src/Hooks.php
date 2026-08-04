@@ -506,6 +506,12 @@ class Hooks
 			if (!$data['videoconference']['bbb']['bbb_csp']) $error .= "\n-".lang("bbb CSP wild card domain is missing!");
 			if (!$data['videoconference']['bbb']['bbb_api_secret']) $error .= "\n-".lang("bbb Api secret is missing!");
 		}
+		$jitsi_secret = $data['videoconference']['jitsi']['jitsi_application_secret'];
+		// jitsi JWT tokens are signed with HS256, which requires a secret of at least 256 bits (32 bytes)
+		if (!empty($jitsi_secret) && strlen($jitsi_secret) < 32)
+		{
+			$error .= "\n-".lang("Jitsi application secret is too short, it needs to be at least %1 characters!", 32);
+		}
 		return $error?? null;
 	}
 
