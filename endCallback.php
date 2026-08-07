@@ -19,7 +19,7 @@ $GLOBALS['egw_info'] = array(
 	$jwt = $_GET['jwt'];
 	$token = new Token();
 	if (($t=$token->validateJWT($jwt))) {
-		$context = $t->getClaim('context');
+		$context = $t->claims()->get('context');
 		Videoconference\Backends\BBB::freeUpResource($context->cal_id, $context->room);
 	}
 

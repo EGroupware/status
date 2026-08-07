@@ -18,7 +18,7 @@ class EndCallbackSession
 		}
 		if ($t)
 		{
-			$context = $t->getClaim('context');
+			$context = $t->claims()->get('context');
 			return $GLOBALS['egw']->session->create($context->account_lid, '', 'text', true, false);
 		}
 		return false;
