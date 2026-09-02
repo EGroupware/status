@@ -11,10 +11,14 @@
 import {EgwApp} from "../../api/js/jsapi/egw_app";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {et2_createWidget} from "../../api/js/etemplate/et2_core_widget";
-import {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
+// et2_grid/et2_button have no web-component replacement to migrate to (real, distinct legacy
+// implementations, not zero-member shims - see doc/ai/projects/app-ts-modernization.md); only used
+// as types here, so import type suffices.
+import type {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import type {Et2UrlPhoneReadonly} from "../../api/js/etemplate/Et2Url/Et2UrlPhoneReadonly";
-import {et2_button} from "../../api/js/etemplate/et2_widget_button";
-import {egw} from "../../api/js/jsapi/egw_global";
+import type {et2_button} from "../../api/js/etemplate/et2_widget_button";
+// egw/app are ambient globals (declare global {} in egw_global.d.ts, unconditionally included
+// via tsconfig's "**/*.d.ts") - no import needed or possible.
 
 export class statusApp extends EgwApp
 {
@@ -63,16 +67,19 @@ export class statusApp extends EgwApp
 				if (egw.preference('ringtone', 'status'))
 				{
 					this._ring = new Audio(this.egw.webserverUrl + '/status/assets/ring.mp3');
-					let self = this;
-					jQuery('body').one('click', function(){
-						self._controllRingTone().initiate();
-					});
+					document.body.addEventListener('click', () =>
+					{
+						this._controllRingTone().initiate();
+					}, {once: true});
 				}
 				break;
 			case 'status.room':
 				let room = this.et2.getArrayMgr('content').getEntry('room');
 				let url = this.et2.getArrayMgr('content').getEntry('frame');
-				let end = this.et2.getDOMWidgetById('end');
+				// getDOMWidgetById() is typed as returning "typeof Et2Widget" (the constructor)
+				// instead of an instance - a pre-existing bug in Et2Template.ts, worked around
+				// the same way as et2_widget_placeholder.ts does throughout: cast to <any>.
+				const end : any = this.et2.getDOMWidgetById('end');
 				let isModerator = url.match(/isModerator\=(1|true)/i)??false;
 				if (isModerator)
 				{
@@ -80,13 +87,14 @@ export class statusApp extends EgwApp
 				}
 				if (url.match(/\&error\=/i) || (!isModerator && this.et2.getArrayMgr('content').getEntry('restrict')))
 				{
-					this.et2.getDOMWidgetById('add').set_disabled(true);
+					(<any>this.et2.getDOMWidgetById('add')).set_disabled(true);
 					break;
 				}
 				egw(window.opener).setSessionItem('status', 'videoconference-session', room);
-				window.addEventListener("beforeunload", function(){
+				window.addEventListener("beforeunload", () =>
+				{
 					window.opener.sessionStorage.removeItem('status-videoconference-session');
-				 }, false);
+				}, false);
 				break;
 		}
 
@@ -111,8 +119,7 @@ export class statusApp extends EgwApp
 	{
 		// EPL/calls does NOT care about other apps data
 		if (pushData.app !== 'stylite' || pushData.type === 'delete' || typeof pushData.acl === 'undefined') return;
-		let self = this;
-		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,function(account)
+		egw.accountData([pushData.acl.account_id, pushData.acl.account_id2], 'account_lid',null,(account) =>
 		{
 			let content : any = [{
 				id: account[pushData.acl.account_id],
@@ -126,7 +133,7 @@ export class statusApp extends EgwApp
 					class3: pushData.acl.account_id2 && pushData.acl.busy ? 'on-phone': ''
 				});
 			}
-			self.mergeContent(content);
+			this.mergeContent(content);
 		}, egw);
 	}
 
@@ -157,17 +164,16 @@ export class statusApp extends EgwApp
 			case 'mail':
 				if (typeof data.account_id == "string" && data.account_id.match(/:/) && data.link_to)
 				{
-					egw.json(
+					egw.request(
 						"EGroupware\\Status\\Ui::ajax_getContactofLink",
-						["rocketchat", data.account_id],
-						(contact) =>
+						["rocketchat", data.account_id]
+					).then((contact) =>
 					{
-							if (contact)
-							{
-								this.mailto(contact[0]['email']);
-							}
+						if (contact)
+						{
+							this.mailto(contact[0]['email']);
 						}
-					).sendRequest()
+					})
 				}
 				else
 				{
@@ -226,10 +232,9 @@ export class statusApp extends EgwApp
 	add_to_fav()
 	{
 		let list = this.et2.getArrayMgr('content').getEntry('list');
-		let self = this;
 		let dialog = new Et2Dialog(this.egw);
 		dialog.transformAttributes({
-			callback: function(_button_id, _value)
+			callback: (_button_id, _value) =>
 			{
 				if(_button_id == 'add' && _value)
 				{
@@ -241,12 +246,12 @@ export class statusApp extends EgwApp
 							if(list[j] && list[j]['account_id'] == _value.accounts[i])
 							{
 								added = true;
-								self.handle_actions({id: 'fav'}, [{data: list[j]}]);
+								this.handle_actions({id: 'fav'}, [{data: list[j]}]);
 							}
 						}
 						if(!added)
 						{
-							self.handle_actions({id: 'fav'}, [{
+							this.handle_actions({id: 'fav'}, [{
 								data: {
 									account_id: _value.accounts[i]
 								}
@@ -277,12 +282,13 @@ export class statusApp extends EgwApp
 	 */
 	refresh()
 	{
-		let self = this;
 		// give it a delay to make sure the preferences data is updated before refreshing
-		window.setTimeout(function(){
-			egw.json('EGroupware\\Status\\Ui::ajax_refresh', [], function(_data){
-				if (self.et2) self.updateContent(_data.fav, _data.list);
-			}).sendRequest();
+		window.setTimeout(() =>
+		{
+			egw.request('EGroupware\\Status\\Ui::ajax_refresh', []).then((_data) =>
+			{
+				if (this.et2) this.updateContent(_data.fav, _data.list);
+			});
 		}, 200);
 	}
 
@@ -296,7 +302,7 @@ export class statusApp extends EgwApp
 		let fav = <et2_grid>this.et2.getWidgetById('fav');
 		let content = this.et2.getArrayMgr('content');
 		let list = <et2_grid>this.et2.getWidgetById('list');
-		let isEqual = function (_a, _b)
+		const isEqual = (_a, _b) =>
 		{
 			if (_a.length != _b.length) return false;
 			for (let i in _a)
@@ -335,14 +341,14 @@ export class statusApp extends EgwApp
 			{
 				if (fav[f] && fav[f]['id'] && _content[i]['id'] == fav[f]['id'])
 				{
-					jQuery.extend(true, fav[f], _content[i]);
+					egw.deepExtend(fav[f], _content[i]);
 				}
 			}
 			for (let l in list)
 			{
 				if (list[l] && list[l]['id'] && _content[i]['id'] == list[l]['id'])
 				{
-					jQuery.extend(true, list[l], _content[i]);
+					egw.deepExtend(list[l], _content[i]);
 					if (_topList || _content[i]['stat1'] > 0) list.splice(1, 0, list.splice(l, 1)[0]);
 				}
 			}
@@ -368,7 +374,8 @@ export class statusApp extends EgwApp
 
 	isOnline(_action, _selected)
 	{
-		return !(_selected[0].data.data?.rocketchat?.type == 'c') && (_selected[0].data.data?.status?.active || app.rocketchat?.isRCActive(_action, _selected));
+		// app.rocketchat is EPL-only and not typed here - see feedback_epl_stylite_blind_spot
+		return !(_selected[0].data.data?.rocketchat?.type == 'c') && (_selected[0].data.data?.status?.active || (<any>app.rocketchat)?.isRCActive(_action, _selected));
 	}
 
 	/**
@@ -378,11 +385,10 @@ export class statusApp extends EgwApp
 	makeCall(data)
 	{
 		let callCancelled = false;
-		let self = this;
 		let button = [{"button_id": 0, "label": egw.lang('Cancel'), id: '0', image: 'cancel'}];
 		let dialog = new Et2Dialog(this.egw);
 		dialog.transformAttributes({
-			callback: function(_btn)
+			callback: (_btn) =>
 			{
 				if(_btn == Et2Dialog.CANCEL_BUTTON)
 				{
@@ -398,14 +404,14 @@ export class statusApp extends EgwApp
 			template: egw.webserverUrl + '/status/templates/default/call.xet'
 		});
 		document.body.appendChild(<HTMLElement><unknown>dialog);
-		setTimeout(function()
+		setTimeout(() =>
 		{
 			if(!callCancelled)
 			{
 				dialog.destroy();
-				egw.json(
+				egw.request(
 					"EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
-					[data, data[0]['room']], function(_url)
+					[data, data[0]['room']]).then((_url) =>
 					{
 						if(_url && _url.msg)
 						{
@@ -413,11 +419,12 @@ export class statusApp extends EgwApp
 						}
 						if(_url.caller)
 						{
-							self.openCall(_url.caller);
+							this.openCall(_url.caller);
 						}
-						if(app.rocketchat?.isRCActive(null, [{data: data[0].data}]))
+						// app.rocketchat is EPL-only and not typed here
+						if((<any>app.rocketchat)?.isRCActive(null, [{data: data[0].data}]))
 						{
-							app.rocketchat.restapi_call('chat_PostMessage', {
+							(<any>app.rocketchat).restapi_call('chat_PostMessage', {
 								roomId: data[0].data.data.rocketchat._id,
 								attachments: [
 									{
@@ -430,7 +437,7 @@ export class statusApp extends EgwApp
 								]
 							})
 						}
-					}).sendRequest();
+					});
 			}
 		}, 3000);
 	}
@@ -463,15 +470,14 @@ export class statusApp extends EgwApp
 		];
 		let notify = _notify || true;
 		let content = _content || {};
-		let self = this;
 		this._controllRingTone().start();
 		let dialog = new Et2Dialog(this.egw);
 		dialog.transformAttributes({
-			callback: function(_btn, value)
+			callback: (_btn, value) =>
 			{
 				if(_btn == Et2Dialog.OK_BUTTON)
 				{
-					self.openCall(value.url);
+					this.openCall(value.url);
 				}
 			},
 			title: '',
@@ -490,10 +496,7 @@ export class statusApp extends EgwApp
 			egw.notification(this.egw.lang('Status'), {
 				body: this.egw.lang('You have a video conference meeting in %1 minutes, initiated by %2', (content['alarm-offset'] / 60), content.owner),
 				icon: egw.webserverUrl + '/api/avatar.php?account_id=' + content.account_id,
-				onclick: function()
-				{
-					window.focus();
-				},
+				onclick: () => window.focus(),
 				requireInteraction: true
 			});
 		}
@@ -516,15 +519,15 @@ export class statusApp extends EgwApp
 		let notify = _notify?? true;
 		let message_bottom = _message_bottom || '';
 		let message_top = _message_top || '';
-		let self = this;
 		let isCallAnswered = false;
-		window.setTimeout(function(){
+		window.setTimeout(() =>
+		{
 			if (!isCallAnswered)
 			{
-				egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data], function(){}).sendRequest();
-				egw.accountData(_data.caller.account_id, 'account_lid', null, function(account)
+				egw.request("EGroupware\\Status\\Videoconference\\Call::ajax_setMissedCallNotification", [_data]);
+				egw.accountData(_data.caller.account_id, 'account_lid', null, (account) =>
 				{
-					self.mergeContent([{
+					this.mergeContent([{
 						id: account[_data.caller.account_id],
 						class1: 'missed-call',
 					}]);
@@ -535,11 +538,11 @@ export class statusApp extends EgwApp
 		this._controllRingTone().start(true);
 		let dialog = new Et2Dialog(this.egw);
 		dialog.transformAttributes({
-			callback: function(_btn)
+			callback: (_btn) =>
 			{
 				if(_btn == Et2Dialog.OK_BUTTON)
 				{
-					self.openCall(_data.call);
+					this.openCall(_data.call);
 					isCallAnswered = true;
 				}
 			},
@@ -562,17 +565,14 @@ export class statusApp extends EgwApp
 			template: egw.webserverUrl + '/status/templates/default/call.xet',
 			dialogClass: "recievedCall"
 		});
-		dialog.addEventListener('close', _=>self._controllRingTone().stop());
+		dialog.addEventListener('close', () => this._controllRingTone().stop());
 		document.body.appendChild(<HTMLElement><unknown>dialog);
 		if(notify)
 		{
 			egw.notification(this.egw.lang('Status'), {
 				body: this.egw.lang('You have a call from %1', _data.caller.name),
 				icon: egw.webserverUrl + '/api/avatar.php?account_id=' + _data.caller.account_id,
-				onclick: function()
-				{
-					window.focus();
-				},
+				onclick: () => window.focus(),
 				requireInteraction: true
 			});
 		}
@@ -580,44 +580,54 @@ export class statusApp extends EgwApp
 
 	private _controllRingTone()
 	{
-		let self = this;
+		// "stop" is a plain arrow (not an object-literal method) so "initiate" below can call it
+		// directly, rather than relying on its own "this" being the returned object (which an arrow
+		// function there wouldn't be).
+		const stop = () =>
+		{
+			if (!this._ring) return;
+			this._ring.pause();
+		};
 		return {
-			start: function (_loop?){
-				if (!self._ring) return;
-				self._ring.loop = _loop || false;
-				self._ring.muted = false;
-				self._ring.play().then(function(){
-					window.setTimeout(function(){
-						self._controllRingTone().stop();
-					}, statusApp.MISSED_CALL_TIMEOUT) // stop ringing automatically
-				},function(_error){
+			start: (_loop?) =>
+			{
+				if (!this._ring) return;
+				this._ring.loop = _loop || false;
+				this._ring.muted = false;
+				this._ring.play().then(() =>
+				{
+					window.setTimeout(() =>
+					{
+						stop();
+					}, statusApp.MISSED_CALL_TIMEOUT); // stop ringing automatically
+				}, (_error) =>
+				{
 					console.log('Error happened: '+_error);
 				});
 			},
-			stop: function (){
-				if (!self._ring) return;
-				self._ring.pause();
-			},
-			initiate: function(){
-				self._ring.muted = true;
-				self._ring.play().then(function(){
+			stop,
+			initiate: () =>
+			{
+				this._ring.muted = true;
+				this._ring.play().then(() =>
+				{
 
-				},function(_error){
+				}, (_error) =>
+				{
 					console.log('Error happened: '+_error);
 				});
-				this.stop();
+				stop();
 			}
 		}
 	}
 
 	public didNotPickUp(_data)
 	{
-		let self = this;
-		Et2Dialog.show_dialog(function(_btn)
+		Et2Dialog.show_dialog((_btn) =>
 		{
 			if(Et2Dialog.YES_BUTTON == _btn)
 			{
-				self.makeCall([_data]);
+				this.makeCall([_data]);
 			}
 		}, this.egw.lang('%1 did not pickup your call, would you like to try again?', _data.name), '');
 	}
@@ -629,18 +639,17 @@ export class statusApp extends EgwApp
 	 */
 	public _phoneMissedCallback (_from, _url)
 	{
-		let self = this;
-		return Et2Dialog.show_dialog(function(_btn)
+		return Et2Dialog.show_dialog((_btn) =>
 		{
 			if(_btn == Et2Dialog.YES_BUTTON)
 			{
 				egw.message(egw.lang("Calling back %1 ...", _from));
-				let url = <Et2UrlPhoneReadonly>et2_createWidget('url-phone', {id: 'temp_url_phone', readonly: true}, self.et2);
+				let url = <Et2UrlPhoneReadonly>et2_createWidget('url-phone', {id: 'temp_url_phone', readonly: true}, this.et2);
 				url.set_value(_url);
 				url.click();
 				url.destroy();
 			}
-			self.mergeContent([{id: _from, class2: '', action2: ''}])
+			this.mergeContent([{id: _from, class2: '', action2: ''}])
 		}, "Would you like to callback?", "Missed call", null, Et2Dialog.BUTTONS_YES_NO);
 	}
 
@@ -703,7 +712,7 @@ export class statusApp extends EgwApp
 
 		let dialog = new Et2Dialog(this.egw);
 		dialog.transformAttributes({
-			callback: function(_button_id, _value)
+			callback: (_button_id, _value) =>
 			{
 				if(_button_id == 'add' && _value)
 				{
@@ -713,21 +722,21 @@ export class statusApp extends EgwApp
 						data.push({
 							id: _value.accounts[i],
 							name: '',
-								avatar: "account:"+_value.accounts[i]
-							})
-						}
-						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
-							[data, statusApp.videoconference_fetchRoomFromUrl(url), true, true],
-							function(_data){
-							if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
-						}).sendRequest();
+							avatar: "account:"+_value.accounts[i]
+						})
 					}
-				},
-				title: this.egw.lang('Invite to this meeting'),
-				buttons: [
-					{label: this.egw.lang("Invite"), id: "add", class: "ui-priority-primary", default: true},
-					{label: this.egw.lang("Cancel"), id: "cancel"}
-				],
+					egw.request("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+						[data, statusApp.videoconference_fetchRoomFromUrl(url), true, true]).then((_data) =>
+						{
+							if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
+						});
+				}
+			},
+			title: this.egw.lang('Invite to this meeting'),
+			buttons: [
+				{label: this.egw.lang("Invite"), id: "add", class: "ui-priority-primary", default: true},
+				{label: this.egw.lang("Cancel"), id: "cancel"}
+			],
 			value: {
 				content: {
 					value: '',
@@ -751,16 +760,16 @@ export class statusApp extends EgwApp
 		let isModerator = url.match(/isModerator\=(1|true)/i)??false;
 		if (isModerator)
 		{
-			Et2Dialog.show_dialog(function(_b)
+			Et2Dialog.show_dialog((_b) =>
 				{
 					if(_b == 1)
 					{
 						egw(window).loading_prompt(room, true, egw.lang('Ending the session ...'));
-						egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url],
-							function()
+						egw.request("EGroupware\\Status\\Videoconference\\Call::ajax_deleteRoom", [room, url])
+							.then(() =>
 							{
 								egw(window).loading_prompt(room, false);
-							}).sendRequest();
+							});
 						return true;
 					}
 				}, "This window will end the session for everyone, are you sure want this?",
@@ -797,10 +806,11 @@ export class statusApp extends EgwApp
 
 	public inviteToCall(_data, _room)
 	{
-		egw.json("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
-			[_data, _room , true, true], function(_data){
+		egw.request("EGroupware\\Status\\Videoconference\\Call::ajax_video_call",
+			[_data, _room , true, true]).then((_data) =>
+		{
 			if (_data && _data.msg) egw(window).message(_data.msg.message, _data.msg.type);
-		}).sendRequest();
+		});
 	}
 
 	public videoconference_countdown_finished() {
@@ -811,7 +821,7 @@ export class statusApp extends EgwApp
 	public videoconference_countdown_join()
 	{
 		let content = this.et2.getArrayMgr('content');
-		egw.json(
+		egw.request(
 			"EGroupware\\Status\\Videoconference\\Call::ajax_genMeetingUrl",
 			[content.getEntry('room'),
 				{
@@ -819,13 +829,15 @@ export class statusApp extends EgwApp
 					account_id:egw.user('account_id'),
 					email:egw.user('account_email'),
 					cal_id:content.getEntry('cal_id')
-				}, content.getEntry('start'), content.getEntry('end')], function(_data){
+				}, content.getEntry('start'), content.getEntry('end')]).then((_data) =>
+				{
 					if (_data)
 					{
 						if (_data.err) egw.message(_data.err, 'error');
-						if(_data.url) app.status.openCall(_data.url);
+						// app.status is EgwApp-typed generically, but at runtime is this very class
+						if(_data.url) (<statusApp>app.status).openCall(_data.url);
 					}
-			}).sendRequest();
+				});
 		window.parent.close();
 	}
 
@@ -834,7 +846,8 @@ export class statusApp extends EgwApp
 		let recordings = this.et2.getArrayMgr('content').getEntry('recordings');
 		let id = _widget.id.replace('delete', '');
 		recordings[id]['cal_id'] = this.et2.getArrayMgr('content').getEntry('cal_id');
-		egw.json('EGroupware\\Status\\Ui::ajax_vc_deleteRecording', recordings[id], function(_data){
+		egw.request('EGroupware\\Status\\Ui::ajax_vc_deleteRecording', recordings[id]).then((_data) =>
+		{
 			if (_data['success'])
 			{
 				this.et2.getInstanceManager().submit();
@@ -843,7 +856,7 @@ export class statusApp extends EgwApp
 			{
 				egw.message(_data['error'], 'error');
 			}
-		}.bind(this)).sendRequest();
+		});
 	}
 }
 app.classes.status = statusApp;
