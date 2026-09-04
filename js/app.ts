@@ -11,12 +11,14 @@
 import {EgwApp} from "../../api/js/jsapi/egw_app";
 import {Et2Dialog} from "../../api/js/etemplate/Et2Dialog/Et2Dialog";
 import {et2_createWidget} from "../../api/js/etemplate/et2_core_widget";
-// et2_grid/et2_button have no web-component replacement to migrate to (real, distinct legacy
-// implementations, not zero-member shims - see doc/ai/projects/app-ts-modernization.md); only used
-// as types here, so import type suffices.
+// et2_grid has no web-component replacement to migrate to (a real, distinct legacy
+// implementation, not a zero-member shim - see doc/ai/projects/app-ts-modernization.md); only used
+// as a type here, so import type suffices.
 import type {et2_grid} from "../../api/js/etemplate/et2_widget_grid";
 import type {Et2UrlPhoneReadonly} from "../../api/js/etemplate/Et2Url/Et2UrlPhoneReadonly";
-import type {et2_button} from "../../api/js/etemplate/et2_widget_button";
+// et2_button is now a shim over Et2Button (et2_widget_button.ts deleted); only used as a
+// type here, so import type suffices.
+import type {et2_button} from "../../api/js/etemplate/legacy-shims/et2_widget_button";
 // egw/app are ambient globals (declare global {} in egw_global.d.ts, unconditionally included
 // via tsconfig's "**/*.d.ts") - no import needed or possible.
 
