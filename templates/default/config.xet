@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="status.config.videoconference" template="" lang="" group="0" version="19.1">
+	<et2-template  id="status.config.videoconference" template="" lang="" group="0" version="19.1">
 		<grid width="100%" class="admin-config egwGridView_grid">
 			<columns>
                 <column width="50%"/>
@@ -26,8 +26,7 @@
                     </et2-select>
 			    </row>
 				<row valign="middle" height="40">
-				    <groupbox>
-                        <caption label="Jitsi Server Settings"/>
+				    <et2-groupbox  summary="Jitsi Server Settings">
 				        <grid width="100%">
                             <columns>
                                 <column width="50%"/>
@@ -54,11 +53,10 @@
                                 </row>
                             </rows>
                         </grid>
-				    </groupbox>
+				    </et2-groupbox>
 				</row>
 				<row valign="middle" height="40">
-                    <groupbox>
-                        <caption label="BBB Server Settings"/>
+                    <et2-groupbox  summary="BBB Server Settings">
                         <grid width="100%">
                             <columns>
                                 <column width="50%"/>
@@ -111,24 +109,24 @@
                                     <et2-checkbox  id="newsettings[videoconference][bbb][bbb_disable_recordings]"></et2-checkbox>
                                 </row>
                                 <row>
-                                    <et2-description value="Open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies)." label="%s:"></et2-description>
-                                    <et2-checkbox id="newsettings[videoconference][bbb][bbb_call_no_iframe]"></et2-checkbox>
+                                    <et2-description  value="Open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies)." label="%s:"></et2-description>
+                                    <et2-checkbox  id="newsettings[videoconference][bbb][bbb_call_no_iframe]"></et2-checkbox>
                                 </row>
                             </rows>
                         </grid>
-                    </groupbox>
+                    </et2-groupbox>
                 </row>
 			</rows>
 		</grid>
-	</template>
-	<template id="status.config" template="" lang="" group="0" version="18.1">
-        <et2-tabbox id="tabs" width="100%" tabHeight="auto">
+	</et2-template>
+	<et2-template  id="status.config" template="" lang="" group="0" version="18.1">
+        <et2-tabbox  id="tabs" width="100%" tabHeight="auto">
     			<tabs>
     				<tab id="Videoconference" label="Video Conference"/>
     			</tabs>
     			<tabpanels>
-    				<template id="status.config.videoconference"/>
+    				<et2-template  id="status.config.videoconference"></et2-template>
     			</tabpanels>
     		</et2-tabbox>
-    	</template>
+    	</et2-template>
 </overlay>

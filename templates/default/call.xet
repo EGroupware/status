@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay PUBLIC "-//EGroupware GmbH//eTemplate 2.0//EN" "https://www.egroupware.org/etemplate2.0.dtd">
 <overlay>
-	<template id="status.call" template="" lang="" group="0" version="1.9.001">
+	<et2-template  id="status.call" template="" lang="" group="0" version="1.9.001">
         <et2-hbox  class="et2_prompt">
             <et2-vbox  class="ui-dialog-content">
                 <et2-description  id="message_top"></et2-description>
@@ -25,5 +25,5 @@
                 <et2-textbox  id="url" disabled="true"></et2-textbox>
             </et2-vbox>
         </et2-hbox>
-    </template>
+    </et2-template>
 </overlay>
