@@ -42,12 +42,14 @@ open call in new window/popup	status	sv	Öppna samtal i nytt fönster/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	sv	Öppna samtalets URL i ett separat fönster utanför iframe (t.ex. webbläsare med begränsad policy).
 phone call	status	sv	Telefonsamtal
 predefined group of users to be listed	status	sv	Fördefinierad grupp av användare som ska listas
+predefined rocket.chat groups to be listed	status	sv	Fördefinierade Rocket.Chat-grupper som ska visas
 remove from favorites	status	sv	Ta bort från favoriter
 resources app is missing!	status	sv	Resursapp saknas!
 ringing timeout	status	sv	Tidsgräns för ringning
 room id	status	sv	Rum-ID
 room is not yet ready!	status	sv	Rummet är ännu inte klart!
 schedule a call	status	sv	Schemalägg ett samtal
+selected rocket.chat groups will be listed.	status	sv	De valda Rocket.Chat-grupperna kommer att visas.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	sv	Ställ in rummets förberedelsetid för schemalagda samtal, så att moderatorn kan starta mötet före den faktiska starttiden, standard är 5 minuter:
 status	status	sv	Status/Videokonferens
 this meeting is no longer valid because it is in the past!	status	sv	Detta möte är inte längre giltigt eftersom det ligger i det förflutna!

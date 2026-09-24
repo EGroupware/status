@@ -45,12 +45,14 @@ open call in new window/popup	status	lv	Atvērt zvanu jaunā logā/iznirstošaj�
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	lv	Atveriet zvana URL atsevišķā logā ārpus iframe (piemēram, pārlūkprogrammās ar ierobežotām politikām).
 phone call	status	lv	Telefona zvans
 predefined group of users to be listed	status	lv	Iepriekš noteikta uzskaitāmo lietotāju grupa
+predefined rocket.chat groups to be listed	status	lv	Tiks parādīts saraksts ar iepriekš definētām Rocket.Chat grupām
 remove from favorites	status	lv	Noņemt no izlases
 resources app is missing!	status	lv	Trūkst resursu lietotnes!
 ringing timeout	status	lv	Zvanīšanas laika ierobežojums
 room id	status	lv	Telpas ID
 room is not yet ready!	status	lv	Telpa vēl nav gatava!
 schedule a call	status	lv	Plānojiet zvanu
+selected rocket.chat groups will be listed.	status	lv	Tiks parādīts izvēlēto Rocket.Chat grupu saraksts.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	lv	Iestatiet telpas sagatavošanas laiku plānotajiem zvaniem, moderators var sākt sanāksmi pirms tās faktiskā sākuma laika, noklusējuma iestatījums ir 5 minūtes:
 status	status	lv	Statuss/Videokonference
 this meeting is no longer valid because it is in the past!	status	lv	Šī tikšanās vairs nav spēkā, jo tā ir pagātne!

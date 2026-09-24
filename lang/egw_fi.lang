@@ -44,6 +44,8 @@ open call in	status	fi	Avaa puhelu
 open call in new window/popup	status	fi	Avaa puhelu uudessa ikkunassa/ponnahdusikkunassa.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	fi	Avaa puhelun URL-osoite erillisessä ikkunassa iframen ulkopuolella (esim. selaimet, joissa on rajoitetut käytännöt).
 phone call	status	fi	Puhelu
+predefined rocket.chat groups to be listed	status	fi	Luettelo valmiista Rocket.Chat-ryhmistä
+selected rocket.chat groups will be listed.	status	fi	Valitut Rocket.Chat-ryhmät näkyvät luettelossa.
 status	status	fi	Tila/Videokonferenssi
 this meeting is no longer valid because it is in the past!	status	fi	Tämä kokous ei ole enää voimassa, koska se on menneisyyttä!
 this meeting will start in	status	fi	Tämä kokous alkaa

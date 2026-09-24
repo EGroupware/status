@@ -42,12 +42,14 @@ open call in new window/popup	status	tr	Aramayı yeni pencerede/açılır pencer
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	tr	Çağrı URL'sini iframe dışında ayrı bir pencerede açın (örn. kısıtlı politikalara sahip tarayıcılar).
 phone call	status	tr	Telefon görüşmesi
 predefined group of users to be listed	status	tr	Listelenecek önceden tanımlanmış kullanıcı grubu
+predefined rocket.chat groups to be listed	status	tr	Önceden tanımlanmış Rocket.Chat gruplarının listelenmesi
 remove from favorites	status	tr	Sık kullanılanlardan kaldır
 resources app is missing!	status	tr	Kaynaklar uygulaması eksik!
 ringing timeout	status	tr	Zil zaman aşımı
 room id	status	tr	Oda Kimliği
 room is not yet ready!	status	tr	Oda henüz hazır değil!
 schedule a call	status	tr	Bir arama planlayın
+selected rocket.chat groups will be listed.	status	tr	Seçilen Rocket.Chat grupları listelenecektir.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	tr	Zamanlanmış aramalar için oda hazırlama süresini ayarlayın, moderatör toplantıyı gerçek başlangıç zamanından önce başlatabilir, varsayılan süre 5 dakikadır:
 status	status	tr	Durum/Videokonferans
 this meeting is no longer valid because it is in the past!	status	tr	Bu toplantı artık geçerli değildir çünkü geçmişte kalmıştır!

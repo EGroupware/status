@@ -45,12 +45,14 @@ open call in new window/popup	status	id	Buka panggilan di jendela/munculan baru.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	id	Buka URL panggilan di jendela terpisah di luar iframe (misal, browser dengan kebijakan yang dibatasi).
 phone call	status	id	Panggilan telepon
 predefined group of users to be listed	status	id	Kelompok pengguna yang telah ditentukan sebelumnya untuk dicantumkan
+predefined rocket.chat groups to be listed	status	id	Daftar grup Rocket.Chat yang telah ditentukan sebelumnya
 remove from favorites	status	id	Hapus dari favorit
 resources app is missing!	status	id	Aplikasi sumber daya tidak ada!
 ringing timeout	status	id	Batas waktu dering
 room id	status	id	ID kamar
 room is not yet ready!	status	id	Kamar belum siap!
 schedule a call	status	id	Jadwalkan panggilan
+selected rocket.chat groups will be listed.	status	id	Grup Rocket.Chat yang dipilih akan ditampilkan.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	id	Mengatur waktu persiapan ruangan untuk panggilan terjadwal, moderator dapat memulai rapat sebelum waktu mulai yang sebenarnya, standarnya adalah 5 menit:
 status	status	id	Status/Konferensi video
 this meeting is no longer valid because it is in the past!	status	id	Pertemuan ini sudah tidak berlaku lagi karena sudah lewat!

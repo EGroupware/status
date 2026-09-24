@@ -45,12 +45,14 @@ open call in new window/popup	status	ja	新しいウィンドウ/ポップアッ
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ja	通話URLをiframe以外の別ウィンドウで開く（ポリシーが制限されているブラウザなど）。
 phone call	status	ja	電話
 predefined group of users to be listed	status	ja	事前に定義されたユーザーグループを表示する
+predefined rocket.chat groups to be listed	status	ja	表示されるRocket.Chatの既定のグループ
 remove from favorites	status	ja	お気に入りから削除
 resources app is missing!	status	ja	リソースアプリがありません！
 ringing timeout	status	ja	呼び出し音タイムアウト
 room id	status	ja	ルームID
 room is not yet ready!	status	ja	部屋はまだ準備されていません！
 schedule a call	status	ja	スケジュール通話
+selected rocket.chat groups will be listed.	status	ja	選択したRocket.Chatのグループが一覧表示されます。
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ja	会議準備時間を設定することで、司会者が実際の会議開始時間より前に会議を開始することができます：
 status	status	ja	ステータス/ビデオ会議
 this meeting is no longer valid because it is in the past!	status	ja	このミーティングは過去のものなので、もう無効です！

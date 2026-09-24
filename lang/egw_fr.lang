@@ -53,12 +53,14 @@ open the call url in a separate window outside of iframe (e.g. browsers with ris
 overwrite	common	fr	écraser
 phone call	status	fr	Appel téléphonique
 predefined group of users to be listed	status	fr	Groupe prédéfini des utilisateurs à lister
+predefined rocket.chat groups to be listed	status	fr	Liste des groupes Rocket.Chat prédéfinis
 remove from favorites	status	fr	Retirer des favoris
 resources app is missing!	status	fr	L'application Ressources est manquante !
 ringing timeout	status	fr	délai de sonnerie
 room id	status	fr	ID de salon
 room is not yet ready!	status	fr	Le salon n'est pas encore disponible :
 schedule a call	status	fr	Planifier un appel
+selected rocket.chat groups will be listed.	status	fr	Les groupes Rocket.Chat sélectionnés seront répertoriés.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	fr	Temps de préparation de la salle pour les appels planifiés, le modérateur peut démarrer le meeting avant sa réelle heure de démarrage, 5 minutes par défaut:
 status	status	fr	Statut
 this meeting is no longer valid because it is in the past!	status	fr	Cette réunion n'est plus valide car dans le passée !

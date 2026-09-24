@@ -42,12 +42,14 @@ open call in new window/popup	status	no	Åpne samtale i nytt vindu/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	no	Åpne URL-adressen til samtalen i et eget vindu utenfor iframe (f.eks. nettlesere med restriksjoner).
 phone call	status	no	Telefonsamtale
 predefined group of users to be listed	status	no	Forhåndsdefinert gruppe av brukere som skal vises
+predefined rocket.chat groups to be listed	status	no	Forhåndsdefinerte Rocket.Chat-grupper som skal vises
 remove from favorites	status	no	Fjern fra favoritter
 resources app is missing!	status	no	Ressurs-appen mangler!
 ringing timeout	status	no	Tidsavbrudd for ringing
 room id	status	no	Rom-ID
 room is not yet ready!	status	no	Rommet er ikke klart ennå!
 schedule a call	status	no	Planlegg en samtale
+selected rocket.chat groups will be listed.	status	no	De valgte Rocket.Chat-gruppene vil bli vist.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	no	Angi forberedelsestid for planlagte samtaler, slik at møteleder kan starte møtet før den faktiske starttiden, standard er 5 minutter:
 status	status	no	Status/Videokonferanse
 this meeting is no longer valid because it is in the past!	status	no	Dette møtet er ikke lenger gyldig fordi det er i fortiden!

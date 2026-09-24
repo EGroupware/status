@@ -42,12 +42,14 @@ open call in new window/popup	status	pl	Otwórz połączenie w nowym oknie.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	pl	Otwórz adres URL połączenia w osobnym oknie poza ramką iframe (np. przeglądarki z ograniczonymi zasadami).
 phone call	status	pl	Połączenie telefoniczne
 predefined group of users to be listed	status	pl	Predefiniowana grupa użytkowników do wyświetlenia na liście
+predefined rocket.chat groups to be listed	status	pl	Wyświetlenie listy predefiniowanych grup Rocket.Chat
 remove from favorites	status	pl	Usuń z ulubionych
 resources app is missing!	status	pl	Brakuje aplikacji zasobów!
 ringing timeout	status	pl	Limit czasu dzwonienia
 room id	status	pl	Identyfikator pokoju
 room is not yet ready!	status	pl	Pokój nie jest jeszcze gotowy!
 schedule a call	status	pl	Zaplanuj połączenie
+selected rocket.chat groups will be listed.	status	pl	Zostaną wyświetlone wybrane grupy Rocket.Chat.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	pl	Ustaw czas przygotowania pokoju dla zaplanowanych połączeń, moderator może rozpocząć spotkanie przed faktycznym czasem rozpoczęcia, domyślnie 5 minut:
 status	status	pl	Status/Wideokonferencja
 this meeting is no longer valid because it is in the past!	status	pl	To spotkanie jest już nieważne, ponieważ należy do przeszłości!

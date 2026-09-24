@@ -45,12 +45,14 @@ open call in new window/popup	status	bg	Отворете обаждането в
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	bg	Отворете URL адреса на повикването в отделен прозорец извън iframe (напр. браузъри с ограничени политики).
 phone call	status	bg	Телефонно обаждане
 predefined group of users to be listed	status	bg	Предварително определена група от потребители, които да бъдат изброени
+predefined rocket.chat groups to be listed	status	bg	Ще се покажат предварително дефинираните групи в Rocket.Chat
 remove from favorites	status	bg	Премахване от любими
 resources app is missing!	status	bg	Липсва приложение за ресурси!
 ringing timeout	status	bg	Време за звънене
 room id	status	bg	Идентификатор на стая
 room is not yet ready!	status	bg	Стаята все още не е готова!
 schedule a call	status	bg	Насрочете повикване
+selected rocket.chat groups will be listed.	status	bg	Избраните групи в Rocket.Chat ще се покажат.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	bg	Задайте време за подготовка на стаята за планирани повиквания, модераторът може да започне срещата преди действителното ѝ време за започване, по подразбиране е 5 минути:
 status	status	bg	Статус/видеоконференция
 this meeting is no longer valid because it is in the past!	status	bg	Тази среща вече не е валидна, защото е в миналото!
