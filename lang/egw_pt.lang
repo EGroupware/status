@@ -45,12 +45,14 @@ open call in new window/popup	status	pt	Abrir a chamada numa nova janela/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	pt	Abrir o URL de chamada numa janela separada fora do iframe (por exemplo, navegadores com políticas restritas).
 phone call	status	pt	Chamada telefónica
 predefined group of users to be listed	status	pt	Grupo predefinido de utilizadores a listar
+predefined rocket.chat groups to be listed	status	pt	Grupos predefinidos do Rocket.Chat a serem apresentados
 remove from favorites	status	pt	Remover dos favoritos
 resources app is missing!	status	pt	A aplicação Recursos está em falta!
 ringing timeout	status	pt	Tempo limite de toque
 room id	status	pt	ID da sala
 room is not yet ready!	status	pt	A sala ainda não está pronta!
 schedule a call	status	pt	Agendar uma chamada
+selected rocket.chat groups will be listed.	status	pt	Os grupos selecionados do Rocket.Chat serão apresentados.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	pt	Definir o tempo de preparação da sala para chamadas agendadas, o moderador pode iniciar a reunião antes da sua hora de início efectiva, a predefinição é de 5 minutos:
 status	status	pt	Estado/Videoconferência
 this meeting is no longer valid because it is in the past!	status	pt	Esta reunião já não é válida porque pertence ao passado!

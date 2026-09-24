@@ -36,12 +36,14 @@ open call in new window/popup	status	nl	Open gesprek in nieuw venster/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	nl	Open de URL van het gesprek in een apart venster buiten een iframe (bijv. browsers met een beperkt beleid).
 phone call	status	nl	Telefoongesprek
 predefined group of users to be listed	status	nl	Voorgedefinieerde groep gebruikers die moet worden weergegeven
+predefined rocket.chat groups to be listed	status	nl	Lijst met vooraf gedefinieerde Rocket.Chat-groepen
 remove from favorites	status	nl	Verwijderen uit favorieten
 resources app is missing!	status	nl	Hulpmiddelen-app ontbreekt!
 ringing timeout	status	nl	Time-out belsignaal
 room id	status	nl	Kamer-ID
 room is not yet ready!	status	nl	Kamer is nog niet klaar!
 schedule a call	status	nl	Plan een gesprek
+selected rocket.chat groups will be listed.	status	nl	De geselecteerde Rocket.Chat-groepen worden weergegeven.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	nl	Stel de voorbereidingstijd van de ruimte in voor geplande gesprekken, moderator kan de vergadering starten voor de eigenlijke starttijd, standaard is dit 5 minuten:
 status	status	nl	Status/Videoconferentie
 this meeting is no longer valid because it is in the past!	status	nl	Deze bijeenkomst is niet langer geldig omdat deze in het verleden ligt!

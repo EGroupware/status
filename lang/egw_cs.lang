@@ -50,12 +50,14 @@ open call in new window/popup	status	cs	Otevřít hovor v novém okně/okně.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	cs	Otevřete adresu URL volání v samostatném okně mimo iframe (např. prohlížeče s omezenými zásadami).
 phone call	status	cs	Telefonní hovor
 predefined group of users to be listed	status	cs	Předdefinovaná skupina uživatelů, kteří mají být uvedeni v seznamu
+predefined rocket.chat groups to be listed	status	cs	Zobrazí se seznam předdefinovaných skupin Rocket.Chat
 remove from favorites	status	cs	Odstranit z oblíbených položek
 resources app is missing!	status	cs	Chybí aplikace Zdroje!
 ringing timeout	status	cs	Časový limit vyzvánění
 room id	status	cs	ID místnosti
 room is not yet ready!	status	cs	Místnost ještě není připravena!
 schedule a call	status	cs	Naplánujte volání
+selected rocket.chat groups will be listed.	status	cs	Zobrazí se seznam vybraných skupin Rocket.Chat.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	cs	Nastavte čas přípravy místnosti pro plánované hovory, moderátor může zahájit schůzku před jejím skutečným začátkem, výchozí hodnota je 5 minut:
 status	status	cs	Stav/Videokonference
 this meeting is no longer valid because it is in the past!	status	cs	Toto setkání již není platné, protože je minulostí!

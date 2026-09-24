@@ -42,12 +42,14 @@ open call in new window/popup	status	ru	Открыть звонок в ново�
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ru	Открыть URL-адрес звонка в отдельном окне вне iframe (например, в браузерах с ристриктивными политиками).
 phone call	status	ru	Телефонный звонок
 predefined group of users to be listed	status	ru	Предопределенная группа пользователей для включения в список
+predefined rocket.chat groups to be listed	status	ru	Список предустановленных групп Rocket.Chat
 remove from favorites	status	ru	Удалить из избранного
 resources app is missing!	status	ru	Приложение "Ресурсы" отсутствует!
 ringing timeout	status	ru	Таймаут звонка
 room id	status	ru	Идентификатор комнаты
 room is not yet ready!	status	ru	Комната еще не готова!
 schedule a call	status	ru	Запланировать звонок
+selected rocket.chat groups will be listed.	status	ru	Будет отображен список выбранных групп Rocket.Chat.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ru	Установите время подготовки комнаты для запланированных звонков, модератор может начать встречу до ее фактического времени начала, по умолчанию - 5 минут:
 status	status	ru	Статус/Видеоконференция
 this meeting is no longer valid because it is in the past!	status	ru	Эта встреча больше не действительна, потому что она уже в прошлом!

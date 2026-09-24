@@ -45,12 +45,14 @@ open call in new window/popup	status	zh	在新窗口/弹出窗口中打开通话
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	zh	在 iframe 之外的单独窗口中打开呼叫 URL（例如有限制策略的浏览器）。
 phone call	status	zh	电话
 predefined group of users to be listed	status	zh	要列出的预定义用户组
+predefined rocket.chat groups to be listed	status	zh	将列出预设的 Rocket.Chat 群组
 remove from favorites	status	zh	从收藏夹中删除
 resources app is missing!	status	zh	资源应用程序丢失！
 ringing timeout	status	zh	铃声超时
 room id	status	zh	房间 ID
 room is not yet ready!	status	zh	房间尚未准备就绪！
 schedule a call	status	zh	安排通话
+selected rocket.chat groups will be listed.	status	zh	所选的 Rocket.Chat 群组将被列出。
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	zh	为预定通话设置会议室准备时间，主持人可在实际开始时间之前开始会议，默认为 5 分钟：
 status	status	zh	状态/视频会议
 this meeting is no longer valid because it is in the past!	status	zh	本次会议已不再有效，因为它已成为过去！

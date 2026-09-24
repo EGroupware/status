@@ -42,12 +42,14 @@ open call in new window/popup	status	sl	Odprite klic v novem oknu.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	sl	Odprite naslov URL klica v ločenem oknu zunaj okvira iframe (npr. brskalniki z omejenimi politikami).
 phone call	status	sl	Telefonski klic
 predefined group of users to be listed	status	sl	Vnaprej določena skupina uporabnikov, ki se izpiše
+predefined rocket.chat groups to be listed	status	sl	Prikaz prednastavljenih skupin Rocket.Chat
 remove from favorites	status	sl	Odstranitev iz priljubljenih
 resources app is missing!	status	sl	Manjka aplikacija Viri!
 ringing timeout	status	sl	Časovna omejitev zvonjenja
 room id	status	sl	ID sobe
 room is not yet ready!	status	sl	Soba še ni pripravljena!
 schedule a call	status	sl	Načrtujte klic
+selected rocket.chat groups will be listed.	status	sl	Prikazale se bodo izbrane skupine Rocket.Chat.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	sl	Nastavite čas priprave sobe za načrtovane klice, moderator lahko začne sestanek pred dejanskim časom začetka, privzeto je 5 minut:
 status	status	sl	Status/Videokonferenca
 this meeting is no longer valid because it is in the past!	status	sl	To srečanje ni več veljavno, ker je v preteklosti!

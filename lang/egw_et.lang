@@ -45,12 +45,14 @@ open call in new window/popup	status	et	Avage kõne uues aknas/popupis.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	et	Avage kõne URL eraldi aknas väljaspool iframe'i (nt ristricted policy'ga brauserid).
 phone call	status	et	Telefonikõne
 predefined group of users to be listed	status	et	Eelnevalt määratud kasutajate grupp, mis tuleb loetleda
+predefined rocket.chat groups to be listed	status	et	Loetletakse eeldefineeritud Rocket.Chati rühmad
 remove from favorites	status	et	Eemaldage lemmikutest
 resources app is missing!	status	et	Ressursside rakendus on puudu!
 ringing timeout	status	et	Helistamise aegumistähtaeg
 room id	status	et	Ruumi ID
 room is not yet ready!	status	et	Ruum ei ole veel valmis!
 schedule a call	status	et	Plaanige kõne
+selected rocket.chat groups will be listed.	status	et	Valitud Rocket.Chati rühmad kuvatakse loeteluna.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	et	Määrake ruumi ettevalmistusaeg planeeritud kõnede jaoks, moderaator võib alustada koosolekut enne selle tegelikku algusaega, vaikimisi on 5 minutit:
 status	status	et	Staatus/Videokonverents
 this meeting is no longer valid because it is in the past!	status	et	See kohtumine ei ole enam kehtiv, sest see on minevikus!

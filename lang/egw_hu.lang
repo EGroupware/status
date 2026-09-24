@@ -42,12 +42,14 @@ open call in new window/popup	status	hu	Hívás megnyitása új ablakban/felugr�
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	hu	A hívás URL-címének megnyitása külön ablakban, az iframe-en kívül (pl. korlátozott irányelvekkel rendelkező böngészők).
 phone call	status	hu	Telefonhívás
 predefined group of users to be listed	status	hu	A felhasználók előre meghatározott csoportja, akiket fel kell sorolni
+predefined rocket.chat groups to be listed	status	hu	Az előre definiált Rocket.Chat-csoportok felsorolása
 remove from favorites	status	hu	Eltávolítás a kedvencek közül
 resources app is missing!	status	hu	Az erőforrások alkalmazás hiányzik!
 ringing timeout	status	hu	Csengetési időkorlát
 room id	status	hu	Szoba azonosító
 room is not yet ready!	status	hu	A szoba még nem készült el!
 schedule a call	status	hu	Hívás ütemezése
+selected rocket.chat groups will be listed.	status	hu	A kiválasztott Rocket.Chat-csoportok felsorolásra kerülnek.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	hu	Állítsa be a terem előkészítési idejét az ütemezett hívásokhoz, a moderátor már a tényleges kezdési idő előtt elkezdheti a megbeszélést, alapértelmezett érték 5 perc:
 status	status	hu	Státusz/Videokonferencia
 this meeting is no longer valid because it is in the past!	status	hu	Ez a találkozó már nem érvényes, mert a múltban van!

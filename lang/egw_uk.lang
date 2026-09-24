@@ -42,12 +42,14 @@ open call in new window/popup	status	uk	Відкрити дзвінок у но�
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	uk	Відкрийте URL-адресу виклику в окремому вікні за межами iframe (наприклад, у браузерах з обмеженими політиками).
 phone call	status	uk	Телефонний дзвінок
 predefined group of users to be listed	status	uk	Заздалегідь визначена група користувачів для списку
+predefined rocket.chat groups to be listed	status	uk	Буде відображено список попередньо визначених груп Rocket.Chat
 remove from favorites	status	uk	Видалити з обраного
 resources app is missing!	status	uk	Додаток Ресурси відсутній!
 ringing timeout	status	uk	Тайм-аут дзвінка
 room id	status	uk	Ідентифікатор кімнати
 room is not yet ready!	status	uk	Кімната ще не готова!
 schedule a call	status	uk	Запланувати дзвінок
+selected rocket.chat groups will be listed.	status	uk	Буде відображено список вибраних груп Rocket.Chat.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	uk	Встановіть час підготовки кімнати для запланованих дзвінків, модератор може почати зустріч до її фактичного початку, за замовчуванням - 5 хвилин:
 status	status	uk	Статус/Відеоконференція
 this meeting is no longer valid because it is in the past!	status	uk	Ця зустріч більше не дійсна, тому що вона в минулому!

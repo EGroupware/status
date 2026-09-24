@@ -45,12 +45,14 @@ open call in new window/popup	status	ko	새 창/팝업에서 통화를 엽니다
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ko	iframe 외부의 별도 창에서 통화 URL을 엽니다(예: 제한된 정책이 있는 브라우저).
 phone call	status	ko	전화 통화
 predefined group of users to be listed	status	ko	나열할 미리 정의된 사용자 그룹
+predefined rocket.chat groups to be listed	status	ko	나열될 사전 정의된 Rocket.Chat 그룹
 remove from favorites	status	ko	즐겨찾기에서 제거
 resources app is missing!	status	ko	리소스 앱이 없습니다!
 ringing timeout	status	ko	벨 울림 시간 초과
 room id	status	ko	룸 ID
 room is not yet ready!	status	ko	회의실이 아직 준비되지 않았습니다!
 schedule a call	status	ko	통화 예약
+selected rocket.chat groups will be listed.	status	ko	선택한 Rocket.Chat 그룹이 나열됩니다.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ko	예약된 통화를 위한 회의실 준비 시간을 설정하면 진행자가 실제 시작 시간 전에 회의를 시작할 수 있으며, 기본값은 5분입니다:
 status	status	ko	상태/화상 회의
 this meeting is no longer valid because it is in the past!	status	ko	이 회의는 과거에 진행되었기 때문에 더 이상 유효하지 않습니다!

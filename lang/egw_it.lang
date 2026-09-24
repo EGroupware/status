@@ -50,12 +50,14 @@ open call in new window/popup	status	it	Aprire la chiamata in una nuova finestra
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	it	Aprire l'URL della chiamata in una finestra separata al di fuori dell'iframe (ad esempio, browser con criteri ristretti).
 phone call	status	it	Chiamata telefonica
 predefined group of users to be listed	status	it	Gruppo predefinito di utenti da elencare
+predefined rocket.chat groups to be listed	status	it	Elenco dei gruppi Rocket.Chat predefiniti
 remove from favorites	status	it	Rimuovi dai preferiti
 resources app is missing!	status	it	Manca l'app Risorse!
 ringing timeout	status	it	Timeout della suoneria
 room id	status	it	ID stanza
 room is not yet ready!	status	it	La stanza non è ancora pronta!
 schedule a call	status	it	Pianificare una chiamata
+selected rocket.chat groups will be listed.	status	it	Verranno elencati i gruppi Rocket.Chat selezionati.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	it	Impostare il tempo di preparazione della sala per le chiamate programmate, in modo che il moderatore possa avviare la riunione prima dell'orario di inizio effettivo; l'impostazione predefinita è di 5 minuti:
 status	status	it	Stato/Videoconferenza
 this meeting is no longer valid because it is in the past!	status	it	Questo incontro non è più valido perché appartiene al passato!

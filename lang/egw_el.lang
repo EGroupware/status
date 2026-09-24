@@ -45,12 +45,14 @@ open call in new window/popup	status	el	Άνοιγμα κλήσης σε νέο 
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	el	Ανοίξτε τη διεύθυνση URL της κλήσης σε ξεχωριστό παράθυρο εκτός iframe (π.χ. προγράμματα περιήγησης με περιορισμένες πολιτικές).
 phone call	status	el	Τηλεφωνική κλήση
 predefined group of users to be listed	status	el	Προκαθορισμένη ομάδα χρηστών που θα καταχωρηθεί
+predefined rocket.chat groups to be listed	status	el	Θα εμφανιστούν οι προκαθορισμένες ομάδες του Rocket.Chat
 remove from favorites	status	el	Αφαίρεση από τα αγαπημένα
 resources app is missing!	status	el	Η εφαρμογή Resources λείπει!
 ringing timeout	status	el	Χρονικό όριο κλήσης
 room id	status	el	Αναγνώριση δωματίου
 room is not yet ready!	status	el	Το δωμάτιο δεν είναι ακόμα έτοιμο!
 schedule a call	status	el	Προγραμματίστε μια κλήση
+selected rocket.chat groups will be listed.	status	el	Θα εμφανιστούν οι επιλεγμένες ομάδες του Rocket.Chat.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	el	Ορίστε το χρόνο προετοιμασίας της αίθουσας για προγραμματισμένες κλήσεις, ο συντονιστής μπορεί να ξεκινήσει τη συνάντηση πριν από την πραγματική ώρα έναρξής της, η προεπιλογή είναι 5 λεπτά:
 status	status	el	Κατάσταση/Βιντεοδιάσκεψη
 this meeting is no longer valid because it is in the past!	status	el	Αυτή η συνάντηση δεν ισχύει πλέον, διότι ανήκει στο παρελθόν!

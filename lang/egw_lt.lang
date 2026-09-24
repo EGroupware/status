@@ -42,12 +42,14 @@ open call in new window/popup	status	lt	Atidarykite skambutį naujame lange / at
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	lt	Atidarykite skambučio URL adresą atskirame lange ne iframe (pvz., naršyklėse, kuriose taikoma ribota politika).
 phone call	status	lt	Skambutis telefonu
 predefined group of users to be listed	status	lt	Iš anksto nustatyta naudotojų grupė, kuri turi būti įtraukta į sąrašą
+predefined rocket.chat groups to be listed	status	lt	Bus rodomas iš anksto nustatytų Rocket.Chat grupių sąrašas
 remove from favorites	status	lt	Pašalinti iš mėgstamiausių
 resources app is missing!	status	lt	Trūksta išteklių programos!
 ringing timeout	status	lt	Skambinimo laiko limitas
 room id	status	lt	Kambario ID
 room is not yet ready!	status	lt	Kambarys dar neparuoštas!
 schedule a call	status	lt	Suplanuokite skambutį
+selected rocket.chat groups will be listed.	status	lt	Bus rodomas pasirinktų Rocket.Chat grupių sąrašas.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	lt	Nustatykite patalpos paruošimo laiką suplanuotiems skambučiams, moderatorius gali pradėti susitikimą anksčiau, nei faktinis jo pradžios laikas, pagal nutylėjimą - 5 minutės:
 status	status	lt	Būsena/Video konferencija
 this meeting is no longer valid because it is in the past!	status	lt	Šis susitikimas nebegalioja, nes jis jau praeityje!

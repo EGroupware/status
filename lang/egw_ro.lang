@@ -44,12 +44,14 @@ open call in new window/popup	status	ro	Deschideți apelul în fereastră nouă/
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	ro	Deschideți URL-ul apelului într-o fereastră separată în afara iframe-ului (de exemplu, browsere cu politici ristricted).
 phone call	status	ro	Apel telefonic
 predefined group of users to be listed	status	ro	Grup predefinit de utilizatori care urmează să fie listat
+predefined rocket.chat groups to be listed	status	ro	Grupurile Rocket.Chat predefinite care vor fi afișate
 remove from favorites	status	ro	Eliminarea din favorite
 resources app is missing!	status	ro	Lipsește aplicația Resurse!
 ringing timeout	status	ro	Timpul de așteptare a apelului
 room id	status	ro	ID cameră
 room is not yet ready!	status	ro	Camera nu este încă pregătită!
 schedule a call	status	ro	Programați un apel
+selected rocket.chat groups will be listed.	status	ro	Grupurile Rocket.Chat selectate vor fi afișate.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	ro	Setați timpul de pregătire a sălii pentru apelurile programate, moderatorul poate începe ședința înainte de ora efectivă de începere a acesteia, valoarea implicită este de 5 minute:
 status	status	ro	Stare/Videoconferință
 this meeting is no longer valid because it is in the past!	status	ro	Această întâlnire nu mai este valabilă pentru că este în trecut!

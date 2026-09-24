@@ -45,12 +45,14 @@ open call in new window/popup	status	da	Åbn opkald i nyt vindue/popup.
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	da	Åbn opkalds-URL'en i et separat vindue uden for iframe (f.eks. browsere med begrænsede politikker).
 phone call	status	da	Telefonopkald
 predefined group of users to be listed	status	da	Foruddefineret gruppe af brugere, der skal vises på listen
+predefined rocket.chat groups to be listed	status	da	Foruddefinerede Rocket.Chat-grupper, der skal vises
 remove from favorites	status	da	Fjern fra favoritter
 resources app is missing!	status	da	Ressource-app mangler!
 ringing timeout	status	da	Timeout for ringning
 room id	status	da	Værelse ID
 room is not yet ready!	status	da	Rummet er endnu ikke klar!
 schedule a call	status	da	Planlæg et opkald
+selected rocket.chat groups will be listed.	status	da	De valgte Rocket.Chat-grupper vises.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	da	Indstil forberedelsestid for planlagte opkald, så ordstyreren kan starte mødet før den faktiske starttid, standard er 5 minutter:
 status	status	da	Status/Videokonference
 this meeting is no longer valid because it is in the past!	status	da	Dette møde er ikke længere gyldigt, fordi det er fortid!

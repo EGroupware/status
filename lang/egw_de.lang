@@ -50,12 +50,14 @@ open call in new window/popup	status	de	Videokonferenz in neuem Fenster/Pop-up �
 open the call url in a separate window outside of iframe (e.g. browsers with ristricted policies).	status	de	Öffnen der Aufruf-URL in einem separaten Fenster außerhalb des Iframe (z. B. bei Browsern mit eingeschränkten Richtlinien)
 phone call	status	de	Telefonanruf
 predefined group of users to be listed	status	de	Zeige in der Status-Leiste nur die Benutzer der ausgewählten Gruppen an
+predefined rocket.chat groups to be listed	status	de	Vordefinierte Rocket.Chat-Gruppen, die aufgelistet werden sollen
 remove from favorites	status	de	Aus Favoriten entfernen
 resources app is missing!	status	de	Fehlende Ausführungsrechte für die Ressourcen-Anwendung!
 ringing timeout	status	de	Timeout für den Klingelton
 room id	status	de	Raumnummer
 room is not yet ready!	status	de	Der Konferenzraum ist noch nicht verfügbar!
 schedule a call	status	de	Als Termin planen
+selected rocket.chat groups will be listed.	status	de	Die ausgewählten Rocket.Chat-Gruppen werden aufgelistet.
 set room preparation time for scheduled calls, moderator can start meeting before its actual starttime, default is 5 minutes:	status	de	Legen Sie die Raumvorbereitungszeit für geplante Anrufe fest. Der Moderator kann die Besprechung vor ihrer eigentlichen Startzeit beginnen, die Standardeinstellung ist 5 Minuten:
 status	status	de	Status/Videokonferenz
 this meeting is no longer valid because it is in the past!	status	de	Diese Konferenz ist nicht mehr gültig, weil sie in der Vergangenheit liegt!
