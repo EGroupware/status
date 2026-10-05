@@ -316,6 +316,13 @@ class Ui {
 	public static function ajax_getContactofLink(string $app, string $id)
 	{
 		$response = Api\Json\Response::get();
+		// Link::get_links() itself has no ACL concept - Link::title() is the generic, app-agnostic
+		// way every app's own link_title() hook already respects that app's real read ACL
+		if (!Api\Link::title($app, $id))
+		{
+			$response->data([]);
+			return;
+		}
 		$links = array_values(Api\Link::get_links($app,$id));
 		$result = [];
 		if (is_array($links))
