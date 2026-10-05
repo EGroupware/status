@@ -387,6 +387,15 @@ class Call
 			return $res;
 		}
 
+		// same participant check getRecordings() above already does
+		$cal = new \calendar_boupdate();
+		$event = $cal->read($_params['cal_id']);
+		if (!$event || !array_key_exists($GLOBALS['egw_info']['user']['account_id'], $event['participants']))
+		{
+			$res['error'] = lang('Access denied!');
+			return $res;
+		}
+
 		$backend = self::_getBackendInstance($_room, []);
 
 		if (method_exists($backend, 'deleteRecordings'))
