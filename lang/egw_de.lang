@@ -11,6 +11,7 @@ bbb domain is missing!	status	de	BigBlueButton-Domäne fehlt!
 bbb server settings	status	de	BigBlueButton Server Einstellungen
 bbb server wildcard domain	status	de	BigBlueButton Server Wildcard Domain
 bigbluebutton server	status	de	BigBlueButton-Server
+call from %1	status	de	Anruf von %1
 callback	status	de	Rückruf
 click to join!	status	de	Anklicken zum Teilnehmen!
 communicating with server %1 failed because of %2	status	de	Die Kommunikation mit Server %1 ist aufgrund von %2 fehlgeschlagen

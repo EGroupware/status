@@ -63,6 +63,9 @@ class Call
 			$participants[$p['id']] = 'A';
 		}
 		$room = $_room?? self::genUniqueRoomID();
+		// meeting subject for a new direct call, the room-id is not human-readable.
+		// Invitations into an existing room set none, to not hide the subject the room already has.
+		$title = $_room ? [] : ['title' => lang('Call from %1', $caller['name'])];
 		try {
 			$cal_id = self::checkResources($room, [
 				'start' => null,
@@ -77,7 +80,7 @@ class Call
 			$response->data(['msg' => ['message' => $e->getMessage(), 'type'=>'error']]);
 			return;
 		}
-		$CallerUrl = self::genMeetingUrl($room, $caller, ['audioonly' => $_data[0]['audioonly'], 'participants'=> $participants]);
+		$CallerUrl = self::genMeetingUrl($room, $caller+$title, ['audioonly' => $_data[0]['audioonly'], 'participants'=> $participants]);
 		$CalleeUrl = '';
 		foreach ($_data as $user) {
 			// try to fill out missing information
@@ -93,7 +96,7 @@ class Call
 				'account_id' => $user['id'],
 				'position' => 'callee'
 			];
-			$CalleeUrl = self::genMeetingUrl($room, $callee, ['audioonly' => $user['audioonly'], 'participants' => $participants]);
+			$CalleeUrl = self::genMeetingUrl($room, $callee+$title, ['audioonly' => $user['audioonly'], 'participants' => $participants]);
 			self::pushCall($CalleeUrl, $user['id'], $caller, $_npn);
 		}
 		$response->data(['caller' => $CallerUrl, 'callee' => $CalleeUrl]);
