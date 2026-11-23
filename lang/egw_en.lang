@@ -11,6 +11,7 @@ bbb domain is missing!	status	en	BBB domain is missing!
 bbb server settings	status	en	BBB Server Settings
 bbb server wildcard domain	status	en	BBB server wildcard domain
 bigbluebutton server	status	en	BigBlueButton Server
+call from %1	status	en	Call from %1
 callback	status	en	Callback
 click to join!	status	en	Click to join!
 communicating with server %1 failed because of %2	status	en	Communicating with server %1 failed because of %2

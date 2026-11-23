@@ -99,6 +99,16 @@ class Jitsi implements Iface
 		$context['user'] = array_map(static function($val){
 			return (string)$val;
 		}, (array)$_context['user']);
+		// show the event title as meeting subject, as the room-id is not human-readable
+		if (!empty($_context['user']['title']))
+		{
+			// Jitsi parses hash params as JSON
+			$subject = json_encode((string)$_context['user']['title'], JSON_UNESCAPED_UNICODE);
+			// localSubject: shown to this participant, independent of moderator rights
+			$this->extraParams['config.localSubject'] = $subject;
+			// subject: set for all participants, but only if this participant is moderator when joining
+			$this->extraParams['config.subject'] = $subject;
+		}
 		// Jitsi doesn't like more context params, we use these params in other backends though
 		unset($context['user']['cal_id'], $context['user']['title']);
 
@@ -177,7 +187,8 @@ class Jitsi implements Iface
 
 	private function _getExtraParams()
 	{
-		return http_build_query($this->extraParams,'#');
+		// Jitsi decodes hash params with decodeURIComponent(), which does not turn "+" back into a space
+		return http_build_query($this->extraParams, '', '&', PHP_QUERY_RFC3986);
 	}
 
 	/**
