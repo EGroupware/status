@@ -174,7 +174,8 @@ class Jitsi implements Iface
 	{
 		$jwt = !empty($this->config['jitsi_application_id']) && !empty($this->config['jitsi_application_secret']) ? "?jwt=".$this->_getToken() : '';
 
-		return 'https://'.$this->payload['sub'].'/'.$this->payload['room'].$jwt.'#'.$this->_getExtraParams();
+		// the room id of a calendar event is set by whoever created it, it must stay a path segment
+		return 'https://'.$this->payload['sub'].'/'.rawurlencode($this->payload['room']).$jwt.'#'.$this->_getExtraParams();
 	}
 
 	/**
